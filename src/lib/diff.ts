@@ -57,8 +57,8 @@ export function buildAlertLines(
   change: SisaChange,
   fuente: string
 ): string {
-  const estadoViejo = `${scoringLabel(change.oldScoring)} / ${change.oldSituacion || "—"} (${change.oldCategoria || "—"})`;
-  const estadoNuevo = `${scoringLabel(change.newScoring)} / ${change.newSituacion || "—"} (${change.newCategoria || "—"})`;
+  const estadoViejo = `scoring ${scoringLabel(change.oldScoring)}, cat ${change.oldSituacion || "—"} (${change.oldCategoria || "—"})`;
+  const estadoNuevo = `scoring ${scoringLabel(change.newScoring)}, cat ${change.newSituacion || "—"} (${change.newCategoria || "—"})`;
   return [
     `CUIT ${change.cuit}${change.razonSocial ? ` — ${change.razonSocial}` : ""}`,
     `estado: ${estadoViejo} → ${estadoNuevo}`,
