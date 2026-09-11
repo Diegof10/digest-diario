@@ -1,0 +1,4 @@
+Fecha de Actualizacion :11/09/2026
+Cuit;Razon Social /Denominacion;Estado de la CUIT;Fecha vigencia del Estado;Fecha notificacion DFE Estado ;CBU;Fecha Actualizacion CBU;Consumo Propio;Cod Categoria ;Categoria;Situacion Categoria;Fecha Vigencia Categoria;Fecha Notificacion DFE Categoria ;Observaciones;Fecha Generacion
+20111111112;DEMO UNO;1;01/01/2025;;;NO;1;PRODUCTOR;AL;01/01/2025;;;11-SEP-26
+20222222223;DEMO DOS;2;01/01/2025;;;NO;1;PRODUCTOR;BA;01/01/2025;;;11-SEP-26
