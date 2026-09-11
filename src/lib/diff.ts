@@ -46,7 +46,9 @@ export function detectChange(
     newSituacion: next.situacionCategoria,
     oldCategoria: prev.categoria,
     newCategoria: next.categoria,
-    fechaVigencia: next.fechaVigenciaEstado || next.fechaVigenciaCategoria || "—",
+    fechaVigencia: changedScoring
+      ? next.fechaVigenciaEstado || next.fechaVigenciaCategoria || "—"
+      : next.fechaVigenciaCategoria || next.fechaVigenciaEstado || "—",
     changedScoring,
     changedCategoria,
   };

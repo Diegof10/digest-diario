@@ -36,3 +36,7 @@ next-env.d.ts
 
 # runtime SISA state
 src/data/last-state.json
+
+# hosted runtime data (watchlist + last-state)
+/data/watchlist.json
+/data/last-state.json

@@ -15,7 +15,8 @@ export type CheckReport = {
   fechaActualizacion?: string;
   watched: number;
   found: number;
-  missing: string[];
+  baseline: number;
+  missing: Array<{ cuit: string; note: string }>;
   changes: Array<{ cuit: string; lines: string; mailed: boolean }>;
   error?: string;
   dryRun: boolean;
@@ -35,7 +36,11 @@ export async function runSisaCheck(opts?: {
       padrón: "no disponible",
       watched: watch.length,
       found: 0,
-      missing: watch.map((w) => normalizeCuit(w.cuit)),
+      baseline: 0,
+      missing: watch.map((w) => ({
+        cuit: normalizeCuit(w.cuit),
+        note: "padrón no disponible",
+      })),
       changes: [],
       error: padrón.error,
       dryRun,
@@ -44,21 +49,39 @@ export async function runSisaCheck(opts?: {
 
   const nextState: Record<string, StoredState> = { ...prev };
   const changes: CheckReport["changes"] = [];
-  const missing: string[] = [];
+  const missing: CheckReport["missing"] = [];
   let found = 0;
+  let baseline = 0;
   const defaultTo = process.env.MAIL_TO || "";
 
   for (const item of watch) {
     const cuit = normalizeCuit(item.cuit);
     const rec = padrón.byCuit.get(cuit);
     if (!rec) {
-      missing.push(cuit);
+      missing.push({ cuit, note: "no figura en padrón" });
       continue;
     }
     found++;
-    const change: SisaChange | null = detectChange(prev[cuit], rec);
-    nextState[cuit] = toStored(rec, padrón.fetchedAt);
+
+    // Prefer watchlist nombre in alerts
+    const recForAlert = {
+      ...rec,
+      razonSocial: item.label || rec.razonSocial,
+    };
+
+    const hadPrev = Boolean(prev[cuit]);
+    if (!hadPrev) {
+      // Primera corrida: arma baseline, no manda mail
+      nextState[cuit] = toStored(recForAlert, padrón.fetchedAt);
+      baseline++;
+      continue;
+    }
+
+    const change: SisaChange | null = detectChange(prev[cuit], recForAlert);
+    nextState[cuit] = toStored(recForAlert, padrón.fetchedAt);
     if (change) {
+      // keep label from watchlist in message
+      if (item.label) change.razonSocial = item.label;
       const lines = buildAlertLines(change, SISA_FUENTE);
       let mailed = false;
       if (!dryRun) {
@@ -82,6 +105,7 @@ export async function runSisaCheck(opts?: {
     fechaActualizacion: padrón.fechaActualizacion,
     watched: watch.length,
     found,
+    baseline,
     missing,
     changes,
     dryRun,
