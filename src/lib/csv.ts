@@ -8,6 +8,35 @@ export type CsvParseResult = {
   skipped: number;
 };
 
+function normHeader(h: string): string {
+  return h
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "_")
+    .replace(/[^a-z0-9_]/g, "");
+}
+
+/** Excel often exports CUIT as 2.0111111112e+10 — recover digits. */
+export function coerceCuitCell(raw: string): string {
+  const s = String(raw ?? "").trim().replace(/^"|"$/g, "").trim();
+  if (!s) return "";
+  // scientific notation
+  if (/^[+-]?\d+(\.\d+)?e[+-]?\d+$/i.test(s)) {
+    try {
+      const n = Number(s);
+      if (Number.isFinite(n)) {
+        const asInt = Math.round(n).toString();
+        return normalizeCuit(asInt);
+      }
+    } catch {
+      /* fall through */
+    }
+  }
+  // keep only digits (and tolerate spaces/dashes via normalizeCuit)
+  return normalizeCuit(s);
+}
+
 /** Parse CSV: cuit (req), nombre|label (opt), mail_to|mail (opt). */
 export function parseCuitsCsv(raw: string): CsvParseResult {
   const errors: string[] = [];
@@ -23,14 +52,14 @@ export function parseCuitsCsv(raw: string): CsvParseResult {
   const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
 
   const split = (line: string): string[] => {
-    const sep = line.includes(";") && !line.includes(",") ? ";" : ",";
+    const sep = (line.match(/;/g) || []).length > (line.match(/,/g) || []).length ? ";" : ",";
     return line.split(sep).map((c) => c.trim().replace(/^"|"$/g, "").trim());
   };
 
   let start = 0;
-  const headerCells = split(lines[0]).map((h) => h.toLowerCase());
+  const headerCells = split(lines[0]).map(normHeader);
   const hasHeader = headerCells.some((h) =>
-    ["cuit", "cuil", "nombre", "label", "mail", "mail_to", "email"].includes(h)
+    ["cuit", "cuil", "nombre", "label", "mail", "mail_to", "email", "correo", "razon", "razon_social"].includes(h)
   );
 
   let idxCuit = 0;
@@ -40,22 +69,41 @@ export function parseCuitsCsv(raw: string): CsvParseResult {
   if (hasHeader) {
     start = 1;
     idxCuit = headerCells.findIndex((h) => h === "cuit" || h === "cuil");
-    if (idxCuit < 0) idxCuit = 0;
-    idxNombre = headerCells.findIndex(
-      (h) => h === "nombre" || h === "label" || h === "razon" || h === "razón"
+    if (idxCuit < 0) {
+      return {
+        ok: false,
+        items: [],
+        errors: [
+          `No encontré columna "cuit". Encabezados: ${split(lines[0]).join(" | ")}`,
+        ],
+        skipped: 0,
+      };
+    }
+    idxNombre = headerCells.findIndex((h) =>
+      ["nombre", "label", "razon", "razon_social", "denominacion"].includes(h)
     );
-    idxMail = headerCells.findIndex(
-      (h) => h === "mail_to" || h === "mail" || h === "email" || h === "correo"
+    idxMail = headerCells.findIndex((h) =>
+      ["mail_to", "mail", "email", "correo"].includes(h)
     );
   }
 
   for (let i = start; i < lines.length; i++) {
     const cells = split(lines[i]);
+    if (cells.every((c) => !c)) continue;
     const rawCuit = cells[idxCuit] || "";
-    const cuit = normalizeCuit(rawCuit);
-    if (!cuit || cuit.length < 11) {
+    let cuit = coerceCuitCell(rawCuit);
+    // pad if Excel dropped leading zeros somehow (rare for CUIT)
+    if (cuit.length > 0 && cuit.length < 11 && /^\d+$/.test(cuit)) {
+      // don't invent — leave invalid
+    }
+    if (cuit.length > 11 && cuit.endsWith("0") && /^[+-]?\d+(\.\d+)?e/i.test(rawCuit)) {
+      // scientific sometimes rounds; keep as-is and fail clearly
+    }
+    if (!cuit || cuit.length !== 11) {
       skipped++;
-      errors.push(`Fila ${i + 1}: CUIT inválido (${rawCuit || "vacío"})`);
+      errors.push(
+        `Fila ${i + 1}: CUIT inválido (${rawCuit || "vacío"} → ${cuit || "—"}). Tiene que quedar en 11 dígitos (sin notación científica).`
+      );
       continue;
     }
     if (seen.has(cuit)) {

@@ -14,7 +14,10 @@ export type WatchlistFile = {
   source?: string;
 };
 
-const DATA = path.join(process.cwd(), "data");
+const IS_VERCEL = Boolean(process.env.VERCEL);
+const DATA = IS_VERCEL
+  ? path.join("/tmp", "alerta-sisa")
+  : path.join(process.cwd(), "data");
 const WATCH = path.join(DATA, "watchlist.json");
 const STATE = path.join(DATA, "last-state.json");
 const BLOB_WATCH = "alerta-sisa/watchlist.json";
@@ -68,7 +71,6 @@ export async function loadWatchlist(): Promise<WatchItem[]> {
     const j = await readJsonBlob<WatchlistFile>(BLOB_WATCH, empty);
     return j.cuits || [];
   }
-  // migrate from legacy src/data if present
   const legacy = path.join(process.cwd(), "src", "data", "watchlist.json");
   const j = await readJsonFs<WatchlistFile>(WATCH, empty);
   if ((j.cuits || []).length === 0) {
@@ -89,8 +91,15 @@ export async function saveWatchlist(
   };
   if (hasBlob()) {
     await writeJsonBlob(BLOB_WATCH, payload);
-  } else {
+    return payload;
+  }
+  try {
     await writeJsonFs(WATCH, payload);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    throw new Error(
+      `No pude guardar la lista (${msg}). En Vercel configurá BLOB_READ_WRITE_TOKEN.`
+    );
   }
   return payload;
 }
@@ -105,8 +114,15 @@ export async function loadLastState(): Promise<Record<string, StoredState>> {
 export async function saveLastState(state: Record<string, StoredState>) {
   if (hasBlob()) {
     await writeJsonBlob(BLOB_STATE, state);
-  } else {
+    return;
+  }
+  try {
     await writeJsonFs(STATE, state);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    throw new Error(
+      `No pude guardar last-state (${msg}). En Vercel configurá BLOB_READ_WRITE_TOKEN.`
+    );
   }
 }
 

@@ -8,18 +8,35 @@ export default function CsvUpload() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [warn, setWarn] = useState<string | null>(null);
+  const [details, setDetails] = useState<string[]>([]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setBusy(true);
     setMsg(null);
     setWarn(null);
+    setDetails([]);
     const fd = new FormData(e.currentTarget);
     try {
       const res = await fetch("/api/cuits/upload", { method: "POST", body: fd });
-      const data = await res.json();
+      let data: {
+        ok?: boolean;
+        error?: string;
+        details?: string[];
+        count?: number;
+        skipped?: number;
+        persistence?: string;
+        warning?: string;
+      } = {};
+      try {
+        data = await res.json();
+      } catch {
+        setMsg(`Error HTTP ${res.status} (respuesta no JSON)`);
+        return;
+      }
       if (!res.ok || !data.ok) {
-        setMsg(data.error || "Error al subir");
+        setMsg(data.error || `Error al subir (HTTP ${res.status})`);
+        if (Array.isArray(data.details)) setDetails(data.details.slice(0, 10));
         return;
       }
       setMsg(
@@ -28,6 +45,9 @@ export default function CsvUpload() {
         }.`
       );
       if (data.warning) setWarn(data.warning);
+      if (Array.isArray(data.details) && data.details.length) {
+        setDetails(data.details.slice(0, 10));
+      }
       router.refresh();
     } catch (err) {
       setMsg(err instanceof Error ? err.message : String(err));
@@ -43,15 +63,15 @@ export default function CsvUpload() {
         <input
           type="file"
           name="file"
-          accept=".csv,text/csv,text/plain"
+          accept=".csv,text/csv,text/plain,.txt"
           required
           className="mt-1 block w-full text-sm"
         />
       </label>
       <p className="text-xs opacity-70">
         Columnas: <code>cuit</code> (obligatorio), <code>nombre</code>{" "}
-        (opcional), <code>mail_to</code> (opcional). Consentimiento del cliente
-        antes de cargar.
+        (opcional), <code>mail_to</code> (opcional). Guardá como CSV UTF-8, no
+        .xlsx. En Excel, la columna CUIT como texto.
       </p>
       <button
         type="submit"
@@ -60,8 +80,15 @@ export default function CsvUpload() {
       >
         {busy ? "Subiendo…" : "Subir y alojar lista"}
       </button>
-      {msg ? <p className="text-sm">{msg}</p> : null}
+      {msg ? <p className="text-sm whitespace-pre-wrap">{msg}</p> : null}
       {warn ? <p className="text-sm text-amber-800">{warn}</p> : null}
+      {details.length > 0 ? (
+        <ul className="list-disc pl-5 text-xs text-amber-900">
+          {details.map((d) => (
+            <li key={d}>{d}</li>
+          ))}
+        </ul>
+      ) : null}
     </form>
   );
 }
