@@ -26,8 +26,11 @@ export default async function Home() {
         <p className="mt-1 text-xs opacity-70">
           Persistencia: <strong>{mode}</strong>
           {mode === "filesystem"
-            ? " (en Vercel usá BLOB_READ_WRITE_TOKEN)"
-            : " (Vercel Blob)"}
+            ? " — este deploy no ve BLOB_READ_WRITE_TOKEN. Conectá el Blob al proyecto, marcá Production+Preview y hacé Redeploy (no alcanza con crear el store)."
+            : " (Vercel Blob OK)"}
+        </p>
+        <p className="mt-1 text-xs opacity-60">
+          Diagnóstico: <code>/api/health</code> → mirá <code>blobTokenPresent</code>.
         </p>
         <div className="mt-4">
           <CsvUpload />
