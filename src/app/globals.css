@@ -10,3 +10,7 @@ body {
   color: var(--forest);
   font-family: system-ui, sans-serif;
 }
+
+code {
+  font-size: 0.85em;
+}

@@ -34,9 +34,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# runtime SISA state
-src/data/last-state.json
-
-# hosted runtime data (watchlist + last-state)
-/data/watchlist.json
-/data/last-state.json
+# runtime snapshots (efímero en Vercel)
+/data/last-digest.json

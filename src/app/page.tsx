@@ -1,92 +1,70 @@
-import CsvUpload from "@/components/CsvUpload";
-import { loadLastState, loadWatchlist, persistenceMode } from "@/lib/store";
-import { scoringLabel } from "@/lib/sisa";
+import CostsBlock from "@/components/CostsBlock";
+import MarketBoard from "@/components/MarketBoard";
+import WhatsAppCopy from "@/components/WhatsAppCopy";
+import { assembleDigest } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  const watch = await loadWatchlist();
-  const state = await loadLastState();
-  const mode = persistenceMode();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ km?: string }>;
+}) {
+  const sp = await searchParams;
+  const kmRaw = sp.km;
+  const km =
+    kmRaw != null && kmRaw !== "" && Number.isFinite(Number(kmRaw))
+      ? Number(kmRaw)
+      : null;
+
+  const digest = await assembleDigest({ km });
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-70">
-        DHF Advisory
-      </p>
-      <h1 className="mt-2 font-serif text-3xl">Alerta SISA</h1>
-      <p className="mt-2 max-w-xl text-sm opacity-80">
-        Cargás un CSV de CUITs, queda alojado, y el cron diario baja el padrón
-        RG4310 y avisa por mail si cambió scoring (0=inactivo, 1–3) o categoría
-        AL/BA. Primera corrida = baseline (no manda mail). WhatsApp = v2.
-      </p>
-
-      <section className="mt-8 rounded-2xl border border-[#1f4a32]/20 bg-white/60 p-5">
-        <h2 className="text-lg font-semibold">Cargar CSV</h2>
-        <p className="mt-1 text-xs opacity-70">
-          Persistencia: <strong>{mode}</strong>
-          {mode === "filesystem"
-            ? " — este deploy no ve BLOB_READ_WRITE_TOKEN. Conectá el Blob al proyecto, marcá Production+Preview y hacé Redeploy (no alcanza con crear el store)."
-            : " (Vercel Blob OK)"}
+    <main className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-10 sm:px-6">
+      <header className="space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-70">
+          DHF Advisory
         </p>
+        <h1 className="font-serif text-3xl leading-tight">Digest diario</h1>
+        <p className="text-sm opacity-80">
+          {digest.fechaLabel}
+          <span className="mx-2 opacity-40">·</span>
+          <span className="font-mono text-xs">{digest.fecha}</span>
+        </p>
+        <p className="max-w-xl text-sm opacity-70">
+          Tablero matutino: mercado (stubs), costos CATAC, fiscal y lectura.
+          Cron 7:00 ARG. Formato WhatsApp / PDF a cargo de Informe.
+        </p>
+      </header>
+
+      <MarketBoard mercado={digest.mercado} />
+
+      <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
+
+      <section className="rounded-2xl border border-[#1f4a32]/20 bg-white/70 p-5">
+        <h2 className="text-lg font-semibold">Fiscal</h2>
+        <p className="mt-2 text-sm">{digest.fiscal.novedad}</p>
         <p className="mt-1 text-xs opacity-60">
-          Diagnóstico: <code>/api/health</code> → mirá <code>blobTokenPresent</code>.
+          Stub Fiscal · {digest.fiscal.ok ? "ok" : "sin fuente live"}
         </p>
-        <div className="mt-4">
-          <CsvUpload />
-        </div>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-[#1f4a32]/20 bg-white/60 p-5">
-        <h2 className="text-lg font-semibold">
-          Lista alojada ({watch.length})
-        </h2>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="text-xs uppercase opacity-60">
-              <tr>
-                <th className="py-2 pr-3">CUIT</th>
-                <th className="py-2 pr-3">Nombre</th>
-                <th className="py-2 pr-3">Scoring</th>
-                <th className="py-2 pr-3">Sit. cat.</th>
-                <th className="py-2">Vigencia</th>
-              </tr>
-            </thead>
-            <tbody>
-              {watch.map((w) => {
-                const cuit = w.cuit.replace(/\D/g, "");
-                const s = state[cuit];
-                return (
-                  <tr key={cuit} className="border-t border-[#1f4a32]/10">
-                    <td className="py-2 pr-3 font-mono text-xs">{cuit}</td>
-                    <td className="py-2 pr-3">
-                      {w.label || s?.razonSocial || "—"}
-                    </td>
-                    <td className="py-2 pr-3">
-                      {s ? scoringLabel(s.scoring) : "sin baseline"}
-                    </td>
-                    <td className="py-2 pr-3">
-                      {s?.situacionCategoria || "—"}
-                    </td>
-                    <td className="py-2">{s?.fechaVigenciaEstado || "—"}</td>
-                  </tr>
-                );
-              })}
-              {watch.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="py-4 opacity-60">
-                    Todavía no hay CSV cargado
-                  </td>
-                </tr>
-              ) : null}
-            </tbody>
-          </table>
-        </div>
+      <section className="rounded-2xl border border-[#1f4a32]/20 bg-white/70 p-5">
+        <h2 className="text-lg font-semibold">Lectura</h2>
+        <p className="mt-1 text-xs opacity-60">
+          Slot 5–6 líneas — Informe completa. No inventar.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm opacity-80">
+          {digest.lectura.map((l, i) => (
+            <li key={i}>{l}</li>
+          ))}
+        </ul>
       </section>
 
-      <footer className="mt-10 border-t border-[#1f4a32]/15 pt-4 text-xs opacity-70">
-        Elaborado por DHF Advisory. Análisis de gestión. No es dictamen
-        impositivo. Chequear ARCA. Sujeto a revisión de Diego.
+      <WhatsAppCopy lines={digest.whatsapp} />
+
+      <footer className="border-t border-[#1f4a32]/15 pt-4 text-xs opacity-70">
+        {digest.pie}
       </footer>
     </main>
   );

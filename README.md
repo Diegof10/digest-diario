@@ -1,66 +1,64 @@
-# Alerta SISA
+# Digest diario
 
-Monitor diario del padrón SISA (ARCA/AFIP `RG4310.ZIP`). Subís un **CSV de CUITs**; queda alojado; el cron compara scoring/categoría y manda mail si cambió.
+Producto matutino de DHF Advisory: tablero web + APIs para armar el digest agro del día (mercado, costos CATAC, fiscal, lectura, WhatsApp 8 líneas).
 
-**No es dictamen.** Sin % de retención. WhatsApp = v2.
+Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proyecto sirve esta página). **No** toca Agro Planeamiento ni `dhf-margenes`.
 
-## CSV
+## Qué muestra la home
 
-Columnas:
+1. Fecha (America/Argentina/Cordoba)
+2. Tablero Mercado — stubs Chicago / Matba / CAC / USDA / clima / WTI (columnas valor, fuente, hora)
+3. Costos — flete CATAC (km → ARS/t) + slots fert/gasoil vacíos
+4. Fiscal — una línea (`sin novedad fiscal` stub)
+5. Lectura — 5–6 líneas (slot Informe)
+6. WhatsApp 8 líneas (copiar)
+7. Pie: *Elaborado por DHF Advisory. Análisis de gestión. No es orden de venta ni dictamen impositivo.*
 
-| columna | obligatorio | notas |
-|---------|-------------|--------|
-| `cuit` | sí | con o sin guiones |
-| `nombre` | no | sale en la línea 1 del mail |
-| `mail_to` | no | si falta, usa `MAIL_TO` |
+## APIs
 
-Consentimiento del cliente antes de cargar CUITs.
+| Ruta | Rol |
+|------|-----|
+| `GET /api/health` | Salud + nombre de producto |
+| `GET /api/digest?km=` | Arma el snapshot completo |
+| `GET /api/catac?km=` | Tarifa CATAC km→ARS/t |
+| `GET /api/mercado` | Stub Mercado (`ok:false`, filas vacías) |
+| `GET /api/fiscal` | Stub Fiscal |
+| `GET /api/cron/digest` | Cron diario (Bearer `CRON_SECRET`) |
 
-## Comportamiento del job
+## CATAC
 
-1. Baja `RG4310.ZIP`. Si falla → `padrón no disponible` (no inventa estado).
-2. **Primera corrida** por CUIT = **baseline**: guarda estado, **no manda mail**.
-3. Corridas siguientes: si cambió scoring (0=inactivo, 1–3) o AL/BA → mail 6 líneas.
-4. Si el CUIT **no figura en el padrón** ese día → se marca `no figura en padrón`; no se inventa scoring ni falso cambio.
-5. Si solo cambia categoría, la fecha del mail es la de vigencia de categoría.
+- Intenta media WordPress en `api.apicatac.com`.
+- Si el fetch falla (bot-wall / sin JSON), usa **fallback embebido** de la tarifa de referencia **abril 2026**, etiquetada **último valor guardado (abr-26)**.
+- **Nunca** se inventan precios. Fert/gasoil quedan vacíos hasta fuente fechada.
 
-## Mensaje (6 líneas)
+PDF oficial de referencia:
 
-1. CUIT (+ nombre)  
-2. estado viejo → nuevo  
-3. fecha vigencia  
-4. fuente/padrón  
-5. chequear ARCA  
-6. pie: no es dictamen  
+https://api.apicatac.com/wp-content/uploads/2026/04/TARIFA-REFERENCIA-CATAC-ABRIL-26.pdf
 
-## Env
+## Cron
 
-Ver `.env.example`:
+`vercel.json`: `0 10 * * *` → `/api/cron/digest`
 
-- `CRON_SECRET` — Vercel Cron (`Authorization: Bearer …`)
-- `MAIL_TO` / `RESEND_API_KEY` / `MAIL_FROM`
-- `BLOB_READ_WRITE_TOKEN` — **en Vercel**, para alojar CSV + last-state entre invocaciones
-- `DRY_RUN=1` — diff sin persistir ni enviar
-
-Sin Blob en Vercel el CSV se pierde entre deploys (el disco es efímero).
+7:00 ARG = 10:00 UTC (UTC−3).
 
 ## Local
 
 ```bash
 npm i
 npm run dev
-# subir CSV en la UI, o:
-curl -F file=@cuits.csv http://localhost:3000/api/cuits/upload
-curl -H "Authorization: Bearer $CRON_SECRET" "http://localhost:3000/api/cron/check?dryRun=1"
+# http://localhost:3000
+# http://localhost:3000/?km=180
+curl -s 'http://localhost:3000/api/digest?km=180' | jq .
+curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/digest
 ```
 
-## Deploy
+## Env
 
-1. Importá `Diegof10/alerta-sisa` en Vercel.
-2. Env: `CRON_SECRET`, `MAIL_TO`, Resend, `BLOB_READ_WRITE_TOKEN`.
-3. Cron `0 11 * * *` → `/api/cron/check`.
+Ver `.env.example`: `CRON_SECRET`.
 
-## Fuente
+## Dueños de formato / datos
 
-https://serviciosweb.afip.gob.ar/genericos/Registros/op_granos/Archivos/RG_4310.zip  
-Diseño: micrositio SISA. Verificar URL si ARCA la mueve.
+- **Informe**: WhatsApp 8 líneas + PDF 1 página + pie DHF.
+- **Costos**: CATAC + fert/gasoil (si hay fuente fechada).
+- **Mercado**: plug-in Chicago/Matba/CAC/USDA/clima/WTI.
+- **Fiscal**: una línea de novedad.

@@ -1,5 +1,5 @@
 {
-  "name": "alerta-sisa",
+  "name": "digest-diario",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,15 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@vercel/blob": "^2.8.0",
-    "adm-zip": "^0.6.1",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/adm-zip": "^0.5.8",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
