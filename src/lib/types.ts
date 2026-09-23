@@ -1,6 +1,8 @@
-/** Tipos del digest diario. Mercado/Fiscal son stubs para plug-in posterior. */
+/** Tipos del digest diario. */
 
 export type EtiquetaDato = "HECHO" | "ÚLTIMO_GUARDADO" | "VACÍO" | "SUPUESTO";
+
+export type SenalMercado = "↑" | "↓" | "→";
 
 export interface CatacTarifa {
   km: number;
@@ -35,6 +37,12 @@ export interface MercadoRow {
   fuente: string | null;
   hora: string | null;
   etiqueta: EtiquetaDato;
+  /** Variación decimal (−0.01 = −1%); null si no hay */
+  varPct?: number | null;
+  senal?: SenalMercado | null;
+  /** Hint ¢/bu u otro detalle */
+  extra?: string | null;
+  contrato?: string | null;
 }
 
 export interface MercadoSnapshot {
@@ -42,6 +50,11 @@ export interface MercadoSnapshot {
   rows: MercadoRow[];
   note: string;
   fetchedAt: string;
+  asOf?: string | null;
+  fxBna?: number | null;
+  wasdeHeadline?: string | null;
+  progressHeadline?: string | null;
+  sourcesOk?: string[];
 }
 
 export interface FiscalSnapshot {
@@ -67,6 +80,7 @@ export interface DigestSnapshot {
   producto: "digest-diario";
   fecha: string; // YYYY-MM-DD America/Argentina/Cordoba
   fechaLabel: string;
+  fechaCorta: string; // dd/mm/yyyy
   generadoAt: string;
   mercado: MercadoSnapshot;
   catac: CatacSnapshot;

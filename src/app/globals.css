@@ -1,16 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f3efe6;
+  --cream: #f4f1ea;
+  --navy: #0b1f3a;
   --forest: #1f4a32;
+  --soja: #1f6b3a;
+  --maiz: #e67e22;
+  --trigo: #c9a227;
 }
 
 body {
   background: var(--cream);
-  color: var(--forest);
-  font-family: system-ui, sans-serif;
+  color: #1a2332;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 code {
   font-size: 0.85em;
+}
+
+.digest-panel {
+  border: 1px solid rgba(11, 31, 58, 0.12);
+  background: #fff;
+  border-radius: 4px;
+  padding: 0.65rem 0.75rem;
+}
+
+.digest-panel-title {
+  margin: 0 0 0.45rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  opacity: 0.85;
+}
+
+.cell-empty {
+  min-height: 1.25rem;
 }

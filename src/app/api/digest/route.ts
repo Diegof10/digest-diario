@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { assembleDigest } from "@/lib/digest";
+import { assembleDigest, DEFAULT_KM } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   const km =
     kmRaw != null && kmRaw !== "" && Number.isFinite(Number(kmRaw))
       ? Number(kmRaw)
-      : null;
+      : DEFAULT_KM;
   const snap = await assembleDigest({ km });
   return NextResponse.json(snap);
 }

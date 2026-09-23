@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Digest diario · DHF Advisory",
+  title: "DHF Digest · DHF Advisory",
   description:
-    "Digest matutino agro: mercado, costos CATAC, fiscal y lectura. Análisis de gestión — DHF Advisory.",
+    "Digest matutino agro: Chicago, Matba, CAC Rosario, USDA, CATAC. Análisis de gestión — DHF Advisory.",
 };
 
 export default function RootLayout({

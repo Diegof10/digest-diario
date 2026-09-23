@@ -17,28 +17,18 @@ export default function WhatsAppCopy({ lines }: { lines: string[] }) {
   }
 
   return (
-    <section className="rounded-2xl border border-[#1f4a32]/20 bg-white/70 p-5">
+    <section className="digest-panel">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-lg font-semibold">WhatsApp · 8 líneas</h2>
+        <h3 className="digest-panel-title mb-0">WhatsApp · 8 líneas</h3>
         <button
           type="button"
           onClick={copy}
-          className="rounded-full bg-[#1f4a32] px-4 py-1.5 text-xs font-semibold text-[#f3efe6]"
+          className="rounded bg-[#0b1f3a] px-3 py-1 text-[11px] font-semibold text-white"
         >
           {copied ? "Copiado" : "Copiar"}
         </button>
       </div>
-      <p className="mt-1 text-xs opacity-60">
-        Formato a cargo de Informe. Scaffold con slots vacíos donde falta dato.
-      </p>
-      <ol className="mt-4 list-decimal space-y-1 pl-5 text-sm">
-        {lines.map((line, i) => (
-          <li key={i} className="leading-snug">
-            {line}
-          </li>
-        ))}
-      </ol>
-      <pre className="mt-4 overflow-x-auto rounded-xl bg-[#1f4a32]/5 p-3 text-xs leading-relaxed whitespace-pre-wrap">
+      <pre className="mt-2 overflow-x-auto rounded border border-slate-200 bg-slate-50 p-2.5 text-[11px] leading-relaxed whitespace-pre-wrap">
         {text}
       </pre>
     </section>

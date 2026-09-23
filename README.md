@@ -7,7 +7,7 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 ## Qué muestra la home
 
 1. Fecha (America/Argentina/Cordoba)
-2. Tablero Mercado — stubs Chicago / Matba / CAC / USDA / clima / WTI (columnas valor, fuente, hora)
+2. Tablero Mercado — Chicago / Matba / CAC Rosario / USDA / BNA (clima/noticias/WTI vacíos sin fuente)
 3. Costos — flete CATAC (km → ARS/t) + slots fert/gasoil vacíos
 4. Fiscal — una línea (`sin novedad fiscal` stub)
 5. Lectura — 5–6 líneas (slot Informe)
@@ -21,9 +21,13 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 | `GET /api/health` | Salud + nombre de producto |
 | `GET /api/digest?km=` | Arma el snapshot completo |
 | `GET /api/catac?km=` | Tarifa CATAC km→ARS/t |
-| `GET /api/mercado` | Stub Mercado (`ok:false`, filas vacías) |
+| `GET /api/mercado` | Mercado live vía feed granos (Chicago/Matba/CAC/USDA/BNA) |
 | `GET /api/fiscal` | Stub Fiscal |
 | `GET /api/cron/digest` | Cron diario (Bearer `CRON_SECRET`) |
+
+## Mercado (feed granos)
+
+`GET https://lark-lake-solar-craft.grok.me/api/granos` — server-side, User-Agent browser-like. Mapea CBOT, CAC Rosario, Matba, FAS/pizarra, BNA, WASDE/Crop Progress. **No inventa precios**; celdas vacías si falta fuente.
 
 ## CATAC
 

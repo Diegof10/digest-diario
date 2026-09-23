@@ -1,10 +1,12 @@
 import { getCatac } from "@/lib/catac";
 import { getFiscal } from "@/lib/fiscal";
-import { getMercado } from "@/lib/mercado";
-import type { CostoInsumoSlot, DigestSnapshot } from "@/lib/types";
+import { getMercado, rowById } from "@/lib/mercado";
+import type { CostoInsumoSlot, DigestSnapshot, MercadoRow } from "@/lib/types";
 
 export const PIE_DHF =
   "Elaborado por DHF Advisory. Análisis de gestión. No es orden de venta ni dictamen impositivo.";
+
+export const DEFAULT_KM = 180;
 
 const INSUMO_SLOTS: CostoInsumoSlot[] = [
   {
@@ -51,23 +53,61 @@ function cordobaParts(d = new Date()) {
     month: "long",
     day: "numeric",
   }).format(d);
-  return { fecha, label };
+  const [y, m, day] = fecha.split("-");
+  const fechaCorta = `${day}/${m}/${y}`;
+  return { fecha, label, fechaCorta };
+}
+
+function cell(r: MercadoRow | undefined): string {
+  if (!r?.valor) return "—";
+  const senal = r.senal ? ` ${r.senal}` : "";
+  const extra = r.extra ? ` (${r.extra})` : "";
+  const unidad = r.unidad ? ` ${r.unidad}` : "";
+  return `${r.valor}${unidad}${senal}${extra}`;
+}
+
+function buildLectura(mercadoNote: string, wasde: string | null | undefined): string[] {
+  const slots: string[] = [];
+  if (wasde) {
+    // Split long WASDE into ~lines
+    const parts = wasde.split(/(?<=\.)\s+/).filter(Boolean);
+    for (const p of parts.slice(0, 4)) slots.push(p);
+  }
+  if (mercadoNote && mercadoNote !== wasde) {
+    const extra = mercadoNote
+      .replace(wasde ?? "", "")
+      .trim()
+      .split(/(?<=\.)\s+/)
+      .filter(Boolean);
+    for (const e of extra) {
+      if (slots.length >= 6) break;
+      if (!slots.includes(e)) slots.push(e);
+    }
+  }
+  while (slots.length < 5) slots.push("—");
+  return slots.slice(0, 6);
 }
 
 function buildWhatsApp(parts: {
-  fechaLabel: string;
+  fechaCorta: string;
+  chicago: string;
+  cac: string;
+  matba: string;
+  bna: string;
   catacLine: string;
   fiscal: string;
-  mercadoResumen: string;
+  wasdeBrief: string;
 }): string[] {
   return [
-    `Digest diario · ${parts.fechaLabel}`,
-    `Mercado: ${parts.mercadoResumen}`,
+    `DHF Digest · ${parts.fechaCorta}`,
+    `Chicago: ${parts.chicago}`,
+    `CAC Rosario: ${parts.cac}`,
+    `Matba: ${parts.matba}`,
+    `BNA: ${parts.bna}`,
     `Flete CATAC: ${parts.catacLine}`,
-    "Fert / gasoil: sin dato fechado",
-    `Fiscal: ${parts.fiscal}`,
-    "Lectura: (slot Informe — 5–6 líneas)",
-    "Dato que falta: precios Mercado + fert/gasoil fechados",
+    parts.wasdeBrief
+      ? `USDA: ${parts.wasdeBrief}`
+      : `Fiscal: ${parts.fiscal}`,
     PIE_DHF,
   ];
 }
@@ -75,8 +115,9 @@ function buildWhatsApp(parts: {
 export async function assembleDigest(opts?: {
   km?: number | null;
 }): Promise<DigestSnapshot> {
-  const km = opts?.km ?? null;
-  const { fecha, label } = cordobaParts();
+  const km =
+    opts?.km != null && Number.isFinite(opts.km) ? opts.km : DEFAULT_KM;
+  const { fecha, label, fechaCorta } = cordobaParts();
   const [mercado, catac, fiscal] = await Promise.all([
     getMercado(),
     getCatac(km),
@@ -84,33 +125,70 @@ export async function assembleDigest(opts?: {
   ]);
 
   let catacLine = "sin dato";
-  if (km != null && catac.arsPerTon != null) {
+  if (catac.arsPerTon != null) {
     catacLine = `${km} km → ${catac.arsPerTon.toLocaleString("es-AR")} ARS/t · ${catac.statusLabel}`;
   } else if (catac.ok) {
-    catacLine = `tabla ${catac.mesShort ?? "?"} disponible · ${catac.statusLabel} (pasar ?km=)`;
+    catacLine = `tabla ${catac.mesShort ?? "?"} · ${catac.statusLabel}`;
   } else {
     catacLine = catac.statusLabel;
   }
 
-  const mercadoConDato = mercado.rows.filter((r) => r.valor != null).length;
-  const mercadoResumen =
-    mercadoConDato === 0
-      ? "sin dato (stubs Chicago/Matba/CAC/USDA/clima/WTI)"
-      : `${mercadoConDato} filas con valor`;
+  const sojaChi = rowById(mercado.rows, "chicago-soja");
+  const maizChi = rowById(mercado.rows, "chicago-maiz");
+  const trigoChi = rowById(mercado.rows, "chicago-trigo");
+  const sojaCac = rowById(mercado.rows, "cac-soja");
+  const maizCac = rowById(mercado.rows, "cac-maiz");
+  const trigoCac = rowById(mercado.rows, "cac-trigo");
+  const sojaMay = rowById(mercado.rows, "matba-soja-may");
+  const sojaNov = rowById(mercado.rows, "matba-soja-nov");
+  const maizMat = rowById(mercado.rows, "matba-maiz");
+  const trigoMat = rowById(mercado.rows, "matba-trigo");
+  const bna = rowById(mercado.rows, "fx-bna");
 
-  const lectura: string[] = [
-    "(slot 1 — Informe)",
-    "(slot 2 — Informe)",
-    "(slot 3 — Informe)",
-    "(slot 4 — Informe)",
-    "(slot 5 — Informe)",
-  ];
+  const chicago = [
+    sojaChi?.valor ? `Soja ${sojaChi.valor}${sojaChi.senal ?? ""}` : null,
+    maizChi?.valor ? `Maíz ${maizChi.valor}${maizChi.senal ?? ""}` : null,
+    trigoChi?.valor ? `Trigo ${trigoChi.valor}${trigoChi.senal ?? ""}` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ") || "—";
+
+  const cac = [
+    sojaCac?.valor ? `Soja ${sojaCac.valor}` : null,
+    maizCac?.valor ? `Maíz ${maizCac.valor}` : null,
+    trigoCac?.valor ? `Trigo ${trigoCac.valor}` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ") || "—";
+
+  const matba = [
+    sojaMay?.valor
+      ? `Soja May ${sojaMay.valor}`
+      : sojaNov?.valor
+        ? `Soja Nov ${sojaNov.valor}`
+        : null,
+    maizMat?.valor ? `Maíz ${maizMat.valor}` : null,
+    trigoMat?.valor ? `Trigo ${trigoMat.valor}` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ") || "—";
+
+  const lectura = buildLectura(mercado.note, mercado.wasdeHeadline);
+
+  const wasdeBrief = mercado.wasdeHeadline
+    ? mercado.wasdeHeadline.slice(0, 100) +
+      (mercado.wasdeHeadline.length > 100 ? "…" : "")
+    : "";
 
   const whatsapp = buildWhatsApp({
-    fechaLabel: label,
+    fechaCorta,
+    chicago,
+    cac,
+    matba,
+    bna: cell(bna),
     catacLine,
     fiscal: fiscal.novedad,
-    mercadoResumen,
+    wasdeBrief,
   });
 
   return {
@@ -118,6 +196,7 @@ export async function assembleDigest(opts?: {
     producto: "digest-diario",
     fecha,
     fechaLabel: label,
+    fechaCorta,
     generadoAt: new Date().toISOString(),
     mercado,
     catac,
