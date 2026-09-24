@@ -251,6 +251,20 @@ function ClimaBlock({ mercado }: { mercado: MercadoSnapshot }) {
   );
 }
 
+function signalLabel(r: MercadoRow): string {
+  if (r.id.startsWith("chicago-") || r.id.startsWith("cbot-")) {
+    return `CBOT fut. ${r.producto}`;
+  }
+  if (r.id.startsWith("matba-")) {
+    return `Matba fwd ${r.producto}`;
+  }
+  if (r.id.startsWith("cac-")) {
+    return `CAC disp. ${r.producto}`;
+  }
+  if (r.id === "wti") return "WTI";
+  return r.producto;
+}
+
 function SignalChip({ r }: { r: MercadoRow | undefined }) {
   if (!r) return null;
   const color =
@@ -263,21 +277,28 @@ function SignalChip({ r }: { r: MercadoRow | undefined }) {
           : "bg-slate-50 text-slate-400 border-slate-100";
   return (
     <div
-      className={`flex items-center justify-between gap-2 rounded border px-2 py-1 text-[11px] ${color}`}
+      className={`flex flex-col gap-0.5 rounded border px-2 py-1.5 text-[11px] ${color}`}
     >
-      <span className="font-medium">{r.producto}</span>
-      <span className="tabular-nums font-bold">
-        {r.valor ? (
-          <>
-            {r.senal ?? "→"} {r.valor}
-            {r.unidad ? (
-              <span className="ml-0.5 font-normal opacity-60">{r.unidad}</span>
-            ) : null}
-          </>
-        ) : (
-          "—"
-        )}
-      </span>
+      <div className="flex items-center justify-between gap-2">
+        <span className="font-medium leading-tight">{signalLabel(r)}</span>
+        <span className="tabular-nums font-bold shrink-0">
+          {r.valor ? (
+            <>
+              {r.senal ?? "→"} {r.valor}
+              {r.unidad ? (
+                <span className="ml-0.5 font-normal opacity-60">{r.unidad}</span>
+              ) : null}
+            </>
+          ) : (
+            "—"
+          )}
+        </span>
+      </div>
+      <p className="text-[9px] opacity-55 leading-tight">
+        {r.valor
+          ? [r.fuente, r.hora].filter(Boolean).join(" · ") || "sin fuente"
+          : "sin fuente"}
+      </p>
     </div>
   );
 }
@@ -292,6 +313,10 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
   const maizMat = rowById(mercado.rows, "matba-maiz");
   const trigoMat = rowById(mercado.rows, "matba-trigo");
 
+  const sojaCac = rowById(mercado.rows, "cac-soja");
+  const maizCac = rowById(mercado.rows, "cac-maiz");
+  const trigoCac = rowById(mercado.rows, "cac-trigo");
+
   const usda = rowById(mercado.rows, "usda");
   const progress = rowById(mercado.rows, "crop-progress");
   const noticias = rowById(mercado.rows, "noticias");
@@ -303,24 +328,30 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
 
       {/* Row A */}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
-        <Panel title="Chicago nocturno · CBOT">
+        <Panel title="Chicago · futuro CBOT (Yahoo)">
+          <p className="mb-1 text-[9px] leading-snug opacity-55">
+            Futuro CBOT en US$/t (no es pizarra ni disponible).
+          </p>
           <CropLine crop="soja" r={sojaChi} />
           <CropLine crop="maiz" r={maizChi} />
           <CropLine crop="trigo" r={trigoChi} />
         </Panel>
 
-        <Panel title="A3 / Matba cosecha" tint="#0b1f3a">
+        <Panel title="Matba · forward cosecha" tint="#0b1f3a">
+          <p className="mb-1 text-[9px] leading-snug opacity-55">
+            Forward Matba Rofex (contrato). No mezclar con disponible.
+          </p>
           <div className="flex items-start gap-2 border-l-4 border-[#1f6b3a] pl-2">
             <span className="w-14 shrink-0 pt-0.5 text-[10px] font-bold text-[#1f6b3a]">
               SOJA
             </span>
             <div className="grid w-full grid-cols-2 gap-2">
               <div>
-                <div className="text-[9px] opacity-50">May</div>
+                <div className="text-[9px] opacity-50">May fwd</div>
                 <Cell r={sojaMay} dense />
               </div>
               <div>
-                <div className="text-[9px] opacity-50">Nov</div>
+                <div className="text-[9px] opacity-50">Nov fwd</div>
                 <Cell r={sojaNov} dense />
               </div>
             </div>
@@ -329,13 +360,13 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
           <CropLine crop="trigo" r={trigoMat} />
         </Panel>
 
-        <Panel title="Cierres CBOT" tint="#c9a227">
-          <p className="text-[10px] leading-snug opacity-55">
-            Misma fuente que Chicago nocturno (Yahoo CBOT). US$/t + ¢/bu.
+        <Panel title="CAC Rosario · disponible" tint="#1f6b3a">
+          <p className="mb-1 text-[9px] leading-snug opacity-55">
+            Disponible / pizarra plaza (CAC). No es futuro CBOT ni Matba.
           </p>
-          <CropLine crop="soja" r={sojaChi} />
-          <CropLine crop="maiz" r={maizChi} />
-          <CropLine crop="trigo" r={trigoChi} />
+          <CropLine crop="soja" r={sojaCac} />
+          <CropLine crop="maiz" r={maizCac} />
+          <CropLine crop="trigo" r={trigoCac} />
         </Panel>
       </div>
 
@@ -379,26 +410,17 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
       {/* Señales */}
       <section className="digest-panel">
         <h3 className="digest-panel-title">Tablero señales</h3>
+        <p className="mb-1.5 text-[10px] opacity-55">
+          Cada chip: plaza + tipo (futuro / forward / disponible) + fuente. No
+          mezclar CBOT con Matba ni con CAC.
+        </p>
         <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-6">
           <SignalChip r={sojaChi} />
           <SignalChip r={maizChi} />
           <SignalChip r={trigoChi} />
           <SignalChip r={sojaMay ?? sojaNov} />
-          <SignalChip r={maizMat} />
-          <SignalChip
-            r={
-              wti ?? {
-                id: "wti",
-                mercado: "Energía",
-                producto: "WTI",
-                valor: null,
-                unidad: null,
-                fuente: null,
-                hora: null,
-                etiqueta: "VACÍO" as const,
-              }
-            }
-          />
+          <SignalChip r={sojaCac} />
+          <SignalChip r={wti} />
         </div>
       </section>
     </div>
