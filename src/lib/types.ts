@@ -69,6 +69,35 @@ export interface ClimaSnapshot {
   etiqueta: EtiquetaDato;
 }
 
+
+export interface NoticiasItem {
+  handle: string;
+  text: string;
+  url?: string | null;
+  likes?: number | null;
+  views?: number | null;
+  reposts?: number | null;
+  publishedAt?: string | null;
+  publishedAtArg?: string | null;
+  metricsUnavailable?: boolean;
+  relevance?: number | null;
+}
+
+export interface NoticiasSnapshot {
+  ok: boolean;
+  valor: string | null;
+  fuente: string | null;
+  hora: string | null;
+  url: string | null;
+  extra: string | null;
+  etiqueta: EtiquetaDato;
+  items: NoticiasItem[];
+  note: string;
+  fetchedAt: string;
+  asOf: string | null;
+  maxAgeHours: number;
+}
+
 export interface MercadoSnapshot {
   ok: boolean;
   rows: MercadoRow[];
@@ -81,6 +110,8 @@ export interface MercadoSnapshot {
   sourcesOk?: string[];
   /** Clima AR/BR/US estructurado (texto + link + fecha; sin heatmap) */
   clima?: ClimaSnapshot | null;
+  /** Noticias X / agro — snapshot fechado; vacío si no hay posts frescos */
+  noticias?: NoticiasSnapshot | null;
 }
 
 export interface FiscalSnapshot {

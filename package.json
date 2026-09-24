@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "noticias:status": "node scripts/refresh-noticias.mjs",
+    "noticias:empty": "node scripts/refresh-noticias.mjs --empty",
+    "noticias:refresh": "node scripts/refresh-noticias.mjs --from"
   },
   "dependencies": {
     "next": "16.3.4",

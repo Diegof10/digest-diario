@@ -396,7 +396,29 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
 
         <Panel title="Noticias">
           {noticias?.valor ? (
-            <p className="text-[11px]">{noticias.valor}</p>
+            <div>
+              <p className="text-[11px] leading-snug whitespace-pre-wrap">
+                {noticias.valor}
+              </p>
+              {noticias.extra ? (
+                <p className="mt-1 text-[10px] leading-snug opacity-60">
+                  {noticias.extra}
+                </p>
+              ) : null}
+              <p className="mt-1 text-[9px] opacity-45">
+                {[noticias.fuente, noticias.hora].filter(Boolean).join(" · ")}
+              </p>
+              {noticias.url ? (
+                <a
+                  href={noticias.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-0.5 inline-block text-[9px] underline decoration-slate-300 underline-offset-2 opacity-55 hover:opacity-90"
+                >
+                  ver post
+                </a>
+              ) : null}
+            </div>
           ) : (
             <p className="text-[11px] opacity-40">— sin fuente</p>
           )}

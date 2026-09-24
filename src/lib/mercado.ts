@@ -4,7 +4,14 @@ import {
   climaResumen,
   getClima,
 } from "@/lib/clima";
-import type { ClimaSnapshot, MercadoRow, MercadoSnapshot, SenalMercado } from "@/lib/types";
+import { getNoticias } from "@/lib/noticias";
+import type {
+  ClimaSnapshot,
+  MercadoRow,
+  MercadoSnapshot,
+  NoticiasSnapshot,
+  SenalMercado,
+} from "@/lib/types";
 
 const GRANOS_URL = "https://lark-lake-solar-craft.grok.me/api/granos";
 
@@ -429,6 +436,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     progressHeadline: progress?.headline ?? null,
     sourcesOk,
     clima: null,
+    noticias: null,
   };
 }
 
@@ -468,6 +476,7 @@ function stubSnapshot(note: string): MercadoSnapshot {
     progressHeadline: null,
     sourcesOk: [],
     clima: null,
+    noticias: null,
   };
 }
 
@@ -559,6 +568,34 @@ async function fetchWti(): Promise<WtiQuote | null> {
   }
 }
 
+
+function applyNoticias(
+  snap: MercadoSnapshot,
+  noticias: NoticiasSnapshot,
+): MercadoSnapshot {
+  const rows = snap.rows.map((r) => {
+    if (r.id !== "noticias") return r;
+    if (!noticias.ok || !noticias.valor) return r;
+    return {
+      ...r,
+      valor: noticias.valor,
+      unidad: "",
+      fuente: noticias.fuente,
+      hora: noticias.hora,
+      etiqueta: noticias.etiqueta,
+      url: noticias.url,
+      extra: noticias.extra,
+    };
+  });
+  const filledCount = rows.filter((r) => r.valor != null).length;
+  return {
+    ...snap,
+    rows,
+    ok: filledCount > 0 || snap.ok,
+    noticias,
+  };
+}
+
 function applyWti(snap: MercadoSnapshot, wti: WtiQuote | null): MercadoSnapshot {
   if (!wti) return snap;
   const pctLabel = fmtPct(wti.varPct);
@@ -591,6 +628,7 @@ function applyWti(snap: MercadoSnapshot, wti: WtiQuote | null): MercadoSnapshot 
 
 export async function getMercado(): Promise<MercadoSnapshot> {
   const climaPromise = getClima();
+  const noticiasPromise = getNoticias();
   const wtiPromise = fetchWti();
   try {
     const res = await fetch(GRANOS_URL, {
@@ -600,29 +638,46 @@ export async function getMercado(): Promise<MercadoSnapshot> {
       },
       cache: "no-store",
     });
-    const [clima, wti] = await Promise.all([climaPromise, wtiPromise]);
+    const [clima, noticias, wti] = await Promise.all([
+      climaPromise,
+      noticiasPromise,
+      wtiPromise,
+    ]);
     if (!res.ok) {
       return applyWti(
-        applyClima(
-          stubSnapshot(
-            `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+        applyNoticias(
+          applyClima(
+            stubSnapshot(
+              `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+            ),
+            clima,
           ),
-          clima,
+          noticias,
         ),
         wti,
       );
     }
     const data = (await res.json()) as GranosPayload;
-    return applyWti(applyClima(mapGranos(data), clima), wti);
+    return applyWti(
+      applyNoticias(applyClima(mapGranos(data), clima), noticias),
+      wti,
+    );
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    const [clima, wti] = await Promise.all([climaPromise, wtiPromise]);
+    const [clima, noticias, wti] = await Promise.all([
+      climaPromise,
+      noticiasPromise,
+      wtiPromise,
+    ]);
     return applyWti(
-      applyClima(
-        stubSnapshot(
-          `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
+      applyNoticias(
+        applyClima(
+          stubSnapshot(
+            `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
+          ),
+          clima,
         ),
-        clima,
+        noticias,
       ),
       wti,
     );
