@@ -11,6 +11,14 @@ export const FERT_SOURCE_URL =
 const FERT_AS_OF = "2026-09-19";
 const FERT_SOURCE_LABEL = "Bichos/IF";
 
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 24 Sep 2026). */
+export const GLIFO_SOURCE_URL =
+  "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
+const GLIFO_AS_OF = "2026-09-24";
+const GLIFO_SOURCE_LABEL = "Campo Simple";
+const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
+const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
+
 const UA =
   "Mozilla/5.0 (compatible; digest-diario/0.1; +https://github.com/Diegof10/digest-diario) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
@@ -82,12 +90,14 @@ function mid(low: number, high: number): number {
   return Math.round(((low + high) / 2) * 10) / 10;
 }
 
-function fmtRange(low: number, high: number): string {
+function fmtRange(low: number, high: number, digits = 0): string {
   const a = low.toLocaleString("es-AR", {
-    maximumFractionDigits: 0,
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
   });
   const b = high.toLocaleString("es-AR", {
-    maximumFractionDigits: 0,
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
   });
   return `${a}–${b}`;
 }
@@ -315,6 +325,8 @@ function buildSlots(
 
   const fertFecha = fmtEsDate(FERT_AS_OF);
   const fertFuente = `${FERT_SOURCE_LABEL} · último valor guardado`;
+  const glifoFecha = fmtEsDate(GLIFO_AS_OF);
+  const glifoFuente = `${GLIFO_SOURCE_LABEL} · lista web`;
 
   return [
     {
@@ -345,6 +357,15 @@ function buildSlots(
       fecha: dap ? fertFecha : null,
       fuente: dap ? fertFuente : null,
       etiqueta: dap ? "ÚLTIMO_GUARDADO" : "VACÍO",
+    },
+    {
+      id: "glifosato",
+      label: "Glifosato 54%",
+      valor: fmtRange(GLIFO_LOW, GLIFO_HIGH, 2),
+      unidad: "USD/L",
+      fecha: glifoFecha,
+      fuente: glifoFuente,
+      etiqueta: "ÚLTIMO_GUARDADO",
     },
     {
       id: "gasoil",
@@ -382,7 +403,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
-    "Solo se publican insumos con precio + fuente + fecha; UAN/Glifosato no entran sin cotización nombrada.",
+    `Glifosato: ${GLIFO_LOW}–${GLIFO_HIGH} USD/L (Campo Simple lista web, consulta ${fmtEsDate(GLIFO_AS_OF)}; genérico 54%–Power Plus II). UAN sin cotización nombrada.`,
   ];
 
   return {
@@ -400,6 +421,11 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
       {
         id: "if-rif",
         label: "IF vía Bichos de Campo (curated)",
+        ok: true,
+      },
+      {
+        id: "campo-simple-glifo",
+        label: "Campo Simple lista web glifosato",
         ok: true,
       },
     ],
