@@ -1,7 +1,7 @@
 import CostsBlock from "@/components/CostsBlock";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
-import MorningBriefCopy from "@/components/MorningBriefCopy";
+import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
 import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 
@@ -85,7 +85,7 @@ export default async function Home({
       </section>
 
       <div className="mt-3">
-        <MorningBriefCopy lines={digest.resumenMatutino} />
+        <MorningBrief lines={digest.resumenMatutino} />
       </div>
 
       <SiteFooter pie={digest.pie} />
