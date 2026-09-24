@@ -114,12 +114,32 @@ export interface MercadoSnapshot {
   noticias?: NoticiasSnapshot | null;
 }
 
+export interface FiscalNovedad {
+  texto: string;
+  fuente: string | null;
+}
+
+export interface FiscalVencimiento {
+  concepto: string;
+  ventana: string;
+  detalle?: string | null;
+  fuente?: string | null;
+}
+
 export interface FiscalSnapshot {
   ok: boolean;
-  /** Una línea: novedad concreta o "sin novedad fiscal" */
+  /** Una línea: novedad concreta o "sin novedad fiscal" (compat digest/resumen) */
   novedad: string;
   fuente: string | null;
   fetchedAt: string;
+  /** Fecha del snapshot (YYYY-MM-DD ARG) */
+  fecha: string | null;
+  actualizadoAt: string | null;
+  novedades: FiscalNovedad[];
+  vencimientos: FiscalVencimiento[];
+  /** Línea tablero / panel (preferida sobre novedad corta) */
+  lineaTablero: string;
+  pie: string | null;
 }
 
 export interface CostoInsumoSlot {

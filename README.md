@@ -9,7 +9,7 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 1. Fecha (America/Argentina/Cordoba)
 2. Tablero Mercado — Chicago / Matba / CAC Rosario / USDA / BNA / Clima AR·BR·US (noticias/WTI vacíos sin fuente)
 3. Costos — flete CATAC (km → ARS/t) + slots fert/gasoil vacíos
-4. Fiscal — una línea (`sin novedad fiscal` stub)
+4. Fiscal (ARCA / consejos) — novedades + vencimientos desde `src/data/fiscal-snapshot.json` (vacío → `sin novedad fiscal`)
 5. Lectura — 5–6 líneas (slot Informe)
 6. Resumen matutino (copiar) — Chief of Staff brief; sin agenda personal
 7. Pie: *Elaborado por DHF Advisory. Análisis de gestión. No es orden de venta ni dictamen impositivo.*
@@ -22,7 +22,7 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 | `GET /api/digest?km=` | Arma el snapshot completo |
 | `GET /api/catac?km=` | Tarifa CATAC km→ARS/t |
 | `GET /api/mercado` | Mercado live vía feed granos (Chicago/Matba/CAC/USDA/BNA) |
-| `GET /api/fiscal` | Stub Fiscal |
+| `GET /api/fiscal` | Snapshot fiscal (novedades + vencimientos; never invent) |
 | `GET /api/resumen-matutino` | Resumen matutino activo (CoS o fallback) |
 | `GET /api/cron/digest` | Cron diario (Bearer `CRON_SECRET`) |
 
@@ -49,6 +49,26 @@ Fetch live opcional (probe URL). Si falla → etiqueta **último valor guardado*
 PDF oficial de referencia:
 
 https://api.apicatac.com/wp-content/uploads/2026/04/TARIFA-REFERENCIA-CATAC-ABRIL-26.pdf
+
+
+## Fiscal (ARCA / consejos)
+
+Snapshot fechado en `src/data/fiscal-snapshot.json` (Fiscal & Estructura AR). **Nunca inventa** RGs ni fechas: archivo ausente/vacío → `sin novedad fiscal` + vencimientos `[]`.
+
+Fuentes de referencia (documentación; no scrape en runtime):
+
+- [ARCA SISA Info Productiva](https://www.arca.gob.ar/actividadesAgropecuarias/sector-agro/sisa/informacion-productiva.asp)
+- [ARCA vencimientos](https://www.afip.gob.ar/vencimientos/)
+- [ARCA anticipos Ganancias PH](https://arca.gob.ar/gananciasYBienes/ganancias/personas-humanas-sucesiones-indivisas/declaracion-jurada/determinativa/anticipos.asp)
+- [Boletín Oficial](https://www.boletinoficial.gob.ar/)
+- [CPCECABA calendario](https://www.consejo.org.ar/calendar_vencimientos)
+- [CPCE Córdoba](https://web.cpcecba.org.ar/)
+
+Refresh: Fiscal agent → actualizar JSON → commit. Pie panel: *No es dictamen impositivo. Sujeto a revisión de Diego.*
+
+```bash
+curl -s http://localhost:3000/api/fiscal | jq .
+```
 
 ## Resumen matutino (Chief of Staff)
 
@@ -103,4 +123,4 @@ Ver `.env.example`: `CRON_SECRET`.
 - **Informe**: Resumen matutino + PDF 1 página + pie DHF.
 - **Costos**: CATAC + fert/gasoil (si hay fuente fechada).
 - **Mercado**: plug-in Chicago/Matba/CAC/USDA/clima/WTI.
-- **Fiscal**: una línea de novedad.
+- **Fiscal**: panel novedades + vencimientos (`fiscal-snapshot.json`); stub vacío si falta.

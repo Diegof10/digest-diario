@@ -1,4 +1,5 @@
 import CostsBlock from "@/components/CostsBlock";
+import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBriefCopy from "@/components/MorningBriefCopy";
 import { assembleDigest, DEFAULT_KM } from "@/lib/digest";
@@ -54,10 +55,9 @@ export default async function Home({
         <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
       </div>
 
-      <section className="digest-panel mt-3">
-        <h3 className="digest-panel-title">Fiscal</h3>
-        <p className="text-[12px]">{digest.fiscal.novedad}</p>
-      </section>
+      <div className="mt-3">
+        <FiscalBlock fiscal={digest.fiscal} />
+      </div>
 
       <section className="digest-panel mt-3">
         <h3 className="digest-panel-title">Lectura</h3>

@@ -1,0 +1,49 @@
+{
+  "fecha": "2026-09-24",
+  "actualizadoAt": "2026-09-24T08:00:00.000-03:00",
+  "fuente": "Fiscal & Estructura AR · BO/ARCA/CPCE",
+  "novedades": [
+    {
+      "texto": "RG ARCA 5894/2026 (BO 01/09/2026): calendario SISA IP1/IP2 + reintegro retenciones IVA…",
+      "fuente": "BO + CPCE Córdoba 01/09/2026"
+    },
+    {
+      "texto": "RG ARCA 5898/2026 (BO 21/09/2026): DJ Ganancias PH 2025 presentación hasta 13/10/2026; pago saldo 27/07/2026.",
+      "fuente": "BO"
+    }
+  ],
+  "vencimientos": [
+    {
+      "concepto": "SISA IP1",
+      "ventana": "01/09–31/10/2026",
+      "detalle": "Existencias al 31/08 (+ comercializado desde 01/09) + superficies Anexo IP1",
+      "fuente": "ARCA SISA / RG 5894"
+    },
+    {
+      "concepto": "SISA IP2",
+      "ventana": "01/12/2026–último día feb/2027",
+      "detalle": "Superficies Anexo IP2 (aún no abre)",
+      "fuente": "ARCA SISA / RG 5894"
+    },
+    {
+      "concepto": "Ganancias PH 1° anticipo PF 2026",
+      "ventana": "hasta 24/09/2026 (excep. RG 5876/5890)",
+      "detalle": "Chequear Cuentas Tributarias",
+      "fuente": "ARCA anticipos"
+    },
+    {
+      "concepto": "Ganancias PH DJ 2025",
+      "ventana": "presentación hasta 13/10/2026",
+      "detalle": "Pago saldo 27/07/2026 (ya vencido si no pagó)",
+      "fuente": "RG 5898"
+    },
+    {
+      "concepto": "2° anticipo Ganancias (+ BP según tabla)",
+      "ventana": "13/10 CUIT 0-3 · 14/10 4-6 · 15/10 7-9",
+      "detalle": "",
+      "fuente": "PDF Anticipos ARCA"
+    }
+  ],
+  "lineaTablero": "Novedad fiscal: vigente RG 5894 (SISA IP1 abierta hasta 31/10; existencias al 31/08) y RG 5898 (DJ Ganancias PH 2025 presentación hasta 13/10). 1° anticipo Ganancias 2026: excepc. 24/09. Fuente: BO + ARCA. Chequear clave fiscal / Cuentas Tributarias. No es dictamen.",
+  "pie": "Elaborado por DHF Advisory. Análisis de gestión. No es dictamen impositivo. Sujeto a revisión de Diego."
+}
