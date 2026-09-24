@@ -191,13 +191,18 @@ function RosarioBlock({ mercado }: { mercado: MercadoSnapshot }) {
 
 
 function ClimaCountry({ e }: { e: ClimaEntry }) {
-  const flag =
-    e.country === "AR" ? "AR" : e.country === "BR" ? "BR" : "US";
+  const flagEmoji =
+    e.country === "AR" ? "🇦🇷" : e.country === "BR" ? "🇧🇷" : "🇺🇸";
   return (
     <div className="border-b border-slate-100 pb-2 last:border-b-0 last:pb-0">
       <div className="flex items-baseline justify-between gap-2">
-        <span className="text-[10px] font-bold tracking-wide text-[#0b1f3a]">
-          {flag} · {e.countryLabel}
+        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wide text-[#0b1f3a]">
+          <span className="text-[14px] leading-none" aria-hidden>
+            {flagEmoji}
+          </span>
+          <span>
+            {e.country} · {e.countryLabel}
+          </span>
         </span>
         <span className="shrink-0 text-[9px] tabular-nums opacity-50">
           {e.fecha}
