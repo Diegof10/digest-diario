@@ -329,18 +329,12 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
       {/* Row A */}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
         <Panel title="Chicago · futuro CBOT (Yahoo)">
-          <p className="mb-1 text-[9px] leading-snug opacity-55">
-            Futuro CBOT en US$/t (no es pizarra ni disponible).
-          </p>
           <CropLine crop="soja" r={sojaChi} />
           <CropLine crop="maiz" r={maizChi} />
           <CropLine crop="trigo" r={trigoChi} />
         </Panel>
 
         <Panel title="Matba · forward cosecha" tint="#0b1f3a">
-          <p className="mb-1 text-[9px] leading-snug opacity-55">
-            Forward Matba Rofex (contrato). No mezclar con disponible.
-          </p>
           <div className="flex items-start gap-2 border-l-4 border-[#1f6b3a] pl-2">
             <span className="w-14 shrink-0 pt-0.5 text-[10px] font-bold text-[#1f6b3a]">
               SOJA
@@ -361,9 +355,6 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
         </Panel>
 
         <Panel title="CAC Rosario · disponible" tint="#1f6b3a">
-          <p className="mb-1 text-[9px] leading-snug opacity-55">
-            Disponible / pizarra plaza (CAC). No es futuro CBOT ni Matba.
-          </p>
           <CropLine crop="soja" r={sojaCac} />
           <CropLine crop="maiz" r={maizCac} />
           <CropLine crop="trigo" r={trigoCac} />
