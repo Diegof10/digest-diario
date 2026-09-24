@@ -6,7 +6,9 @@ import { getResumenMatutinoLineas } from "@/lib/resumen-matutino";
 import type { CostoInsumoSlot, DigestSnapshot, MercadoRow } from "@/lib/types";
 
 export const PIE_DHF =
-  "Elaborado por DHF Advisory. Análisis de gestión. No es orden de venta ni dictamen impositivo.";
+  "Análisis de gestión. No es orden de venta ni dictamen impositivo.";
+export const X_PROFILE_URL = "https://x.com/dhferrari";
+export const X_HANDLE = "@dhferrari";
 
 export const DEFAULT_KM = 180;
 

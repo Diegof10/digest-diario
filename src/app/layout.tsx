@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Resumen agrario · DHF Advisory",
+  title: "Resumen agrario · @dhferrari",
   description:
-    "Resumen agrario matutino: Chicago, Matba, CAC Rosario, USDA, CATAC, fiscal. Análisis de gestión — DHF Advisory.",
+    "Resumen agrario matutino: Chicago, Matba, CAC Rosario, USDA, CATAC, fiscal. Análisis de gestión — @dhferrari.",
 };
 
 export default function RootLayout({

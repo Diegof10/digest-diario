@@ -2,7 +2,8 @@ import CostsBlock from "@/components/CostsBlock";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBriefCopy from "@/components/MorningBriefCopy";
-import { assembleDigest, DEFAULT_KM } from "@/lib/digest";
+import SiteFooter from "@/components/SiteFooter";
+import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
 
@@ -35,9 +36,22 @@ export default async function Home({
               <span className="absolute left-2 top-0 h-4 w-1.5 rounded-full bg-[#1f6b3a] opacity-90" />
             </span>
           </span>
-          <h1 className="text-sm font-bold tracking-[0.14em] sm:text-base">
-            RESUMEN AGRARIO
-          </h1>
+          <div>
+            <h1 className="text-sm font-bold tracking-[0.14em] sm:text-base">
+              RESUMEN AGRARIO
+            </h1>
+            <a
+              href={X_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-medium tracking-normal text-white/75 hover:text-white"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden className="h-3 w-3 fill-current">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+              </svg>
+              {X_HANDLE}
+            </a>
+          </div>
         </div>
         <div className="text-right">
           <div className="text-sm font-semibold tabular-nums">
@@ -74,9 +88,7 @@ export default async function Home({
         <MorningBriefCopy lines={digest.resumenMatutino} />
       </div>
 
-      <footer className="mt-4 border-t border-[#0b1f3a]/15 pt-2 text-[10px] opacity-60">
-        {digest.pie}
-      </footer>
+      <SiteFooter pie={digest.pie} />
     </main>
   );
 }
