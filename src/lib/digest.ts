@@ -1,5 +1,6 @@
 import { getCatac } from "@/lib/catac";
 import { getFiscal } from "@/lib/fiscal";
+import { getInsumos } from "@/lib/insumos";
 import { getMercado, rowById } from "@/lib/mercado";
 import type { CostoInsumoSlot, DigestSnapshot, MercadoRow } from "@/lib/types";
 
@@ -8,10 +9,10 @@ export const PIE_DHF =
 
 export const DEFAULT_KM = 180;
 
-const INSUMO_SLOTS: CostoInsumoSlot[] = [
+const EMPTY_INSUMO_SLOTS: CostoInsumoSlot[] = [
   {
     id: "urea",
-    label: "Urea",
+    label: "Urea FCA",
     valor: null,
     unidad: "USD/t",
     fecha: null,
@@ -19,8 +20,17 @@ const INSUMO_SLOTS: CostoInsumoSlot[] = [
     etiqueta: "VACÍO",
   },
   {
-    id: "fosfato",
-    label: "Fosfato (MAP/DAP)",
+    id: "map",
+    label: "MAP FCA",
+    valor: null,
+    unidad: "USD/t",
+    fecha: null,
+    fuente: null,
+    etiqueta: "VACÍO",
+  },
+  {
+    id: "dap",
+    label: "DAP FCA",
     valor: null,
     unidad: "USD/t",
     fecha: null,
@@ -29,7 +39,7 @@ const INSUMO_SLOTS: CostoInsumoSlot[] = [
   },
   {
     id: "gasoil",
-    label: "Gasoil",
+    label: "Gasoil (surtidor)",
     valor: null,
     unidad: "ARS/l",
     fecha: null,
@@ -118,10 +128,11 @@ export async function assembleDigest(opts?: {
   const km =
     opts?.km != null && Number.isFinite(opts.km) ? opts.km : DEFAULT_KM;
   const { fecha, label, fechaCorta } = cordobaParts();
-  const [mercado, catac, fiscal] = await Promise.all([
+  const [mercado, catac, fiscal, insumosSnap] = await Promise.all([
     getMercado(),
     getCatac(km),
     getFiscal(),
+    getInsumos().catch(() => null),
   ]);
 
   let catacLine = "sin dato";
@@ -200,7 +211,7 @@ export async function assembleDigest(opts?: {
     generadoAt: new Date().toISOString(),
     mercado,
     catac,
-    insumos: INSUMO_SLOTS,
+    insumos: insumosSnap?.slots ?? EMPTY_INSUMO_SLOTS,
     fiscal,
     lectura,
     whatsapp,

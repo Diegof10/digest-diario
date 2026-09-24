@@ -1,5 +1,12 @@
 import type { CatacSnapshot, CostoInsumoSlot } from "@/lib/types";
 
+function etiquetaHint(e: CostoInsumoSlot["etiqueta"]): string | null {
+  if (e === "ÚLTIMO_GUARDADO") return "último valor guardado";
+  if (e === "VACÍO") return "sin dato";
+  if (e === "SUPUESTO") return "supuesto";
+  return null;
+}
+
 export default function CostsBlock({
   catac,
   insumos,
@@ -34,27 +41,34 @@ export default function CostsBlock({
             </a>
           ) : null}
         </div>
-        {insumos.map((i) => (
-          <div
-            key={i.id}
-            className="rounded border border-slate-200 px-2 py-1.5"
-          >
-            <div className="text-[9px] uppercase opacity-50">{i.label}</div>
-            <div className="text-sm font-bold tabular-nums opacity-70">
-              {i.valor ?? "—"}
-              {i.valor && i.unidad ? (
-                <span className="ml-0.5 text-[9px] font-normal opacity-55">
-                  {i.unidad}
-                </span>
-              ) : null}
+        {insumos.map((i) => {
+          const hint = etiquetaHint(i.etiqueta);
+          return (
+            <div
+              key={i.id}
+              className="rounded border border-slate-200 px-2 py-1.5"
+            >
+              <div className="text-[9px] uppercase opacity-50">{i.label}</div>
+              <div
+                className={`text-sm font-bold tabular-nums ${
+                  i.valor ? "" : "opacity-70"
+                }`}
+              >
+                {i.valor ?? "—"}
+                {i.valor && i.unidad ? (
+                  <span className="ml-0.5 text-[9px] font-normal opacity-55">
+                    {i.unidad}
+                  </span>
+                ) : null}
+              </div>
+              <div className="text-[9px] opacity-45">
+                {i.fuente && i.fecha
+                  ? `${i.fuente} · ${i.fecha}`
+                  : hint ?? "sin fuente"}
+              </div>
             </div>
-            <div className="text-[9px] opacity-45">
-              {i.fuente && i.fecha
-                ? `${i.fuente} · ${i.fecha}`
-                : "sin fuente"}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
