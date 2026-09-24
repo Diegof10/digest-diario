@@ -1,6 +1,6 @@
 import CostsBlock from "@/components/CostsBlock";
 import MarketBoard from "@/components/MarketBoard";
-import WhatsAppCopy from "@/components/WhatsAppCopy";
+import MorningBriefCopy from "@/components/MorningBriefCopy";
 import { assembleDigest, DEFAULT_KM } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
@@ -71,7 +71,7 @@ export default async function Home({
       </section>
 
       <div className="mt-3">
-        <WhatsAppCopy lines={digest.whatsapp} />
+        <MorningBriefCopy lines={digest.resumenMatutino} />
       </div>
 
       <footer className="mt-4 border-t border-[#0b1f3a]/15 pt-2 text-[10px] opacity-60">

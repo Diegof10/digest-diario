@@ -1,6 +1,6 @@
 # Digest diario
 
-Producto matutino de DHF Advisory: tablero web + APIs para armar el digest agro del día (mercado, costos CATAC, fiscal, lectura, WhatsApp 8 líneas).
+Producto matutino de DHF Advisory: tablero web + APIs para armar el digest agro del día (mercado, costos CATAC, fiscal, lectura, Resumen matutino).
 
 Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proyecto sirve esta página). **No** toca Agro Planeamiento ni `dhf-margenes`.
 
@@ -11,7 +11,7 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 3. Costos — flete CATAC (km → ARS/t) + slots fert/gasoil vacíos
 4. Fiscal — una línea (`sin novedad fiscal` stub)
 5. Lectura — 5–6 líneas (slot Informe)
-6. WhatsApp 8 líneas (copiar)
+6. Resumen matutino (copiar) — Chief of Staff brief; sin agenda personal
 7. Pie: *Elaborado por DHF Advisory. Análisis de gestión. No es orden de venta ni dictamen impositivo.*
 
 ## APIs
@@ -23,6 +23,7 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 | `GET /api/catac?km=` | Tarifa CATAC km→ARS/t |
 | `GET /api/mercado` | Mercado live vía feed granos (Chicago/Matba/CAC/USDA/BNA) |
 | `GET /api/fiscal` | Stub Fiscal |
+| `GET /api/resumen-matutino` | Resumen matutino activo (CoS o fallback) |
 | `GET /api/cron/digest` | Cron diario (Bearer `CRON_SECRET`) |
 
 ## Mercado (feed granos)
@@ -49,6 +50,33 @@ PDF oficial de referencia:
 
 https://api.apicatac.com/wp-content/uploads/2026/04/TARIFA-REFERENCIA-CATAC-ABRIL-26.pdf
 
+## Resumen matutino (Chief of Staff)
+
+UI title: **Resumen matutino** (nunca WhatsApp).
+
+- **Source of truth (shared box):** `/workspace/dhf-digest/latest.txt` (siempre hoy) y `resumen-matutino-YYYY-MM-DD.txt` (histórico).
+- **Bundled copy (Vercel):** `src/data/resumen-matutino.txt` — Vercel no lee `/workspace`, así que el cron/sync copia el txt al repo y se pushea.
+- **Formato CoS:**
+  ```
+  fecha: YYYY-MM-DD ART
+  titulo_ui: Resumen matutino
+
+  <líneas de mercado / FX / granos>
+  ```
+- **Filtro:** se omiten líneas `Agenda:` (calendario personal / reuniones / recordatorios). Solo mercados/FX/granos.
+- **Timing:** CoS escribe ~08:00 ART. Correr sync **después** de eso, luego commit+push. No inventar líneas.
+- **Fallback:** si el archivo falta o el body está vacío, `assembleDigest` usa el short digest auto-armado (mismo contenido que el viejo buildWhatsApp).
+
+```bash
+./scripts/sync-resumen-matutino.sh
+# opcional API:
+curl -s http://localhost:3000/api/resumen-matutino | jq .
+```
+
+| Ruta | Rol |
+|------|-----|
+| `GET /api/resumen-matutino` | Líneas activas del panel (CoS txt o fallback) |
+
 ## Cron
 
 `vercel.json`: `0 10 * * *` → `/api/cron/digest`
@@ -72,7 +100,7 @@ Ver `.env.example`: `CRON_SECRET`.
 
 ## Dueños de formato / datos
 
-- **Informe**: WhatsApp 8 líneas + PDF 1 página + pie DHF.
+- **Informe**: Resumen matutino + PDF 1 página + pie DHF.
 - **Costos**: CATAC + fert/gasoil (si hay fuente fechada).
 - **Mercado**: plug-in Chicago/Matba/CAC/USDA/clima/WTI.
 - **Fiscal**: una línea de novedad.

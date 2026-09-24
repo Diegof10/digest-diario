@@ -2,6 +2,7 @@ import { getCatac } from "@/lib/catac";
 import { getFiscal } from "@/lib/fiscal";
 import { getInsumos } from "@/lib/insumos";
 import { getMercado, rowById } from "@/lib/mercado";
+import { getResumenMatutinoLineas } from "@/lib/resumen-matutino";
 import type { CostoInsumoSlot, DigestSnapshot, MercadoRow } from "@/lib/types";
 
 export const PIE_DHF =
@@ -98,7 +99,7 @@ function buildLectura(mercadoNote: string, wasde: string | null | undefined): st
   return slots.slice(0, 6);
 }
 
-function buildWhatsApp(parts: {
+function buildResumenFallback(parts: {
   fechaCorta: string;
   chicago: string;
   cac: string;
@@ -191,7 +192,7 @@ export async function assembleDigest(opts?: {
       (mercado.wasdeHeadline.length > 100 ? "…" : "")
     : "";
 
-  const whatsapp = buildWhatsApp({
+  const fallback = buildResumenFallback({
     fechaCorta,
     chicago,
     cac,
@@ -201,6 +202,11 @@ export async function assembleDigest(opts?: {
     fiscal: fiscal.novedad,
     wasdeBrief,
   });
+
+  // CoS bundled txt (src/data/resumen-matutino.txt) wins when body lines exist.
+  // Never invent news: missing/empty → auto-built fallback only.
+  const cosLineas = await getResumenMatutinoLineas();
+  const resumenMatutino = cosLineas ?? fallback;
 
   return {
     ok: true,
@@ -214,7 +220,7 @@ export async function assembleDigest(opts?: {
     insumos: insumosSnap?.slots ?? EMPTY_INSUMO_SLOTS,
     fiscal,
     lectura,
-    whatsapp,
+    resumenMatutino,
     pie: PIE_DHF,
   };
 }

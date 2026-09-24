@@ -1,0 +1,9 @@
+fecha: 2026-09-24 ART
+titulo_ui: Resumen matutino
+
+CBOT: soja 486,9 US$/t (+0,6%) · maíz 208,4 (plano) · trigo 260,1 (−0,1%)
+AFA San Martín (23/09): soja 378,7 · maíz 200,7 · trigo 235,2
+Rosario CAC (22/09): soja 372 · maíz 198 · trigo 230
+FOB Up River: soja 506 · maíz 225 · trigo 266 · FAS ~370 / 192 / 231
+FX: oficial 1.535 · blue 1.560 · MEP 1.543 · CCL 1.607 · riesgo país 566
+Mercados: S&P −0,8% · Nasdaq −1,1% · WTI 93 · Brent 104,5 · UST 10a 5,11%

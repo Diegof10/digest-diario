@@ -145,6 +145,7 @@ export interface DigestSnapshot {
   fiscal: FiscalSnapshot;
   /** 5–6 líneas; vacío hasta que Informe complete */
   lectura: string[];
-  whatsapp: string[];
+  /** Resumen matutino (CoS txt si hay body; si no, auto-built fallback) */
+  resumenMatutino: string[];
   pie: string;
 }

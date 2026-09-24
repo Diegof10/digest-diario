@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function WhatsAppCopy({ lines }: { lines: string[] }) {
+export default function MorningBriefCopy({ lines }: { lines: string[] }) {
   const [copied, setCopied] = useState(false);
   const text = lines.join("\n");
 
@@ -19,7 +19,7 @@ export default function WhatsAppCopy({ lines }: { lines: string[] }) {
   return (
     <section className="digest-panel">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="digest-panel-title mb-0">WhatsApp · 8 líneas</h3>
+        <h3 className="digest-panel-title mb-0">Resumen matutino</h3>
         <button
           type="button"
           onClick={copy}
