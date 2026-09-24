@@ -4,7 +4,7 @@ export type CropQuote = {
   crop: CropKey;
   price: string;
   unit?: string;
-  change?: string; // "+0,6%" | "plano" | "−0,1%"
+  change?: string; // "+0,6%" | "+2,1 · +0,6%" | "plano" | "−0,1%"
 };
 
 export type PlazaBlock = {
@@ -31,23 +31,21 @@ function normCrop(raw: string): CropKey | null {
   return null;
 }
 
-/** Parse "soja 486,9 US$/t (+0,6%)" fragments. */
+/** Parse "soja 486,9 US$/t (+0,6%)" or "soja 378,7 (+2,1 · +0,6%)". */
 function parseQuotes(segment: string): CropQuote[] {
   const out: CropQuote[] = [];
-  // split on · or |
-  const parts = segment.split(/\s*[·|]\s*/);
-  for (const part of parts) {
-    const m = part.match(
-      /(soja|ma[ií]z|trigo)\s+([0-9][0-9.,]*)\s*(US\$\/t|\$\/t|USD\/t)?\s*(?:\(([^)]+)\))?/i,
-    );
-    if (!m) continue;
+  // Global scan — do NOT split on · first (change can be "+2,1 · +0,6%").
+  const re =
+    /(soja|ma[ií]z|trigo)\s+([0-9][0-9.,]*)\s*(US\$\/t|\$\/t|USD\/t)?\s*(?:\(([^)]+)\))?/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(segment)) !== null) {
     const crop = normCrop(m[1]);
     if (!crop) continue;
     out.push({
       crop,
       price: m[2],
       unit: m[3]?.replace("USD", "US$"),
-      change: m[4]?.trim(),
+      change: m[4]?.trim() || undefined,
     });
   }
   return out;
