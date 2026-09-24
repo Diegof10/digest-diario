@@ -1,4 +1,10 @@
-import type { MercadoRow, MercadoSnapshot, SenalMercado } from "@/lib/types";
+import {
+  climaFechaLabel,
+  climaFuenteLabel,
+  climaResumen,
+  getClima,
+} from "@/lib/clima";
+import type { ClimaSnapshot, MercadoRow, MercadoSnapshot, SenalMercado } from "@/lib/types";
 
 const GRANOS_URL = "https://lark-lake-solar-craft.grok.me/api/granos";
 
@@ -394,7 +400,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     rows.push(emptyRow("crop-progress", "Crop Progress", "Condición"));
   }
 
-  // Noticias / clima / WTI — sin fuente → vacío
+  // Noticias / WTI — sin fuente → vacío; clima se rellena en getMercado
   rows.push(emptyRow("noticias", "Noticias", "Agro"));
   rows.push(emptyRow("clima", "Clima", "AR/BR/US"));
   rows.push(emptyRow("wti", "Energía", "WTI"));
@@ -422,6 +428,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     wasdeHeadline: wasde?.headline ?? null,
     progressHeadline: progress?.headline ?? null,
     sourcesOk,
+    clima: null,
   };
 }
 
@@ -460,10 +467,37 @@ function stubSnapshot(note: string): MercadoSnapshot {
     wasdeHeadline: null,
     progressHeadline: null,
     sourcesOk: [],
+    clima: null,
+  };
+}
+
+function applyClima(snap: MercadoSnapshot, clima: ClimaSnapshot): MercadoSnapshot {
+  const rows = snap.rows.map((r) => {
+    if (r.id !== "clima") return r;
+    if (!clima.ok || clima.entries.length === 0) return r;
+    const resumen = climaResumen(clima);
+    return {
+      ...r,
+      valor: resumen.length > 220 ? resumen.slice(0, 217) + "…" : resumen,
+      unidad: "",
+      fuente: climaFuenteLabel(clima),
+      hora: climaFechaLabel(clima),
+      etiqueta: clima.etiqueta,
+      url: clima.entries[0]?.url ?? null,
+      extra: clima.note,
+    };
+  });
+  const filledCount = rows.filter((r) => r.valor != null).length;
+  return {
+    ...snap,
+    rows,
+    ok: filledCount > 0 || snap.ok,
+    clima,
   };
 }
 
 export async function getMercado(): Promise<MercadoSnapshot> {
+  const climaPromise = getClima();
   try {
     const res = await fetch(GRANOS_URL, {
       headers: {
@@ -472,17 +506,25 @@ export async function getMercado(): Promise<MercadoSnapshot> {
       },
       cache: "no-store",
     });
+    const clima = await climaPromise;
     if (!res.ok) {
-      return stubSnapshot(
-        `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+      return applyClima(
+        stubSnapshot(
+          `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+        ),
+        clima,
       );
     }
     const data = (await res.json()) as GranosPayload;
-    return mapGranos(data);
+    return applyClima(mapGranos(data), clima);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    return stubSnapshot(
-      `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
+    const clima = await climaPromise;
+    return applyClima(
+      stubSnapshot(
+        `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
+      ),
+      clima,
     );
   }
 }

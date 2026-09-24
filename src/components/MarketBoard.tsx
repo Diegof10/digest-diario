@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { MercadoRow, MercadoSnapshot } from "@/lib/types";
+import type { ClimaEntry, MercadoRow, MercadoSnapshot } from "@/lib/types";
 import { rowById } from "@/lib/mercado";
 
 const CROP = {
@@ -189,6 +189,68 @@ function RosarioBlock({ mercado }: { mercado: MercadoSnapshot }) {
   );
 }
 
+
+function ClimaCountry({ e }: { e: ClimaEntry }) {
+  const flag =
+    e.country === "AR" ? "AR" : e.country === "BR" ? "BR" : "US";
+  return (
+    <div className="border-b border-slate-100 pb-2 last:border-b-0 last:pb-0">
+      <div className="flex items-baseline justify-between gap-2">
+        <span className="text-[10px] font-bold tracking-wide text-[#0b1f3a]">
+          {flag} · {e.countryLabel}
+        </span>
+        <span className="shrink-0 text-[9px] tabular-nums opacity-50">
+          {e.fecha}
+        </span>
+      </div>
+      <p className="mt-0.5 text-[11px] leading-snug">{e.bullet}</p>
+      <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[9px] opacity-55">
+        <span>{e.fuente}</span>
+        <a
+          href={e.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-slate-300 underline-offset-2 hover:opacity-90"
+        >
+          ver fuente
+        </a>
+        {e.secondaryUrl ? (
+          <a
+            href={e.secondaryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-slate-300 underline-offset-2 hover:opacity-90"
+          >
+            {e.secondaryNote?.includes("PDF") ? "PDF" : "outlook"}
+          </a>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function ClimaBlock({ mercado }: { mercado: MercadoSnapshot }) {
+  const clima = mercado.clima;
+  const entries = clima?.entries ?? [];
+  if (!clima?.ok || entries.length === 0) {
+    return <p className="text-[11px] opacity-40">— sin fuente</p>;
+  }
+  const tag =
+    clima.etiqueta === "ÚLTIMO_GUARDADO"
+      ? "último valor guardado"
+      : clima.etiqueta === "HECHO"
+        ? "HECHO"
+        : clima.etiqueta;
+  return (
+    <div className="flex flex-col gap-2">
+      {entries.map((e) => (
+        <ClimaCountry key={e.country} e={e} />
+      ))}
+      <p className="text-[9px] uppercase tracking-wide opacity-40">{tag}</p>
+    </div>
+  );
+}
+
 function SignalChip({ r }: { r: MercadoRow | undefined }) {
   if (!r) return null;
   const color =
@@ -233,7 +295,6 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
   const usda = rowById(mercado.rows, "usda");
   const progress = rowById(mercado.rows, "crop-progress");
   const noticias = rowById(mercado.rows, "noticias");
-  const clima = rowById(mercado.rows, "clima");
   const wti = rowById(mercado.rows, "wti");
 
   return (
@@ -311,11 +372,7 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
         </Panel>
 
         <Panel title="Clima AR / BR / US">
-          {clima?.valor ? (
-            <p className="text-[11px]">{clima.valor}</p>
-          ) : (
-            <p className="text-[11px] opacity-40">— sin fuente</p>
-          )}
+          <ClimaBlock mercado={mercado} />
         </Panel>
       </div>
 

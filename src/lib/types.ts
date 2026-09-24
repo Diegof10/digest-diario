@@ -43,6 +43,30 @@ export interface MercadoRow {
   /** Hint ¢/bu u otro detalle */
   extra?: string | null;
   contrato?: string | null;
+  /** URL fuente (clima / reportes) */
+  url?: string | null;
+}
+
+export interface ClimaEntry {
+  country: "AR" | "BR" | "US";
+  countryLabel: string;
+  bullet: string;
+  fuente: string;
+  /** Fecha de referencia de la fuente (ej. ago-2026, 10/9/2026) */
+  fecha: string;
+  url: string;
+  secondaryUrl?: string | null;
+  secondaryNote?: string | null;
+  etiqueta: EtiquetaDato;
+}
+
+export interface ClimaSnapshot {
+  ok: boolean;
+  entries: ClimaEntry[];
+  note: string;
+  fetchedAt: string;
+  fuente: "live" | "snapshot";
+  etiqueta: EtiquetaDato;
 }
 
 export interface MercadoSnapshot {
@@ -55,6 +79,8 @@ export interface MercadoSnapshot {
   wasdeHeadline?: string | null;
   progressHeadline?: string | null;
   sourcesOk?: string[];
+  /** Clima AR/BR/US estructurado (texto + link + fecha; sin heatmap) */
+  clima?: ClimaSnapshot | null;
 }
 
 export interface FiscalSnapshot {

@@ -7,7 +7,7 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 ## Qué muestra la home
 
 1. Fecha (America/Argentina/Cordoba)
-2. Tablero Mercado — Chicago / Matba / CAC Rosario / USDA / BNA (clima/noticias/WTI vacíos sin fuente)
+2. Tablero Mercado — Chicago / Matba / CAC Rosario / USDA / BNA / Clima AR·BR·US (noticias/WTI vacíos sin fuente)
 3. Costos — flete CATAC (km → ARS/t) + slots fert/gasoil vacíos
 4. Fiscal — una línea (`sin novedad fiscal` stub)
 5. Lectura — 5–6 líneas (slot Informe)
@@ -28,6 +28,16 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 ## Mercado (feed granos)
 
 `GET https://lark-lake-solar-craft.grok.me/api/granos` — server-side, User-Agent browser-like. Mapea CBOT, CAC Rosario, Matba, FAS/pizarra, BNA, WASDE/Crop Progress. **No inventa precios**; celdas vacías si falta fuente.
+
+## Clima AR / BR / US
+
+Snapshot fechado en `src/lib/clima.ts` (texto + link + fecha; **sin heatmap**):
+
+- **AR** — SMN Pronóstico Climático Trimestral (ago-2026)
+- **BR** — INMET Boletim Agroclimatológico set/2026 (pub. 10/9)
+- **US** — Drought Monitor 15/9 + NOAA CPC Seasonal Drought Outlook 17/9
+
+Fetch live opcional (probe URL). Si falla → etiqueta **último valor guardado** con los bullets HECHO aprobados. Nunca inventa clima distinto.
 
 ## CATAC
 
