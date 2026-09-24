@@ -496,8 +496,102 @@ function applyClima(snap: MercadoSnapshot, clima: ClimaSnapshot): MercadoSnapsho
   };
 }
 
+
+const YAHOO_WTI_URL =
+  "https://query1.finance.yahoo.com/v8/finance/chart/CL=F?interval=1d&range=5d";
+
+type WtiQuote = {
+  price: number;
+  prevClose: number;
+  varPct: number;
+  asOfIso: string;
+};
+
+async function fetchWti(): Promise<WtiQuote | null> {
+  try {
+    const res = await fetch(YAHOO_WTI_URL, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": UA,
+      },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      chart?: {
+        result?: Array<{
+          meta?: { regularMarketPrice?: number; regularMarketTime?: number };
+          timestamp?: number[];
+          indicators?: { quote?: Array<{ close?: Array<number | null> }> };
+        }>;
+      };
+    };
+    const result = data.chart?.result?.[0];
+    if (!result) return null;
+    const closes = (result.indicators?.quote?.[0]?.close ?? []).filter(
+      (c): c is number => c != null && Number.isFinite(c),
+    );
+    const metaPrice = result.meta?.regularMarketPrice;
+    const price =
+      metaPrice != null && Number.isFinite(metaPrice)
+        ? metaPrice
+        : closes.length
+          ? closes[closes.length - 1]
+          : null;
+    if (price == null) return null;
+    // Variación diaria = vs cierre de la sesión anterior (últimos 2 closes)
+    const prevClose =
+      closes.length >= 2
+        ? closes[closes.length - 2]
+        : closes.length === 1
+          ? closes[0]
+          : null;
+    if (prevClose == null || prevClose === 0) return null;
+    const varPct = price / prevClose - 1;
+    const t = result.meta?.regularMarketTime;
+    const asOfIso =
+      t != null
+        ? new Date(t * 1000).toISOString()
+        : new Date().toISOString();
+    return { price, prevClose, varPct, asOfIso };
+  } catch {
+    return null;
+  }
+}
+
+function applyWti(snap: MercadoSnapshot, wti: WtiQuote | null): MercadoSnapshot {
+  if (!wti) return snap;
+  const pctLabel = fmtPct(wti.varPct);
+  const rows = snap.rows.map((r) => {
+    if (r.id !== "wti") return r;
+    return filled({
+      id: "wti",
+      mercado: "Energía",
+      producto: "WTI",
+      valor: fmtNum(wti.price, 2),
+      unidad: "US$/bbl",
+      fuente: "Yahoo CL=F",
+      hora: horaArg(wti.asOfIso),
+      varPct: wti.varPct,
+      extra: [
+        pctLabel,
+        `prev ${fmtNum(wti.prevClose, 2)}`,
+      ]
+        .filter(Boolean)
+        .join(" · "),
+    });
+  });
+  const filledCount = rows.filter((r) => r.valor != null).length;
+  return {
+    ...snap,
+    rows,
+    ok: filledCount > 0 || snap.ok,
+  };
+}
+
 export async function getMercado(): Promise<MercadoSnapshot> {
   const climaPromise = getClima();
+  const wtiPromise = fetchWti();
   try {
     const res = await fetch(GRANOS_URL, {
       headers: {
@@ -506,25 +600,31 @@ export async function getMercado(): Promise<MercadoSnapshot> {
       },
       cache: "no-store",
     });
-    const clima = await climaPromise;
+    const [clima, wti] = await Promise.all([climaPromise, wtiPromise]);
     if (!res.ok) {
-      return applyClima(
-        stubSnapshot(
-          `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+      return applyWti(
+        applyClima(
+          stubSnapshot(
+            `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+          ),
+          clima,
         ),
-        clima,
+        wti,
       );
     }
     const data = (await res.json()) as GranosPayload;
-    return applyClima(mapGranos(data), clima);
+    return applyWti(applyClima(mapGranos(data), clima), wti);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    const clima = await climaPromise;
-    return applyClima(
-      stubSnapshot(
-        `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
+    const [clima, wti] = await Promise.all([climaPromise, wtiPromise]);
+    return applyWti(
+      applyClima(
+        stubSnapshot(
+          `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
+        ),
+        clima,
       ),
-      clima,
+      wti,
     );
   }
 }
