@@ -1,10 +1,71 @@
 {
-  "asOf": null,
-  "asOfArg": null,
+  "asOf": "2026-09-24T11:34:38.838Z",
+  "asOfArg": "24/09/2026, 08:34",
   "maxAgeHours": 48,
-  "valor": null,
-  "note": "X API HTTP 403 en api.x.com y api.twitter.com (users/by + search/recent). Sin posts — no se inventan likes. Token presente (box-secrets card.X_BEARER_TOKEN) pero sin permiso de lectura (plan Free/revocado). Fecha ARG 24/09/2026. fuente=X API · scripts/fetch-noticias-x.mjs",
-  "items": [],
+  "valor": "• Chicago 23/9: trigo −1,4% · maíz −1,5% · soja baja (Mar Negro + US-China + USD) (@BCRmercados) • Rosario: maíz baja; soja/trigo estables (@BCRmercados) • CBOT AMS: ZC 529 · ZS 1318 · ZW 708,5 ¢ (@USDA_AMS)",
+  "note": "Borrador 24/09 ARG OK Diego — sin métricas X (API 403). Ranking relevancia/recencia web; likes/vistas N/D.",
+  "items": [
+    {
+      "handle": "BCRmercados",
+      "text": "Chicago 23/9 bajista: trigo −1,4%, maíz −1,5%; soja con pérdidas. Mar Negro, cumbre US-China y dólar firme.",
+      "url": "https://palabradecampo.com/cierre-del-mercado-de-chicago-13/",
+      "likes": null,
+      "views": null,
+      "reposts": null,
+      "publishedAt": "2026-09-23T21:00:00.000Z",
+      "publishedAtArg": "23/09/2026 ~18:00",
+      "metricsUnavailable": true,
+      "relevance": 95
+    },
+    {
+      "handle": "BCRmercados",
+      "text": "Rosario 23/9: maíz con bajas vs martes; soja y trigo mayormente estables; cupos/logística condicionan negocios.",
+      "url": "https://ruralnet.com.ar/rosario-maiz-baja-soja-estable/",
+      "likes": null,
+      "views": null,
+      "reposts": null,
+      "publishedAt": "2026-09-23T22:00:00.000Z",
+      "publishedAtArg": "23/09/2026 ~19:00",
+      "metricsUnavailable": true,
+      "relevance": 90
+    },
+    {
+      "handle": "USDA_AMS",
+      "text": "Daily grain futures 23/9: corn Dec 529¢, soy Nov 1318¢, wheat Dec 708.5¢.",
+      "url": "https://www.indexbox.io/es/blog/usda-daily-grain-futures-and-canola-bids-report-for-september-23-2026/",
+      "likes": null,
+      "views": null,
+      "reposts": null,
+      "publishedAt": "2026-09-23T22:30:00.000Z",
+      "publishedAtArg": "23/09/2026 ~19:30",
+      "metricsUnavailable": true,
+      "relevance": 88
+    },
+    {
+      "handle": "BCRmercados",
+      "text": "Tabla BCR intl 23/9: soja Nov ~484 US$/t (−2,9); maíz Dic ~208 US$/t (−3,2).",
+      "url": "https://www.bcr.com.ar/es/mercados",
+      "likes": null,
+      "views": null,
+      "reposts": null,
+      "publishedAt": "2026-09-23T21:30:00.000Z",
+      "publishedAtArg": "23/09/2026 ~18:30",
+      "metricsUnavailable": true,
+      "relevance": 85
+    },
+    {
+      "handle": "infocampoweb",
+      "text": "BNA 23/9 ~$1.507/$1.516 (+0,13%); A3500 $1.516,3 — FX en plaza granos.",
+      "url": "https://ruralnet.com.ar/rosario-maiz-baja-soja-estable/",
+      "likes": null,
+      "views": null,
+      "reposts": null,
+      "publishedAt": "2026-09-23T22:00:00.000Z",
+      "publishedAtArg": "23/09/2026 ~19:00",
+      "metricsUnavailable": true,
+      "relevance": 70
+    }
+  ],
   "accounts": [
     {
       "handle": "BCRmercados",
@@ -67,7 +128,7 @@
       "why": "Reuters agri/commodities (filtrar grain)"
     }
   ],
-  "updatedAt": "2026-09-24T11:31:18.076Z",
-  "updatedBy": "scripts/fetch-noticias-x.mjs",
-  "fuente": "X API"
+  "updatedAt": "2026-09-24T11:34:38.838Z",
+  "updatedBy": "refresh-noticias.mjs --from posts-sugeridos (OK Diego)",
+  "fuente": "Borrador web (@handles) · sin métricas X"
 }
