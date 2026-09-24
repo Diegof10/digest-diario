@@ -433,8 +433,7 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
       <section className="digest-panel">
         <h3 className="digest-panel-title">Tablero señales</h3>
         <p className="mb-1.5 text-[10px] opacity-55">
-          Cada chip: plaza + tipo (futuro / forward / disponible) + fuente. No
-          mezclar CBOT con Matba ni con CAC.
+          Cada chip: plaza + tipo (futuro / forward / disponible) + fuente.
         </p>
         <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-6">
           <SignalChip r={sojaChi} />

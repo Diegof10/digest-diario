@@ -181,21 +181,16 @@ export async function getNoticias(): Promise<NoticiasSnapshot> {
   const handles = [
     ...new Set(items.map((i) => `@${i.handle.replace(/^@/, "")}`)),
   ].slice(0, 4);
-  const metricsNote = items.every(
-    (i) => i.metricsUnavailable || (i.likes == null && i.views == null),
-  )
-    ? "métricas X no disponibles · ranking por relevancia/recencia"
-    : null;
-
   const anyUrl = items.find((i) => i.url)?.url ?? null;
 
+  // Diego 24/9: no mostrar "métricas X no disponibles" ni nota draft en UI
   return {
     ok: true,
     valor: clipValor(valor),
     fuente: `X ${handles.join(" ")}`,
     hora: file.asOfArg ?? horaArgFromIso(file.asOf),
     url: anyUrl,
-    extra: metricsNote || file.note || null,
+    extra: null,
     etiqueta: "HECHO",
     items,
     note: file.note || `Snapshot noticias · ${items.length} items`,
