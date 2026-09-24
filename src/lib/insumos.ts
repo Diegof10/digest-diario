@@ -347,6 +347,24 @@ function buildSlots(
       etiqueta: dap ? "ÚLTIMO_GUARDADO" : "VACÍO",
     },
     {
+      id: "uan",
+      label: "UAN",
+      valor: null,
+      unidad: "USD/t",
+      fecha: null,
+      fuente: null,
+      etiqueta: "VACÍO",
+    },
+    {
+      id: "glifosato",
+      label: "Glifosato",
+      valor: null,
+      unidad: "USD/L",
+      fecha: null,
+      fuente: null,
+      etiqueta: "VACÍO",
+    },
+    {
       id: "gasoil",
       label: "Gasoil (surtidor)",
       valor:
@@ -380,6 +398,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
+    "UAN y Glifosato: slots vacíos hasta cotización nombrada + fecha (Lead 24/9).",
   ];
 
   return {
