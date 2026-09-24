@@ -256,7 +256,7 @@ function signalLabel(r: MercadoRow): string {
     return `CBOT fut. ${r.producto}`;
   }
   if (r.id.startsWith("matba-")) {
-    return `Matba fwd ${r.producto}`;
+    return `Matba ${r.producto}`;
   }
   if (r.id.startsWith("cac-")) {
     return `CAC disp. ${r.producto}`;
@@ -334,18 +334,18 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
           <CropLine crop="trigo" r={trigoChi} />
         </Panel>
 
-        <Panel title="Matba · forward cosecha" tint="#0b1f3a">
+        <Panel title="Matba · futuros" tint="#0b1f3a">
           <div className="flex items-start gap-2 border-l-4 border-[#1f6b3a] pl-2">
             <span className="w-14 shrink-0 pt-0.5 text-[10px] font-bold text-[#1f6b3a]">
               SOJA
             </span>
             <div className="grid w-full grid-cols-2 gap-2">
               <div>
-                <div className="text-[9px] opacity-50">May fwd</div>
+                <div className="text-[9px] opacity-50">May</div>
                 <Cell r={sojaMay} dense />
               </div>
               <div>
-                <div className="text-[9px] opacity-50">Nov fwd</div>
+                <div className="text-[9px] opacity-50">Nov</div>
                 <Cell r={sojaNov} dense />
               </div>
             </div>
@@ -424,7 +424,7 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
       <section className="digest-panel">
         <h3 className="digest-panel-title">Tablero señales</h3>
         <p className="mb-1.5 text-[10px] opacity-55">
-          Cada chip: plaza + tipo (futuro / forward / disponible) + fuente.
+          Cada chip: plaza + tipo (futuro / disponible) + fuente.
         </p>
         <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-6">
           <SignalChip r={sojaChi} />

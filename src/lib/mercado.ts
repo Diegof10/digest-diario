@@ -240,7 +240,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     }
   }
 
-  // Matba cosecha: soja May/Nov, maíz, trigo
+  // Matba futuros: soja May/Nov, maíz, trigo
   const matbaHora = data.matbaAsOf
     ? horaArg(`${data.matbaAsOf}T12:00:00-03:00`)
     : hora;
@@ -276,7 +276,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
       rows.push(
         filled({
           id: slot.id,
-          mercado: "A3/Matba cosecha",
+          mercado: "A3/Matba futuros",
           producto: slot.producto,
           valor: fmtNum(m.value, 1),
           unidad: "US$/t",
@@ -288,7 +288,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
         }),
       );
     } else {
-      rows.push(emptyRow(slot.id, "A3/Matba cosecha", slot.producto));
+      rows.push(emptyRow(slot.id, "A3/Matba futuros", slot.producto));
     }
   }
 
@@ -448,10 +448,10 @@ function stubSnapshot(note: string): MercadoSnapshot {
     ["cbot-soja", "Cierres CBOT", "Soja"],
     ["cbot-maiz", "Cierres CBOT", "Maíz"],
     ["cbot-trigo", "Cierres CBOT", "Trigo"],
-    ["matba-soja-may", "A3/Matba cosecha", "Soja May"],
-    ["matba-soja-nov", "A3/Matba cosecha", "Soja Nov"],
-    ["matba-maiz", "A3/Matba cosecha", "Maíz"],
-    ["matba-trigo", "A3/Matba cosecha", "Trigo"],
+    ["matba-soja-may", "A3/Matba futuros", "Soja May"],
+    ["matba-soja-nov", "A3/Matba futuros", "Soja Nov"],
+    ["matba-maiz", "A3/Matba futuros", "Maíz"],
+    ["matba-trigo", "A3/Matba futuros", "Trigo"],
     ["cac-soja", "CAC Rosario", "Soja"],
     ["cac-maiz", "CAC Rosario", "Maíz"],
     ["cac-trigo", "CAC Rosario", "Trigo"],
