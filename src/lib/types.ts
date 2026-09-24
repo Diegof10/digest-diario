@@ -154,7 +154,7 @@ export interface CostoInsumoSlot {
 
 export interface DigestSnapshot {
   ok: boolean;
-  producto: "digest-diario";
+  producto: "resumen-agrario";
   fecha: string; // YYYY-MM-DD America/Argentina/Cordoba
   fechaLabel: string;
   fechaCorta: string; // dd/mm/yyyy

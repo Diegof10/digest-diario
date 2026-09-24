@@ -110,7 +110,7 @@ function buildResumenFallback(parts: {
   wasdeBrief: string;
 }): string[] {
   return [
-    `DHF Digest · ${parts.fechaCorta}`,
+    `Resumen agrario · ${parts.fechaCorta}`,
     `Chicago: ${parts.chicago}`,
     `CAC Rosario: ${parts.cac}`,
     `Matba: ${parts.matba}`,
@@ -210,7 +210,7 @@ export async function assembleDigest(opts?: {
 
   return {
     ok: true,
-    producto: "digest-diario",
+    producto: "resumen-agrario",
     fecha,
     fechaLabel: label,
     fechaCorta,

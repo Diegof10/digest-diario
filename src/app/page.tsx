@@ -36,7 +36,7 @@ export default async function Home({
             </span>
           </span>
           <h1 className="text-sm font-bold tracking-[0.14em] sm:text-base">
-            DHF DIGEST
+            RESUMEN AGRARIO
           </h1>
         </div>
         <div className="text-right">

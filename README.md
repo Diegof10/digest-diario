@@ -1,6 +1,6 @@
-# Digest diario
+# Resumen agrario
 
-Producto matutino de DHF Advisory: tablero web + APIs para armar el digest agro del día (mercado, costos CATAC, fiscal, lectura, Resumen matutino).
+Producto matutino de DHF Advisory (**Resumen agrario**): tablero web + APIs del resumen agro del día (mercado, costos CATAC, fiscal, lectura, Resumen matutino).
 
 Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proyecto sirve esta página). **No** toca Agro Planeamiento ni `dhf-margenes`.
 
