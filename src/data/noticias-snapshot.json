@@ -3,22 +3,71 @@
   "asOfArg": null,
   "maxAgeHours": 48,
   "valor": null,
-  "note": "Sin posts X frescos con métricas verificables. Nitter/XCancel offline (sep-2026); mirrors Cloudflare. Refresh diario 07:00 ARG vía scripts/refresh-noticias.mjs o routine Noticias X.",
+  "note": "X API HTTP 403 en api.x.com y api.twitter.com (users/by + search/recent). Sin posts — no se inventan likes. Token presente (box-secrets card.X_BEARER_TOKEN) pero sin permiso de lectura (plan Free/revocado). Fecha ARG 24/09/2026. fuente=X API · scripts/fetch-noticias-x.mjs",
   "items": [],
   "accounts": [
-    {"handle": "BCRmercados", "focus": "local", "why": "Análisis BCR granos, pizarra, exportaciones"},
-    {"handle": "BolsaRosario", "focus": "local", "why": "Cuenta institucional BCR"},
-    {"handle": "a3mercados", "focus": "local", "why": "Futuros/opciones agro A3 (ex Matba-Rofex)"},
-    {"handle": "Bolsadecereales", "focus": "local", "why": "Bolsa de Cereales BA — estimaciones/GEA"},
-    {"handle": "infocampoweb", "focus": "local", "why": "Periodismo agro AR, precios Rosario"},
-    {"handle": "BichosdeCampo", "focus": "local", "why": "Agro periodismo/análisis de campo"},
-    {"handle": "AgrofyNews", "focus": "local", "why": "Portal agro noticias LATAM"},
-    {"handle": "kannbwx", "focus": "intl", "why": "Karen Braun — granos globales, charts USDA"},
-    {"handle": "USDA_AMS", "focus": "intl", "why": "USDA AMS market news / export sales"},
-    {"handle": "USDAForeignAg", "focus": "intl", "why": "FAS GAIN / trade attachés"},
-    {"handle": "AgWeb", "focus": "intl", "why": "AgWeb Editors — CBOT commentary US"},
-    {"handle": "Reuters", "focus": "intl", "why": "Reuters agri/commodities (filtrar grain)"}
+    {
+      "handle": "BCRmercados",
+      "focus": "local",
+      "why": "Análisis BCR granos, pizarra, exportaciones"
+    },
+    {
+      "handle": "BolsaRosario",
+      "focus": "local",
+      "why": "Cuenta institucional BCR"
+    },
+    {
+      "handle": "a3mercados",
+      "focus": "local",
+      "why": "Futuros/opciones agro A3 (ex Matba-Rofex)"
+    },
+    {
+      "handle": "Bolsadecereales",
+      "focus": "local",
+      "why": "Bolsa de Cereales BA — estimaciones/GEA"
+    },
+    {
+      "handle": "infocampoweb",
+      "focus": "local",
+      "why": "Periodismo agro AR, precios Rosario"
+    },
+    {
+      "handle": "BichosdeCampo",
+      "focus": "local",
+      "why": "Agro periodismo/análisis de campo"
+    },
+    {
+      "handle": "AgrofyNews",
+      "focus": "local",
+      "why": "Portal agro noticias LATAM"
+    },
+    {
+      "handle": "kannbwx",
+      "focus": "intl",
+      "why": "Karen Braun — granos globales, charts USDA"
+    },
+    {
+      "handle": "USDA_AMS",
+      "focus": "intl",
+      "why": "USDA AMS market news / export sales"
+    },
+    {
+      "handle": "USDAForeignAg",
+      "focus": "intl",
+      "why": "FAS GAIN / trade attachés"
+    },
+    {
+      "handle": "AgWeb",
+      "focus": "intl",
+      "why": "AgWeb Editors — CBOT commentary US"
+    },
+    {
+      "handle": "Reuters",
+      "focus": "intl",
+      "why": "Reuters agri/commodities (filtrar grain)"
+    }
   ],
-  "updatedAt": null,
-  "updatedBy": null
+  "updatedAt": "2026-09-24T11:31:18.076Z",
+  "updatedBy": "scripts/fetch-noticias-x.mjs",
+  "fuente": "X API"
 }
