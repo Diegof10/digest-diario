@@ -12,62 +12,7 @@ export const X_HANDLE = "@dhferrari";
 
 export const DEFAULT_KM = 180;
 
-const EMPTY_INSUMO_SLOTS: CostoInsumoSlot[] = [
-  {
-    id: "urea",
-    label: "Urea FCA",
-    valor: null,
-    unidad: "USD/t",
-    fecha: null,
-    fuente: null,
-    etiqueta: "VACÍO",
-  },
-  {
-    id: "map",
-    label: "MAP FCA",
-    valor: null,
-    unidad: "USD/t",
-    fecha: null,
-    fuente: null,
-    etiqueta: "VACÍO",
-  },
-  {
-    id: "dap",
-    label: "DAP FCA",
-    valor: null,
-    unidad: "USD/t",
-    fecha: null,
-    fuente: null,
-    etiqueta: "VACÍO",
-  },
-  {
-    id: "uan",
-    label: "UAN",
-    valor: null,
-    unidad: "USD/t",
-    fecha: null,
-    fuente: null,
-    etiqueta: "VACÍO",
-  },
-  {
-    id: "glifosato",
-    label: "Glifosato",
-    valor: null,
-    unidad: "USD/L",
-    fecha: null,
-    fuente: null,
-    etiqueta: "VACÍO",
-  },
-  {
-    id: "gasoil",
-    label: "Gasoil (surtidor)",
-    valor: null,
-    unidad: "ARS/l",
-    fecha: null,
-    fuente: null,
-    etiqueta: "VACÍO",
-  },
-];
+const EMPTY_INSUMO_SLOTS: CostoInsumoSlot[] = [];
 
 function cordobaParts(d = new Date()) {
   const fmt = new Intl.DateTimeFormat("en-CA", {
@@ -237,7 +182,9 @@ export async function assembleDigest(opts?: {
     generadoAt: new Date().toISOString(),
     mercado,
     catac,
-    insumos: insumosSnap?.slots ?? EMPTY_INSUMO_SLOTS,
+    insumos: (insumosSnap?.slots ?? EMPTY_INSUMO_SLOTS).filter(
+      (s) => Boolean(s.valor && s.fuente && s.fecha),
+    ),
     fiscal,
     lectura,
     resumenMatutino,

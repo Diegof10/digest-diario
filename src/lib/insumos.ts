@@ -347,24 +347,6 @@ function buildSlots(
       etiqueta: dap ? "ÚLTIMO_GUARDADO" : "VACÍO",
     },
     {
-      id: "uan",
-      label: "UAN",
-      valor: null,
-      unidad: "USD/t",
-      fecha: null,
-      fuente: null,
-      etiqueta: "VACÍO",
-    },
-    {
-      id: "glifosato",
-      label: "Glifosato",
-      valor: null,
-      unidad: "USD/L",
-      fecha: null,
-      fuente: null,
-      etiqueta: "VACÍO",
-    },
-    {
       id: "gasoil",
       label: "Gasoil (surtidor)",
       valor:
@@ -391,14 +373,16 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   const fetchedAt = new Date().toISOString();
   const asOf = cordobaTodayYmd();
 
-  const slots = buildSlots(fertilizantes, gas.point);
+  const slots = buildSlots(fertilizantes, gas.point).filter(
+    (s) => Boolean(s.valor && s.fuente && s.fecha),
+  );
 
   const noteParts = [
     "Fertilizantes: snapshot curado IF vía Bichos (19/9/2026), no scrape en vivo.",
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
-    "UAN y Glifosato: slots vacíos hasta cotización nombrada + fecha (Lead 24/9).",
+    "Solo se publican insumos con precio + fuente + fecha; UAN/Glifosato no entran sin cotización nombrada.",
   ];
 
   return {
