@@ -1,6 +1,10 @@
 import type { ReactNode } from "react";
 import type { ClimaEntry, MercadoRow, MercadoSnapshot } from "@/lib/types";
 import { rowById } from "@/lib/mercado";
+import type { Tema } from "@/lib/tema";
+import { GrainLabel } from "@/components/ui/GrainIcon";
+import NoticiasUi from "@/components/ui/NoticiasUi";
+import TradingBoard from "@/components/ui/TradingBoard";
 
 const CROP = {
   soja: { accent: "#1f6b3a", label: "SOJA" },
@@ -97,11 +101,23 @@ function Panel({
 function CropLine({
   crop,
   r,
+  tema = "base",
 }: {
   crop: keyof typeof CROP;
   r: MercadoRow | undefined;
+  tema?: Tema;
 }) {
   const c = CROP[crop];
+  if (tema !== "base") {
+    return (
+      <div className="flex items-start gap-2 border-l-4 pl-2" style={{ borderColor: "var(--g-" + crop + ")" }}>
+        <span className="w-16 shrink-0 pt-0.5 text-[10px]">
+          <GrainLabel grano={crop} />
+        </span>
+        <Cell r={r} dense />
+      </div>
+    );
+  }
   return (
     <div className="flex items-start gap-2 border-l-4 pl-2" style={{ borderColor: c.accent }}>
       <span
@@ -146,7 +162,7 @@ function PlazaCell({ r }: { r: MercadoRow | undefined }) {
   );
 }
 
-function PlazasBlock({ mercado }: { mercado: MercadoSnapshot }) {
+function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tema?: Tema }) {
   const cols = PLAZAS.map((p) => {
     const rows = (["soja", "maiz", "trigo"] as const).map((g) =>
       rowById(mercado.rows, `${p.id}-${g}`),
@@ -159,7 +175,7 @@ function PlazasBlock({ mercado }: { mercado: MercadoSnapshot }) {
   ) as string[];
 
   return (
-    <section className="digest-panel overflow-hidden p-0">
+    <section className={`digest-panel overflow-hidden p-0 ${tema !== "base" ? "plazas-ui" : ""}`}>
       <div className="flex items-center justify-between bg-[#0b1f3a] px-3 py-1.5 text-white">
         <span className="text-[11px] font-bold tracking-[0.12em]">PLAZAS FÍSICAS · DISPONIBLE</span>
         <span className="text-[10px] opacity-80">una fuente por plaza · var vs cierre publicado anterior</span>
@@ -197,9 +213,13 @@ function PlazasBlock({ mercado }: { mercado: MercadoSnapshot }) {
               {(["soja", "maiz", "trigo"] as const).map((g, gi) => (
                 <tr key={g} className="border-b border-slate-100 align-top last:border-0">
                   <td className="px-3 py-2">
-                    <span className="text-[10px] font-bold tracking-wide" style={{ color: CROP[g].accent }}>
-                      {CROP[g].label}
-                    </span>
+                    {tema !== "base" ? (
+                      <span className="text-[10px]"><GrainLabel grano={g} /></span>
+                    ) : (
+                      <span className="text-[10px] font-bold tracking-wide" style={{ color: CROP[g].accent }}>
+                        {CROP[g].label}
+                      </span>
+                    )}
                   </td>
                   {cols.map((c) => (
                     <td key={c.id} className="px-3 py-2">
@@ -340,7 +360,7 @@ function SignalChip({ r }: { r: MercadoRow | undefined }) {
   );
 }
 
-export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
+export default function MarketBoard({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tema?: Tema }) {
   const sojaChi = rowById(mercado.rows, "chicago-soja");
   const maizChi = rowById(mercado.rows, "chicago-maiz");
   const trigoChi = rowById(mercado.rows, "chicago-trigo");
@@ -360,21 +380,25 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <PlazasBlock mercado={mercado} />
+      <PlazasBlock mercado={mercado} tema={tema} />
 
       {/* Row A */}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         <Panel title="Chicago · futuro CBOT (Yahoo)">
-          <CropLine crop="soja" r={sojaChi} />
-          <CropLine crop="maiz" r={maizChi} />
-          <CropLine crop="trigo" r={trigoChi} />
+          <CropLine crop="soja" r={sojaChi} tema={tema} />
+          <CropLine crop="maiz" r={maizChi} tema={tema} />
+          <CropLine crop="trigo" r={trigoChi} tema={tema} />
         </Panel>
 
         <Panel title="Matba · futuros" tint="#0b1f3a">
           <div className="flex items-start gap-2 border-l-4 border-[#1f6b3a] pl-2">
-            <span className="w-14 shrink-0 pt-0.5 text-[10px] font-bold text-[#1f6b3a]">
-              SOJA
-            </span>
+            {tema !== "base" ? (
+              <span className="w-16 shrink-0 pt-0.5 text-[10px]"><GrainLabel grano="soja" /></span>
+            ) : (
+              <span className="w-14 shrink-0 pt-0.5 text-[10px] font-bold text-[#1f6b3a]">
+                SOJA
+              </span>
+            )}
             <div className="grid w-full grid-cols-2 gap-2">
               <div>
                 <div className="text-[9px] opacity-50">May</div>
@@ -386,8 +410,8 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
               </div>
             </div>
           </div>
-          <CropLine crop="maiz" r={maizMat} />
-          <CropLine crop="trigo" r={trigoMat} />
+          <CropLine crop="maiz" r={maizMat} tema={tema} />
+          <CropLine crop="trigo" r={trigoMat} tema={tema} />
         </Panel>
 
       </div>
@@ -416,6 +440,9 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
           ) : null}
         </Panel>
 
+        {tema !== "base" ? (
+          <NoticiasUi items={noticiasItems} fallback={noticias?.valor ?? null} />
+        ) : (
         <Panel title="Noticias">
           {noticiasItems.length > 0 ? (
             <ol className="flex flex-col gap-1.5">
@@ -447,6 +474,7 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
             <p className="text-[11px] opacity-40">— sin fuente</p>
           )}
         </Panel>
+        )}
 
         <Panel title="Clima AR / BR / US">
           <ClimaBlock mercado={mercado} />
@@ -454,6 +482,9 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
       </div>
 
       {/* Señales */}
+      {tema !== "base" ? (
+        <TradingBoard rows={[sojaChi, maizChi, trigoChi, sojaMay ?? sojaNov, sojaCac, wti]} />
+      ) : (
       <section className="digest-panel">
         <h3 className="digest-panel-title">Tablero señales</h3>
         <p className="mb-1.5 text-[10px] opacity-55">
@@ -468,6 +499,7 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
           <SignalChip r={wti} />
         </div>
       </section>
+      )}
     </div>
   );
 }

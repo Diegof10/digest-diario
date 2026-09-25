@@ -5,6 +5,10 @@ import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
 import { getClimaVivo } from "@/lib/clima-vivo";
+import { loadResumenMatutino } from "@/lib/resumen-matutino";
+import { parseTema } from "@/lib/tema";
+import { buildTicker } from "@/lib/ticker";
+import Ticker from "@/components/ui/Ticker";
 import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +16,7 @@ export const dynamic = "force-dynamic";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ km?: string }>;
+  searchParams: Promise<{ km?: string; tema?: string }>;
 }) {
   const sp = await searchParams;
   const kmRaw = sp.km;
@@ -21,9 +25,17 @@ export default async function Home({
       ? Number(kmRaw)
       : DEFAULT_KM;
 
-  const [digest, climaVivo] = await Promise.all([assembleDigest({ km }), getClimaVivo()]);
+  const tema = parseTema(sp.tema);
+  const [digest, climaVivo, cos] = await Promise.all([
+    assembleDigest({ km }),
+    getClimaVivo(),
+    tema !== "base" ? loadResumenMatutino() : Promise.resolve(null),
+  ]);
+  const ticker = tema !== "base" ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null) : [];
 
   return (
+    <div data-tema={tema} className="tema-root">
+    {tema !== "base" ? <Ticker items={ticker} /> : null}
     <main className="mx-auto w-full max-w-5xl px-2 py-3 sm:px-4 sm:py-5">
       {/* Header bar — placa style */}
       <header className="mb-3 flex items-center justify-between gap-3 rounded-sm bg-[#0b1f3a] px-3 py-2.5 text-white sm:px-4">
@@ -65,9 +77,9 @@ export default async function Home({
         </div>
       </header>
 
-      <ClimaVivo clima={climaVivo} />
+      <ClimaVivo clima={climaVivo} tema={tema} />
 
-      <MarketBoard mercado={digest.mercado} />
+      <MarketBoard mercado={digest.mercado} tema={tema} />
 
       <div className="mt-3">
         <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
@@ -89,10 +101,11 @@ export default async function Home({
       </section>
 
       <div className="mt-3">
-        <MorningBrief lines={digest.resumenMatutino} />
+        <MorningBrief lines={digest.resumenMatutino} tema={tema} />
       </div>
 
       <SiteFooter pie={digest.pie} />
     </main>
+    </div>
   );
 }

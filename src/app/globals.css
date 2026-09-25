@@ -39,3 +39,127 @@ code {
 .cell-empty {
   min-height: 1.25rem;
 }
+
+/* ================================================================== */
+/* Propuesta visual (rama ui-propuesta) · ?tema=a | ?tema=b            */
+/* ================================================================== */
+
+:root {
+  --g-soja: #2e9e4f;
+  --g-maiz: #f2c200;
+  --g-trigo: #c9a227;
+}
+
+/* Zonas oscuras (tablero, cinta, noticias) — en A y en B */
+.zona-oscura {
+  background: #07090d;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+}
+
+/* ---------------- Cinta (ticker) ---------------- */
+.ticker {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow: hidden;
+  border-width: 0 0 1px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 45s linear infinite;
+}
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+.ticker-group {
+  display: flex;
+  flex-shrink: 0;
+}
+.tk-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1.1rem 0.5rem 0;
+  white-space: nowrap;
+}
+.tk-item::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 0.9rem;
+  margin-left: 1.1rem;
+  background: #334155;
+}
+.tk-label { color: #cbd5e1; font-weight: 600; }
+.tk-num { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tk-up { color: #34d399; }
+.tk-down { color: #f87171; }
+.tk-flat { color: #9ca3af; }
+.tk-when { color: #94a3b8; font-size: 10px; }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker { overflow-x: auto; }
+  .ticker-track { animation: none; }
+  .ticker-group[aria-hidden] { display: none; }
+}
+
+/* ---------------- Variante B: página clara ---------------- */
+[data-tema="b"] .clima-ui { background: #fff; }
+
+/* ---------------- Variante A: toda oscura, tipo terminal ---------------- */
+[data-tema="a"].tema-root {
+  min-height: 100vh;
+  background: #05070a;
+  color: #e5e7eb;
+}
+[data-tema="a"] header { background: #000 !important; border: 1px solid #1f2937; }
+[data-tema="a"] .digest-panel {
+  background: #0d1117;
+  border-color: #1f2937;
+  color: #e5e7eb;
+}
+[data-tema="a"] .digest-panel-title { color: #fb923c !important; opacity: 1; }
+[data-tema="a"] .tabular-nums,
+[data-tema="a"] .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+[data-tema="a"] .text-\[\#0b1f3a\],
+[data-tema="a"] .text-\[\#0b1f3a\]\/70,
+[data-tema="a"] .text-\[\#0b1f3a\]\/85 { color: #e2e8f0; }
+[data-tema="a"] .bg-\[\#0b1f3a\] { background: #000; border-bottom: 1px solid #1f2937; }
+[data-tema="a"] .bg-slate-50,
+[data-tema="a"] .bg-slate-100,
+[data-tema="a"] .bg-white { background: #111827; }
+[data-tema="a"] .border-slate-100,
+[data-tema="a"] .border-slate-200,
+[data-tema="a"] .divide-slate-100 > *,
+[data-tema="a"] .divide-slate-200\/60 > * { border-color: #1f2937; }
+[data-tema="a"] .text-slate-400,
+[data-tema="a"] .text-slate-500 { color: #94a3b8; }
+[data-tema="a"] .text-emerald-700 { color: #34d399; }
+[data-tema="a"] .text-red-700 { color: #f87171; }
+[data-tema="a"] .text-\[\#1f6b3a\] { color: #34d399; }
+[data-tema="a"] .text-\[\#b91c1c\] { color: #f87171; }
+[data-tema="a"] .decoration-slate-300 { text-decoration-color: #475569; }
+[data-tema="a"] .bg-emerald-50 { background: #052e1a; color: #6ee7b7; border-color: #065f46; }
+[data-tema="a"] .bg-red-50 { background: #2a0a0a; color: #fca5a5; border-color: #7f1d1d; }
+[data-tema="a"] .clima-ui { background: #0d1117; }
+
+/* Plazas en celular: que entren las 3 plazas (CAC, AFA, ACA) en 360 px sin scroll */
+@media (max-width: 480px) {
+  .plazas-ui table { table-layout: fixed; }
+  .plazas-ui th, .plazas-ui td { padding: 0.4rem 0.25rem !important; }
+  .plazas-ui th:first-child, .plazas-ui td:first-child { width: 2.6rem; padding-left: 0.5rem !important; }
+  .plazas-ui td:first-child .grain-name { display: block; font-size: 8px; }
+  .plazas-ui td:first-child > span > span { flex-direction: column; align-items: flex-start; }
+  .plazas-ui .text-lg { font-size: 0.9rem; }
+  .plazas-ui th .text-\[11px\] { font-size: 10px; line-height: 1.15; }
+  .plazas-ui th .text-\[9px\] { font-size: 8px; }
+  .plazas-ui td .text-\[10px\] { font-size: 9px; }
+}
