@@ -65,6 +65,8 @@ export interface PlazasSnapshot {
   /** ACA Timbúes · sólo disponible en $/t */
   aca: PlazaSnapshot;
   fxBnaDivisa: { valor: number; fecha: string; fuente: string } | null;
+  /** Cierre BNA divisa comprador anterior (serie Blob o TC de la CAC), para la variación */
+  fxBnaDivisaPrev: { valor: number; fecha: string } | null;
   persistencia: { written: boolean; error: string | null; updatedAt: string | null };
   fetchedAt: string;
 }
@@ -445,7 +447,15 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
     }
   }
 
-  return { cac, afa, aca, fxBnaDivisa: bna, persistencia, fetchedAt: new Date().toISOString() };
+  const fxPrev = bna
+    ? (() => {
+        const cands = [previoEnSerie(serie, "fx.bna", "usd", bna.fecha), cacTc && cacTc.fecha < bna.fecha ? { valor: cacTc.valor, fecha: cacTc.fecha } : null]
+          .filter((x): x is { valor: number; fecha: string } => Boolean(x))
+          .sort((a, b) => b.fecha.localeCompare(a.fecha));
+        return cands[0] ?? null;
+      })()
+    : null;
+  return { cac, afa, aca, fxBnaDivisa: bna, fxBnaDivisaPrev: fxPrev, persistencia, fetchedAt: new Date().toISOString() };
 }
 
 /* ------------------------------ Formato ----------------------------- */
