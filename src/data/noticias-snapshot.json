@@ -1,134 +1,73 @@
 {
-  "asOf": "2026-09-25T10:09:49.180Z",
-  "asOfArg": "25/09/2026, 07:09",
+  "asOf": "2026-09-25T10:45:00.000Z",
+  "asOfArg": "25/09/2026, 07:45",
   "maxAgeHours": 48,
-  "valor": "• Chicago 24/9 baja: US-China + USD firme + Mar Negro (@BCRmercados) • Rosario: maíz/soja mejoran; trigo quieto (@BCRmercados) • CBOT AMS: ZC 527,5 · ZS 1317,5 · ZW 707 ¢ (@USDA_AMS) • A3 24/9: soja Nov 382,2 · maíz Dic 208,5 · trigo Nov 226 US$/t (@a3mercados)",
-  "note": "Borrador 25/09 ARG — sin métricas X (API 403). Ranking relevancia/recencia web BCR+AMS; likes/vistas N/D.",
+  "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
+  "valor": null,
+  "note": "Búsqueda web ES/EN/PT últimas 48 h · 25/09 07:45 ARG",
   "items": [
     {
-      "handle": "BCRmercados",
-      "text": "Chicago 24/9 bajista: soja/maíz/trigo en baja; US-China sin definiciones, dólar firme y expectativa de Mar Negro.",
-      "url": "https://www.bcr.com.ar/es/mercados/mercado-de-granos/comentario-del-mercado/comentario-del-mercado-chicago/cierre-del-1741",
-      "likes": null,
-      "views": null,
-      "reposts": null,
-      "publishedAt": "2026-09-24T21:00:00.000Z",
-      "publishedAtArg": "24/09/2026 ~18:00",
-      "metricsUnavailable": true,
-      "relevance": 95
+      "title": "Trump and Xi meet as farmers press for concrete trade actions",
+      "source": "Agri-Pulse",
+      "handle": "Agri-Pulse",
+      "text": "Trump and Xi meet as farmers press for concrete trade actions",
+      "url": "https://www.agri-pulse.com/articles/25294-trump-and-xi-meet-as-farmers-press-for-concrete-trade-actions",
+      "publishedAt": "2026-09-24T15:45:00.000Z",
+      "publishedAtArg": "24/09 12:45",
+      "rank": 1
     },
     {
-      "handle": "BCRmercados",
-      "text": "Rosario 24/9: interés comprador en maíz (subas campaña entrante); soja mejora sin cupos cortos; trigo sin novedad.",
-      "url": "https://www.bcr.com.ar/es/mercados/mercado-de-granos/comentario-del-mercado/comentario-del-mercado-local/comentario-1798",
-      "likes": null,
-      "views": null,
-      "reposts": null,
-      "publishedAt": "2026-09-24T22:00:00.000Z",
-      "publishedAtArg": "24/09/2026 ~19:00",
-      "metricsUnavailable": true,
-      "relevance": 92
+      "title": "China freia compras de soja brasileira à espera de negociação com os EUA, dizem fontes",
+      "source": "Bloomberg Línea",
+      "handle": "Bloomberg Línea",
+      "text": "China freia compras de soja brasileira à espera de negociação com os EUA, dizem fontes",
+      "url": "https://www.bloomberglinea.com.br/agro/china-freia-compras-de-soja-brasileira-a-espera-de-negociacao-com-os-eua-dizem-fontes/",
+      "publishedAt": "2026-09-24T12:45:00.000Z",
+      "publishedAtArg": "24/09 09:45",
+      "rank": 2
     },
     {
-      "handle": "USDA_AMS",
-      "text": "Daily grain futures 24/9: corn Dec 527.5¢, soy Nov 1317.5¢, wheat Dec 707¢.",
-      "url": "https://www.indexbox.io/blog/usda-national-daily-sunflower-canola-millet-and-flaxseed-report-for-sept-24-2026/",
-      "likes": null,
-      "views": null,
-      "reposts": null,
-      "publishedAt": "2026-09-24T22:30:00.000Z",
-      "publishedAtArg": "24/09/2026 ~19:30",
-      "metricsUnavailable": true,
-      "relevance": 90
+      "title": "El Gobierno Nacional y la Mesa de Enlace coordinan medidas frente al fenómeno de El Niño",
+      "source": "Argentina.gob.ar (SAGyP)",
+      "handle": "Argentina.gob.ar",
+      "text": "El Gobierno Nacional y la Mesa de Enlace coordinan medidas frente al fenómeno de El Niño",
+      "url": "https://www.argentina.gob.ar/noticias/el-gobierno-nacional-y-la-mesa-de-enlace-coordinan-medidas-frente-al-fenomeno-de-el-nino",
+      "publishedAt": "2026-09-23T18:55:23.000Z",
+      "publishedAtArg": "23/09 15:55",
+      "rank": 3
     },
     {
-      "handle": "a3mercados",
-      "text": "A3 24/9: soja Nov 382,2 US$/t; maíz Dic 208,5; trigo Nov 226 (ajustes BCR).",
-      "url": "https://www.bcr.com.ar/es/mercados",
-      "likes": null,
-      "views": null,
-      "reposts": null,
-      "publishedAt": "2026-09-24T21:30:00.000Z",
-      "publishedAtArg": "24/09/2026 ~18:30",
-      "metricsUnavailable": true,
-      "relevance": 86
+      "title": "El trigo resiste al mal clima: afirman que mantiene un “excelente estado” pese a la falta de lluvias, el granizo y las heladas",
+      "source": "TN Campo (PAS Bolsa de Cereales BA)",
+      "handle": "TN Campo",
+      "text": "El trigo resiste al mal clima: afirman que mantiene un “excelente estado” pese a la falta de lluvias, el granizo y las heladas",
+      "url": "https://tn.com.ar/campo/2026/09/24/el-trigo-resiste-al-mal-clima-afirman-que-mantiene-un-excelente-estado-pese-a-la-falta-de-lluvias-el-granizo-y-las-heladas/",
+      "publishedAt": "2026-09-24T19:56:00.000Z",
+      "publishedAtArg": "24/09 16:56",
+      "rank": 4
     },
     {
-      "handle": "infocampoweb",
-      "text": "BNA 24/9 $1.510,5/$1.519,5 (+0,23%); A3500 $1.518,7 — FX en plaza granos (BCR).",
-      "url": "https://www.bcr.com.ar/es/mercados/mercado-de-granos/comentario-del-mercado/comentario-del-mercado-local/comentario-1798",
-      "likes": null,
-      "views": null,
-      "reposts": null,
-      "publishedAt": "2026-09-24T22:00:00.000Z",
-      "publishedAtArg": "24/09/2026 ~19:00",
-      "metricsUnavailable": true,
-      "relevance": 72
+      "title": "Cosecha récord, logística al límite: a los puertos entran 10.000 camiones por día y se agota la capacidad",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "text": "Cosecha récord, logística al límite: a los puertos entran 10.000 camiones por día y se agota la capacidad",
+      "url": "https://www.infocampo.com.ar/cosecha-record-logistica-al-limite-a-los-puertos-entran-10-000-camiones-por-dia-y-se-agota-la-capacidad/",
+      "publishedAt": "2026-09-24T20:15:22.000Z",
+      "publishedAtArg": "24/09 17:15",
+      "rank": 5
     }
   ],
-  "accounts": [
-    {
-      "handle": "BCRmercados",
-      "focus": "local",
-      "why": "Análisis BCR granos, pizarra, exportaciones"
-    },
-    {
-      "handle": "BolsaRosario",
-      "focus": "local",
-      "why": "Cuenta institucional BCR"
-    },
-    {
-      "handle": "a3mercados",
-      "focus": "local",
-      "why": "Futuros/opciones agro A3 (ex Matba-Rofex)"
-    },
-    {
-      "handle": "Bolsadecereales",
-      "focus": "local",
-      "why": "Bolsa de Cereales BA — estimaciones/GEA"
-    },
-    {
-      "handle": "infocampoweb",
-      "focus": "local",
-      "why": "Periodismo agro AR, precios Rosario"
-    },
-    {
-      "handle": "BichosdeCampo",
-      "focus": "local",
-      "why": "Agro periodismo/análisis de campo"
-    },
-    {
-      "handle": "AgrofyNews",
-      "focus": "local",
-      "why": "Portal agro noticias LATAM"
-    },
-    {
-      "handle": "kannbwx",
-      "focus": "intl",
-      "why": "Karen Braun — granos globales, charts USDA"
-    },
-    {
-      "handle": "USDA_AMS",
-      "focus": "intl",
-      "why": "USDA AMS market news / export sales"
-    },
-    {
-      "handle": "USDAForeignAg",
-      "focus": "intl",
-      "why": "FAS GAIN / trade attachés"
-    },
-    {
-      "handle": "AgWeb",
-      "focus": "intl",
-      "why": "AgWeb Editors — CBOT commentary US"
-    },
-    {
-      "handle": "Reuters",
-      "focus": "intl",
-      "why": "Reuters agri/commodities (filtrar grain)"
-    }
+  "descartadas": [
+    { "motivo": "precio", "fuente": "@BCRmercados", "item": "Chicago 24/9 bajista (comentario cierre)" },
+    { "motivo": "precio", "fuente": "@BCRmercados", "item": "Rosario 24/9: maíz/soja mejoran, trigo quieto" },
+    { "motivo": "precio", "fuente": "@USDA_AMS", "item": "CBOT daily futures 24/9 (ZC/ZS/ZW)" },
+    { "motivo": "precio", "fuente": "@a3mercados", "item": "A3 24/9 soja Nov / maíz Dic / trigo Nov" },
+    { "motivo": "precio", "fuente": "@infocampoweb", "item": "BNA / A3500 tipo de cambio 24/9" },
+    { "motivo": "vieja", "fuente": "InfoMoney/Reuters", "item": "Abiove reduz previsão de exportação de soja (18/9)" },
+    { "motivo": "vieja", "fuente": "Clarín Rural", "item": "Chicharrita: 50° informe Red de Monitoreo (≈22/9)" },
+    { "motivo": "duplicado", "fuente": "La Nación Campo / Infocampo / TN", "item": "Plan Súper Niño (se deja la fuente oficial)" },
+    { "motivo": "duplicado", "fuente": "Reuters / Brownfield / IndexBox", "item": "Tregua EE.UU.-China, venta flash USDA 120.000 t a China" }
   ],
-  "updatedAt": "2026-09-25T10:09:49.180Z",
-  "updatedBy": "refresh-noticias.mjs --from posts-sugeridos (borrador web API 403)",
-  "fuente": "Borrador web (@handles) · sin métricas X"
+  "updatedAt": "2026-09-25T10:45:00.000Z",
+  "updatedBy": "búsqueda web manual (criterio eventos, sin precios)"
 }

@@ -84,6 +84,8 @@ export interface ClimaSnapshot {
 
 
 export interface NoticiasItem {
+  title?: string | null;
+  source?: string | null;
   handle: string;
   text: string;
   url?: string | null;
@@ -123,7 +125,7 @@ export interface MercadoSnapshot {
   sourcesOk?: string[];
   /** Clima AR/BR/US estructurado (texto + link + fecha; sin heatmap) */
   clima?: ClimaSnapshot | null;
-  /** Noticias X / agro — snapshot fechado; vacío si no hay posts frescos */
+  /** Noticias agro (eventos, no precios) — snapshot fechado; vacío si vencido */
   noticias?: NoticiasSnapshot | null;
   /** Plazas físicas (CAC / AFA / FOB) desde fuentes directas */
   plazas?: import("@/lib/plazas").PlazasSnapshot | null;

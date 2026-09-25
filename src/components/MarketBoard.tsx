@@ -354,6 +354,7 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
   const usda = rowById(mercado.rows, "usda");
   const progress = rowById(mercado.rows, "crop-progress");
   const noticias = rowById(mercado.rows, "noticias");
+  const noticiasItems = (mercado.noticias?.ok ? mercado.noticias.items : []).slice(0, 5);
   const wti = rowById(mercado.rows, "wti");
 
   return (
@@ -415,30 +416,32 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
         </Panel>
 
         <Panel title="Noticias">
-          {noticias?.valor ? (
-            <div>
-              <p className="text-[11px] leading-snug whitespace-pre-wrap">
-                {noticias.valor}
-              </p>
-              {noticias.extra ? (
-                <p className="mt-1 text-[10px] leading-snug opacity-60">
-                  {noticias.extra}
-                </p>
-              ) : null}
-              <p className="mt-1 text-[9px] opacity-45">
-                {[noticias.fuente, noticias.hora].filter(Boolean).join(" · ")}
-              </p>
-              {noticias.url ? (
-                <a
-                  href={noticias.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-0.5 inline-block text-[9px] underline decoration-slate-300 underline-offset-2 opacity-55 hover:opacity-90"
-                >
-                  ver post
-                </a>
-              ) : null}
-            </div>
+          {noticiasItems.length > 0 ? (
+            <ol className="flex flex-col gap-1.5">
+              {noticiasItems.map((it, i) => (
+                <li key={it.url ?? i} className="text-[11px] leading-snug">
+                  {it.url ? (
+                    <a
+                      href={it.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-slate-300 underline-offset-2 hover:decoration-slate-600"
+                    >
+                      {it.title || it.text}
+                    </a>
+                  ) : (
+                    <span>{it.title || it.text}</span>
+                  )}
+                  <span className="block text-[9px] opacity-50">
+                    {[it.source || it.handle, it.publishedAtArg]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          ) : noticias?.valor ? (
+            <p className="text-[11px] leading-snug opacity-60">{noticias.valor}</p>
           ) : (
             <p className="text-[11px] opacity-40">— sin fuente</p>
           )}

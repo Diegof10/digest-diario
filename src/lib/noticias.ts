@@ -3,9 +3,10 @@ import path from "path";
 import type { EtiquetaDato } from "@/lib/types";
 
 /**
- * Noticias X / agro digest — dated snapshot only.
- * Never invent likes/views. Empty items or stale asOf → VACÍO.
- * Daily refresh: `node scripts/refresh-noticias.mjs` (routine 07:00 ARG).
+ * Noticias agro — snapshot fechado de EVENTOS que mueven la decisión del
+ * productor (nunca movimientos de precio). Máx. 5 items: título del medio,
+ * fuente, fecha/hora y link verificado. Stale asOf → VACÍO.
+ * Sin items pero con `valor` fresco (p.ej. "sin noticias nuevas · 25/9") → se muestra el valor.
  */
 
 export interface NoticiasAccount {
@@ -15,6 +16,11 @@ export interface NoticiasAccount {
 }
 
 export interface NoticiasItem {
+  /** Título tal cual lo publica el medio */
+  title?: string | null;
+  /** Medio / fuente */
+  source?: string | null;
+  /** Legacy: nombre corto de la fuente */
   handle: string;
   text: string;
   url?: string | null;
@@ -98,9 +104,9 @@ function clipValor(s: string): string {
 export function buildValorFromItems(items: NoticiasItem[]): string | null {
   if (!items.length) return null;
   const lines = items.slice(0, 5).map((it) => {
-    const snip =
-      it.text.length > 90 ? it.text.slice(0, 87).trimEnd() + "…" : it.text;
-    return `• ${snip} (@${it.handle.replace(/^@/, "")})`;
+    const t = (it.title || it.text || "").trim();
+    const snip = t.length > 90 ? t.slice(0, 87).trimEnd() + "…" : t;
+    return `• ${snip} (${it.source || it.handle})`;
   });
   return clipValor(lines.join(" "));
 }
@@ -147,11 +153,28 @@ export async function getNoticias(): Promise<NoticiasSnapshot> {
   const items = Array.isArray(file.items) ? file.items : [];
   const age = ageHours(file.asOf);
 
+  if (items.length === 0 && file.asOf && file.valor?.trim() && (age == null || age <= maxAge)) {
+    return {
+      ok: true,
+      valor: clipValor(file.valor),
+      fuente: null,
+      hora: file.asOfArg ?? horaArgFromIso(file.asOf),
+      url: null,
+      extra: null,
+      etiqueta: "HECHO",
+      items: [],
+      note: file.note || "Sin noticias nuevas",
+      fetchedAt: new Date().toISOString(),
+      asOf: file.asOf,
+      maxAgeHours: maxAge,
+    };
+  }
+
   if (items.length === 0 || !file.asOf) {
     return {
       ...emptySnap(
         file.note ||
-          "Noticias vacío — sin posts frescos en snapshot (no se inventan likes).",
+          "Noticias vacío — sin items frescos en snapshot.",
       ),
       maxAgeHours: maxAge,
       asOf: file.asOf,
@@ -178,16 +201,15 @@ export async function getNoticias(): Promise<NoticiasSnapshot> {
     };
   }
 
-  const handles = [
-    ...new Set(items.map((i) => `@${i.handle.replace(/^@/, "")}`)),
-  ].slice(0, 4);
+  const sources = [
+    ...new Set(items.map((i) => (i.source || i.handle).replace(/^@/, ""))),
+  ].slice(0, 5);
   const anyUrl = items.find((i) => i.url)?.url ?? null;
 
-  // Diego 24/9: no mostrar "métricas X no disponibles" ni nota draft en UI
   return {
     ok: true,
     valor: clipValor(valor),
-    fuente: `X ${handles.join(" ")}`,
+    fuente: sources.join(" · "),
     hora: file.asOfArg ?? horaArgFromIso(file.asOf),
     url: anyUrl,
     extra: null,
