@@ -325,31 +325,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     }
   }
 
-  // Pizarra FAS (MAGYP) si hay
-  const fasGrains: Array<{ grain: string; producto: string }> = [
-    { grain: "soja", producto: "Soja" },
-    { grain: "maiz", producto: "Maíz" },
-    { grain: "trigo", producto: "Trigo" },
-  ];
-  for (const g of fasGrains) {
-    const f = data.fas?.find((x) => x.grain === g.grain);
-    const pz = f?.pizarra;
-    if (pz != null && Number.isFinite(pz)) {
-      rows.push(
-        filled({
-          id: `pizarra-${g.grain}`,
-          mercado: "Pizarra Rosario",
-          producto: g.producto,
-          valor: fmtNum(pz, 2),
-          unidad: "US$/t",
-          fuente: "MAGYP pizarra",
-          hora: f?.asOf ?? null,
-        }),
-      );
-    } else {
-      rows.push(emptyRow(`pizarra-${g.grain}`, "Pizarra Rosario", g.producto));
-    }
-  }
+  // Pizarra MAGYP (FAS) eliminada: estaba clavada y duplicaba CAC Rosario.
 
   // BNA FX
   if (data.fxBna != null && Number.isFinite(data.fxBna)) {
@@ -455,9 +431,6 @@ function stubSnapshot(note: string): MercadoSnapshot {
     ["cac-soja", "CAC Rosario", "Soja"],
     ["cac-maiz", "CAC Rosario", "Maíz"],
     ["cac-trigo", "CAC Rosario", "Trigo"],
-    ["pizarra-soja", "Pizarra Rosario", "Soja"],
-    ["pizarra-maiz", "Pizarra Rosario", "Maíz"],
-    ["pizarra-trigo", "Pizarra Rosario", "Trigo"],
     ["fx-bna", "FX", "BNA"],
     ["usda", "USDA/WASDE", "Reporte"],
     ["crop-progress", "Crop Progress", "Condición"],
