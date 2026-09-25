@@ -2,7 +2,9 @@ import { getCatac } from "@/lib/catac";
 import { getFiscal } from "@/lib/fiscal";
 import { getInsumos } from "@/lib/insumos";
 import { getMercado, rowById } from "@/lib/mercado";
-import { getResumenMatutinoLineas } from "@/lib/resumen-matutino";
+import { frescura, isoToDm } from "@/lib/habiles";
+import { lineaResumen } from "@/lib/plazas";
+import { loadResumenMatutino, mergeResumenConPlazas } from "@/lib/resumen-matutino";
 import type { CostoInsumoSlot, DigestSnapshot, MercadoRow } from "@/lib/types";
 
 export const PIE_DHF =
@@ -90,12 +92,13 @@ function buildResumenFallback(parts: {
 
 export async function assembleDigest(opts?: {
   km?: number | null;
+  fresh?: boolean;
 }): Promise<DigestSnapshot> {
   const km =
     opts?.km != null && Number.isFinite(opts.km) ? opts.km : DEFAULT_KM;
   const { fecha, label, fechaCorta } = cordobaParts();
   const [mercado, catac, fiscal, insumosSnap] = await Promise.all([
-    getMercado(),
+    getMercado({ fresh: opts?.fresh }),
     getCatac(km),
     getFiscal(),
     getInsumos().catch(() => null),
@@ -170,8 +173,19 @@ export async function assembleDigest(opts?: {
 
   // CoS bundled txt (src/data/resumen-matutino.txt) wins when body lines exist.
   // Never invent news: missing/empty → auto-built fallback only.
-  const cosLineas = await getResumenMatutinoLineas();
-  const resumenMatutino = cosLineas ?? fallback;
+  // Líneas AFA / CAC / FOB: generadas del feed vivo (src/lib/plazas.ts).
+  const cos = await loadResumenMatutino();
+  const plazaLines = mercado.plazas
+    ? [mercado.plazas.afa, mercado.plazas.cac, mercado.plazas.fob]
+        .map(lineaResumen)
+        .filter((l): l is string => Boolean(l))
+    : [];
+  const merged = mergeResumenConPlazas(
+    cos ? { fecha: cos.fecha, lineas: cos.lineas } : null,
+    plazaLines,
+    { frescuraDe: (f) => frescura(f), fechaDm: (f) => isoToDm(f) },
+  );
+  const resumenMatutino = cos && cos.lineas.length > 0 ? (merged ?? fallback) : fallback;
 
   return {
     ok: true,

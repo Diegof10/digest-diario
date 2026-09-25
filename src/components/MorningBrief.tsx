@@ -101,6 +101,9 @@ export default function MorningBrief({ lines }: { lines: string[] }) {
   return (
     <section className="digest-panel">
       <h3 className="digest-panel-title">Resumen matutino</h3>
+      <p className="-mt-1 mb-1.5 text-[9px] opacity-50">
+        AFA (pizarra AFA SCL) · CAC (Cámara Arbitral BCR) · FOB (MAGYP): feed vivo, var vs cierre publicado anterior de la misma fuente.
+      </p>
 
       {grainPlazas.length > 0 ? (
         <>
@@ -115,7 +118,12 @@ export default function MorningBrief({ lines }: { lines: string[] }) {
                 <span className="text-[#0b1f3a]/70">{p.plaza}</span>
                 {p.detail ? (
                   <span className="ml-1 font-normal normal-case tracking-normal opacity-70">
-                    {p.detail}
+                    {p.detail.replace(/\s*·\s*viejo/i, "")}
+                  </span>
+                ) : null}
+                {p.detail && /viejo/i.test(p.detail) ? (
+                  <span className="ml-1 rounded bg-amber-100 px-1 py-px text-[9px] font-bold normal-case tracking-normal text-amber-800">
+                    viejo
                   </span>
                 ) : null}
               </div>

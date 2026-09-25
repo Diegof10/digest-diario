@@ -18,7 +18,9 @@ function Cell({
   if (!r?.valor) {
     return (
       <div className={dense ? "cell-empty" : "cell-empty py-1"}>
-        <span className="text-[10px] uppercase tracking-wide opacity-40">—</span>
+        <span className="text-[10px] tracking-wide opacity-50">
+          {r?.frescura === "vencido" && r.extra ? r.extra : "—"}
+        </span>
       </div>
     );
   }
@@ -50,10 +52,23 @@ function Cell({
           {[r.contrato, r.extra || pct].filter(Boolean).join(" · ")}
         </div>
       ) : null}
-      <div className="mt-0.5 text-[9px] uppercase tracking-wide opacity-45">
-        {[r.fuente, r.hora].filter(Boolean).join(" · ")}
+      <div className="mt-0.5 flex flex-wrap items-center gap-1 text-[9px] uppercase tracking-wide">
+        <span className="opacity-45">{[r.fuente, r.hora].filter(Boolean).join(" · ")}</span>
+        <ViejoBadge r={r} />
       </div>
     </div>
+  );
+}
+
+export function ViejoBadge({ r }: { r?: Pick<MercadoRow, "frescura"> | null }) {
+  if (r?.frescura !== "viejo") return null;
+  return (
+    <span
+      className="rounded bg-amber-100 px-1 py-px text-[9px] font-bold normal-case tracking-normal text-amber-800"
+      title="Dato con 1 a 3 días hábiles de atraso vs el último día hábil"
+    >
+      viejo
+    </span>
   );
 }
 
@@ -100,90 +115,106 @@ function CropLine({
   );
 }
 
-function RosarioBlock({ mercado }: { mercado: MercadoSnapshot }) {
-  const soja = rowById(mercado.rows, "cac-soja");
-  const maiz = rowById(mercado.rows, "cac-maiz");
-  const trigo = rowById(mercado.rows, "cac-trigo");
-  const bna = rowById(mercado.rows, "fx-bna");
-  const fx = mercado.fxBna;
+const PLAZAS = [
+  { id: "cac", titulo: "Pizarra CAC Rosario" },
+  { id: "afa", titulo: "AFA San Martín" },
+  { id: "fob", titulo: "FOB Up River" },
+] as const;
 
-  function arsLine(r: MercadoRow | undefined) {
-    if (!r?.valor || fx == null) return null;
-    // es-AR: "." thousands, "," decimal (fmtNum output)
-    const normalized = Number(
-      String(r.valor).replace(/\./g, "").replace(",", "."),
-    );
-    if (!Number.isFinite(normalized)) return null;
-    const ars = Math.round(normalized * fx);
-    return ars.toLocaleString("es-AR");
+function PlazaCell({ r }: { r: MercadoRow | undefined }) {
+  if (!r) return <div className="text-sm opacity-30">—</div>;
+  if (!r.valor) {
+    return <div className="text-[10px] leading-snug opacity-50">{r.extra ?? "—"}</div>;
   }
+  const tone =
+    r.senal === "↑" ? "text-emerald-700" : r.senal === "↓" ? "text-red-700" : "text-slate-500";
+  return (
+    <div className="min-w-0">
+      <div className="flex flex-wrap items-baseline gap-1">
+        <span className="text-lg font-bold tabular-nums leading-none">
+          {r.unidad === "ARS/t" ? `$${r.valor}` : `US$${r.valor}`}
+        </span>
+        <span className="text-[9px] opacity-50">{r.unidad}</span>
+      </div>
+      {r.valorUsd ? (
+        <div className="text-[10px] tabular-nums opacity-70">≈ US${r.valorUsd}/t</div>
+      ) : null}
+      <div className={`text-[10px] font-semibold tabular-nums ${tone}`}>
+        {r.varAbs ? `(${r.varAbs})` : <span className="font-normal opacity-50">sin cierre previo</span>}
+      </div>
+    </div>
+  );
+}
+
+function PlazasBlock({ mercado }: { mercado: MercadoSnapshot }) {
+  const cols = PLAZAS.map((p) => {
+    const rows = (["soja", "maiz", "trigo"] as const).map((g) =>
+      rowById(mercado.rows, `${p.id}-${g}`),
+    );
+    const any = rows.find(Boolean);
+    return { ...p, rows, any };
+  }).filter((c) => c.any);
+  const tcNotes = Array.from(
+    new Set(cols.flatMap((c) => c.rows.map((r) => (r?.valorUsd && r.tc ? r.tc : null))).filter(Boolean)),
+  ) as string[];
 
   return (
     <section className="digest-panel overflow-hidden p-0">
       <div className="flex items-center justify-between bg-[#0b1f3a] px-3 py-1.5 text-white">
-        <span className="text-[11px] font-bold tracking-[0.12em]">
-          ROSARIO · CAC / PIZARRA
-        </span>
-        <span className="text-[10px] opacity-80">
-          {soja?.hora || maiz?.hora || "—"}
-        </span>
+        <span className="text-[11px] font-bold tracking-[0.12em]">PLAZAS FÍSICAS · DISPONIBLE</span>
+        <span className="text-[10px] opacity-80">una fuente por plaza · var vs cierre publicado anterior</span>
       </div>
-      <div className="grid grid-cols-1 divide-y divide-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        {(
-          [
-            ["soja", soja],
-            ["maiz", maiz],
-            ["trigo", trigo],
-          ] as const
-        ).map(([crop, r]) => {
-          const c = CROP[crop];
-          const ars = arsLine(r);
-          return (
-            <div key={crop} className="flex items-center gap-3 px-3 py-3">
-              <div
-                className="h-10 w-1.5 shrink-0 rounded-full"
-                style={{ background: c.accent }}
-              />
-              <div className="min-w-0 flex-1">
-                <div className="text-[10px] font-bold tracking-wide" style={{ color: c.accent }}>
-                  {c.label}
-                </div>
-                {r?.valor ? (
-                  <>
-                    <div className="text-xl font-bold tabular-nums leading-none">
-                      {r.unidad === "US$/t" ? `US$${r.valor}` : r.valor}
+      {cols.length === 0 ? (
+        <p className="px-3 py-3 text-[11px] opacity-50">sin dato de plazas físicas (fuentes no respondieron)</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr className="border-b border-slate-200 align-top">
+                <th className="w-16 px-3 py-2" />
+                {cols.map((c) => (
+                  <th key={c.id} className="px-3 py-2 font-normal">
+                    <div className="text-[11px] font-bold text-[#0b1f3a]">{c.titulo}</div>
+                    <div className="mt-0.5 flex flex-wrap items-center gap-1 text-[9px] opacity-80">
+                      <span className="opacity-60">
+                        {c.any?.url ? (
+                          <a href={c.any.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">
+                            {c.any.fuente}
+                          </a>
+                        ) : (
+                          c.any?.fuente
+                        )}
+                        {" · "}
+                        {c.any?.hora}
+                      </span>
+                      <ViejoBadge r={c.any} />
                     </div>
-                    <div className="mt-0.5 text-[10px] opacity-55">
-                      {r.unidad}
-                      {ars ? ` · ≈ $${ars} ARS/t (CAC×BNA)` : ""}
-                    </div>
-                    <div className="text-[9px] opacity-45">
-                      {[r.fuente, r.hora].filter(Boolean).join(" · ")}
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-sm opacity-40">—</div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px]">
-        <span>
-          <strong>BNA</strong>{" "}
-          {bna?.valor ? (
-            <span className="tabular-nums font-semibold">{bna.valor}</span>
-          ) : (
-            "—"
-          )}
-          {bna?.fuente ? (
-            <span className="ml-1 text-[9px] opacity-50">· {bna.fuente}</span>
-          ) : null}
-        </span>
-        <span className="text-[9px] opacity-45">
-          Fuentes {[...(mercado.sourcesOk ?? [])].slice(0, 4).join(" · ") || "—"}
-        </span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {(["soja", "maiz", "trigo"] as const).map((g, gi) => (
+                <tr key={g} className="border-b border-slate-100 align-top last:border-0">
+                  <td className="px-3 py-2">
+                    <span className="text-[10px] font-bold tracking-wide" style={{ color: CROP[g].accent }}>
+                      {CROP[g].label}
+                    </span>
+                  </td>
+                  {cols.map((c) => (
+                    <td key={c.id} className="px-3 py-2">
+                      <PlazaCell r={c.rows[gi]} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
+        CAC y AFA publican en ARS/t; US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
+        {" "}FOB MAGYP en US$/t (embarque más próximo). &quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
       </div>
     </section>
   );
@@ -264,7 +295,7 @@ function signalLabel(r: MercadoRow): string {
     return `Matba ${r.producto}`;
   }
   if (r.id.startsWith("cac-")) {
-    return `CAC disp. ${r.producto}`;
+    return `Pizarra CAC ${r.producto}`;
   }
   if (r.id === "wti") return "WTI";
   return r.producto;
@@ -319,8 +350,6 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
   const trigoMat = rowById(mercado.rows, "matba-trigo");
 
   const sojaCac = rowById(mercado.rows, "cac-soja");
-  const maizCac = rowById(mercado.rows, "cac-maiz");
-  const trigoCac = rowById(mercado.rows, "cac-trigo");
 
   const usda = rowById(mercado.rows, "usda");
   const progress = rowById(mercado.rows, "crop-progress");
@@ -329,10 +358,10 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <RosarioBlock mercado={mercado} />
+      <PlazasBlock mercado={mercado} />
 
       {/* Row A */}
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         <Panel title="Chicago · futuro CBOT (Yahoo)">
           <CropLine crop="soja" r={sojaChi} />
           <CropLine crop="maiz" r={maizChi} />
@@ -359,11 +388,6 @@ export default function MarketBoard({ mercado }: { mercado: MercadoSnapshot }) {
           <CropLine crop="trigo" r={trigoMat} />
         </Panel>
 
-        <Panel title="CAC Rosario · disponible" tint="#1f6b3a">
-          <CropLine crop="soja" r={sojaCac} />
-          <CropLine crop="maiz" r={maizCac} />
-          <CropLine crop="trigo" r={trigoCac} />
-        </Panel>
       </div>
 
       {/* Row B */}

@@ -45,6 +45,17 @@ export interface MercadoRow {
   contrato?: string | null;
   /** URL fuente (clima / reportes) */
   url?: string | null;
+  /** Fecha del dato publicado (yyyy-mm-dd) */
+  fecha?: string | null;
+  /** fresco (hoy/último hábil) · viejo (1–3 hábiles) · vencido (>3, sin precio) */
+  frescura?: "fresco" | "viejo" | "vencido" | null;
+  /** Var diaria "abs · %" vs cierre publicado anterior de la misma fuente */
+  varAbs?: string | null;
+  /** Conversión a US$/t (plazas en ARS) */
+  valorUsd?: string | null;
+  /** Tipo de cambio usado en la conversión (fuente + fecha) */
+  tc?: string | null;
+  prevFecha?: string | null;
 }
 
 export interface ClimaEntry {
@@ -112,6 +123,8 @@ export interface MercadoSnapshot {
   clima?: ClimaSnapshot | null;
   /** Noticias X / agro — snapshot fechado; vacío si no hay posts frescos */
   noticias?: NoticiasSnapshot | null;
+  /** Plazas físicas (CAC / AFA / FOB) desde fuentes directas */
+  plazas?: import("@/lib/plazas").PlazasSnapshot | null;
 }
 
 export interface FiscalNovedad {
@@ -122,6 +135,8 @@ export interface FiscalNovedad {
 export interface FiscalVencimiento {
   concepto: string;
   ventana: string;
+  /** Último día de la ventana (yyyy-mm-dd, ART). Si pasó, no se muestra. */
+  vence?: string | null;
   detalle?: string | null;
   fuente?: string | null;
 }
@@ -140,6 +155,12 @@ export interface FiscalSnapshot {
   /** Línea tablero / panel (preferida sobre novedad corta) */
   lineaTablero: string;
   pie: string | null;
+  /** Fecha de la última revisión del snapshot (yyyy-mm-dd) */
+  ultimaRevision?: string | null;
+  /** Hoy ART (yyyy-mm-dd) — para "sin novedad · <fecha>" */
+  hoy?: string;
+  /** Vencimientos ya pasados que se filtraron */
+  vencidosOcultos?: number;
 }
 
 export interface CostoInsumoSlot {

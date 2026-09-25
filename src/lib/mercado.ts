@@ -4,7 +4,15 @@ import {
   climaResumen,
   getClima,
 } from "@/lib/clima";
+import { frescura, hoyArtIso, isoToDmy } from "@/lib/habiles";
 import { getNoticias } from "@/lib/noticias";
+import {
+  fmtPrecio,
+  fmtVar,
+  getPlazas,
+  type PlazaSnapshot,
+  type PlazasSnapshot,
+} from "@/lib/plazas";
 import type {
   ClimaSnapshot,
   MercadoRow,
@@ -150,6 +158,7 @@ function filled(
     varPct?: number | null;
     extra?: string | null;
     contrato?: string | null;
+    fecha?: string | null;
   },
 ): MercadoRow {
   return {
@@ -159,6 +168,7 @@ function filled(
     varPct: base.varPct ?? null,
     extra: base.extra ?? null,
     contrato: base.contrato ?? null,
+    fecha: base.fecha ?? null,
   };
 }
 
@@ -282,6 +292,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
           unidad: "US$/t",
           fuente: "Matba",
           hora: matbaHora,
+          fecha: m.asOf ?? data.matbaAsOf ?? null,
           varPct: m.change,
           contrato: m.contract,
           extra: fmtPct(m.change),
@@ -292,38 +303,8 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     }
   }
 
-  // CAC Rosario
-  const rosario =
-    data.local?.find((l) => /rosario/i.test(l.plaza)) ?? data.local?.[0];
-  const cacUnit =
-    rosario?.unit === "usdt" || rosario?.unit === "USD/t" ? "US$/t" : "US$/t";
-  const cacHora = rosario?.hint
-    ? rosario.hint.replace(/^CAC\s*·\s*/i, "")
-    : hora;
-  const cacGrains: Array<{ id: string; key: "soja" | "maiz" | "trigo"; producto: string }> = [
-    { id: "cac-soja", key: "soja", producto: "Soja" },
-    { id: "cac-maiz", key: "maiz", producto: "Maíz" },
-    { id: "cac-trigo", key: "trigo", producto: "Trigo" },
-  ];
-  for (const g of cacGrains) {
-    const v = rosario?.[g.key];
-    if (v != null && Number.isFinite(v)) {
-      rows.push(
-        filled({
-          id: g.id,
-          mercado: "CAC Rosario",
-          producto: g.producto,
-          valor: fmtNum(v, 2),
-          unidad: cacUnit,
-          fuente: "CAC Rosario",
-          hora: cacHora,
-          extra: rosario?.hint ?? null,
-        }),
-      );
-    } else {
-      rows.push(emptyRow(g.id, "CAC Rosario", g.producto));
-    }
-  }
+  // Plazas físicas (Pizarra CAC Rosario / AFA San Martín / FOB Up River):
+  // se agregan en applyPlazas() desde fuentes directas (src/lib/plazas.ts).
 
   // Pizarra MAGYP (FAS) eliminada: estaba clavada y duplicaba CAC Rosario.
 
@@ -428,9 +409,6 @@ function stubSnapshot(note: string): MercadoSnapshot {
     ["matba-soja-nov", "A3/Matba futuros", "Soja Nov"],
     ["matba-maiz", "A3/Matba futuros", "Maíz"],
     ["matba-trigo", "A3/Matba futuros", "Trigo"],
-    ["cac-soja", "CAC Rosario", "Soja"],
-    ["cac-maiz", "CAC Rosario", "Maíz"],
-    ["cac-trigo", "CAC Rosario", "Trigo"],
     ["fx-bna", "FX", "BNA"],
     ["usda", "USDA/WASDE", "Reporte"],
     ["crop-progress", "Crop Progress", "Condición"],
@@ -582,6 +560,7 @@ function applyWti(snap: MercadoSnapshot, wti: WtiQuote | null): MercadoSnapshot 
       unidad: "US$/bbl",
       fuente: "Yahoo CL=F",
       hora: horaArg(wti.asOfIso),
+      fecha: hoyArtIso(new Date(wti.asOfIso)),
       varPct: wti.varPct,
       extra: [
         pctLabel,
@@ -599,10 +578,114 @@ function applyWti(snap: MercadoSnapshot, wti: WtiQuote | null): MercadoSnapshot 
   };
 }
 
-export async function getMercado(): Promise<MercadoSnapshot> {
+const GRANO_LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo" } as const;
+
+/** Filas de plazas físicas desde fuentes directas; nunca rellena huecos. */
+function plazaRows(p: PlazaSnapshot): MercadoRow[] {
+  const rows: MercadoRow[] = [];
+  for (const g of p.granos) {
+    const fechaLabel = isoToDmy(g.fecha);
+    const est = frescura(g.fecha);
+    const base: MercadoRow = {
+      id: `${p.id}-${g.grano}`,
+      mercado: p.nombre,
+      producto: GRANO_LABEL[g.grano],
+      valor: null,
+      unidad: g.unidad === "ARS/t" ? "ARS/t" : "US$/t",
+      fuente: p.fuente,
+      hora: fechaLabel,
+      etiqueta: "HECHO",
+      varPct: null,
+      senal: null,
+      extra: null,
+      contrato: null,
+      url: p.url,
+      fecha: g.fecha,
+      frescura: est,
+      varAbs: null,
+      valorUsd: null,
+      tc: null,
+      prevFecha: g.prev?.fecha ?? null,
+    };
+    if (est === "vencido") {
+      rows.push({
+        ...base,
+        unidad: null,
+        etiqueta: "VACÍO",
+        extra: `sin dato fresco · última fuente ${fechaLabel}`,
+      });
+      continue;
+    }
+    const v = fmtVar(g);
+    rows.push({
+      ...base,
+      valor: fmtPrecio(g),
+      varPct: g.pct,
+      senal: senalFromChange(g.pct),
+      varAbs: v,
+      extra: [
+        v ? `${v} vs ${isoToDmy(g.prev?.fecha).slice(0, 5)}` : "sin cierre previo",
+        g.estimativo ? "precio estimativo (E)" : null,
+      ]
+        .filter(Boolean)
+        .join(" · "),
+      valorUsd:
+        g.usd != null
+          ? g.usd.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          : null,
+      tc: g.tc
+        ? `${g.tc.fuente} ${isoToDmy(g.tc.fecha).slice(0, 5)}: ${g.tc.valor.toLocaleString("es-AR", { maximumFractionDigits: 2 })}`
+        : null,
+    });
+  }
+  return rows;
+}
+
+function applyPlazas(snap: MercadoSnapshot, plazas: PlazasSnapshot | null): MercadoSnapshot {
+  const rest = snap.rows.filter((r) => !/^(cac|afa|fob)-/.test(r.id));
+  if (!plazas) return { ...snap, rows: rest, plazas: null };
+  const rows = [
+    ...plazaRows(plazas.cac),
+    ...plazaRows(plazas.afa),
+    ...plazaRows(plazas.fob),
+    ...rest,
+  ];
+  return {
+    ...snap,
+    rows,
+    ok: rows.some((r) => r.valor != null) || snap.ok,
+    plazas,
+  };
+}
+
+/** Frescura para filas de precio con fecha real de dato (Matba, WTI). >3 hábiles → se oculta. */
+function applyFrescura(snap: MercadoSnapshot): MercadoSnapshot {
+  const rows = snap.rows.map((r) => {
+    if (!r.fecha || r.frescura || !r.valor) return r;
+    const est = frescura(r.fecha);
+    if (est === "vencido") {
+      return {
+        ...r,
+        valor: null,
+        unidad: null,
+        senal: null,
+        varPct: null,
+        etiqueta: "VACÍO" as const,
+        frescura: est,
+        extra: `sin dato fresco · última fuente ${isoToDmy(r.fecha)}`,
+      };
+    }
+    return { ...r, frescura: est };
+  });
+  return { ...snap, rows };
+}
+
+export async function getMercado(opts: { fresh?: boolean } = {}): Promise<MercadoSnapshot> {
   const climaPromise = getClima();
   const noticiasPromise = getNoticias();
   const wtiPromise = fetchWti();
+  const plazasPromise = getPlazas({ fresh: opts.fresh }).catch(() => null);
+  let base: MercadoSnapshot;
   try {
     const res = await fetch(GRANOS_URL, {
       headers: {
@@ -611,50 +694,26 @@ export async function getMercado(): Promise<MercadoSnapshot> {
       },
       cache: "no-store",
     });
-    const [clima, noticias, wti] = await Promise.all([
-      climaPromise,
-      noticiasPromise,
-      wtiPromise,
-    ]);
-    if (!res.ok) {
-      return applyWti(
-        applyNoticias(
-          applyClima(
-            stubSnapshot(
-              `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
-            ),
-            clima,
-          ),
-          noticias,
-        ),
-        wti,
-      );
-    }
-    const data = (await res.json()) as GranosPayload;
-    return applyWti(
-      applyNoticias(applyClima(mapGranos(data), clima), noticias),
-      wti,
-    );
+    base = res.ok
+      ? mapGranos((await res.json()) as GranosPayload)
+      : stubSnapshot(
+          `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
+        );
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    const [clima, noticias, wti] = await Promise.all([
-      climaPromise,
-      noticiasPromise,
-      wtiPromise,
-    ]);
-    return applyWti(
-      applyNoticias(
-        applyClima(
-          stubSnapshot(
-            `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
-          ),
-          clima,
-        ),
-        noticias,
-      ),
-      wti,
+    base = stubSnapshot(
+      `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
     );
   }
+  const [clima, noticias, wti, plazas] = await Promise.all([
+    climaPromise,
+    noticiasPromise,
+    wtiPromise,
+    plazasPromise,
+  ]);
+  return applyFrescura(
+    applyPlazas(applyWti(applyNoticias(applyClima(base, clima), noticias), wti), plazas),
+  );
 }
 
 export function rowById(rows: MercadoRow[], id: string): MercadoRow | undefined {
