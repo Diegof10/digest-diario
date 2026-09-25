@@ -173,10 +173,11 @@ export async function assembleDigest(opts?: {
 
   // CoS bundled txt (src/data/resumen-matutino.txt) wins when body lines exist.
   // Never invent news: missing/empty → auto-built fallback only.
-  // Líneas AFA / CAC / FOB: generadas del feed vivo (src/lib/plazas.ts).
+  // Líneas AFA / CAC: generadas del feed vivo (src/lib/plazas.ts). FOB retirado (25/9):
+  // las líneas FOB del texto CoS se descartan en mergeResumenConPlazas.
   const cos = await loadResumenMatutino();
   const plazaLines = mercado.plazas
-    ? [mercado.plazas.afa, mercado.plazas.cac, mercado.plazas.fob]
+    ? [mercado.plazas.afa, mercado.plazas.cac]
         .map(lineaResumen)
         .filter((l): l is string => Boolean(l))
     : [];

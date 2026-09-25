@@ -1,7 +1,6 @@
 import {
   dmyToIso,
   frescura,
-  habilAnterior,
   hoyArtIso,
   isoToDm,
   REGLAS,
@@ -14,6 +13,7 @@ import {
   valorEnSerie,
   type SerieFile,
 } from "@/lib/serie-blob";
+import { getAca, type AcaSnapshot } from "@/lib/aca";
 
 /**
  * Plazas físicas — UNA fuente por plaza, fetch server-side directo:
@@ -21,7 +21,8 @@ import {
  *      https://www.cac.bcr.com.ar/es/precios-de-pizarra (+ /consultas para el cierre previo)
  *  - AFA San Martín: pizarra diaria AFA SCL (AFA Diario · Mercados en línea
  *      + Comparativo Pizarra para el cierre previo)
- *  - FOB Up River: FOB oficiales MAGYP (ws precios_fob.php por fecha)
+ *  - ACA (Asociación de Cooperativas Argentinas): físico por puerto, posición disponible
+ *      en $/t (src/lib/aca.ts). FOB Up River (MAGYP) retirado 25/9 por pedido de Diego.
  * Var diaria = último cierre publicado vs cierre publicado anterior de la MISMA fuente.
  * Sin cierre previo → var null. Nunca se inventan precios ni variaciones.
  */
@@ -45,7 +46,7 @@ export interface CotizacionGrano {
 }
 
 export interface PlazaSnapshot {
-  id: "cac" | "afa" | "fob";
+  id: "cac" | "afa";
   nombre: string;
   lugar: string;
   fuente: string;
@@ -59,7 +60,8 @@ export interface PlazaSnapshot {
 export interface PlazasSnapshot {
   cac: PlazaSnapshot;
   afa: PlazaSnapshot;
-  fob: PlazaSnapshot;
+  /** ACA · físico por puerto, sólo disponible en $/t */
+  aca: AcaSnapshot;
   fxBnaDivisa: { valor: number; fecha: string; fuente: string } | null;
   persistencia: { written: boolean; error: string | null; updatedAt: string | null };
   fetchedAt: string;
@@ -75,15 +77,6 @@ const CAC_PRODUCT: Record<Grano, string> = { soja: "13", maiz: "3", trigo: "8" }
 export const AFA_URL = "https://www.afascl.coop/afadiario/mercados-en-linea";
 const AFA_COMP_URL = "https://www.afascl.coop/afadiario/comparativo-pizarra";
 const AFA_GRANO: Record<Grano, string> = { soja: "Soja", maiz: "Maiz", trigo: "Trigo" };
-
-export const MAGYP_FOB_URL =
-  "https://www.magyp.gob.ar/sitio/areas/ss_mercados_agropecuarios/ws/ssma/precios_fob.php";
-/** Posiciones NCM MAGYP (Up River, embarque más próximo). */
-const FOB_POSICION: Record<Grano, string> = {
-  soja: "12019000190C",
-  maiz: "10059010190Y",
-  trigo: "10019900110W",
-};
 
 const BNA_URL = "https://www.bna.com.ar/Personas";
 
@@ -370,74 +363,6 @@ async function getAfa(
   }
 }
 
-/* ---------------------------- FOB MAGYP ----------------------------- */
-
-type FobPost = {
-  fecha: string;
-  posicion: string;
-  precio: number;
-  mesDesde: number;
-  ["añoDesde"]: number;
-};
-
-async function fetchFobFecha(iso: string, hoy: string, o: FetchOpts): Promise<FobPost[]> {
-  const [y, m, d] = iso.split("-");
-  const url = `${MAGYP_FOB_URL}?Fecha=${d}/${m}/${y}`;
-  // Fechas pasadas no cambian: cache largo; hoy: cache corto.
-  const txt = await fetchText(url, iso < hoy ? { ...o, revalidate: 21600 } : o);
-  const data = JSON.parse(txt) as { posts?: FobPost[] } | FobPost[];
-  const posts = Array.isArray(data) ? data : (data.posts ?? []);
-  return posts.filter((p) => p && typeof p.precio === "number" && String(p.fecha).startsWith(iso));
-}
-
-function fobPrecio(posts: FobPost[], g: Grano): number | null {
-  const cands = posts
-    .filter((p) => p.posicion === FOB_POSICION[g])
-    .sort((a, b) => a["añoDesde"] * 100 + a.mesDesde - (b["añoDesde"] * 100 + b.mesDesde));
-  const v = cands[0]?.precio;
-  return v != null && Number.isFinite(v) && v > 0 ? v : null;
-}
-
-async function getFob(hoy: string, o: FetchOpts, serie: SerieFile): Promise<PlazaSnapshot> {
-  const base = {
-    id: "fob" as const,
-    nombre: "FOB Up River",
-    lugar: "Up River",
-    fuente: "MAGYP · FOB oficiales",
-    url: MAGYP_FOB_URL,
-  };
-  try {
-    // Recorre hábiles hacia atrás (máx. 8) hasta encontrar 2 fechas publicadas.
-    const fechas: string[] = [];
-    let d = hoy;
-    const wd = new Date(`${hoy}T12:00:00Z`).getUTCDay();
-    if (wd === 0 || wd === 6) d = habilAnterior(hoy);
-    for (let i = 0; i < 8; i++) {
-      fechas.push(d);
-      d = habilAnterior(d);
-    }
-    const found: Array<{ fecha: string; posts: FobPost[] }> = [];
-    for (const f of fechas) {
-      const posts = await fetchFobFecha(f, hoy, o).catch(() => [] as FobPost[]);
-      if (posts.length > 0) found.push({ fecha: f, posts });
-      if (found.length >= 2) break;
-    }
-    if (found.length === 0) return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, "MAGYP FOB: sin publicaciones en los últimos 8 hábiles");
-    const [ult, ant] = found;
-    const granos: CotizacionGrano[] = [];
-    for (const g of GRANOS) {
-      const v = fobPrecio(ult.posts, g);
-      if (v == null) continue;
-      const pv = ant ? fobPrecio(ant.posts, g) : null;
-      const prev = pv != null ? { valor: pv, fecha: ant!.fecha } : previoEnSerie(serie, "fob.usd", g, ult.fecha);
-      granos.push({ grano: g, valor: v, unidad: "US$/t", fecha: ult.fecha, prev, ...varDe(v, prev) });
-    }
-    return { ...base, fecha: ult.fecha, frescura: frescura(ult.fecha, REGLAS.fob), granos, error: null };
-  } catch (err) {
-    return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `MAGYP FOB: ${err instanceof Error ? err.message : String(err)}`);
-  }
-}
-
 /* ------------------------------ Público ----------------------------- */
 
 export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {}): Promise<PlazasSnapshot> {
@@ -455,12 +380,12 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
   // TC de la CAC (BNA divisa comprador de su fecha) también sirve para AFA de esa fecha.
   const cacTc = cac.granos.find((g) => g.tc?.fuente.includes("CAC"))?.tc ?? null;
   const fx2 = (fecha: string) => fx(fecha) ?? (cacTc && cacTc.fecha === fecha ? cacTc : null);
-  const [afa, fob] = await Promise.all([getAfa(hoy, o, serie, fx2), getFob(hoy, o, serie)]);
+  const [afa, aca] = await Promise.all([getAfa(hoy, o, serie, fx2), getAca(o)]);
 
   let persistencia: PlazasSnapshot["persistencia"] = { written: false, error: null, updatedAt: serie.updatedAt };
   if (opts.persist !== false) {
     const puntos: Array<{ serie: string; grano: string; fecha: string; valor: number }> = [];
-    for (const [p, serieId] of [[cac, "cac.ars"], [afa, "afa.ars"], [fob, "fob.usd"]] as const) {
+    for (const [p, serieId] of [[cac, "cac.ars"], [afa, "afa.ars"]] as const) {
       for (const g of p.granos) {
         puntos.push({ serie: serieId, grano: g.grano, fecha: g.fecha, valor: g.valor });
         if (g.prev) puntos.push({ serie: serieId, grano: g.grano, fecha: g.prev.fecha, valor: g.prev.valor });
@@ -468,6 +393,9 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
           puntos.push({ serie: "cac.usd", grano: g.grano, fecha: g.fecha, valor: g.usd });
         }
       }
+    }
+    for (const f of aca.filas) {
+      if (f.valor != null && f.fechaPub) puntos.push({ serie: "aca.ars", grano: f.key, fecha: f.fechaPub, valor: f.valor });
     }
     if (bna) puntos.push({ serie: "fx.bna", grano: "usd", fecha: bna.fecha, valor: bna.valor });
     if (cacTc) puntos.push({ serie: "fx.bna", grano: "usd", fecha: cacTc.fecha, valor: cacTc.valor });
@@ -479,7 +407,7 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
     }
   }
 
-  return { cac, afa, fob, fxBnaDivisa: bna, persistencia, fetchedAt: new Date().toISOString() };
+  return { cac, afa, aca, fxBnaDivisa: bna, persistencia, fetchedAt: new Date().toISOString() };
 }
 
 /* ------------------------------ Formato ----------------------------- */
@@ -513,7 +441,7 @@ const LABEL: Record<Grano, string> = { soja: "soja", maiz: "maíz", trigo: "trig
 export function lineaResumen(p: PlazaSnapshot): string | null {
   if (p.frescura === "vencido" || p.granos.length === 0 || !p.fecha) return null;
   const head =
-    p.id === "cac" ? "Rosario CAC" : p.id === "afa" ? "AFA San Martín" : "FOB Up River";
+    p.id === "cac" ? "Rosario CAC" : "AFA San Martín";
   const tag = `${isoToDm(p.fecha)}${p.frescura === "viejo" ? " · viejo" : ""}`;
   const parts = p.granos.map((g) => {
     const unit = g.unidad === "ARS/t" ? "$/t" : "US$/t";

@@ -7,7 +7,7 @@ export const maxDuration = 60;
 
 /**
  * Vercel Cron (ver vercel.json): 07:00 ART diario + 11:15 y 18:30 ART lun–vie.
- * Refresca todas las fuentes sin cache (feed granos, CAC, AFA, MAGYP FOB, BNA, WTI,
+ * Refresca todas las fuentes sin cache (feed granos, CAC, AFA, ACA, BNA, WTI,
  * clima, noticias) y persiste la serie de cierres en Vercel Blob.
  * Protegido con CRON_SECRET: Vercel manda `Authorization: Bearer $CRON_SECRET`.
  */
@@ -31,12 +31,20 @@ export async function GET(req: NextRequest) {
   const snap = await assembleDigest({ km, fresh: true });
   const p = snap.mercado.plazas;
   const resumen = p
-    ? Object.fromEntries(
-        (["cac", "afa", "fob"] as const).map((k) => [
-          k,
-          { fecha: p[k].fecha, frescura: p[k].frescura, granos: p[k].granos.length, error: p[k].error },
-        ]),
-      )
+    ? {
+        ...Object.fromEntries(
+          (["cac", "afa"] as const).map((k) => [
+            k,
+            { fecha: p[k].fecha, frescura: p[k].frescura, granos: p[k].granos.length, error: p[k].error },
+          ]),
+        ),
+        aca: {
+          ok: p.aca.ok,
+          filas: p.aca.filas.length,
+          conPrecio: p.aca.filas.filter((f) => f.valor != null).length,
+          error: p.aca.error,
+        },
+      }
     : null;
   const ms = Date.now() - started;
   await appendCronLog({

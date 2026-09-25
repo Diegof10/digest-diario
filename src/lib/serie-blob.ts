@@ -5,7 +5,8 @@ import { get, put } from "@vercel/blob";
  * (store conectado al proyecto; auth OIDC vía BLOB_STORE_ID, o BLOB_READ_WRITE_TOKEN).
  *
  * Estructura: { [serieId]: { [grano]: { [yyyy-mm-dd]: número } } }
- *  - afa.ars, cac.ars, cac.usd, fob.usd, fx.bna (grano "usd")
+ *  - afa.ars, cac.ars, cac.usd, aca.ars (grano "<cultivo>-<puerto>"), fx.bna (grano "usd")
+ *  - fob.usd: histórico (FOB retirado 25/9, ya no se escribe)
  * Sólo se guardan valores publicados por la fuente; nunca se rellenan huecos.
  */
 

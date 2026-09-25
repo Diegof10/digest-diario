@@ -303,7 +303,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     }
   }
 
-  // Plazas físicas (Pizarra CAC Rosario / AFA San Martín / FOB Up River):
+  // Plazas físicas (Pizarra CAC Rosario / AFA San Martín; ACA por puerto aparte):
   // se agregan en applyPlazas() desde fuentes directas (src/lib/plazas.ts).
 
   // Pizarra MAGYP (FAS) eliminada: estaba clavada y duplicaba CAC Rosario.
@@ -647,7 +647,6 @@ function applyPlazas(snap: MercadoSnapshot, plazas: PlazasSnapshot | null): Merc
   const rows = [
     ...plazaRows(plazas.cac),
     ...plazaRows(plazas.afa),
-    ...plazaRows(plazas.fob),
     ...rest,
   ];
   return {

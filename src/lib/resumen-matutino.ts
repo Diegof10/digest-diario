@@ -116,7 +116,8 @@ export async function getResumenMatutinoLineas(): Promise<string[] | null> {
 const PLAZA_LINE_RE = /^\s*(AFA\b|(?:Rosario\s+)?CAC\b|Pizarra\s+CAC\b|FOB\b)/i;
 
 /**
- * Reemplaza las líneas AFA / CAC / FOB del texto CoS por las generadas del feed vivo
+ * Reemplaza las líneas AFA / CAC del texto CoS por las generadas del feed vivo.
+ * Las líneas FOB del CoS se descartan (FOB Up River retirado de plazas físicas, 25/9)
  * (mismo formato "precio (abs · %)"). El resto del texto se mantiene, marcado con su
  * fecha si está viejo (1–3 hábiles) y descartado si tiene >3 hábiles de atraso.
  * Si una plaza viva no tiene dato mostrable, su línea NO se reemplaza por texto viejo.

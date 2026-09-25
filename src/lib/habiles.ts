@@ -78,9 +78,9 @@ export const REGLA_DEFAULT: ReglaPublicacion = { offsetHabiles: 0, hora: "23:59"
 export const REGLAS: Record<string, ReglaPublicacion> = {
   // Cámara Arbitral de Cereales (BCR): pizarra de D publicada el hábil siguiente ~10:15.
   cac: { offsetHabiles: 1, hora: "10:30" },
-  // AFA San Martín y FOB MAGYP: horario de publicación no documentado → hábil anterior.
+  // AFA San Martín y ACA: horario de publicación no documentado → hábil anterior.
   afa: REGLA_DEFAULT,
-  fob: REGLA_DEFAULT,
+  aca: REGLA_DEFAULT,
 };
 
 function ahoraArt(now = new Date()): { fecha: string; hhmm: string } {

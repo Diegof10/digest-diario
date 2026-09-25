@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import type { ClimaEntry, MercadoRow, MercadoSnapshot } from "@/lib/types";
 import { rowById } from "@/lib/mercado";
+import { ACA_CULTIVO_LABEL, type AcaSnapshot } from "@/lib/aca";
+import { isoToDm } from "@/lib/habiles";
 
 const CROP = {
   soja: { accent: "#1f6b3a", label: "SOJA" },
@@ -118,7 +120,6 @@ function CropLine({
 const PLAZAS = [
   { id: "cac", titulo: "Pizarra CAC Rosario" },
   { id: "afa", titulo: "AFA San Martín" },
-  { id: "fob", titulo: "FOB Up River" },
 ] as const;
 
 function PlazaCell({ r }: { r: MercadoRow | undefined }) {
@@ -214,12 +215,92 @@ function PlazasBlock({ mercado }: { mercado: MercadoSnapshot }) {
       )}
       <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
         CAC y AFA publican en ARS/t; US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
-        {" "}FOB MAGYP en US$/t (embarque más próximo). &quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
+        {" "}&quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
       </div>
+      {mercado.plazas?.aca ? <AcaBlock aca={mercado.plazas.aca} /> : (
+        <div className="border-t border-slate-200 px-3 py-2 text-[11px] opacity-60">ACA · sin referencia · ACA no disponible</div>
+      )}
     </section>
   );
 }
 
+
+function hhmmArt(iso: string): string {
+  return new Intl.DateTimeFormat("es-AR", {
+    timeZone: "America/Argentina/Cordoba",
+    day: "numeric",
+    month: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date(iso)).replace(",", "");
+}
+
+/** "24/09" → "24/9" */
+function dmCorto(iso: string | null): string {
+  return isoToDm(iso).replace(/^0/, "").replace(/\/0/, "/");
+}
+
+function AcaBlock({ aca }: { aca: AcaSnapshot }) {
+  const leido = hhmmArt(aca.leidoAt);
+  return (
+    <div className="border-t border-slate-200">
+      <div className="flex flex-wrap items-center justify-between gap-1 bg-slate-100 px-3 py-1.5">
+        <span className="text-[11px] font-bold tracking-[0.1em] text-[#0b1f3a]">ACA · FÍSICO POR PUERTO · DISPONIBLE $/t</span>
+        <span className="text-[9px] opacity-60">
+          <a href={aca.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">
+            ACA Base
+          </a>
+          {" · "}leído {leido}
+        </span>
+      </div>
+      {!aca.ok || aca.filas.length === 0 ? (
+        <p className="px-3 py-2 text-[11px] opacity-70">sin referencia · ACA no disponible{aca.error ? ` (${aca.error})` : ""}</p>
+      ) : (
+        <ul className="divide-y divide-slate-100">
+          {aca.filas.map((f) => {
+            const head = `${ACA_CULTIVO_LABEL[f.cultivo]} ${f.puerto} · disponible`;
+            const vencido = f.valor != null && f.frescura === "vencido";
+            const pub = f.fechaPub ? `publicado ${dmCorto(f.fechaPub)}${f.horaPub ? ` ${f.horaPub}` : ""}` : `leído ${leido}`;
+            return (
+              <li key={f.key} className="flex flex-wrap items-baseline gap-x-1.5 px-3 py-1 text-[11px]">
+                <span className="font-semibold text-[#0b1f3a]">{head}</span>
+                <span className="opacity-40">·</span>
+                {f.valor != null && !vencido ? (
+                  <span className="font-bold tabular-nums">{f.valor.toLocaleString("es-AR", { maximumFractionDigits: 0 })} $/t</span>
+                ) : (
+                  <span className="opacity-60">
+                    sin referencia
+                    {vencido ? ` · sin dato fresco (último ${dmCorto(f.fechaPub)})` : f.motivo ? ` (${f.motivo})` : ""}
+                  </span>
+                )}
+                <span className="opacity-40">·</span>
+                <span className="text-[10px] opacity-60">ACA · {f.valor != null && !vencido ? pub : `leído ${leido}`}</span>
+                {f.valor != null && f.frescura === "viejo" ? <ViejoBadge r={{ frescura: "viejo" }} /> : null}
+                {f.valor != null && !vencido && f.condiciones ? (
+                  <span className="w-full text-[9px] lowercase opacity-45">{f.condiciones}</span>
+                ) : null}
+              </li>
+            );
+          })}
+          {aca.cultivosSinPublicar.map((c) => (
+            <li key={`sin-${c}`} className="flex flex-wrap items-baseline gap-x-1.5 px-3 py-1 text-[11px]">
+              <span className="font-semibold text-[#0b1f3a]">{ACA_CULTIVO_LABEL[c]} · disponible</span>
+              <span className="opacity-40">·</span>
+              <span className="opacity-60">sin referencia (ACA no publica {ACA_CULTIVO_LABEL[c].toLowerCase()} en ningún puerto)</span>
+              <span className="opacity-40">·</span>
+              <span className="text-[10px] opacity-60">ACA · leído {leido}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
+        Sólo posición disponible en pesos; si no hay disponible en $, &quot;sin referencia&quot; (nunca se toma otra posición).
+        {aca.puertosSinPublicar.length ? ` ACA no publica hoy: ${aca.puertosSinPublicar.join(", ")}.` : ""}
+      </div>
+    </div>
+  );
+}
 
 function ClimaCountry({ e }: { e: ClimaEntry }) {
   const flagEmoji =

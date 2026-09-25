@@ -102,7 +102,7 @@ export default function MorningBrief({ lines }: { lines: string[] }) {
     <section className="digest-panel">
       <h3 className="digest-panel-title">Resumen matutino</h3>
       <p className="-mt-1 mb-1.5 text-[9px] opacity-50">
-        AFA (pizarra AFA SCL) · CAC (Cámara Arbitral BCR) · FOB (MAGYP): feed vivo, var vs cierre publicado anterior de la misma fuente.
+        AFA (pizarra AFA SCL) · CAC (Cámara Arbitral BCR): feed vivo, var vs cierre publicado anterior de la misma fuente.
       </p>
 
       {grainPlazas.length > 0 ? (
