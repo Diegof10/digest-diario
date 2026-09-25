@@ -1,9 +1,11 @@
+import AvanceCampana from "@/components/AvanceCampana";
 import ClimaVivo from "@/components/ClimaVivo";
 import CostsBlock from "@/components/CostsBlock";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
+import { loadAvance } from "@/lib/avance";
 import { getClimaVivo } from "@/lib/clima-vivo";
 import { loadResumenMatutino } from "@/lib/resumen-matutino";
 import { parseTema } from "@/lib/tema";
@@ -33,6 +35,7 @@ export default async function Home({
     tema !== "base" ? loadResumenMatutino() : Promise.resolve(null),
   ]);
   const lecturaCards = await buildLecturaCards(digest.mercado, digest.fiscal, climaVivo);
+  const avance = loadAvance();
   const ticker = tema !== "base" ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null) : [];
 
   return (
@@ -82,6 +85,10 @@ export default async function Home({
       <ClimaVivo clima={climaVivo} tema={tema} />
 
       <MarketBoard mercado={digest.mercado} tema={tema} />
+
+      <div className="mt-3">
+        <AvanceCampana data={avance} viejo={avance.viejo} dias={avance.dias} />
+      </div>
 
       <div className="mt-3">
         <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />

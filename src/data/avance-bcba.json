@@ -1,0 +1,149 @@
+{
+  "fuente": "Bolsa de Cereales de Bs. As. · Panorama Agrícola Semanal",
+  "fuenteUrl": "https://www.bolsadecereales.com/estimaciones-informes",
+  "geometria": {
+    "tipo": "aproximada",
+    "nota": "La BCBA no publica un shape de sus zonas PAS (sólo un mapa imagen en el informe). Zonas aproximadas disolviendo departamentos IGN según el mapa de zonas del PAS."
+  },
+  "estadoDescarga": {
+    "ok": false,
+    "intentoISO": "2026-09-25T09:20:00-03:00",
+    "detalle": "bolsadecereales.com responde 403 con desafío Cloudflare (Turnstile) a clientes automáticos; el PDF del 24/09 no se pudo descargar. Se usa el texto del PAS citado por prensa para las cifras nacionales."
+  },
+  "informes": [
+    {
+      "fecha": "2026-09-24",
+      "relevamientoAl": null,
+      "origen": "prensa",
+      "origenNota": "Cifras nacionales tomadas del texto del PAS citado por TN e Infobae (24/09/2026). PDF oficial no accesible: sin datos por zona.",
+      "publicado": {
+        "iso": null,
+        "texto": "jueves 24/09/2026 · hora oficial s/d; primera nota de prensa 16:56 ART (TN)"
+      },
+      "urlInforme": "https://www.bolsadecereales.com/estimaciones-informes",
+      "respaldo": [
+        "https://tn.com.ar/campo/2026/09/24/el-trigo-resiste-al-mal-clima-afirman-que-mantiene-un-excelente-estado-pese-a-la-falta-de-lluvias-el-granizo-y-las-heladas/",
+        "https://www.infobae.com/revista-chacra/2026/09/24/el-trigo-desafia-al-clima/"
+      ],
+      "cultivos": {
+        "maiz": {
+          "metricas": {
+            "siembra": {
+              "campana": "2026/27",
+              "nacional": 17.1,
+              "areaMHa": 8.4,
+              "varSemanalPp": 6,
+              "vsAnioAnteriorPp": null,
+              "notaVsAnioAnterior": "El informe dice «una mejora de alrededor de 5%» respecto de la campaña previa (valor aproximado: no se carga).",
+              "zonas": {}
+            },
+            "cosecha": {
+              "campana": "2025/26",
+              "nacional": 99.2,
+              "varSemanalPp": null,
+              "vsAnioAnteriorPp": null,
+              "zonas": {}
+            }
+          }
+        },
+        "girasol": {
+          "metricas": {
+            "siembra": {
+              "campana": "2026/27",
+              "nacional": 31.4,
+              "areaMHa": 3.1,
+              "varSemanalPp": 4.8,
+              "vsAnioAnteriorPp": null,
+              "notaVsAnioAnterior": "El informe compara contra el promedio de 5 campañas e histórico («adelanto de aproximadamente 10%»), no contra el año anterior.",
+              "zonas": {}
+            }
+          }
+        },
+        "trigo": {
+          "metricas": {
+            "condicion": {
+              "campana": "2026/27",
+              "categoria": "Normal a Excelente",
+              "nacional": 94.6,
+              "varSemanalPp": null,
+              "vsAnioAnteriorPp": null,
+              "zonas": {}
+            }
+          }
+        },
+        "soja": { "sinAvance": true, "metricas": {} }
+      }
+    },
+    {
+      "fecha": "2026-09-17",
+      "relevamientoAl": "2026-09-16",
+      "origen": "pdf",
+      "origenNota": "PDF del PAS (copia pública del archivo de la BCBA). Zonas: sólo las cifras por zona que el texto del informe da con número; los gráficos regionales no se leen (no hay tabla).",
+      "publicado": {
+        "iso": "2026-09-17T14:34:08-03:00",
+        "texto": "jueves 17/09/2026 14:34 ART (fecha de creación del PDF)"
+      },
+      "urlInforme": "https://www.bolsadecereales.com/estimaciones-informes",
+      "respaldo": [
+        "https://casaresonline.com.ar/wp-content/uploads/2026/09/PAS-2026-09-17_compressed.pdf"
+      ],
+      "cultivos": {
+        "maiz": {
+          "metricas": {
+            "siembra": {
+              "campana": "2026/27",
+              "nacional": 11.1,
+              "areaMHa": 8.4,
+              "varSemanalPp": 5.6,
+              "vsAnioAnteriorPp": null,
+              "zonas": { "VIII": 58.3 }
+            },
+            "cosecha": {
+              "campana": "2025/26",
+              "nacional": 98.2,
+              "varSemanalPp": null,
+              "vsAnioAnteriorPp": null,
+              "zonas": {}
+            }
+          }
+        },
+        "girasol": {
+          "metricas": {
+            "siembra": {
+              "campana": "2026/27",
+              "nacional": 26.6,
+              "areaMHa": 3,
+              "varSemanalPp": 3.2,
+              "vsAnioAnteriorPp": null,
+              "zonas": { "V": 73 }
+            }
+          }
+        },
+        "trigo": {
+          "metricas": {
+            "condicion": {
+              "campana": "2026/27",
+              "categoria": "Normal a Excelente",
+              "nacional": 97.5,
+              "varSemanalPp": null,
+              "vsAnioAnteriorPp": null,
+              "zonas": {}
+            }
+          }
+        },
+        "cebada": {
+          "metricas": {
+            "condicion": {
+              "categoria": "Normal a Buena",
+              "nacional": 99,
+              "varSemanalPp": null,
+              "vsAnioAnteriorPp": null,
+              "zonas": {}
+            }
+          }
+        },
+        "soja": { "sinAvance": true, "metricas": {} }
+      }
+    }
+  ]
+}

@@ -9,7 +9,8 @@
     "lint": "eslint",
     "noticias:status": "node scripts/refresh-noticias.mjs",
     "noticias:empty": "node scripts/refresh-noticias.mjs --empty",
-    "noticias:refresh": "node scripts/refresh-noticias.mjs --from"
+    "noticias:refresh": "node scripts/refresh-noticias.mjs --from",
+    "avance:update": "node scripts/update-avance-bcba.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

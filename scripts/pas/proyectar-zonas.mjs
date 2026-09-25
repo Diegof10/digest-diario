@@ -1,0 +1,11 @@
+import fs from 'fs';
+import {geoConicEqualArea, geoPath} from 'd3-geo';
+const z=JSON.parse(fs.readFileSync('zonas2.geojson'));const p=JSON.parse(fs.readFileSync('provs2.geojson'));
+const rw=g=>{for(const f of g.features){const G=f.geometry;const polys=G.type==='Polygon'?[G.coordinates]:G.coordinates;for(const p of polys)for(const r of p)r.reverse();}};rw(z);rw(p);
+const W=400,H=560;
+const proj=geoConicEqualArea().parallels([-24,-38]).rotate([62,0]).fitExtent([[6,6],[W-6,H-6]],z);
+const path=geoPath(proj).digits(0);const ppath=geoPath(geoConicEqualArea().parallels([-24,-38]).rotate([62,0]).fitExtent([[6,6],[W-6,H-6]],z).clipExtent([[0,0],[W,H]])).digits(0);
+const zonas=z.features.map(f=>{const [cx,cy]=path.centroid(f);return {id:f.properties.zona,d:path(f),cx:+cx.toFixed(1),cy:+cy.toFixed(1)}});
+const provs=ppath({type:'FeatureCollection',features:p.features});
+fs.writeFileSync('zonas-bcba-svg.json',JSON.stringify({viewBox:`0 0 ${W} ${H}`,zonas,provincias:provs}));
+console.log(fs.statSync('zonas-bcba-svg.json').size, zonas.map(z=>z.id+':'+z.d.length).join(' '));
