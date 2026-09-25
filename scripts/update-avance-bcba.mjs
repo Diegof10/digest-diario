@@ -53,6 +53,13 @@ function pdfATexto(file) {
   return { txt, creado };
 }
 
+function fmtART(iso) {
+  const d = new Date(iso);
+  const f = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Cordoba", weekday: "long", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(d);
+  const g = (t) => f.find((x) => x.type === t)?.value;
+  return `${g("weekday")} ${g("day")}/${g("month")}/${g("year")} ${g("hour")}:${g("minute")}`;
+}
+
 function aInforme(parsed, meta) {
   const cultivos = {};
   for (const [k, v] of Object.entries(parsed.cultivos)) cultivos[k] = v;
@@ -61,8 +68,10 @@ function aInforme(parsed, meta) {
     fecha: parsed.fecha,
     relevamientoAl: parsed.relevamientoAl,
     origen: "pdf",
-    origenNota: meta.via === "oficial" ? "PDF oficial del PAS." : "PDF del PAS (copia pública del archivo de la BCBA). Zonas: sólo cifras por zona dadas con número en el texto.",
-    publicado: { iso: meta.creado, texto: meta.creado ? `creación del PDF ${meta.creado}` : "hora s/d" },
+    origenNota:
+      (meta.via === "oficial" ? "PDF oficial del PAS." : meta.via === "manual" ? "PDF oficial del PAS (descargado a mano del sitio de la BCBA)." : "PDF del PAS (copia pública del archivo de la BCBA).") +
+      " Zonas: sólo cifras por zona que el texto da con número; los gráficos regionales no se leen.",
+    publicado: { iso: meta.creado, texto: meta.creado ? `${fmtART(meta.creado)} ART (creación del PDF)` : "hora s/d" },
     urlInforme: OFICIAL,
     respaldo: meta.url ? [meta.url] : [],
     cultivos,
@@ -95,8 +104,10 @@ async function main() {
     }
   }
   const ahora = new Date().toISOString();
-  if (informe && informe.fecha > (data.informes[0]?.fecha ?? "")) {
-    data.informes = [informe, ...data.informes].slice(0, 4);
+  const top = data.informes[0];
+  const reemplaza = informe && top && informe.fecha === top.fecha && top.origen !== "pdf"; // PDF reemplaza cifras de prensa
+  if (informe && (reemplaza || informe.fecha > (top?.fecha ?? ""))) {
+    data.informes = reemplaza ? [informe, ...data.informes.slice(1)] : [informe, ...data.informes].slice(0, 4);
     data.estadoDescarga = { ok: true, intentoISO: ahora, detalle: `informe ${informe.fecha} (${informe.respaldo[0] ?? "manual"})` };
   } else {
     data.estadoDescarga = { ok: false, intentoISO: ahora, detalle: informe ? `sin informe nuevo (último ${data.informes[0]?.fecha})` : errores.join(" | ") || "sin candidatos" };

@@ -43,23 +43,16 @@ export function parseRelevamiento(text) {
   return m ? `${m[3]}-${m[2]}-${m[1]}` : null;
 }
 
-/** Párrafo del cuerpo (antes de los recuadros por cultivo) que menciona el cultivo. */
-function bloque(body, re) {
-  const m = body.match(re);
-  if (!m) return null;
-  const start = m.index;
-  // corta en el siguiente párrafo temático (heurística: próximo "Por su parte, la siembra de|En cuanto al|Finalmente,")
-  const rest = body.slice(start + 1);
-  const cut = rest.search(/(Por su parte, la siembra de|En cuanto al |Finalmente, |En paralelo, la cosecha de)/);
-  return body.slice(start, cut >= 0 ? start + 1 + cut : undefined);
-}
+const PP = String.raw`(?:p\.?\s?p\.?|%|puntos porcentuales)`;
+const N = String.raw`(\d+(?:,\d+)?)`;
+const rx = (src) => new RegExp(src, "i");
 
 function vsAnioAnterior(par) {
-  // sólo si el informe da un número explícito en p.p. contra la campaña previa / año anterior
-  const m = par.match(/(adelanto|demora|retraso|mejora)[^.]{0,40}?de\s+(\d+(?:,\d+)?)\s*p\.?\s*p\.?[^.]{0,60}?(campaña previa|campaña anterior|año anterior|ciclo previo|interanual)/i)
-    || par.match(/(demora|retraso|adelanto) interanual de\s+(\d+(?:,\d+)?)\s*(puntos|p\.?\s*p\.?)/i);
-  if (!m) return null;
-  const v = num(m[2]);
+  // sólo número explícito contra la campaña previa / año anterior; "alrededor de" o "aproximadamente" → null
+  const m = par.match(rx(String.raw`(adelanto|demora|retraso|mejora)\s+(?:interanual\s+)?de\s+((?:alrededor de|aproximadamente|cerca de)\s+)?` + N + String.raw`\s?` + PP + String.raw`[^.]{0,40}?(campaña previa|campaña anterior|año anterior|ciclo previo)`))
+    || par.match(rx(String.raw`(demora|retraso|adelanto) interanual de\s+()` + N + String.raw`\s?` + PP));
+  if (!m || m[2]) return null;
+  const v = num(m[3]);
   return /demora|retraso/i.test(m[1]) ? -v : v;
 }
 
@@ -68,8 +61,7 @@ function zonasEn(par, patrones) {
   for (const z of ZONAS_PAS) {
     for (const a of z.alias) {
       for (const p of patrones) {
-        const re = new RegExp(p.replace("ZONA", esc(a)), "i");
-        const m = par.match(re);
+        const m = par.match(rx(p.replace("ZONA", esc(a))));
         if (m) { out[z.id] = num(m[1]); break; }
       }
       if (out[z.id] != null) break;
@@ -79,66 +71,71 @@ function zonasEn(par, patrones) {
 }
 
 const ZONA_SIEMBRA = [
-  "en (?:el |la )?ZONA,? donde ya se implantó el (\\d+(?:,\\d+)?)\\s?%",
-  "en (?:el |la )?ZONA,? donde las labores alcanzan el (\\d+(?:,\\d+)?)\\s?%",
-  "en (?:el |la )?ZONA,? la siembra (?:alcanza|cubre) el (\\d+(?:,\\d+)?)\\s?%",
+  String.raw`en (?:el |la )?ZONA,? donde ya se implantó el (\d+(?:,\d+)?)\s?%`,
+  String.raw`en (?:el |la )?ZONA,? donde las labores alcanzan el (\d+(?:,\d+)?)\s?%`,
+  String.raw`en (?:el |la )?ZONA,? la siembra (?:alcanza|cubre) el (\d+(?:,\d+)?)\s?%`,
 ];
+
+/** Oraciones de un párrafo (corta en ". " seguido de mayúscula). */
+const oraciones = (par) => par.split(/(?<=\.)\s+(?=[A-ZÁÉÍÓÚÑ])/);
 
 export function parsePas(text) {
   const fecha = parseFechaInforme(text);
   const relevamientoAl = parseRelevamiento(text);
-  const bodyStart = text.search(/Al presente informe/i);
-  const body = flat(bodyStart >= 0 ? text.slice(bodyStart) : text);
+  const i0 = text.search(/Al presente informe/i);
+  const raw = i0 >= 0 ? text.slice(i0) : text;
+  // cuerpo = hasta los recuadros por cultivo (línea que empieza con MAÍZ/GIRASOL/TRIGO en mayúsculas)
+  const iBox = raw.search(/\n\s*(MAÍZ|GIRASOL|TRIGO|CEBADA)\s{2,}/);
+  const cuerpo = iBox > 0 ? raw.slice(0, iBox) : raw;
+  const recuadros = flat(iBox > 0 ? raw.slice(iBox) : "");
+  const pars = cuerpo.split(/\n\s*\n/).map(flat).filter(Boolean);
+  const parDe = (re) => pars.find((p) => re.test(p)) || "";
   const cultivos = {};
 
-  // MAÍZ siembra
-  const pm = bloque(body, /siembra de maíz[^.]*?alcanza/i);
-  if (pm) {
-    const m = pm.match(/siembra de maíz[^.]*?(\d{4}\/\d{2})?[^.]*?alcanza el (\d+(?:,\d+)?)\s?% de las ([\d.,]+)\s?MHa[^.]*?progreso intersemanal de (\d+(?:,\d+)?)\s?(?:p\.?\s?p\.?|%)/i);
-    const camp = pm.match(/(\d{4}\/\d{2})/);
-    if (m) {
-      cultivos.maiz = cultivos.maiz || { metricas: {} };
-      cultivos.maiz.metricas.siembra = {
-        campana: camp ? camp[1] : null,
-        nacional: num(m[2]), areaMHa: numArea(m[3]), varSemanalPp: num(m[4]),
-        vsAnioAnteriorPp: vsAnioAnterior(pm),
-        zonas: zonasEn(pm, ZONA_SIEMBRA),
-      };
-    }
+  // MAÍZ siembra (oración de siembra dentro del párrafo de maíz)
+  const pm = parDe(/siembra de maíz/i);
+  const om = oraciones(pm).find((o) => /siembra de maíz/i.test(o)) || "";
+  const m1 = om.match(rx(String.raw`siembra de maíz[^.]*?(\d{4}\/\d{2})[^.]*?alcanza el ` + N + String.raw`\s?% de las ([\d.,]+)\s?MHa[^.]*?progreso intersemanal de ` + N + String.raw`\s?` + PP));
+  if (m1) {
+    const zonasPar = pm.split(/En paralelo, la cosecha/i)[0];
+    const vsRec = recuadros.match(rx(String.raw`La siembra de maíz \d{4}\/\d{2} alcanza el [\d,]+\s?%, con (?:un|una)[\s\S]{0,200}?(adelanto|demora|retraso) de ` + N + String.raw`\s?p\.?\s?p\.? respecto de la campaña previa`));
+    cultivos.maiz = { metricas: { siembra: {
+      campana: m1[1], nacional: num(m1[2]), areaMHa: numArea(m1[3]), varSemanalPp: num(m1[4]),
+      vsAnioAnteriorPp: vsAnioAnterior(zonasPar) ?? (vsRec ? (/demora|retraso/i.test(vsRec[1]) ? -num(vsRec[2]) : num(vsRec[2])) : null),
+      zonas: zonasEn(zonasPar, ZONA_SIEMBRA),
+    } } };
   }
-  // MAÍZ cosecha
-  const mc = body.match(/cosecha de maíz (\d{4}\/\d{2}) alcanza el (\d+(?:,\d+)?)\s?% del área apta/i);
+  // MAÍZ cosecha (sin variación semanal salvo que la oración la traiga)
+  const oc = oraciones(pm).find((o) => /cosecha de maíz \d{4}\/\d{2}/i.test(o)) || "";
+  const mc = oc.match(rx(String.raw`cosecha de maíz (\d{4}\/\d{2}) alcanza el ` + N + String.raw`\s?% del área apta`));
   if (mc) {
+    const ws = oc.match(rx(String.raw`progreso intersemanal de ` + N + String.raw`\s?` + PP));
     cultivos.maiz = cultivos.maiz || { metricas: {} };
-    const pc = bloque(body, /cosecha de maíz \d{4}\/\d{2} alcanza/i) || "";
-    const ws = pc.match(/progreso intersemanal de (\d+(?:,\d+)?)\s?(?:p\.?\s?p\.?|%)/i);
-    cultivos.maiz.metricas.cosecha = {
-      campana: mc[1], nacional: num(mc[2]), varSemanalPp: ws ? num(ws[1]) : null,
-      vsAnioAnteriorPp: vsAnioAnterior(pc), zonas: {},
-    };
+    cultivos.maiz.metricas.cosecha = { campana: mc[1], nacional: num(mc[2]), varSemanalPp: ws ? num(ws[1]) : null, vsAnioAnteriorPp: vsAnioAnterior(oc), zonas: {} };
   }
   // GIRASOL siembra
-  const pg = bloque(body, /siembra de girasol (?:cubre|alcanza)/i);
-  if (pg) {
-    const m = pg.match(/siembra de girasol (?:cubre|alcanza) el (\d+(?:,\d+)?)\s?% de las ([\d.,]+)\s?MHa[^.]*?(\d{4}\/\d{2})?[^.]*?progreso intersemanal de (\d+(?:,\d+)?)\s?(?:p\.?\s?p\.?|%)/i);
-    if (m) {
-      cultivos.girasol = { metricas: { siembra: {
-        campana: m[3] || (pg.match(/(\d{4}\/\d{2})/) || [])[1] || null,
-        nacional: num(m[1]), areaMHa: numArea(m[2]), varSemanalPp: num(m[4]),
-        vsAnioAnteriorPp: vsAnioAnterior(pg), zonas: zonasEn(pg, ZONA_SIEMBRA),
-      } } };
-    }
+  const pg = parDe(/siembra de girasol/i);
+  const og = oraciones(pg).find((o) => /siembra de girasol (?:cubre|alcanza)/i.test(o)) || "";
+  const g1 = og.match(rx(String.raw`siembra de girasol (?:cubre|alcanza) el ` + N + String.raw`\s?% de las ([\d.,]+)\s?MHa[^.]*?progreso intersemanal de ` + N + String.raw`\s?` + PP));
+  const g2 = og.match(rx(String.raw`progreso intersemanal de ` + N + String.raw`\s?` + PP + String.raw`[.,]*\s*la siembra de girasol (?:cubre|alcanza) el ` + N + String.raw`\s?% de una superficie cuya proyección se ajusta a ([\d.,]+)\s?MHa`));
+  if (g1 || g2) {
+    cultivos.girasol = { metricas: { siembra: {
+      campana: (pg.match(/(\d{4}\/\d{2})/) || [])[1] || null,
+      nacional: num(g1 ? g1[1] : g2[2]), areaMHa: numArea(g1 ? g1[2] : g2[3]), varSemanalPp: num(g1 ? g1[3] : g2[1]),
+      vsAnioAnteriorPp: vsAnioAnterior(pg), zonas: zonasEn(pg, ZONA_SIEMBRA),
+    } } };
   }
   // TRIGO condición
-  const pt = bloque(body, /En cuanto al trigo/i) || body;
-  const tc = pt.match(/(\d+(?:,\d+)?)\s?% del área presenta condición de cultivo entre Normal a Excelente/i)
-    || body.match(/trigo[^.]*?condición de cultivo[^.]*?Normal (?:a|\/) Excelente en el (\d+(?:,\d+)?)\s?%/i);
+  const pt = parDe(/trigo/i);
+  const tc = pt.match(rx(N + String.raw`\s?% del área presenta condición de cultivo entre Normal a Excelente`))
+    || pt.match(rx(String.raw`condición de cultivo Normal (?:a|\/) Excelente en el ` + N + String.raw`\s?%`));
   if (tc) cultivos.trigo = { metricas: { condicion: { categoria: "Normal a Excelente", nacional: num(tc[1]), varSemanalPp: null, vsAnioAnteriorPp: null, zonas: {} } } };
   // CEBADA condición
-  const cb = body.match(/cebada[^]*?(\d+(?:,\d+)?)\s?% bajo una condición de cultivo (Normal a Buena|Normal a Excelente)/i);
+  const pc = parDe(/cebada/i);
+  const cb = pc.match(rx(N + String.raw`\s?% bajo una condición de cultivo (Normal a Buena|Normal a Excelente)`));
   if (cb) cultivos.cebada = { metricas: { condicion: { categoria: cb[2], nacional: num(cb[1]), varSemanalPp: null, vsAnioAnteriorPp: null, zonas: {} } } };
-  // SOJA siembra (sólo si el informe la menciona con número)
-  const sj = body.match(/siembra de soja[^.]*?(?:alcanza|cubre) el (\d+(?:,\d+)?)\s?%/i);
+  // SOJA siembra (sólo con número explícito)
+  const sj = cuerpo.match(/siembra de soja[^.]*?(?:alcanza|cubre) el (\d+(?:,\d+)?)\s?%/i);
   if (sj) cultivos.soja = { metricas: { siembra: { nacional: num(sj[1]), varSemanalPp: null, vsAnioAnteriorPp: null, zonas: {} } } };
 
   return { fecha, relevamientoAl, cultivos };

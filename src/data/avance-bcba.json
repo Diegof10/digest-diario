@@ -6,25 +6,22 @@
     "nota": "La BCBA no publica un shape de sus zonas PAS (sólo un mapa imagen en el informe). Zonas aproximadas disolviendo departamentos IGN según el mapa de zonas del PAS."
   },
   "estadoDescarga": {
-    "ok": false,
-    "intentoISO": "2026-09-25T09:20:00-03:00",
-    "detalle": "bolsadecereales.com responde 403 con desafío Cloudflare (Turnstile) a clientes automáticos; el PDF del 24/09 no se pudo descargar. Se usa el texto del PAS citado por prensa para las cifras nacionales."
+    "ok": true,
+    "intentoISO": "2026-09-25T12:58:09.115Z",
+    "detalle": "informe 2026-09-24 (manual)"
   },
   "informes": [
     {
       "fecha": "2026-09-24",
-      "relevamientoAl": null,
-      "origen": "prensa",
-      "origenNota": "Cifras nacionales tomadas del texto del PAS citado por TN e Infobae (24/09/2026). PDF oficial no accesible: sin datos por zona.",
+      "relevamientoAl": "2026-09-23",
+      "origen": "pdf",
+      "origenNota": "PDF oficial del PAS (descargado a mano del sitio de la BCBA). Zonas: sólo cifras por zona que el texto da con número; los gráficos regionales no se leen.",
       "publicado": {
-        "iso": null,
-        "texto": "jueves 24/09/2026 · hora oficial s/d; primera nota de prensa 16:56 ART (TN)"
+        "iso": "2026-09-24T17:54:12.000Z",
+        "texto": "jueves 24/09/2026 14:54 ART (creación del PDF)"
       },
       "urlInforme": "https://www.bolsadecereales.com/estimaciones-informes",
-      "respaldo": [
-        "https://tn.com.ar/campo/2026/09/24/el-trigo-resiste-al-mal-clima-afirman-que-mantiene-un-excelente-estado-pese-a-la-falta-de-lluvias-el-granizo-y-las-heladas/",
-        "https://www.infobae.com/revista-chacra/2026/09/24/el-trigo-desafia-al-clima/"
-      ],
+      "respaldo": [],
       "cultivos": {
         "maiz": {
           "metricas": {
@@ -33,8 +30,7 @@
               "nacional": 17.1,
               "areaMHa": 8.4,
               "varSemanalPp": 6,
-              "vsAnioAnteriorPp": null,
-              "notaVsAnioAnterior": "El informe dice «una mejora de alrededor de 5%» respecto de la campaña previa (valor aproximado: no se carga).",
+              "vsAnioAnteriorPp": 4.9,
               "zonas": {}
             },
             "cosecha": {
@@ -54,24 +50,27 @@
               "areaMHa": 3.1,
               "varSemanalPp": 4.8,
               "vsAnioAnteriorPp": null,
-              "notaVsAnioAnterior": "El informe compara contra el promedio de 5 campañas e histórico («adelanto de aproximadamente 10%»), no contra el año anterior.",
-              "zonas": {}
+              "zonas": {},
+              "notaVsAnioAnterior": "El informe compara contra el promedio histórico y de las últimas 5 campañas («adelanto de alrededor de 10 p.p.»), no contra el año anterior."
             }
           }
         },
         "trigo": {
           "metricas": {
             "condicion": {
-              "campana": "2026/27",
               "categoria": "Normal a Excelente",
               "nacional": 94.6,
               "varSemanalPp": null,
               "vsAnioAnteriorPp": null,
-              "zonas": {}
+              "zonas": {},
+              "campana": "2026/27"
             }
           }
         },
-        "soja": { "sinAvance": true, "metricas": {} }
+        "soja": {
+          "sinAvance": true,
+          "metricas": {}
+        }
       }
     },
     {
@@ -96,7 +95,9 @@
               "areaMHa": 8.4,
               "varSemanalPp": 5.6,
               "vsAnioAnteriorPp": null,
-              "zonas": { "VIII": 58.3 }
+              "zonas": {
+                "VIII": 58.3
+              }
             },
             "cosecha": {
               "campana": "2025/26",
@@ -115,7 +116,9 @@
               "areaMHa": 3,
               "varSemanalPp": 3.2,
               "vsAnioAnteriorPp": null,
-              "zonas": { "V": 73 }
+              "zonas": {
+                "V": 73
+              }
             }
           }
         },
@@ -142,7 +145,10 @@
             }
           }
         },
-        "soja": { "sinAvance": true, "metricas": {} }
+        "soja": {
+          "sinAvance": true,
+          "metricas": {}
+        }
       }
     }
   ]
