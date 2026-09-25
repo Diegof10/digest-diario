@@ -1,4 +1,5 @@
 import type { CostoInsumoSlot, EtiquetaDato } from "@/lib/types";
+import { frescuraCiclo } from "@/lib/habiles";
 
 /** SE Precios en Surtidor — Res. 314/2016 (retail pump, not canal Agro). */
 export const SE_SURTIDOR_CSV_URL =
@@ -315,6 +316,21 @@ async function fetchGasoilRetail(): Promise<GasoilParse> {
   }
 }
 
+/** Aplica frescura por ciclo: >1 ciclo viejo; >2 ciclos sin precio + nota. */
+function conFrescura(slot: CostoInsumoSlot, fechaIso: string | null, cicloDias: number): CostoInsumoSlot {
+  const est = frescuraCiclo(fechaIso, cicloDias);
+  const base = { ...slot, fechaIso, cicloDias, frescura: est };
+  if (est === "vencido" && fechaIso) {
+    return {
+      ...base,
+      valor: null,
+      etiqueta: "VACÍO",
+      nota: `sin dato fresco · última publicación ${fmtEsDate(fechaIso)}`,
+    };
+  }
+  return base;
+}
+
 function buildSlots(
   fert: InsumosSnapshot["fertilizantes"],
   gasoil: InsumoPricePoint | null,
@@ -328,7 +344,7 @@ function buildSlots(
   const glifoFecha = fmtEsDate(GLIFO_AS_OF);
   const glifoFuente = `${GLIFO_SOURCE_LABEL} · lista web`;
 
-  return [
+  const slots: CostoInsumoSlot[] = [
     {
       id: "urea",
       label: "Urea FCA",
@@ -386,6 +402,18 @@ function buildSlots(
       etiqueta: gasoil ? gasoil.etiqueta : "VACÍO",
     },
   ];
+  // Ciclos: fertilizantes mensual; glifosato y gasoil semanal.
+  const meta: Record<string, { fecha: string | null; ciclo: number }> = {
+    urea: { fecha: FERT_AS_OF, ciclo: 31 },
+    map: { fecha: FERT_AS_OF, ciclo: 31 },
+    dap: { fecha: FERT_AS_OF, ciclo: 31 },
+    glifosato: { fecha: GLIFO_AS_OF, ciclo: 7 },
+    gasoil: { fecha: gasoil?.asOf ? gasoil.asOf.slice(0, 10) : null, ciclo: 7 },
+  };
+  return slots.map((sl) => {
+    const m = meta[sl.id];
+    return m && sl.fecha ? conFrescura(sl, m.fecha, m.ciclo) : sl;
+  });
 }
 
 export async function getInsumos(): Promise<InsumosSnapshot> {
@@ -395,7 +423,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   const asOf = cordobaTodayYmd();
 
   const slots = buildSlots(fertilizantes, gas.point).filter(
-    (s) => Boolean(s.valor && s.fuente && s.fecha),
+    (s) => Boolean((s.valor || s.nota) && s.fuente && s.fecha),
   );
 
   const noteParts = [

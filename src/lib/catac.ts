@@ -19,14 +19,6 @@ function nowIso() {
   return new Date().toISOString();
 }
 
-function calendarYm(d = new Date()) {
-  // Cordoba ≈ UTC-3; usamos UTC-3 fijo para etiqueta de frescura
-  const local = new Date(d.getTime() - 3 * 60 * 60 * 1000);
-  const y = local.getUTCFullYear();
-  const m = String(local.getUTCMonth() + 1).padStart(2, "0");
-  return `${y}${m}`;
-}
-
 function lookupArs(tarifas: CatacTarifa[], km: number | null): number | null {
   if (km == null || !Number.isFinite(km) || tarifas.length === 0) return null;
   const k = Math.max(1, Math.min(999, Math.round(km)));
@@ -39,17 +31,18 @@ function fromFallback(
   note: string,
 ): CatacSnapshot {
   const f = fallback as FallbackShape;
-  const mesYm = f.mes.slice(0, 6);
-  const stale = mesYm < calendarYm();
+  // CATAC publica cuadros sin periodicidad fija: el último cuadro publicado sigue
+  // vigente hasta que salga uno nuevo → NO se marca viejo por calendario.
+  const vigenteDesde = `${f.mes.slice(0, 4)}-${f.mes.slice(4, 6)}-${f.mes.slice(6, 8)}`;
+  const dm = `${f.mes.slice(6, 8)}/${f.mes.slice(4, 6)}`;
   return {
     ok: f.tarifas.length > 0,
     mes: f.mes,
     mesLabel: f.mesLabel,
     mesShort: f.mesShort,
-    staleVsCalendar: stale,
-    statusLabel: stale
-      ? `último valor guardado (${f.mesShort})`
-      : `CATAC ${f.mesShort}`,
+    staleVsCalendar: false,
+    statusLabel: `Tarifa CATAC vigente desde ${dm} (último cuadro publicado)`,
+    vigenteDesde,
     pdfUrl: f.pdfUrl || PDF_ABRIL,
     mediaId: f.mediaId,
     tarifas: f.tarifas,
@@ -123,7 +116,6 @@ export async function getCatac(km: number | null = null): Promise<CatacSnapshot>
       pdfUrl: first.source_url || base.pdfUrl,
       mediaId: first.id,
       fuente: "live",
-      statusLabel: `último valor guardado (${base.mesShort})`,
     };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);

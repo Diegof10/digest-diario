@@ -26,6 +26,8 @@ export interface CatacSnapshot {
   parseNote: string;
   fetchedAt: string;
   fuente: "live" | "fallback" | "none";
+  /** Fecha de vigencia del último cuadro CATAC publicado (yyyy-mm-dd) */
+  vigenteDesde?: string | null;
 }
 
 export interface MercadoRow {
@@ -171,6 +173,13 @@ export interface CostoInsumoSlot {
   fecha: string | null;
   fuente: string | null;
   etiqueta: EtiquetaDato;
+  /** Fecha de publicación (yyyy-mm-dd) */
+  fechaIso?: string | null;
+  /** Ciclo de publicación en días (gasoil/glifosato 7, fertilizantes 31) */
+  cicloDias?: number | null;
+  frescura?: "fresco" | "viejo" | "vencido" | null;
+  /** Nota visible cuando no se muestra el precio (vencido) */
+  nota?: string | null;
 }
 
 export interface DigestSnapshot {

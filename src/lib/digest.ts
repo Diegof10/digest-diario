@@ -197,7 +197,7 @@ export async function assembleDigest(opts?: {
     mercado,
     catac,
     insumos: (insumosSnap?.slots ?? EMPTY_INSUMO_SLOTS).filter(
-      (s) => Boolean(s.valor && s.fuente && s.fecha),
+      (s) => Boolean((s.valor || s.nota) && s.fuente && s.fecha),
     ),
     fiscal,
     lectura,
