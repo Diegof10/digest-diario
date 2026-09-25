@@ -1,5 +1,6 @@
 import type { MercadoRow } from "@/lib/types";
 import { GrainIcon, grainFromText } from "@/components/ui/GrainIcon";
+import { pieFuente } from "@/lib/ticker";
 
 function label(r: MercadoRow): string {
   if (r.id.startsWith("chicago-") || r.id.startsWith("cbot-")) return `CBOT ${r.producto}`;
@@ -38,7 +39,7 @@ export default function TradingBoard({ rows }: { rows: Array<MercadoRow | undefi
               </div>
               <div className="font-mono text-[11px] tabular-nums">{r.valor ? <Var r={r} /> : null}</div>
               <div className="font-mono text-[9px] text-slate-500">
-                {r.valor ? [r.fuente, r.hora].filter(Boolean).join(" · ") || "sin fuente" : "sin fuente"}
+                {pieFuente(r)}
               </div>
             </div>
           );

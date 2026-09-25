@@ -25,13 +25,16 @@ function dmCorto(dd: string, mm: string): string {
 }
 
 /** row.hora "25/09, 08:09" (horaArg) → "demorado · 08:09" o "dd/m hh:mm" si no es de hoy */
-function cuandoDeHora(hora: string | null | undefined, prefijo: string): string | null {
+function cuandoDeHora(hora: string | null | undefined, prefijo: string, leido = false): string | null {
   const m = hora?.match(/(\d{1,2})\/(\d{1,2}),?\s*(\d{2}:\d{2})/);
   if (!m) return null;
   const [, dd, mm, hhmm] = m;
   const hoy = hoyArtIso();
   const esHoy = hoy.slice(5) === `${mm.padStart(2, "0")}-${dd.padStart(2, "0")}`;
-  return esHoy ? `${prefijo} · ${hhmm}` : `${prefijo} · ${dmCorto(dd, mm)} ${hhmm}`;
+  const t = esHoy ? hhmm : `${dmCorto(dd, mm)} ${hhmm}`;
+  // leido: la hora es la de lectura del feed, no la de la cotización
+  if (leido) return prefijo ? `${prefijo} · leído ${t}` : `leído ${t}`;
+  return `${prefijo} · ${t}`;
 }
 
 function isoDm(iso: string): string {
@@ -59,7 +62,7 @@ export function buildTicker(
   for (const id of ["chicago-soja", "chicago-maiz", "chicago-trigo"]) {
     const r = by(id);
     if (!r?.valor) continue;
-    const cuando = cuandoDeHora(r.hora, "demorado");
+    const cuando = cuandoDeHora(r.hora, "demorado", true);
     if (!cuando) continue;
     out.push({ id, label: `${r.producto} CBOT`, grano: grano(r), valor: r.valor, unidad: r.unidad, varPct: r.varPct ?? null, cuando });
   }
@@ -83,7 +86,7 @@ export function buildTicker(
   // Dólar BNA (feed, sin variación informada)
   const bna = by("fx-bna");
   if (bna?.valor) {
-    const cuando = cuandoDeHora(bna.hora, "leído");
+    const cuando = cuandoDeHora(bna.hora, "", true);
     if (cuando) out.push({ id: "fx-bna", label: "Dólar BNA", valor: bna.valor, unidad: null, varPct: null, cuando });
   }
 
@@ -108,4 +111,18 @@ export function buildTicker(
     if (cuando) out.push({ id: "wti", label: "WTI", valor: wti.valor, unidad: wti.unidad, varPct: wti.varPct ?? null, cuando });
   }
   return out;
+}
+
+/**
+ * Pie de fuente para el tablero de señales con el mismo criterio que la cinta:
+ * CBOT (hora de lectura del feed) → "demorado · leído hh:mm"; Matba (sólo fecha) → "dato d/m".
+ */
+export function pieFuente(r: MercadoRow): string {
+  if (!r.valor) return "sin fuente";
+  if (r.id.startsWith("chicago-") || r.id.startsWith("cbot-")) {
+    const c = cuandoDeHora(r.hora, "demorado", true);
+    return [r.fuente, c].filter(Boolean).join(" · ");
+  }
+  if (r.id.startsWith("matba-") && r.fecha) return [r.fuente, `dato ${isoDm(r.fecha)}`].filter(Boolean).join(" · ");
+  return [r.fuente, r.hora].filter(Boolean).join(" · ") || "sin fuente";
 }
