@@ -12,8 +12,9 @@ const CULTIVOS: { key: string; label: string }[] = [
   { key: "girasol", label: "Girasol" },
   { key: "trigo", label: "Trigo" },
   { key: "soja", label: "Soja" },
-  { key: "cebada", label: "Cebada" },
 ];
+// v1: maíz y girasol = siembra; trigo = condición; soja = sin avance (nunca 0%)
+const METRICAS_V1: Record<string, MetricaKey[]> = { maiz: ["siembra"], girasol: ["siembra"], trigo: ["condicion"], soja: ["siembra"] };
 const ORDEN_METRICA: MetricaKey[] = ["siembra", "cosecha", "condicion"];
 const METRICA_LABEL: Record<MetricaKey, string> = { siembra: "siembra", cosecha: "cosecha", condicion: "condición" };
 
@@ -33,7 +34,7 @@ const fechaCorta = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${is
 function metricasDe(inf: Informe, cultivo: string): MetricaKey[] {
   const c = inf.cultivos[cultivo];
   if (!c) return [];
-  return ORDEN_METRICA.filter((k) => c.metricas[k]?.nacional != null);
+  return ORDEN_METRICA.filter((k) => (METRICAS_V1[cultivo] ?? []).includes(k) && c.metricas[k]?.nacional != null);
 }
 
 function labelBoton(inf: Informe, cultivo: string): string {
