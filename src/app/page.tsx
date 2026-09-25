@@ -9,7 +9,6 @@ import { loadResumenMatutino } from "@/lib/resumen-matutino";
 import { parseTema } from "@/lib/tema";
 import { buildTicker } from "@/lib/ticker";
 import Ticker from "@/components/ui/Ticker";
-import LecturaCards from "@/components/ui/LecturaCards";
 import { buildLecturaCards } from "@/lib/lectura-cards";
 import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 
@@ -92,12 +91,9 @@ export default async function Home({
         <FiscalBlock fiscal={digest.fiscal} />
       </div>
 
-      <div className="mt-3">
-        <LecturaCards cards={lecturaCards} />
-      </div>
 
       <div className="mt-3">
-        <MorningBrief lines={digest.resumenMatutino} tema={tema} />
+        <MorningBrief lines={digest.resumenMatutino} tema={tema} cards={lecturaCards} />
       </div>
 
       <SiteFooter pie={digest.pie} />

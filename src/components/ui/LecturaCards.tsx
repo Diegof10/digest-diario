@@ -69,7 +69,7 @@ function Detalle({ card, id, className }: { card: LecturaCard; id: string; class
  * abre/cierra (button + aria-expanded); Esc cierra. En celular el detalle se abre en línea
  * a lo ancho de la grilla (2 columnas, sin scroll horizontal).
  */
-export default function LecturaCards({ cards }: { cards: LecturaCard[] }) {
+export default function LecturaCards({ cards, embedded = false }: { cards: LecturaCard[]; embedded?: boolean }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
   const btns = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -96,8 +96,11 @@ export default function LecturaCards({ cards }: { cards: LecturaCard[] }) {
   const canHover = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   return (
-    <section className="lectura-cards zona-oscura rounded p-2.5" aria-label="Lectura del día">
-      <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-orange-400">Lectura</h3>
+    <section
+      className={`lectura-cards ${embedded ? "" : "zona-oscura rounded p-2.5"}`}
+      aria-label="Lectura del día"
+    >
+      <h3 className="mb-1.5 text-[9px] font-bold uppercase tracking-[0.14em] text-orange-400">Lectura del día</h3>
       <div ref={root} className="grid grid-flow-row-dense grid-cols-2 gap-1.5 md:grid-cols-5">
         {cards.map((c, idx) => {
           const open = openId === c.id || hoverId === c.id;

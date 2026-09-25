@@ -1,6 +1,8 @@
 import { CROP_META, type CropKey } from "@/components/CropIcons";
 import { GRAIN_COLOR, GrainIcon } from "@/components/ui/GrainIcon";
 import type { Tema } from "@/lib/tema";
+import LecturaCards from "@/components/ui/LecturaCards";
+import type { LecturaCard } from "@/lib/lectura-cards";
 import {
   changeTone,
   parseResumenVisual,
@@ -89,7 +91,16 @@ function CropRow({
   );
 }
 
-export default function MorningBrief({ lines, tema = "base" }: { lines: string[]; tema?: Tema }) {
+export default function MorningBrief({
+  lines,
+  tema = "base",
+  cards = [],
+}: {
+  lines: string[];
+  tema?: Tema;
+  /** Tarjetas de lectura del día (armadas en el render; no dependen del texto del matutino) */
+  cards?: LecturaCard[];
+}) {
   const { plazas, extras } = parseResumenVisual(lines);
   const crops: CropKey[] = ["soja", "maiz", "trigo"];
 
@@ -111,6 +122,12 @@ export default function MorningBrief({ lines, tema = "base" }: { lines: string[]
       <p className="-mt-1 mb-1.5 text-[9px] opacity-50">
         AFA (pizarra AFA SCL) · CAC (Cámara Arbitral BCR): feed vivo, var vs cierre publicado anterior de la misma fuente.
       </p>
+
+      {cards.length > 0 ? (
+        <div className="mb-2.5">
+          <LecturaCards cards={cards} embedded />
+        </div>
+      ) : null}
 
       {grainPlazas.length > 0 ? (
         <>
