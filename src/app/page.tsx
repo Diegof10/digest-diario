@@ -1,8 +1,10 @@
+import ClimaVivo from "@/components/ClimaVivo";
 import CostsBlock from "@/components/CostsBlock";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
+import { getClimaVivo } from "@/lib/clima-vivo";
 import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +21,7 @@ export default async function Home({
       ? Number(kmRaw)
       : DEFAULT_KM;
 
-  const digest = await assembleDigest({ km });
+  const [digest, climaVivo] = await Promise.all([assembleDigest({ km }), getClimaVivo()]);
 
   return (
     <main className="mx-auto w-full max-w-5xl px-2 py-3 sm:px-4 sm:py-5">
@@ -62,6 +64,8 @@ export default async function Home({
           </div>
         </div>
       </header>
+
+      <ClimaVivo clima={climaVivo} />
 
       <MarketBoard mercado={digest.mercado} />
 
