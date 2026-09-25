@@ -9,6 +9,7 @@ import { loadResumenMatutino } from "@/lib/resumen-matutino";
 import { parseTema } from "@/lib/tema";
 import { buildTicker } from "@/lib/ticker";
 import Ticker from "@/components/ui/Ticker";
+import { buildLecturaCards } from "@/lib/lectura-cards";
 import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +32,7 @@ export default async function Home({
     getClimaVivo(),
     tema !== "base" ? loadResumenMatutino() : Promise.resolve(null),
   ]);
+  const lecturaCards = await buildLecturaCards(digest.mercado, digest.fiscal, climaVivo);
   const ticker = tema !== "base" ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null) : [];
 
   return (
@@ -89,19 +91,9 @@ export default async function Home({
         <FiscalBlock fiscal={digest.fiscal} />
       </div>
 
-      <section className="digest-panel mt-3">
-        <h3 className="digest-panel-title">Lectura</h3>
-        <ul className="space-y-1 text-[12px] leading-snug">
-          {digest.lectura.map((l, i) => (
-            <li key={i} className={l === "—" ? "opacity-40" : ""}>
-              {l}
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <div className="mt-3">
-        <MorningBrief lines={digest.resumenMatutino} tema={tema} />
+        <MorningBrief lines={digest.resumenMatutino} tema={tema} cards={lecturaCards} />
       </div>
 
       <SiteFooter pie={digest.pie} />
