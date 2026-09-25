@@ -4,7 +4,7 @@ import {
   climaResumen,
   getClima,
 } from "@/lib/clima";
-import { frescura, hoyArtIso, isoToDmy } from "@/lib/habiles";
+import { frescura, hoyArtIso, isoToDmy, REGLAS } from "@/lib/habiles";
 import { getNoticias } from "@/lib/noticias";
 import {
   fmtPrecio,
@@ -585,7 +585,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
   const rows: MercadoRow[] = [];
   for (const g of p.granos) {
     const fechaLabel = isoToDmy(g.fecha);
-    const est = frescura(g.fecha);
+    const est = frescura(g.fecha, REGLAS[p.id]);
     const base: MercadoRow = {
       id: `${p.id}-${g.grano}`,
       mercado: p.nombre,

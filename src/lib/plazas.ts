@@ -4,6 +4,7 @@ import {
   habilAnterior,
   hoyArtIso,
   isoToDm,
+  REGLAS,
   type Frescura,
 } from "@/lib/habiles";
 import {
@@ -289,7 +290,7 @@ async function getCac(
     });
     if (granos.length === 0) return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, "CAC: sin precios parseables");
     const fecha = granos.map((x) => x.fecha).sort().pop()!;
-    return { ...base, fecha, frescura: frescura(fecha, hoy), granos, error: null };
+    return { ...base, fecha, frescura: frescura(fecha, REGLAS.cac), granos, error: null };
   } catch (err) {
     return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `CAC: ${err instanceof Error ? err.message : String(err)}`);
   }
@@ -363,7 +364,7 @@ async function getAfa(
     });
     if (granos.length === 0) return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, "AFA: sin precios parseables");
     const fecha = granos.map((x) => x.fecha).sort().pop()!;
-    return { ...base, fecha, frescura: frescura(fecha, hoy), granos, error: null };
+    return { ...base, fecha, frescura: frescura(fecha, REGLAS.afa), granos, error: null };
   } catch (err) {
     return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `AFA: ${err instanceof Error ? err.message : String(err)}`);
   }
@@ -431,7 +432,7 @@ async function getFob(hoy: string, o: FetchOpts, serie: SerieFile): Promise<Plaz
       const prev = pv != null ? { valor: pv, fecha: ant!.fecha } : previoEnSerie(serie, "fob.usd", g, ult.fecha);
       granos.push({ grano: g, valor: v, unidad: "US$/t", fecha: ult.fecha, prev, ...varDe(v, prev) });
     }
-    return { ...base, fecha: ult.fecha, frescura: frescura(ult.fecha, hoy), granos, error: null };
+    return { ...base, fecha: ult.fecha, frescura: frescura(ult.fecha, REGLAS.fob), granos, error: null };
   } catch (err) {
     return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `MAGYP FOB: ${err instanceof Error ? err.message : String(err)}`);
   }
