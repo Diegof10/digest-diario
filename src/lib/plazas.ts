@@ -13,7 +13,7 @@ import {
   valorEnSerie,
   type SerieFile,
 } from "@/lib/serie-blob";
-import { getAca, type AcaSnapshot } from "@/lib/aca";
+import { ACA_URL, disponiblePesos, fetchAcaItems } from "@/lib/aca";
 
 /**
  * Plazas físicas — UNA fuente por plaza, fetch server-side directo:
@@ -21,8 +21,8 @@ import { getAca, type AcaSnapshot } from "@/lib/aca";
  *      https://www.cac.bcr.com.ar/es/precios-de-pizarra (+ /consultas para el cierre previo)
  *  - AFA San Martín: pizarra diaria AFA SCL (AFA Diario · Mercados en línea
  *      + Comparativo Pizarra para el cierre previo)
- *  - ACA (Asociación de Cooperativas Argentinas): físico por puerto, posición disponible
- *      en $/t (src/lib/aca.ts). FOB Up River (MAGYP) retirado 25/9 por pedido de Diego.
+ *  - ACA Timbúes: físico ACA, sólo posición disponible en $/t (src/lib/aca.ts);
+ *      sin disponible en $ → "sin referencia". FOB Up River (MAGYP) retirado 25/9.
  * Var diaria = último cierre publicado vs cierre publicado anterior de la MISMA fuente.
  * Sin cierre previo → var null. Nunca se inventan precios ni variaciones.
  */
@@ -43,10 +43,12 @@ export interface CotizacionGrano {
   /** Conversión a US$ (sólo plazas en ARS) con BNA divisa comprador de la fecha del dato */
   usd?: number | null;
   tc?: { valor: number; fecha: string; fuente: string } | null;
+  /** Hora de publicación de la fuente (hh:mm ART), si la informa (ACA) */
+  hora?: string | null;
 }
 
 export interface PlazaSnapshot {
-  id: "cac" | "afa";
+  id: "cac" | "afa" | "aca";
   nombre: string;
   lugar: string;
   fuente: string;
@@ -60,8 +62,8 @@ export interface PlazaSnapshot {
 export interface PlazasSnapshot {
   cac: PlazaSnapshot;
   afa: PlazaSnapshot;
-  /** ACA · físico por puerto, sólo disponible en $/t */
-  aca: AcaSnapshot;
+  /** ACA Timbúes · sólo disponible en $/t */
+  aca: PlazaSnapshot;
   fxBnaDivisa: { valor: number; fecha: string; fuente: string } | null;
   persistencia: { written: boolean; error: string | null; updatedAt: string | null };
   fetchedAt: string;
@@ -363,6 +365,43 @@ async function getAfa(
   }
 }
 
+/* ---------------------------- ACA Timbúes --------------------------- */
+
+const ACA_GRANO: Record<Grano, string> = { soja: "SOJA", maiz: "MAIZ", trigo: "TRIGO" };
+
+async function getAcaTimbues(
+  o: FetchOpts,
+  serie: SerieFile,
+  fx: (fecha: string) => { valor: number; fecha: string; fuente: string } | null,
+): Promise<PlazaSnapshot> {
+  const base = {
+    id: "aca" as const,
+    nombre: "ACA Timbúes",
+    lugar: "Timbúes",
+    fuente: "ACA · físico disponible",
+    url: ACA_URL,
+  };
+  try {
+    const items = await fetchAcaItems(o);
+    const granos: CotizacionGrano[] = [];
+    for (const g of GRANOS) {
+      const d = disponiblePesos(items, "TIMBUES", ACA_GRANO[g]);
+      if (!d) continue; // sin disponible en $ → "sin referencia" (nunca otra posición)
+      const prev = previoEnSerie(serie, "aca.ars", `${g}-timbues`, d.fecha);
+      const t = fx(d.fecha);
+      const usd = t ? Math.round((d.valor / t.valor) * 100) / 100 : null;
+      granos.push({ grano: g, valor: d.valor, unidad: "ARS/t", fecha: d.fecha, prev, ...varDe(d.valor, prev), usd, tc: t, hora: d.hora });
+    }
+    if (granos.length === 0) {
+      return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, "ACA: Timbúes sin disponible en $/t");
+    }
+    const fecha = granos.map((x) => x.fecha).sort().pop()!;
+    return { ...base, fecha, frescura: frescura(fecha, REGLAS.aca), granos, error: null };
+  } catch (err) {
+    return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `ACA no disponible: ${err instanceof Error ? err.message : String(err)}`);
+  }
+}
+
 /* ------------------------------ Público ----------------------------- */
 
 export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {}): Promise<PlazasSnapshot> {
@@ -380,22 +419,21 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
   // TC de la CAC (BNA divisa comprador de su fecha) también sirve para AFA de esa fecha.
   const cacTc = cac.granos.find((g) => g.tc?.fuente.includes("CAC"))?.tc ?? null;
   const fx2 = (fecha: string) => fx(fecha) ?? (cacTc && cacTc.fecha === fecha ? cacTc : null);
-  const [afa, aca] = await Promise.all([getAfa(hoy, o, serie, fx2), getAca(o)]);
+  const [afa, aca] = await Promise.all([getAfa(hoy, o, serie, fx2), getAcaTimbues(o, serie, fx2)]);
 
   let persistencia: PlazasSnapshot["persistencia"] = { written: false, error: null, updatedAt: serie.updatedAt };
   if (opts.persist !== false) {
     const puntos: Array<{ serie: string; grano: string; fecha: string; valor: number }> = [];
-    for (const [p, serieId] of [[cac, "cac.ars"], [afa, "afa.ars"]] as const) {
+    for (const [p, serieId] of [[cac, "cac.ars"], [afa, "afa.ars"], [aca, "aca.ars"]] as const) {
       for (const g of p.granos) {
-        puntos.push({ serie: serieId, grano: g.grano, fecha: g.fecha, valor: g.valor });
-        if (g.prev) puntos.push({ serie: serieId, grano: g.grano, fecha: g.prev.fecha, valor: g.prev.valor });
+        // ACA: clave "<grano>-timbues" dentro de aca.ars
+        const gk = p.id === "aca" ? `${g.grano}-timbues` : g.grano;
+        puntos.push({ serie: serieId, grano: gk, fecha: g.fecha, valor: g.valor });
+        if (g.prev) puntos.push({ serie: serieId, grano: gk, fecha: g.prev.fecha, valor: g.prev.valor });
         if (p.id === "cac" && g.usd != null && g.tc?.fuente.includes("CAC")) {
           puntos.push({ serie: "cac.usd", grano: g.grano, fecha: g.fecha, valor: g.usd });
         }
       }
-    }
-    for (const f of aca.filas) {
-      if (f.valor != null && f.fechaPub) puntos.push({ serie: "aca.ars", grano: f.key, fecha: f.fechaPub, valor: f.valor });
     }
     if (bna) puntos.push({ serie: "fx.bna", grano: "usd", fecha: bna.fecha, valor: bna.valor });
     if (cacTc) puntos.push({ serie: "fx.bna", grano: "usd", fecha: cacTc.fecha, valor: cacTc.valor });

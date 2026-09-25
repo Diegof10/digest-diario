@@ -31,20 +31,12 @@ export async function GET(req: NextRequest) {
   const snap = await assembleDigest({ km, fresh: true });
   const p = snap.mercado.plazas;
   const resumen = p
-    ? {
-        ...Object.fromEntries(
-          (["cac", "afa"] as const).map((k) => [
-            k,
-            { fecha: p[k].fecha, frescura: p[k].frescura, granos: p[k].granos.length, error: p[k].error },
-          ]),
-        ),
-        aca: {
-          ok: p.aca.ok,
-          filas: p.aca.filas.length,
-          conPrecio: p.aca.filas.filter((f) => f.valor != null).length,
-          error: p.aca.error,
-        },
-      }
+    ? Object.fromEntries(
+        (["cac", "afa", "aca"] as const).map((k) => [
+          k,
+          { fecha: p[k].fecha, frescura: p[k].frescura, granos: p[k].granos.length, error: p[k].error },
+        ]),
+      )
     : null;
   const ms = Date.now() - started;
   await appendCronLog({

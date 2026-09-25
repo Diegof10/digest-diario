@@ -593,7 +593,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
       valor: null,
       unidad: g.unidad === "ARS/t" ? "ARS/t" : "US$/t",
       fuente: p.fuente,
-      hora: fechaLabel,
+      hora: g.hora ? `${fechaLabel} ${g.hora}` : fechaLabel,
       etiqueta: "HECHO",
       varPct: null,
       senal: null,
@@ -612,7 +612,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         ...base,
         unidad: null,
         etiqueta: "VACÍO",
-        extra: `sin dato fresco · última fuente ${fechaLabel}`,
+        extra: p.id === "aca" ? "sin referencia" : `sin dato fresco · última fuente ${fechaLabel}`,
       });
       continue;
     }
@@ -638,15 +638,44 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         : null,
     });
   }
+  // ACA: grano sin disponible en $/t → celda "sin referencia" (nunca otra posición).
+  if (p.id === "aca") {
+    const hora = p.granos[0] ? rows[0]?.hora ?? null : null;
+    for (const g of ["soja", "maiz", "trigo"] as const) {
+      if (rows.some((r) => r.id === `aca-${g}`)) continue;
+      rows.push({
+        id: `aca-${g}`,
+        mercado: p.nombre,
+        producto: GRANO_LABEL[g],
+        valor: null,
+        unidad: null,
+        fuente: p.fuente,
+        hora,
+        etiqueta: "VACÍO",
+        varPct: null,
+        senal: null,
+        extra: p.error && p.granos.length === 0 ? `sin referencia · ${p.error}` : "sin referencia",
+        contrato: null,
+        url: p.url,
+        fecha: null,
+        frescura: null,
+        varAbs: null,
+        valorUsd: null,
+        tc: null,
+        prevFecha: null,
+      } as MercadoRow);
+    }
+  }
   return rows;
 }
 
 function applyPlazas(snap: MercadoSnapshot, plazas: PlazasSnapshot | null): MercadoSnapshot {
-  const rest = snap.rows.filter((r) => !/^(cac|afa|fob)-/.test(r.id));
+  const rest = snap.rows.filter((r) => !/^(cac|afa|aca|fob)-/.test(r.id));
   if (!plazas) return { ...snap, rows: rest, plazas: null };
   const rows = [
     ...plazaRows(plazas.cac),
     ...plazaRows(plazas.afa),
+    ...plazaRows(plazas.aca),
     ...rest,
   ];
   return {
