@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { assembleDigest, DEFAULT_KM } from "@/lib/digest";
+import { appendCronLog } from "@/lib/serie-blob";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -37,8 +38,16 @@ export async function GET(req: NextRequest) {
         ]),
       )
     : null;
+  const ms = Date.now() - started;
+  await appendCronLog({
+    at: new Date().toISOString(),
+    ms,
+    userAgent: req.headers.get("user-agent"),
+    plazas: resumen,
+    blobWritten: Boolean(p?.persistencia.written),
+  }).catch(() => {});
   console.log(
-    `[cron/digest] ok ${Date.now() - started}ms plazas=${JSON.stringify(resumen)} blob=${JSON.stringify(p?.persistencia ?? null)}`,
+    `[cron/digest] ok ${ms}ms plazas=${JSON.stringify(resumen)} blob=${JSON.stringify(p?.persistencia ?? null)}`,
   );
   return NextResponse.json({
     ok: true,

@@ -134,3 +134,49 @@ export function valorEnSerie(
   const v = file.series[serie]?.[grano]?.[fecha];
   return v != null && Number.isFinite(v) ? v : null;
 }
+
+/* ------------------------- Registro de corridas del cron ------------------------- */
+
+const CRON_LOG = "series/cron-log.json";
+
+export interface CronRun {
+  at: string;
+  ms: number;
+  userAgent: string | null;
+  plazas: unknown;
+  blobWritten: boolean;
+}
+
+export async function readCronLog(): Promise<CronRun[]> {
+  if (!blobConfigured()) return [];
+  const order: Access[] = accessOk ? [accessOk] : ["private", "public"];
+  for (const access of order) {
+    try {
+      const res = await get(CRON_LOG, { access, useCache: false });
+      accessOk = access;
+      if (!res || res.statusCode !== 200) return [];
+      const arr = JSON.parse(await streamToText(res.stream)) as CronRun[];
+      return Array.isArray(arr) ? arr : [];
+    } catch (err) {
+      lastError = `cronlog(${access}): ${err instanceof Error ? err.message : String(err)}`;
+    }
+  }
+  return [];
+}
+
+export async function appendCronLog(run: CronRun): Promise<void> {
+  if (!blobConfigured()) return;
+  const runs = [run, ...(await readCronLog())].slice(0, 40);
+  const access: Access = accessOk ?? "private";
+  try {
+    await put(CRON_LOG, JSON.stringify(runs), {
+      access,
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: "application/json",
+      cacheControlMaxAge: 60,
+    });
+  } catch (err) {
+    lastError = `cronlog write: ${err instanceof Error ? err.message : String(err)}`;
+  }
+}
