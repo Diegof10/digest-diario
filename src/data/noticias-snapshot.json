@@ -7,24 +7,26 @@
   "note": "Búsqueda web ES/EN/PT últimas 48 h · 25/09 07:45 ARG",
   "items": [
     {
-      "title": "Trump and Xi meet as farmers press for concrete trade actions",
-      "source": "Agri-Pulse",
+      "title": "Trump y Xi se reúnen mientras los productores reclaman medidas comerciales concretas",
+      "source": "Agri-Pulse · traducido del inglés",
       "handle": "Agri-Pulse",
-      "text": "Trump and Xi meet as farmers press for concrete trade actions",
+      "text": "Trump y Xi se reúnen mientras los productores reclaman medidas comerciales concretas",
       "url": "https://www.agri-pulse.com/articles/25294-trump-and-xi-meet-as-farmers-press-for-concrete-trade-actions",
       "publishedAt": "2026-09-24T15:45:00.000Z",
       "publishedAtArg": "24/09 12:45",
-      "rank": 1
+      "rank": 1,
+      "titleOriginal": "Trump and Xi meet as farmers press for concrete trade actions"
     },
     {
-      "title": "China freia compras de soja brasileira à espera de negociação com os EUA, dizem fontes",
-      "source": "Bloomberg Línea",
+      "title": "China frena las compras de soja brasileña a la espera de negociar con EE. UU., según fuentes",
+      "source": "Bloomberg Línea · traducido del portugués",
       "handle": "Bloomberg Línea",
-      "text": "China freia compras de soja brasileira à espera de negociação com os EUA, dizem fontes",
+      "text": "China frena las compras de soja brasileña a la espera de negociar con EE. UU., según fuentes",
       "url": "https://www.bloomberglinea.com.br/agro/china-freia-compras-de-soja-brasileira-a-espera-de-negociacao-com-os-eua-dizem-fontes/",
       "publishedAt": "2026-09-24T12:45:00.000Z",
       "publishedAtArg": "24/09 09:45",
-      "rank": 2
+      "rank": 2,
+      "titleOriginal": "China freia compras de soja brasileira à espera de negociação com os EUA, dizem fontes"
     },
     {
       "title": "El Gobierno Nacional y la Mesa de Enlace coordinan medidas frente al fenómeno de El Niño",
@@ -58,15 +60,51 @@
     }
   ],
   "descartadas": [
-    { "motivo": "precio", "fuente": "@BCRmercados", "item": "Chicago 24/9 bajista (comentario cierre)" },
-    { "motivo": "precio", "fuente": "@BCRmercados", "item": "Rosario 24/9: maíz/soja mejoran, trigo quieto" },
-    { "motivo": "precio", "fuente": "@USDA_AMS", "item": "CBOT daily futures 24/9 (ZC/ZS/ZW)" },
-    { "motivo": "precio", "fuente": "@a3mercados", "item": "A3 24/9 soja Nov / maíz Dic / trigo Nov" },
-    { "motivo": "precio", "fuente": "@infocampoweb", "item": "BNA / A3500 tipo de cambio 24/9" },
-    { "motivo": "vieja", "fuente": "InfoMoney/Reuters", "item": "Abiove reduz previsão de exportação de soja (18/9)" },
-    { "motivo": "vieja", "fuente": "Clarín Rural", "item": "Chicharrita: 50° informe Red de Monitoreo (≈22/9)" },
-    { "motivo": "duplicado", "fuente": "La Nación Campo / Infocampo / TN", "item": "Plan Súper Niño (se deja la fuente oficial)" },
-    { "motivo": "duplicado", "fuente": "Reuters / Brownfield / IndexBox", "item": "Tregua EE.UU.-China, venta flash USDA 120.000 t a China" }
+    {
+      "motivo": "precio",
+      "fuente": "@BCRmercados",
+      "item": "Chicago 24/9 bajista (comentario cierre)"
+    },
+    {
+      "motivo": "precio",
+      "fuente": "@BCRmercados",
+      "item": "Rosario 24/9: maíz/soja mejoran, trigo quieto"
+    },
+    {
+      "motivo": "precio",
+      "fuente": "@USDA_AMS",
+      "item": "CBOT daily futures 24/9 (ZC/ZS/ZW)"
+    },
+    {
+      "motivo": "precio",
+      "fuente": "@a3mercados",
+      "item": "A3 24/9 soja Nov / maíz Dic / trigo Nov"
+    },
+    {
+      "motivo": "precio",
+      "fuente": "@infocampoweb",
+      "item": "BNA / A3500 tipo de cambio 24/9"
+    },
+    {
+      "motivo": "vieja",
+      "fuente": "InfoMoney/Reuters",
+      "item": "Abiove reduz previsão de exportação de soja (18/9)"
+    },
+    {
+      "motivo": "vieja",
+      "fuente": "Clarín Rural",
+      "item": "Chicharrita: 50° informe Red de Monitoreo (≈22/9)"
+    },
+    {
+      "motivo": "duplicado",
+      "fuente": "La Nación Campo / Infocampo / TN",
+      "item": "Plan Súper Niño (se deja la fuente oficial)"
+    },
+    {
+      "motivo": "duplicado",
+      "fuente": "Reuters / Brownfield / IndexBox",
+      "item": "Tregua EE.UU.-China, venta flash USDA 120.000 t a China"
+    }
   ],
   "updatedAt": "2026-09-25T10:45:00.000Z",
   "updatedBy": "búsqueda web manual (criterio eventos, sin precios)"
