@@ -1,4 +1,6 @@
 import { CROP_META, type CropKey } from "@/components/CropIcons";
+import { GRAIN_COLOR, GrainIcon } from "@/components/ui/GrainIcon";
+import type { Tema } from "@/lib/tema";
 import {
   changeTone,
   parseResumenVisual,
@@ -45,13 +47,18 @@ function CropRow({
   crop,
   byPlaza,
   plazas,
+  tema = "base",
 }: {
   crop: CropKey;
   byPlaza: Record<string, CropQuote | undefined>;
   plazas: PlazaBlock[];
+  tema?: Tema;
 }) {
-  const meta = CROP_META[crop];
-  const Icon = meta.Icon;
+  const ui = tema !== "base";
+  const meta = ui ? { ...CROP_META[crop], color: GRAIN_COLOR[crop] } : CROP_META[crop];
+  const Icon = ui
+    ? ({ className }: { className?: string; color?: string }) => <GrainIcon grano={crop} className={className} />
+    : meta.Icon;
   return (
     <div className="flex items-stretch gap-2 border-b border-slate-100 py-2 last:border-0 sm:gap-3">
       <div
@@ -82,7 +89,7 @@ function CropRow({
   );
 }
 
-export default function MorningBrief({ lines }: { lines: string[] }) {
+export default function MorningBrief({ lines, tema = "base" }: { lines: string[]; tema?: Tema }) {
   const { plazas, extras } = parseResumenVisual(lines);
   const crops: CropKey[] = ["soja", "maiz", "trigo"];
 
@@ -141,6 +148,7 @@ export default function MorningBrief({ lines }: { lines: string[] }) {
                   crop={crop}
                   byPlaza={byPlaza}
                   plazas={grainPlazas}
+                  tema={tema}
                 />
               );
             })}

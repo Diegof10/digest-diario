@@ -21,6 +21,8 @@ export interface ClimaCiudad {
   nombre: string;
   tempC: number | null;
   condicion: string | null;
+  /** weather_code WMO (sólo para elegir el ícono) */
+  code: number | null;
   vientoKmh: number | null;
   vientoDir: string | null;
   /** current.time de Open-Meteo, hora local ART "yyyy-mm-ddThh:mm" */
@@ -88,6 +90,7 @@ export async function getClimaVivo(): Promise<ClimaVivoSnapshot> {
       nombre: c.nombre,
       tempC: null,
       condicion: null,
+      code: null,
       vientoKmh: null,
       vientoDir: null,
       horaDato: null,
@@ -116,15 +119,16 @@ export async function getClimaVivo(): Promise<ClimaVivoSnapshot> {
       const time = cur?.time ?? null;
       const base = { id: c.id, nombre: c.nombre, horaDato: time };
       if (typeof temp !== "number" || !Number.isFinite(temp) || !time) {
-        return { ...base, tempC: null, condicion: null, vientoKmh: null, vientoDir: null, error: "respuesta sin dato" };
+        return { ...base, tempC: null, condicion: null, code: null, vientoKmh: null, vientoDir: null, error: "respuesta sin dato" };
       }
       if (now - artToDate(time).getTime() > 2 * 3600_000) {
-        return { ...base, tempC: null, condicion: null, vientoKmh: null, vientoDir: null, error: "dato de más de 2 h" };
+        return { ...base, tempC: null, condicion: null, code: null, vientoKmh: null, vientoDir: null, error: "dato de más de 2 h" };
       }
       return {
         ...base,
         tempC: temp,
         condicion: condicionWmo(cur?.weather_code),
+        code: typeof cur?.weather_code === "number" ? cur.weather_code : null,
         vientoKmh: typeof cur?.wind_speed_10m === "number" ? cur.wind_speed_10m : null,
         vientoDir: dirCardinal(cur?.wind_direction_10m),
         error: null,
