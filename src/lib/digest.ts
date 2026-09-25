@@ -79,7 +79,7 @@ function buildResumenFallback(parts: {
   return [
     `Resumen agrario · ${parts.fechaCorta}`,
     `Chicago: ${parts.chicago}`,
-    `CAC Rosario: ${parts.cac}`,
+    `Pizarra CAC Rosario (ARS/t): ${parts.cac}`,
     `Matba: ${parts.matba}`,
     `BNA: ${parts.bna}`,
     `Flete CATAC: ${parts.catacLine}`,
