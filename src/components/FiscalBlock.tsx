@@ -1,29 +1,55 @@
 import { isoToDmy } from "@/lib/habiles";
 import type { FiscalSnapshot } from "@/lib/types";
 
+const TZ = "America/Argentina/Cordoba";
+
+function partesArt(iso: string) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: TZ,
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date(iso));
+  const g = (t: string) => (parts.find((p) => p.type === t)?.value ?? "").padStart(2, "0");
+  return { dd: g("day"), mm: g("month"), yyyy: g("year"), hh: g("hour").replace(/^24$/, "00"), mi: g("minute") };
+}
+
+/** ISO → "DD/MM/AAAA HH:MM" en ART */
+function fechaHoraArt(iso: string): string {
+  const p = partesArt(iso);
+  return `${p.dd}/${p.mm}/${p.yyyy} ${p.hh}:${p.mi}`;
+}
+
+/** ISO o yyyy-mm-dd → "DD/MM" (ART) */
+function ddmm(s: string): string {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return isoToDmy(s).slice(0, 5);
+  const p = partesArt(s);
+  return `${p.dd}/${p.mm}`;
+}
+
 export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
-  const linea =
-    fiscal.lineaTablero?.trim() ||
-    fiscal.novedad?.trim() ||
-    "sin novedad fiscal";
+  const vigentes = fiscal.normasVigentes ?? [];
   const empty =
     !fiscal.ok ||
-    (linea === "sin novedad fiscal" &&
-      fiscal.novedades.length === 0 &&
-      fiscal.vencimientos.length === 0);
+    (fiscal.novedades.length === 0 && vigentes.length === 0 && fiscal.vencimientos.length === 0);
 
   return (
     <section className="digest-panel">
       <h3 className="digest-panel-title">Fiscal (ARCA / consejos)</h3>
 
       <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
-        Última revisión: {fiscal.ultimaRevision ? isoToDmy(fiscal.ultimaRevision) : "—"}
+        {fiscal.cronAt
+          ? `Última actualización (cron): ${fechaHoraArt(fiscal.cronAt)} ART`
+          : fiscal.cargaManual
+            ? `Última actualización: carga manual ${ddmm(fiscal.cargaManual)}`
+            : "Última actualización: —"}
       </p>
 
       {empty ? (
-        <p className="text-[12px] opacity-50">
-          sin novedad · {fiscal.hoy ? isoToDmy(fiscal.hoy) : "—"}
-        </p>
+        <p className="text-[12px] opacity-50">Sin novedad fiscal</p>
       ) : (
         <div className="flex flex-col gap-2">
           {fiscal.novedades.length > 0 ? (
@@ -40,10 +66,31 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
               ))}
             </ul>
           ) : (
-            <p className="text-[12px] leading-snug opacity-60">
-              sin novedad · {fiscal.hoy ? isoToDmy(fiscal.hoy) : "—"}
-            </p>
+            <p className="text-[12px] leading-snug opacity-60">Sin novedad fiscal</p>
           )}
+
+          {vigentes.length > 0 ? (
+            <p className="text-[10px] leading-snug opacity-70">
+              <span className="font-semibold">Normas vigentes:</span>{" "}
+              {vigentes.map((n, i) => {
+                const label = n.norma || n.texto.split(":")[0];
+                const bo = n.boFecha ? ` (BO ${isoToDmy(n.boFecha)})` : "";
+                return (
+                  <span key={i}>
+                    {i > 0 ? " · " : ""}
+                    {n.url ? (
+                      <a href={n.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">
+                        {label}
+                      </a>
+                    ) : (
+                      label
+                    )}
+                    {bo}
+                  </span>
+                );
+              })}
+            </p>
+          ) : null}
 
           {fiscal.vencimientos.length > 0 ? (
             <div className="border-t border-slate-100 pt-2">

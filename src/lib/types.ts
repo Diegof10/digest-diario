@@ -134,6 +134,12 @@ export interface MercadoSnapshot {
 export interface FiscalNovedad {
   texto: string;
   fuente: string | null;
+  /** "RG ARCA 5894/2026" (etiqueta corta para "Normas vigentes") */
+  norma?: string | null;
+  /** Fecha de publicación en el Boletín Oficial (yyyy-mm-dd) */
+  boFecha?: string | null;
+  /** Link oficial (BO / ARCA) */
+  url?: string | null;
 }
 
 export interface FiscalVencimiento {
@@ -165,6 +171,12 @@ export interface FiscalSnapshot {
   hoy?: string;
   /** Vencimientos ya pasados que se filtraron */
   vencidosOcultos?: number;
+  /** Normas publicadas en BO hace más de 7 días (ART): línea "Normas vigentes:" */
+  normasVigentes?: FiscalNovedad[];
+  /** Última corrida registrada del cron (ISO) o null */
+  cronAt?: string | null;
+  /** Fecha de carga manual del snapshot (ISO o yyyy-mm-dd), fallback si no hay cron */
+  cargaManual?: string | null;
 }
 
 export interface CostoInsumoSlot {

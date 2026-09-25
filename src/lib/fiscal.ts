@@ -1,6 +1,7 @@
 import { readFile } from "fs/promises";
 import path from "path";
-import { hoyArtIso } from "@/lib/habiles";
+import { dmyToIso, hoyArtIso } from "@/lib/habiles";
+import { readCronLog } from "@/lib/serie-blob";
 import type {
   FiscalNovedad,
   FiscalSnapshot,
@@ -71,15 +72,51 @@ function asList<T>(v: unknown): T[] {
   return Array.isArray(v) ? (v as T[]) : [];
 }
 
+/** Días de ventana para "Novedad": publicación en BO dentro de los últimos 7 días (ART). */
+export const NOVEDAD_DIAS = 7;
+
+function isoMenosDias(iso: string, n: number): string {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() - n);
+  return dt.toISOString().slice(0, 10);
+}
+
+/** Fecha BO: campo boFecha o "(BO dd/mm/aaaa)" en el texto. */
+function boFechaDe(n: FiscalNovedad): string | null {
+  if (n.boFecha && /^\d{4}-\d{2}-\d{2}$/.test(n.boFecha)) return n.boFecha;
+  return dmyToIso(n.texto.match(/BO\s+(\d{1,2}\/\d{1,2}\/\d{4})/i)?.[1]);
+}
+
+async function ultimaCorridaCron(): Promise<string | null> {
+  try {
+    const runs = await readCronLog();
+    const ats = runs.map((r) => r?.at).filter((a): a is string => typeof a === "string" && !Number.isNaN(Date.parse(a)));
+    return ats.sort().pop() ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export async function getFiscal(): Promise<FiscalSnapshot> {
   const fetchedAt = new Date().toISOString();
+  const cronAtP = ultimaCorridaCron();
   try {
     const raw = await readFile(snapshotPath(), "utf8");
     const data = JSON.parse(raw) as FiscalFile;
-    const novedades = asList<FiscalNovedad>(data.novedades).filter(
-      (n) => n && typeof n.texto === "string" && n.texto.trim(),
-    );
+    const todas = asList<FiscalNovedad>(data.novedades)
+      .filter((n) => n && typeof n.texto === "string" && n.texto.trim())
+      .map((n) => ({ ...n, boFecha: boFechaDe(n) }));
     const hoy = hoyArtIso();
+    const desde = isoMenosDias(hoy, NOVEDAD_DIAS);
+    // Novedad = sólo BO dentro de los últimos 7 días; el resto pasa a "Normas vigentes".
+    const novedades = todas.filter((n) => n.boFecha != null && n.boFecha >= desde && n.boFecha <= hoy);
+    const normasVigentes = todas.filter((n) => !novedades.includes(n));
+    const cronAt = await cronAtP;
+    const cargaManual =
+      (typeof data.actualizadoAt === "string" && data.actualizadoAt.trim()) ||
+      (typeof data.fecha === "string" && data.fecha.trim()) ||
+      null;
     const anio = (typeof data.fecha === "string" && data.fecha.slice(0, 4)) || hoy.slice(0, 4);
     const todos = asList<FiscalVencimiento>(data.vencimientos).filter(
       (v) => v && typeof v.concepto === "string" && v.concepto.trim(),
@@ -89,19 +126,13 @@ export async function getFiscal(): Promise<FiscalSnapshot> {
       .map((v) => ({ ...v, vence: venceDe(v, anio) }))
       .filter((v) => !v.vence || v.vence >= hoy);
     const vencidosOcultos = todos.length - vencimientos.length;
-    const linea =
-      (typeof data.lineaTablero === "string" && data.lineaTablero.trim()) ||
-      (typeof data.novedad === "string" && data.novedad.trim()) ||
-      "";
-
-    if (!linea && novedades.length === 0 && vencimientos.length === 0) {
-      return { ...EMPTY, fetchedAt, hoy };
+    if (todas.length === 0 && vencimientos.length === 0) {
+      return { ...EMPTY, fetchedAt, hoy, cronAt, cargaManual, normasVigentes: [] };
     }
 
-    const novedad =
-      linea ||
-      novedades.map((n) => n.texto).join(" · ") ||
-      "sin novedad fiscal";
+    // La línea libre del snapshot (lineaTablero) mezclaba normas viejas como "novedad":
+    // ahora la novedad sale sólo de los ítems con BO en los últimos 7 días.
+    const novedad = novedades.map((n) => n.texto).join(" · ") || "Sin novedad fiscal";
 
     return {
       ok: true,
@@ -132,8 +163,11 @@ export async function getFiscal(): Promise<FiscalSnapshot> {
           : null,
       hoy,
       vencidosOcultos,
+      normasVigentes,
+      cronAt,
+      cargaManual,
     };
   } catch {
-    return { ...EMPTY, fetchedAt, hoy: hoyArtIso() };
+    return { ...EMPTY, fetchedAt, hoy: hoyArtIso(), cronAt: await cronAtP, cargaManual: null, normasVigentes: [] };
   }
 }

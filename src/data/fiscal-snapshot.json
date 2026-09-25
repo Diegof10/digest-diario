@@ -5,11 +5,17 @@
   "novedades": [
     {
       "texto": "RG ARCA 5894/2026 (BO 01/09/2026): calendario SISA IP1/IP2 + reintegro retenciones IVA…",
-      "fuente": "BO + CPCE Córdoba 01/09/2026"
+      "fuente": "BO + CPCE Córdoba 01/09/2026",
+      "norma": "RG ARCA 5894/2026",
+      "boFecha": "2026-09-01",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/346725/20260901"
     },
     {
       "texto": "RG ARCA 5898/2026 (BO 21/09/2026): DJ Ganancias PH 2025 presentación hasta 13/10/2026; pago saldo 27/07/2026.",
-      "fuente": "BO"
+      "fuente": "BO",
+      "norma": "RG ARCA 5898/2026",
+      "boFecha": "2026-09-21",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/347746/20260921"
     }
   ],
   "vencimientos": [
