@@ -1,5 +1,6 @@
 import { readFile } from "fs/promises";
 import path from "path";
+import { hoyArtIso } from "@/lib/habiles";
 import type {
   FiscalNovedad,
   FiscalSnapshot,
@@ -53,6 +54,19 @@ function snapshotPath(): string {
   return path.join(process.cwd(), SNAPSHOT_REL);
 }
 
+/** Fecha fin de un vencimiento: campo `vence` o la mayor fecha dd/mm(/yyyy) de la ventana. */
+export function venceDe(v: FiscalVencimiento, anioDefault: string): string | null {
+  if (v.vence && /^\d{4}-\d{2}-\d{2}$/.test(v.vence)) return v.vence;
+  const fechas: string[] = [];
+  const re = /(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(v.ventana)) !== null) {
+    const y = m[3] ?? anioDefault;
+    fechas.push(`${y}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}`);
+  }
+  return fechas.sort().pop() ?? null;
+}
+
 function asList<T>(v: unknown): T[] {
   return Array.isArray(v) ? (v as T[]) : [];
 }
@@ -65,16 +79,23 @@ export async function getFiscal(): Promise<FiscalSnapshot> {
     const novedades = asList<FiscalNovedad>(data.novedades).filter(
       (n) => n && typeof n.texto === "string" && n.texto.trim(),
     );
-    const vencimientos = asList<FiscalVencimiento>(data.vencimientos).filter(
+    const hoy = hoyArtIso();
+    const anio = (typeof data.fecha === "string" && data.fecha.slice(0, 4)) || hoy.slice(0, 4);
+    const todos = asList<FiscalVencimiento>(data.vencimientos).filter(
       (v) => v && typeof v.concepto === "string" && v.concepto.trim(),
     );
+    // Filtra vencimientos cuya fecha fin ya pasó (ART).
+    const vencimientos = todos
+      .map((v) => ({ ...v, vence: venceDe(v, anio) }))
+      .filter((v) => !v.vence || v.vence >= hoy);
+    const vencidosOcultos = todos.length - vencimientos.length;
     const linea =
       (typeof data.lineaTablero === "string" && data.lineaTablero.trim()) ||
       (typeof data.novedad === "string" && data.novedad.trim()) ||
       "";
 
     if (!linea && novedades.length === 0 && vencimientos.length === 0) {
-      return { ...EMPTY, fetchedAt };
+      return { ...EMPTY, fetchedAt, hoy };
     }
 
     const novedad =
@@ -105,8 +126,14 @@ export async function getFiscal(): Promise<FiscalSnapshot> {
         typeof data.pie === "string" && data.pie.trim()
           ? data.pie.trim()
           : null,
+      ultimaRevision:
+        typeof data.fecha === "string" && data.fecha.trim()
+          ? data.fecha.trim()
+          : null,
+      hoy,
+      vencidosOcultos,
     };
   } catch {
-    return { ...EMPTY, fetchedAt };
+    return { ...EMPTY, fetchedAt, hoy: hoyArtIso() };
   }
 }

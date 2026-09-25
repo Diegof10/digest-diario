@@ -1,3 +1,4 @@
+import { isoToDmy } from "@/lib/habiles";
 import type { FiscalSnapshot } from "@/lib/types";
 
 export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
@@ -15,8 +16,14 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
     <section className="digest-panel">
       <h3 className="digest-panel-title">Fiscal (ARCA / consejos)</h3>
 
+      <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
+        Última revisión: {fiscal.ultimaRevision ? isoToDmy(fiscal.ultimaRevision) : "—"}
+      </p>
+
       {empty ? (
-        <p className="text-[12px] opacity-50">sin novedad fiscal</p>
+        <p className="text-[12px] opacity-50">
+          sin novedad · {fiscal.hoy ? isoToDmy(fiscal.hoy) : "—"}
+        </p>
       ) : (
         <div className="flex flex-col gap-2">
           {fiscal.novedades.length > 0 ? (
@@ -33,7 +40,9 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
               ))}
             </ul>
           ) : (
-            <p className="text-[12px] leading-snug">{linea}</p>
+            <p className="text-[12px] leading-snug opacity-60">
+              sin novedad · {fiscal.hoy ? isoToDmy(fiscal.hoy) : "—"}
+            </p>
           )}
 
           {fiscal.vencimientos.length > 0 ? (
@@ -55,10 +64,19 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
             </div>
           ) : null}
 
+          {fiscal.vencimientos.length === 0 ? (
+            <p className="border-t border-slate-100 pt-2 text-[11px] opacity-50">
+              sin vencimientos próximos cargados
+            </p>
+          ) : null}
+
           {fiscal.fuente ? (
             <p className="text-[9px] opacity-45">
               {fiscal.fuente}
-              {fiscal.fecha ? ` · ${fiscal.fecha}` : ""}
+              {fiscal.fecha ? ` · ${isoToDmy(fiscal.fecha)}` : ""}
+              {fiscal.vencidosOcultos
+                ? ` · ${fiscal.vencidosOcultos} vencimiento(s) ya pasado(s) oculto(s)`
+                : ""}
             </p>
           ) : null}
 
