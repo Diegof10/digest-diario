@@ -33,13 +33,13 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "US",
     countryLabel: "Estados Unidos",
     bullet:
-      "Sequía amplia al 15/9; outlook CPC a dic favorece mejora Este/Sur y persistencia Norte/Montañas (17/9).",
+      "Mapa USDM 22/9 (publicado 24/9): más sequía Sur/Planicies (D3–D4 TX–OK–AR); lluvias mejoran Medio Oeste. CPC a dic: mejora Este/Sur, persistencia Norte/Montañas (17/9).",
     fuente: "US Drought Monitor · NOAA CPC Seasonal Drought Outlook",
-    fecha: "15–17/9/2026",
+    fecha: "22–24/9/2026",
     url: "https://droughtmonitor.unl.edu/",
     secondaryUrl:
       "https://www.cpc.ncep.noaa.gov/products/expert_assessment/sdo_summary.php/",
-    secondaryNote: "CPC Seasonal Drought Outlook (17/9)",
+    secondaryNote: "CPC Seasonal Drought Outlook (17/9; próximo 15/10)",
   },
 ];
 
@@ -118,13 +118,13 @@ export async function getClima(): Promise<ClimaSnapshot> {
       return snapshotFromHecho(
         "HECHO",
         true,
-        "Fuentes climáticos alcanzables · snapshot HECHO aprobado (SMN / INMET 10/9 / USDM+CPC).",
+        "Fuentes climáticos alcanzables · snapshot HECHO aprobado (SMN ago-2026 / INMET 10/9 / USDM 22–24/9 · CPC 17/9).",
       );
     }
     return snapshotFromHecho(
       "ÚLTIMO_GUARDADO",
       false,
-      "último valor guardado — probe parcial/fallido; bullets HECHO aprobados (SMN ago-2026 · INMET 10/9 · USDM 15/9 · CPC 17/9).",
+      "último valor guardado — probe parcial/fallido; bullets HECHO aprobados (SMN ago-2026 · INMET 10/9 · USDM 22–24/9 · CPC 17/9).",
     );
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);

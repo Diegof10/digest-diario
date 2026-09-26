@@ -1,42 +1,30 @@
 {
-  "asOf": "2026-09-25T10:45:00.000Z",
-  "asOfArg": "25/09/2026, 07:45",
+  "asOf": "2026-09-26T10:05:00.000Z",
+  "asOfArg": "26/09/2026, 07:05",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT últimas 48 h · 25/09 07:45 ARG",
+  "note": "Búsqueda web ES/EN/PT últimas 48 h · 26/09 07:05 ARG",
   "items": [
     {
-      "title": "Trump y Xi se reúnen mientras los productores reclaman medidas comerciales concretas",
-      "source": "Agri-Pulse · traducido del inglés",
-      "handle": "Agri-Pulse",
-      "text": "Trump y Xi se reúnen mientras los productores reclaman medidas comerciales concretas",
-      "url": "https://www.agri-pulse.com/articles/25294-trump-and-xi-meet-as-farmers-press-for-concrete-trade-actions",
-      "publishedAt": "2026-09-24T15:45:00.000Z",
-      "publishedAtArg": "24/09 12:45",
-      "rank": 1,
-      "titleOriginal": "Trump and Xi meet as farmers press for concrete trade actions"
+      "title": "¡Apurate, Niño!: la primavera arrancó con el 70% de la zona núcleo entre sequía y escasez de agua",
+      "source": "Bichos de Campo (BCR/GEA)",
+      "handle": "Bichos de Campo",
+      "text": "¡Apurate, Niño!: la primavera arrancó con el 70% de la zona núcleo entre sequía y escasez de agua",
+      "url": "https://bichosdecampo.com/apurate-nino-la-primavera-arranco-con-el-70-de-la-zona-nucleo-entre-sequia-y-escasez-de-agua/",
+      "publishedAt": "2026-09-25T15:00:00.000Z",
+      "publishedAtArg": "25/09 12:00",
+      "rank": 1
     },
     {
-      "title": "China frena las compras de soja brasileña a la espera de negociar con EE. UU., según fuentes",
-      "source": "Bloomberg Línea · traducido del portugués",
-      "handle": "Bloomberg Línea",
-      "text": "China frena las compras de soja brasileña a la espera de negociar con EE. UU., según fuentes",
-      "url": "https://www.bloomberglinea.com.br/agro/china-freia-compras-de-soja-brasileira-a-espera-de-negociacao-com-os-eua-dizem-fontes/",
-      "publishedAt": "2026-09-24T12:45:00.000Z",
-      "publishedAtArg": "24/09 09:45",
-      "rank": 2,
-      "titleOriginal": "China freia compras de soja brasileira à espera de negociação com os EUA, dizem fontes"
-    },
-    {
-      "title": "El Gobierno Nacional y la Mesa de Enlace coordinan medidas frente al fenómeno de El Niño",
-      "source": "Argentina.gob.ar (SAGyP)",
-      "handle": "Argentina.gob.ar",
-      "text": "El Gobierno Nacional y la Mesa de Enlace coordinan medidas frente al fenómeno de El Niño",
-      "url": "https://www.argentina.gob.ar/noticias/el-gobierno-nacional-y-la-mesa-de-enlace-coordinan-medidas-frente-al-fenomeno-de-el-nino",
-      "publishedAt": "2026-09-23T18:55:23.000Z",
-      "publishedAtArg": "23/09 15:55",
-      "rank": 3
+      "title": "Con la cosecha ya fuera de su pico, se mantiene muy fuerte el ingreso de camiones a los puertos",
+      "source": "La Nación Campo",
+      "handle": "La Nación Campo",
+      "text": "Con la cosecha ya fuera de su pico, se mantiene muy fuerte el ingreso de camiones a los puertos",
+      "url": "https://www.lanacion.com.ar/economia/campo/con-la-cosecha-ya-fuera-de-su-pico-se-mantiene-muy-fuerte-el-ingreso-de-camiones-a-los-puertos-nid25092026/",
+      "publishedAt": "2026-09-26T08:24:00.000Z",
+      "publishedAtArg": "26/09 05:24",
+      "rank": 2
     },
     {
       "title": "El trigo resiste al mal clima: afirman que mantiene un “excelente estado” pese a la falta de lluvias, el granizo y las heladas",
@@ -46,66 +34,72 @@
       "url": "https://tn.com.ar/campo/2026/09/24/el-trigo-resiste-al-mal-clima-afirman-que-mantiene-un-excelente-estado-pese-a-la-falta-de-lluvias-el-granizo-y-las-heladas/",
       "publishedAt": "2026-09-24T19:56:00.000Z",
       "publishedAtArg": "24/09 16:56",
+      "rank": 3
+    },
+    {
+      "title": "China desploma sus compras de soja brasileña: pasan de 20 a menos de 5 cargas semanales",
+      "source": "Bloomberg Línea",
+      "handle": "Bloomberg Línea",
+      "text": "China desploma sus compras de soja brasileña: pasan de 20 a menos de 5 cargas semanales",
+      "url": "https://www.bloomberglinea.com/latinoamerica/brasil/china-desploma-sus-compras-de-soja-brasilena-pasan-de-20-a-menos-de-5-cargas-semanales/",
+      "publishedAt": "2026-09-24T18:01:00.000Z",
+      "publishedAtArg": "24/09 15:01",
       "rank": 4
     },
     {
-      "title": "Cosecha récord, logística al límite: a los puertos entran 10.000 camiones por día y se agota la capacidad",
-      "source": "Infocampo",
-      "handle": "Infocampo",
-      "text": "Cosecha récord, logística al límite: a los puertos entran 10.000 camiones por día y se agota la capacidad",
-      "url": "https://www.infocampo.com.ar/cosecha-record-logistica-al-limite-a-los-puertos-entran-10-000-camiones-por-dia-y-se-agota-la-capacidad/",
-      "publishedAt": "2026-09-24T20:15:22.000Z",
-      "publishedAtArg": "24/09 17:15",
-      "rank": 5
+      "title": "China debe gastar US$ 1.200 millones por semana para cumplir los compromisos agrícolas con EE. UU., según Basse",
+      "source": "Agri-Pulse · traducido del inglés",
+      "handle": "Agri-Pulse",
+      "text": "China debe gastar US$ 1.200 millones por semana para cumplir los compromisos agrícolas con EE. UU., según Basse",
+      "url": "https://www.agri-pulse.com/articles/25296-china-must-spend-12b-a-week-to-meet-us-ag-pledges-basse-says",
+      "publishedAt": "2026-09-24T20:57:00.000Z",
+      "publishedAtArg": "24/09 17:57",
+      "rank": 5,
+      "titleOriginal": "China must spend $1.2B weekly to meet US ag pledges, Basse says"
     }
   ],
   "descartadas": [
     {
       "motivo": "precio",
-      "fuente": "@BCRmercados",
-      "item": "Chicago 24/9 bajista (comentario cierre)"
-    },
-    {
-      "motivo": "precio",
-      "fuente": "@BCRmercados",
-      "item": "Rosario 24/9: maíz/soja mejoran, trigo quieto"
-    },
-    {
-      "motivo": "precio",
-      "fuente": "@USDA_AMS",
-      "item": "CBOT daily futures 24/9 (ZC/ZS/ZW)"
-    },
-    {
-      "motivo": "precio",
-      "fuente": "@a3mercados",
-      "item": "A3 24/9 soja Nov / maíz Dic / trigo Nov"
-    },
-    {
-      "motivo": "precio",
-      "fuente": "@infocampoweb",
-      "item": "BNA / A3500 tipo de cambio 24/9"
-    },
-    {
-      "motivo": "vieja",
-      "fuente": "InfoMoney/Reuters",
-      "item": "Abiove reduz previsão de exportação de soja (18/9)"
-    },
-    {
-      "motivo": "vieja",
-      "fuente": "Clarín Rural",
-      "item": "Chicharrita: 50° informe Red de Monitoreo (≈22/9)"
+      "fuente": "TN Campo",
+      "item": "Soja Rosario $565.000/t cierre 25/9"
     },
     {
       "motivo": "duplicado",
-      "fuente": "La Nación Campo / Infocampo / TN",
-      "item": "Plan Súper Niño (se deja la fuente oficial)"
+      "fuente": "Infocampo / Infobae",
+      "item": "Camiones a puertos / logística (se deja LN 26/9)"
     },
     {
       "motivo": "duplicado",
-      "fuente": "Reuters / Brownfield / IndexBox",
-      "item": "Tregua EE.UU.-China, venta flash USDA 120.000 t a China"
+      "fuente": "Bloomberg Línea BR / Briefs",
+      "item": "China frena soja Brasil (se deja Bloomberg Línea ES)"
+    },
+    {
+      "motivo": "duplicado",
+      "fuente": "Infobae Chacra 25/9",
+      "item": "Heladas/calor primavera (cubre Bichos sequía núcleo)"
+    },
+    {
+      "motivo": "vieja",
+      "fuente": "Argentina.gob.ar SAGyP",
+      "item": "Mesa de Enlace / El Niño (23/9, >48h)"
+    },
+    {
+      "motivo": "vieja",
+      "fuente": "CONAB",
+      "item": "Perspectivas safra 2026/27 366,6 Mt (18/9)"
+    },
+    {
+      "motivo": "vieja",
+      "fuente": "Infocampo / BCBA",
+      "item": "Precampaña maíz 8,4 Mha (≈25/8)"
+    },
+    {
+      "motivo": "opinion",
+      "fuente": "Agri-Pulse 25294",
+      "item": "Trump-Xi reunión sin hecho comercial nuevo (cubre pledges 25296)"
     }
   ],
-  "updatedAt": "2026-09-25T10:45:00.000Z",
+  "updatedAt": "2026-09-26T10:05:00.000Z",
   "updatedBy": "búsqueda web manual (criterio eventos, sin precios)"
 }
