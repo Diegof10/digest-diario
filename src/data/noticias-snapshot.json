@@ -1,105 +1,74 @@
 {
-  "asOf": "2026-09-26T10:05:00.000Z",
-  "asOfArg": "26/09/2026, 07:05",
+  "asOf": "2026-09-29T09:55:32.000Z",
+  "asOfArg": "29/09/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT últimas 48 h · 26/09 07:05 ARG",
+  "note": "Búsqueda web ES/EN/PT últimas 48 h · 29/09 06:55 ARG (corrida manual: rutinas 28/9 fallaron por infraestructura)",
   "items": [
     {
-      "title": "¡Apurate, Niño!: la primavera arrancó con el 70% de la zona núcleo entre sequía y escasez de agua",
-      "source": "Bichos de Campo (BCR/GEA)",
-      "handle": "Bichos de Campo",
-      "text": "¡Apurate, Niño!: la primavera arrancó con el 70% de la zona núcleo entre sequía y escasez de agua",
-      "url": "https://bichosdecampo.com/apurate-nino-la-primavera-arranco-con-el-70-de-la-zona-nucleo-entre-sequia-y-escasez-de-agua/",
-      "publishedAt": "2026-09-25T15:00:00.000Z",
-      "publishedAtArg": "25/09 12:00",
+      "title": "Ley de semillas: pese al acercamiento y tras la falta de acuerdo, el Gobierno decidirá quiénes pagarán por el uso propio",
+      "source": "La Nación",
+      "handle": "La Nación",
+      "text": "Ley de semillas: pese al acercamiento y tras la falta de acuerdo, el Gobierno decidirá quiénes pagarán por el uso propio",
+      "url": "https://www.lanacion.com.ar/economia/campo/ley-de-semillas-pese-al-acercamiento-y-tras-la-falta-de-acuerdo-el-gobierno-decidira-quienes-pagaran-nid28092026/",
+      "publishedAt": "2026-09-28T22:42:40.455Z",
+      "publishedAtArg": "28/09 19:42",
       "rank": 1
     },
     {
-      "title": "Con la cosecha ya fuera de su pico, se mantiene muy fuerte el ingreso de camiones a los puertos",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "text": "Con la cosecha ya fuera de su pico, se mantiene muy fuerte el ingreso de camiones a los puertos",
-      "url": "https://www.lanacion.com.ar/economia/campo/con-la-cosecha-ya-fuera-de-su-pico-se-mantiene-muy-fuerte-el-ingreso-de-camiones-a-los-puertos-nid25092026/",
-      "publishedAt": "2026-09-26T08:24:00.000Z",
-      "publishedAtArg": "26/09 05:24",
+      "title": "“Ciclogénesis”: septiembre termina con tormentas severas y lluvias heterogéneas en la región agrícola",
+      "source": "TN Campo",
+      "handle": "TN Campo",
+      "text": "“Ciclogénesis”: septiembre termina con tormentas severas y lluvias heterogéneas en la región agrícola",
+      "url": "https://tn.com.ar/campo/2026/09/28/ciclogenesis-septiembre-termina-con-tormentas-severas-y-lluvias-heterogeneas-en-la-region-agricola/",
+      "publishedAt": "2026-09-28T15:07:29.236Z",
+      "publishedAtArg": "28/09 12:07",
       "rank": 2
     },
     {
-      "title": "El trigo resiste al mal clima: afirman que mantiene un “excelente estado” pese a la falta de lluvias, el granizo y las heladas",
-      "source": "TN Campo (PAS Bolsa de Cereales BA)",
-      "handle": "TN Campo",
-      "text": "El trigo resiste al mal clima: afirman que mantiene un “excelente estado” pese a la falta de lluvias, el granizo y las heladas",
-      "url": "https://tn.com.ar/campo/2026/09/24/el-trigo-resiste-al-mal-clima-afirman-que-mantiene-un-excelente-estado-pese-a-la-falta-de-lluvias-el-granizo-y-las-heladas/",
-      "publishedAt": "2026-09-24T19:56:00.000Z",
-      "publishedAtArg": "24/09 16:56",
+      "title": "EE.UU. y China extienden la tregua comercial, sin nuevos compromisos de compra de soja",
+      "source": "DTN · traducido del inglés",
+      "handle": "DTN",
+      "text": "EE.UU. y China extienden la tregua comercial, sin nuevos compromisos de compra de soja",
+      "url": "https://www.dtnpf.com/agriculture/web/ag/columns/washington-insider/article/2026/09/28/us-china-extends-trade-truce-new",
+      "publishedAt": "2026-09-28T05:03:00.000Z",
+      "publishedAtArg": "28/09 02:03",
       "rank": 3
     },
     {
-      "title": "China desploma sus compras de soja brasileña: pasan de 20 a menos de 5 cargas semanales",
-      "source": "Bloomberg Línea",
-      "handle": "Bloomberg Línea",
-      "text": "China desploma sus compras de soja brasileña: pasan de 20 a menos de 5 cargas semanales",
-      "url": "https://www.bloomberglinea.com/latinoamerica/brasil/china-desploma-sus-compras-de-soja-brasilena-pasan-de-20-a-menos-de-5-cargas-semanales/",
-      "publishedAt": "2026-09-24T18:01:00.000Z",
-      "publishedAtArg": "24/09 15:01",
+      "title": "Brasil: la siembra de soja 2026/27 avanza levemente por delante del año pasado, estima AgRural",
+      "source": "Terra (Reuters/AgRural) · traducido del portugués",
+      "handle": "Terra (Reuters/AgRural)",
+      "text": "Brasil: la siembra de soja 2026/27 avanza levemente por delante del año pasado, estima AgRural",
+      "url": "https://www.terra.com.br/economia/plantio-de-soja-do-brasil-tem-leve-avanco-anual-na-safra-2627-estima-agrural,cd78ab07656effdd95bbcc7313f54996t163fbgp.html",
+      "publishedAt": "2026-09-28T14:42:18.000Z",
+      "publishedAtArg": "28/09 11:42",
       "rank": 4
-    },
-    {
-      "title": "China debe gastar US$ 1.200 millones por semana para cumplir los compromisos agrícolas con EE. UU., según Basse",
-      "source": "Agri-Pulse · traducido del inglés",
-      "handle": "Agri-Pulse",
-      "text": "China debe gastar US$ 1.200 millones por semana para cumplir los compromisos agrícolas con EE. UU., según Basse",
-      "url": "https://www.agri-pulse.com/articles/25296-china-must-spend-12b-a-week-to-meet-us-ag-pledges-basse-says",
-      "publishedAt": "2026-09-24T20:57:00.000Z",
-      "publishedAtArg": "24/09 17:57",
-      "rank": 5,
-      "titleOriginal": "China must spend $1.2B weekly to meet US ag pledges, Basse says"
     }
   ],
   "descartadas": [
     {
+      "motivo": "duplicado",
+      "fuente": "Infocampo / El Tribuno / LT15",
+      "item": "Ley de semillas uso propio (se deja LN 28/9)"
+    },
+    {
+      "motivo": "duplicado",
+      "fuente": "Farm Progress / Feedstuffs / Ag Bull",
+      "item": "Tregua EE.UU.–China sin soja comercial (se deja DTN)"
+    },
+    {
+      "motivo": "vieja",
+      "fuente": "BCR / La Nación / Palabra de Campo",
+      "item": "70% de la región núcleo en escasez/sequía (25/9, >48 h)"
+    },
+    {
       "motivo": "precio",
-      "fuente": "TN Campo",
-      "item": "Soja Rosario $565.000/t cierre 25/9"
-    },
-    {
-      "motivo": "duplicado",
-      "fuente": "Infocampo / Infobae",
-      "item": "Camiones a puertos / logística (se deja LN 26/9)"
-    },
-    {
-      "motivo": "duplicado",
-      "fuente": "Bloomberg Línea BR / Briefs",
-      "item": "China frena soja Brasil (se deja Bloomberg Línea ES)"
-    },
-    {
-      "motivo": "duplicado",
-      "fuente": "Infobae Chacra 25/9",
-      "item": "Heladas/calor primavera (cubre Bichos sequía núcleo)"
-    },
-    {
-      "motivo": "vieja",
-      "fuente": "Argentina.gob.ar SAGyP",
-      "item": "Mesa de Enlace / El Niño (23/9, >48h)"
-    },
-    {
-      "motivo": "vieja",
-      "fuente": "CONAB",
-      "item": "Perspectivas safra 2026/27 366,6 Mt (18/9)"
-    },
-    {
-      "motivo": "vieja",
-      "fuente": "Infocampo / BCBA",
-      "item": "Precampaña maíz 8,4 Mha (≈25/8)"
-    },
-    {
-      "motivo": "opinion",
-      "fuente": "Agri-Pulse 25294",
-      "item": "Trump-Xi reunión sin hecho comercial nuevo (cubre pledges 25296)"
+      "fuente": "varios",
+      "item": "Cierres de pizarra/Chicago 28/9"
     }
   ],
-  "updatedAt": "2026-09-26T10:05:00.000Z",
+  "updatedAt": "2026-09-29T09:55:32.000Z",
   "updatedBy": "búsqueda web manual (criterio eventos, sin precios)"
 }

@@ -34,7 +34,7 @@ function fuenteCorta(s: string | null | undefined): { fuente: string; nota: stri
   return { fuente: f || "", nota: rest.join(" · ") || null };
 }
 
-export default function NoticiasUi({ items, fallback }: { items: NoticiasItem[]; fallback: string | null }) {
+export default function NoticiasUi({ items, fallback, stale }: { items: NoticiasItem[]; fallback: string | null; stale?: string | null }) {
   return (
     <section className="noticias-ui zona-oscura flex flex-col rounded p-2.5">
       <h3 className="mb-2 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.14em] text-orange-400">
@@ -48,8 +48,11 @@ export default function NoticiasUi({ items, fallback }: { items: NoticiasItem[];
           ))}
         </span>
       </h3>
+      {stale ? (
+        <p role="status" className="mb-1.5 rounded-sm bg-amber-900/50 px-1.5 py-1 text-[10px] font-bold text-amber-200">{stale}</p>
+      ) : null}
       {items.length === 0 ? (
-        <p className="text-[11px] text-slate-400">{fallback ?? "— sin fuente"}</p>
+        <p className="text-[11px] text-slate-400">{stale ? "sin noticias de hoy" : fallback ?? "— sin fuente"}</p>
       ) : (
         <ol className="flex flex-col gap-1.5">
           {items.map((it, i) => {

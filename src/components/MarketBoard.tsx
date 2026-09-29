@@ -4,6 +4,7 @@ import { rowById } from "@/lib/mercado";
 import type { Tema } from "@/lib/tema";
 import { GrainLabel } from "@/components/ui/GrainIcon";
 import NoticiasUi from "@/components/ui/NoticiasUi";
+import { noticiasStaleLabel } from "@/lib/noticias";
 import TradingBoard from "@/components/ui/TradingBoard";
 
 const CROP = {
@@ -132,7 +133,7 @@ function CropLine({
 }
 
 const PLAZAS = [
-  { id: "cac", titulo: "Pizarra CAC Rosario" },
+  { id: "cac", titulo: "CAC Rosario" },
   { id: "afa", titulo: "AFA San Martín" },
   { id: "aca", titulo: "ACA Timbúes" },
 ] as const;
@@ -168,7 +169,11 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
       rowById(mercado.rows, `${p.id}-${g}`),
     );
     const any = rows.find(Boolean);
-    return { ...p, rows, any };
+    // fecha de SU pizarra: la más reciente de las celdas con precio de esa columna
+    const fechas = rows.filter((r) => r?.valor && r.fecha).map((r) => r!.fecha as string).sort();
+    const f = fechas.pop();
+    const fecha = f ? `${f.slice(8, 10)}/${f.slice(5, 7)}/${f.slice(0, 4)}` : null;
+    return { ...p, rows, any, fecha };
   }).filter((c) => c.any);
   const tcNotes = Array.from(
     new Set(cols.flatMap((c) => c.rows.map((r) => (r?.valorUsd && r.tc ? r.tc : null))).filter(Boolean)),
@@ -177,11 +182,11 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
   return (
     <section className={`digest-panel overflow-hidden p-0 ${tema !== "base" ? "plazas-ui" : ""}`}>
       <div className="flex items-center justify-between bg-[#0b1f3a] px-3 py-1.5 text-white">
-        <span className="text-[11px] font-bold tracking-[0.12em]">PLAZAS FÍSICAS · DISPONIBLE</span>
-        <span className="text-[10px] opacity-80">una fuente por plaza · var vs cierre publicado anterior</span>
+        <span className="text-[11px] font-bold tracking-[0.12em]">PRECIO PIZARRA</span>
+        <span className="text-[10px] opacity-80">cada columna con la fecha de su pizarra · $/t sin IVA · var vs pizarra anterior</span>
       </div>
       {cols.length === 0 ? (
-        <p className="px-3 py-3 text-[11px] opacity-50">sin dato de plazas físicas (fuentes no respondieron)</p>
+        <p className="px-3 py-3 text-[11px] opacity-50">sin dato de pizarras (fuentes no respondieron)</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
@@ -200,9 +205,10 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
                         ) : (
                           c.any?.fuente
                         )}
-                        {" · "}
-                        {c.any?.hora}
                       </span>
+                    </div>
+                    <div className="mt-0.5 flex flex-wrap items-center gap-1 text-[10px] font-semibold tabular-nums">
+                      <span>{c.fecha ? `pizarra ${c.fecha}` : "pizarra s/d"}</span>
                       <ViejoBadge r={c.any} />
                     </div>
                   </th>
@@ -233,7 +239,7 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
         </div>
       )}
       <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
-        CAC, AFA y ACA publican en ARS/t (ACA: sólo disponible en $; si no hay, &quot;sin referencia&quot;); US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
+        Pizarras en $/t sin IVA. ACA Timbúes: s/d mientras ACA no publique pizarra propia de Timbúes (su «Pizarra» web es la CAC Rosario). US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
         {" "}&quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
       </div>
     </section>
@@ -376,6 +382,7 @@ export default function MarketBoard({ mercado, tema = "base" }: { mercado: Merca
   const progress = rowById(mercado.rows, "crop-progress");
   const noticias = rowById(mercado.rows, "noticias");
   const noticiasItems = (mercado.noticias?.ok ? mercado.noticias.items : []).slice(0, 5);
+  const noticiasStale = noticiasStaleLabel(mercado.noticias?.asOf ?? null);
   const wti = rowById(mercado.rows, "wti");
 
   return (
@@ -441,9 +448,10 @@ export default function MarketBoard({ mercado, tema = "base" }: { mercado: Merca
         </Panel>
 
         {tema !== "base" ? (
-          <NoticiasUi items={noticiasItems} fallback={noticias?.valor ?? null} />
+          <NoticiasUi items={noticiasItems} fallback={noticias?.valor ?? null} stale={noticiasStale} />
         ) : (
         <Panel title="Noticias">
+          {noticiasStale ? <p className="mb-1 text-[10px] font-bold text-amber-700">{noticiasStale}</p> : null}
           {noticiasItems.length > 0 ? (
             <ol className="flex flex-col gap-1.5">
               {noticiasItems.map((it, i) => (

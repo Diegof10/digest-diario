@@ -612,7 +612,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         ...base,
         unidad: null,
         etiqueta: "VACÍO",
-        extra: p.id === "aca" ? "sin referencia" : `sin dato fresco · última fuente ${fechaLabel}`,
+        extra: p.id === "aca" ? "s/d" : `sin dato fresco · última fuente ${fechaLabel}`,
       });
       continue;
     }
@@ -638,7 +638,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         : null,
     });
   }
-  // ACA: grano sin disponible en $/t → celda "sin referencia" (nunca otra posición).
+  // ACA: grano sin pizarra → celda "s/d" con la fuente (nunca 0 ni otro precio).
   if (p.id === "aca") {
     const hora = p.granos[0] ? rows[0]?.hora ?? null : null;
     for (const g of ["soja", "maiz", "trigo"] as const) {
@@ -654,7 +654,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         etiqueta: "VACÍO",
         varPct: null,
         senal: null,
-        extra: p.error && p.granos.length === 0 ? `sin referencia · ${p.error}` : "sin referencia",
+        extra: "s/d",
         contrato: null,
         url: p.url,
         fecha: null,

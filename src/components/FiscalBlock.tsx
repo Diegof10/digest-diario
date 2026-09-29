@@ -40,6 +40,17 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
     <section className="digest-panel">
       <h3 className="digest-panel-title">Fiscal (ARCA / consejos)</h3>
 
+      {(() => {
+        const ref = fiscal.cargaManual ?? fiscal.cronAt; // revisión del contenido fiscal (rutina diaria); el cron sólo refresca mercado
+        const hoy = fiscal.hoy ?? null;
+        const refDia = ref ? new Intl.DateTimeFormat("en-CA", { timeZone: "America/Argentina/Cordoba" }).format(new Date(ref.length === 10 ? `${ref}T12:00:00-03:00` : ref)) : null;
+        if (hoy && refDia === hoy) return null;
+        return (
+          <p role="status" className="-mt-0.5 mb-1 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
+            {ref ? `Fiscal sin actualizar desde ${ref.length === 10 ? ddmm(ref) : `${fechaHoraArt(ref)} ART`}` : "Fiscal sin actualizar (sin fecha de corrida)"}
+          </p>
+        );
+      })()}
       <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
         {fiscal.cronAt
           ? `Última actualización (cron): ${fechaHoraArt(fiscal.cronAt)} ART`
@@ -105,6 +116,9 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
                   >
                     <span className="font-medium">{v.concepto}</span>
                     <span className="tabular-nums opacity-70">{v.ventana}</span>
+                    {v.detalle && /verificar/i.test(v.detalle) ? (
+                      <span className="w-full text-[9px] font-semibold text-amber-600">verificar cronograma ARCA</span>
+                    ) : null}
                   </li>
                 ))}
               </ul>

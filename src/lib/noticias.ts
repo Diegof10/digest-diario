@@ -221,3 +221,16 @@ export async function getNoticias(): Promise<NoticiasSnapshot> {
     maxAgeHours: maxAge,
   };
 }
+
+/**
+ * "Noticias sin actualizar desde DD/MM HH:MM" si el asOf (ART) no es de hoy; null si es de hoy.
+ * Sin asOf → "Noticias sin actualizar (sin fecha de corrida)".
+ */
+export function noticiasStaleLabel(asOf: string | null | undefined, now = new Date()): string | null {
+  const tz = "America/Argentina/Cordoba";
+  if (!asOf || Number.isNaN(Date.parse(asOf))) return "Noticias sin actualizar (sin fecha de corrida)";
+  const dia = (d: Date) => new Intl.DateTimeFormat("en-CA", { timeZone: tz }).format(d);
+  const d = new Date(asOf);
+  if (dia(d) === dia(now)) return null;
+  return `Noticias sin actualizar desde ${horaArgFromIso(asOf)?.replace(",", "")}`;
+}

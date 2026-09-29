@@ -13,7 +13,7 @@ import {
   valorEnSerie,
   type SerieFile,
 } from "@/lib/serie-blob";
-import { ACA_URL, disponiblePesos, fetchAcaItems } from "@/lib/aca";
+import { ACA_URL } from "@/lib/aca";
 
 /**
  * Plazas físicas — UNA fuente por plaza, fetch server-side directo:
@@ -21,8 +21,8 @@ import { ACA_URL, disponiblePesos, fetchAcaItems } from "@/lib/aca";
  *      https://www.cac.bcr.com.ar/es/precios-de-pizarra (+ /consultas para el cierre previo)
  *  - AFA San Martín: pizarra diaria AFA SCL (AFA Diario · Mercados en línea
  *      + Comparativo Pizarra para el cierre previo)
- *  - ACA Timbúes: físico ACA, sólo posición disponible en $/t (src/lib/aca.ts);
- *      sin disponible en $ → "sin referencia". FOB Up River (MAGYP) retirado 25/9.
+ *  - ACA Timbúes: sólo PIZARRA publicada por ACA para Timbúes; hoy no existe → "s/d" con fuente
+ *      (29/9: el físico disponible de ACA dejó de usarse). FOB Up River (MAGYP) retirado 25/9.
  * Var diaria = último cierre publicado vs cierre publicado anterior de la MISMA fuente.
  * Sin cierre previo → var null. Nunca se inventan precios ni variaciones.
  */
@@ -62,7 +62,7 @@ export interface PlazaSnapshot {
 export interface PlazasSnapshot {
   cac: PlazaSnapshot;
   afa: PlazaSnapshot;
-  /** ACA Timbúes · sólo disponible en $/t */
+  /** ACA Timbúes · pizarra (s/d mientras ACA no publique pizarra propia de Timbúes) */
   aca: PlazaSnapshot;
   fxBnaDivisa: { valor: number; fecha: string; fuente: string } | null;
   /** Cierre BNA divisa comprador anterior (serie Blob o TC de la CAC), para la variación */
@@ -371,37 +371,18 @@ async function getAfa(
 
 const ACA_GRANO: Record<Grano, string> = { soja: "SOJA", maiz: "MAIZ", trigo: "TRIGO" };
 
-async function getAcaTimbues(
-  o: FetchOpts,
-  serie: SerieFile,
-  fx: (fecha: string) => { valor: number; fecha: string; fuente: string } | null,
-): Promise<PlazaSnapshot> {
-  const base = {
-    id: "aca" as const,
-    nombre: "ACA Timbúes",
-    lugar: "Timbúes",
-    fuente: "ACA · físico disponible",
-    url: ACA_URL,
-  };
-  try {
-    const items = await fetchAcaItems(o);
-    const granos: CotizacionGrano[] = [];
-    for (const g of GRANOS) {
-      const d = disponiblePesos(items, "TIMBUES", ACA_GRANO[g]);
-      if (!d) continue; // sin disponible en $ → "sin referencia" (nunca otra posición)
-      const prev = previoEnSerie(serie, "aca.ars", `${g}-timbues`, d.fecha);
-      const t = fx(d.fecha);
-      const usd = t ? Math.round((d.valor / t.valor) * 100) / 100 : null;
-      granos.push({ grano: g, valor: d.valor, unidad: "ARS/t", fecha: d.fecha, prev, ...varDe(d.valor, prev), usd, tc: t, hora: d.hora });
-    }
-    if (granos.length === 0) {
-      return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, "ACA: Timbúes sin disponible en $/t");
-    }
-    const fecha = granos.map((x) => x.fecha).sort().pop()!;
-    return { ...base, fecha, frescura: frescura(fecha, REGLAS.aca), granos, error: null };
-  } catch (err) {
-    return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `ACA no disponible: ${err instanceof Error ? err.message : String(err)}`);
-  }
+/**
+ * ACA Timbúes · PRECIO PIZARRA (29/9, Diego): sólo pizarra publicada por ACA para Timbúes.
+ * Verificado 29/09/2026: el bloque "Pizarra" de acabase.com.ar (js/pizarras.js) NO es una pizarra
+ * propia de ACA ni de Timbúes: es la Cámara Arbitral de Rosario (API BCR PreciosCamara, puerto "RS"),
+ * o sea el mismo dato que la columna CAC. El JSON de ACA (GetMercados) sólo trae "físico" (precio de
+ * compra ofrecido por ACA, disponible/posiciones), que NO es pizarra. → s/d con la fuente; nunca 0.
+ */
+export const ACA_PIZARRA_SD =
+  "s/d · ACA no publica pizarra propia de Timbúes (la «Pizarra» de acabase.com.ar es la CAC Rosario)";
+
+async function getAcaTimbues(): Promise<PlazaSnapshot> {
+  return emptyPlaza("aca", "ACA Timbúes", "Timbúes", "ACA · pizarra Timbúes", ACA_URL, ACA_PIZARRA_SD);
 }
 
 /* ------------------------------ Público ----------------------------- */
@@ -421,7 +402,7 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
   // TC de la CAC (BNA divisa comprador de su fecha) también sirve para AFA de esa fecha.
   const cacTc = cac.granos.find((g) => g.tc?.fuente.includes("CAC"))?.tc ?? null;
   const fx2 = (fecha: string) => fx(fecha) ?? (cacTc && cacTc.fecha === fecha ? cacTc : null);
-  const [afa, aca] = await Promise.all([getAfa(hoy, o, serie, fx2), getAcaTimbues(o, serie, fx2)]);
+  const [afa, aca] = await Promise.all([getAfa(hoy, o, serie, fx2), getAcaTimbues()]);
 
   let persistencia: PlazasSnapshot["persistencia"] = { written: false, error: null, updatedAt: serie.updatedAt };
   if (opts.persist !== false) {
