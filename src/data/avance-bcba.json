@@ -51,7 +51,12 @@
               "varSemanalPp": 4.8,
               "vsAnioAnteriorPp": null,
               "zonas": {},
-              "notaVsAnioAnterior": "El informe compara contra el promedio histórico y de las últimas 5 campañas («adelanto de alrededor de 10 p.p.»), no contra el año anterior."
+              "datosTexto": [
+                {
+                  "texto": "Adelanto de alrededor de 10 p.p. vs promedio histórico y promedio U5C (5 campañas)",
+                  "cita": "PAS BCBA 24/09, relevamiento al 23/09"
+                }
+              ]
             }
           }
         },
@@ -63,7 +68,13 @@
               "varSemanalPp": null,
               "vsAnioAnteriorPp": null,
               "zonas": {},
-              "campana": "2026/27"
+              "campana": "2026/27",
+              "datosTexto": [
+                {
+                  "texto": "Condición hídrica nacional: −5,8 p.p. en la semana",
+                  "cita": "PAS BCBA 24/09, relevamiento al 23/09"
+                }
+              ]
             }
           }
         },

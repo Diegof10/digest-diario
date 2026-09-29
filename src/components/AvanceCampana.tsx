@@ -218,6 +218,15 @@ export default function AvanceCampana({ data, viejo, dias }: Props) {
                 <dd className="text-slate-100">{fmtPp(m.vsAnioAnteriorPp)}</dd>
               </dl>
               {m.notaVsAnioAnterior ? <p className="mt-1 text-[9px] leading-snug text-slate-500">{m.notaVsAnioAnterior}</p> : null}
+              {m.datosTexto?.length ? (
+                <ul className="mt-1.5 space-y-0.5 text-[10px] leading-snug text-slate-200">
+                  {m.datosTexto.map((d) => (
+                    <li key={d.texto}>
+                      {d.texto} <span className="text-[9px] text-slate-500">({d.cita})</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </>
           ) : (
             <p className="text-lg font-bold text-slate-400">s/d en este informe</p>

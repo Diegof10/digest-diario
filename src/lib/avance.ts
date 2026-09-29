@@ -9,6 +9,8 @@ export type Metrica = {
   varSemanalPp: number | null;
   vsAnioAnteriorPp: number | null;
   notaVsAnioAnterior?: string;
+  /** Datos que el informe da sólo en texto (sin serie numérica comparable), con su cita */
+  datosTexto?: { texto: string; cita: string }[];
   zonas: Record<string, number>;
 };
 export type Cultivo = { sinAvance?: boolean; metricas: Partial<Record<MetricaKey, Metrica>> };
