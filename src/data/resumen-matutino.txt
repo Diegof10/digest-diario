@@ -1,9 +1,7 @@
-fecha: 2026-09-25 ART
+fecha: 2026-09-29 ART
 titulo_ui: Resumen matutino
 
-CBOT: soja 479,3 US$/t (−1,0%) · maíz 203,9 (−1,8%) · trigo 254,1 (−2,2%)
-AFA San Martín (24/09): soja 381,6 (+3,4 · +0,9%) · maíz 200,4 (plano) · trigo 235,6 (+0,7 · +0,3%)
-Rosario CAC (23/09): soja 371,6 (plano) · maíz 196,0 (plano) · trigo 233,0 (plano)
-FOB Up River (MAGYP 24/09): soja 510 (plano) · maíz 223 (plano) · trigo 263 (+1 · +0,4%) · FAS ~370 / 192 / 231
-FX: oficial 1.540 · blue 1.560 · MEP 1.545 · CCL 1.614 · riesgo país 578
-Mercados: S&P plano · Nasdaq plano · WTI 94,6 · Brent 106,6 · UST 10a 5,20%
+CBOT (cierre 28/09): soja 473,4 US$/t (−2,4%) · maíz 205,9 (−1,1%) · trigo 253,1 (−2,2%)
+FX: oficial 1.545 · blue 1.565 · MEP 1.550 · CCL 1.618 · riesgo país 628
+Mercados (28/09): S&P −0,8% · Nasdaq −0,9% · WTI 92,6 · Brent 105,3 · UST 10a 5,24%
+Nota: China bajó aranceles agro a EE.UU. pero dejó afuera el poroto de soja.
