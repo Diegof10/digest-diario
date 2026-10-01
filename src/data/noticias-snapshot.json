@@ -1,11 +1,31 @@
 {
-  "asOf": "2026-10-01T11:15:00.000Z",
-  "asOfArg": "01/10/2026, 08:15",
+  "asOf": "2026-10-01T21:02:05.000Z",
+  "asOfArg": "01/10/2026, 18:02",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT últimas 48 h · 01/10 08:15 ARG (corrida manual: rutina 6:53 falló por infraestructura)",
+  "note": "Búsqueda web ES/EN/PT · 01/10/2026, 18:02 ARG (respaldo manual: cron 17:43 no actualizó el bloque; logs Vercel 403)",
   "items": [
+    {
+      "title": "INASE y ARCA: desde el 1/10 vale la Carta de Porte de Semillas; será obligatoria desde el 1/12 para especies con apertura por variedad en SISA",
+      "source": "Argentina.gob.ar",
+      "handle": "INASE/ARCA",
+      "text": "INASE y ARCA: desde el 1/10 vale la Carta de Porte de Semillas; será obligatoria desde el 1/12 para especies con apertura por variedad en SISA",
+      "url": "https://www.argentina.gob.ar/noticias/inase-y-arca-implementan-la-carta-de-porte-de-semillas",
+      "publishedAt": "2026-10-01T03:00:00.000Z",
+      "publishedAtArg": "01/10",
+      "rank": 1
+    },
+    {
+      "title": "Bolsa de Cereales: se da por finalizada la cosecha de maíz 2025/26 con récord de 64 Mt; la siembra 2026/27 ya lleva 22,2% de 8,4 M ha",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "text": "Bolsa de Cereales: se da por finalizada la cosecha de maíz 2025/26 con récord de 64 Mt; la siembra 2026/27 ya lleva 22,2% de 8,4 M ha",
+      "url": "https://www.infocampo.com.ar/y-un-dia-termino-la-cosecha-de-maiz-otra-campana-en-la-que-el-campo-argentino-hizo-historia/",
+      "publishedAt": "2026-10-01T19:53:52.000Z",
+      "publishedAtArg": "01/10 16:53",
+      "rank": 2
+    },
     {
       "title": "USDA: los stocks de maíz de EE.UU. al 1/9 suben 35% (2.095 M bu) y superan todas las estimaciones; soja 315 M bu (−3%) y trigo 1.845 M bu (−14%)",
       "source": "USDA NASS",
@@ -14,7 +34,7 @@
       "url": "https://www.nass.usda.gov/Newsroom/2026/09-30-2026.php",
       "publishedAt": "2026-09-30T16:00:00.000Z",
       "publishedAtArg": "30/09 13:00",
-      "rank": 1
+      "rank": 3
     },
     {
       "title": "China: la demanda débil y los márgenes negativos frenan las compras de soja; los molinos privados ya se cubrieron con Brasil y Argentina hasta febrero",
@@ -24,7 +44,7 @@
       "url": "https://www.reuters.com/world/china/chinas-weak-soybean-demand-dims-prospects-us-cargoes-after-tariff-snub-2026-09-30/",
       "publishedAt": null,
       "publishedAtArg": "30/09",
-      "rank": 2
+      "rank": 4
     },
     {
       "title": "Calor, tormentas fuertes y riesgo de heladas: se viene un escenario climático cambiante para la primera semana de octubre",
@@ -34,51 +54,36 @@
       "url": "https://www.clarin.com/rural/calor-tormentas-fuertes-riesgo-heladas-viene-escenario-climatico-cambiante-primera-semana-octubre_0_tcUyAjtmFX.html",
       "publishedAt": "2026-09-30T15:05:08.000Z",
       "publishedAtArg": "30/09 12:05",
-      "rank": 3
-    },
-    {
-      "title": "“Que no vuelvan nunca más”: fuerte reclamo de Federación Agraria para poner fin a las retenciones por ley",
-      "source": "La Nación",
-      "handle": "La Nación",
-      "text": "“Que no vuelvan nunca más”: fuerte reclamo de Federación Agraria para poner fin a las retenciones por ley",
-      "url": "https://www.lanacion.com.ar/economia/campo/que-no-vuelvan-nunca-mas-fuerte-reclamo-de-federacion-agraria-para-poner-fin-a-las-retenciones-por-nid29092026/",
-      "publishedAt": "2026-09-29T21:37:11.706Z",
-      "publishedAtArg": "29/09 18:37",
-      "rank": 4
-    },
-    {
-      "title": "El Gobierno evaluará las propuestas de los ruralistas sobre la Ley de Semillas para definir quiénes pagarán por el uso propio",
-      "source": "TN Campo",
-      "handle": "TN",
-      "text": "El Gobierno evaluará las propuestas de los ruralistas sobre la Ley de Semillas para definir quiénes pagarán por el uso propio",
-      "url": "https://tn.com.ar/campo/2026/09/29/el-gobierno-evaluara-las-propuestas-de-los-ruralistas-sobre-la-ley-de-semillas-para-definir-quienes-pagaran-por-el-uso-propio/",
-      "publishedAt": "2026-09-29T16:24:21.525Z",
-      "publishedAtArg": "29/09 13:24",
       "rank": 5
     }
   ],
   "descartadas": [
     {
-      "motivo": "fuera de 48 h",
-      "fuente": "La Nación 28/09 · DTN 28/09",
-      "item": "Ley de semillas (LN) y tregua EE.UU.–China (DTN); el tema sigue con TN 29/09 y Reuters 30/09"
+      "motivo": "duplicado/menor frescura",
+      "fuente": "La Nación / Agrofy / Infocampo FAA",
+      "item": "FAA pide fin de retenciones por ley (ya cubierto en tanda previa)"
     },
     {
-      "motivo": "duplicado",
-      "fuente": "Puntal / La Voz / Agroempresario",
-      "item": "FAA pide fin de retenciones por ley (se deja LN 29/9)"
+      "motivo": "menor impacto vs top 5",
+      "fuente": "TN / LN 28-29/09",
+      "item": "Ley de Semillas: Gobierno define pago por uso propio"
     },
     {
       "motivo": "menor impacto",
-      "fuente": "Conab / Exame",
-      "item": "Brasil: siembra de soja 3,9% al 30/9"
+      "fuente": "Portal do Agronegócio / CONAB",
+      "item": "Brasil: siembra de soja 2026/27 en 3,9% al 25/9"
     },
     {
       "motivo": "precio",
-      "fuente": "varios",
-      "item": "Movimientos de Chicago tras el informe de stocks"
+      "fuente": "Infocampo / Ruralnet",
+      "item": "Precios Rosario/Chicago y liquidación CIARA (flujo de divisas)"
+    },
+    {
+      "motivo": "fuera de ventana / viejo",
+      "fuente": "Palabra de Campo",
+      "item": "Acsoja pide acelerar baja de retenciones (publicado jun/2026)"
     }
   ],
-  "updatedAt": "2026-10-01T11:15:00.000Z",
-  "updatedBy": "búsqueda web manual (criterio eventos, sin precios)"
+  "updatedAt": "2026-10-01T21:02:05.000Z",
+  "updatedBy": "respaldo manual post cierre Matba (rutina Noticias tarde)"
 }
