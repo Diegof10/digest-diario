@@ -23,6 +23,15 @@ function Indice({ label, i }: { label: string; i: HaciendaIndice | null }) {
       </div>
     );
   }
+  if (i.valor == null) {
+    return (
+      <div className="px-3 py-2">
+        <div className="text-[10px] font-bold tracking-wide">{label}</div>
+        <div className="text-[11px] font-semibold opacity-75">Sin {label} (menos de 300 novillos)</div>
+        <div className="text-[9px] opacity-50">remate {corta(i.fecha)}</div>
+      </div>
+    );
+  }
   const pct = i.varPct != null ? i.varPct * 100 : null;
   const color = pct == null ? "opacity-60" : pct > 0 ? "text-emerald-500" : pct < 0 ? "text-red-500" : "opacity-60";
   return (
@@ -30,7 +39,7 @@ function Indice({ label, i }: { label: string; i: HaciendaIndice | null }) {
       <div className="text-[10px] font-bold tracking-wide">{label}</div>
       <div className="flex flex-wrap items-baseline gap-1.5">
         <span className="text-lg font-bold tabular-nums leading-tight">{nf(i.valor, 1)}</span>
-        <span className="text-[10px] opacity-60">$/kg</span>
+        <span className="text-[10px] opacity-60">$/kg vivo</span>
         {pct != null ? (
           <span className={`text-[11px] font-semibold tabular-nums ${color}`}>
             {pct > 0 ? "+" : ""}
@@ -39,8 +48,8 @@ function Indice({ label, i }: { label: string; i: HaciendaIndice | null }) {
         ) : null}
       </div>
       <div className="text-[9px] opacity-50">
-        {corta(i.fecha)}
-        {i.prevFecha ? ` vs ${corta(i.prevFecha)}` : ""}
+        remate {corta(i.fecha)}
+        {i.prevFecha && i.varPct != null ? ` vs remate ${corta(i.prevFecha)}` : ""}
       </div>
     </div>
   );
@@ -71,7 +80,7 @@ export default function HaciendaBlock({ hacienda }: { hacienda: HaciendaSnapshot
               <div className="text-[10px] font-bold tracking-wide">Ingreso</div>
               {h.dia ? (
                 <div className="text-[11px] tabular-nums">
-                  {corta(h.dia.fecha)}: <b>{nf(h.dia.cabezas)}</b> cab.
+                  remate {corta(h.dia.fecha)}: <b>{nf(h.dia.cabezas)}</b> cab.
                 </div>
               ) : null}
               {h.hoy ? (
@@ -88,10 +97,10 @@ export default function HaciendaBlock({ hacienda }: { hacienda: HaciendaSnapshot
                 <thead>
                   <tr className="text-[9px] uppercase tracking-wide opacity-60">
                     <th className="px-3 py-1 text-left font-semibold">
-                      Categoría · {corta(h.dia.fecha)}
+                      Categoría · remate {corta(h.dia.fecha)}
                       {h.dia.estado ? ` (${h.dia.estado})` : ""}
                     </th>
-                    <th className="px-2 py-1 text-right font-semibold">Prom. $/kg</th>
+                    <th className="px-2 py-1 text-right font-semibold">Prom. $/kg vivo</th>
                     <th className="px-2 py-1 text-right font-semibold">Mín–Máx</th>
                     <th className="px-2 py-1 text-right font-semibold">Cab.</th>
                     <th className="px-3 py-1 text-right font-semibold">Kg prom.</th>

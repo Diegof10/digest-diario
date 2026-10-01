@@ -11,7 +11,8 @@ export const HACIENDA_URL = "https://www.mercadoagroganadero.com.ar/dll/inicio.d
 const BASE = "https://www.mercadoagroganadero.com.ar/dll";
 
 export interface HaciendaIndice {
-  valor: number;
+  /** null = el MAG no lo calculó ese día (menos de 300 novillos) */
+  valor: number | null;
   fecha: string; // dd/mm/yyyy
   prev: number | null;
   prevFecha: string | null;
@@ -107,17 +108,19 @@ function parseDias(html: string): DiaRow[] {
     }));
 }
 
+/** Índice del último día con remate cerrado; variación contra el día con remate anterior que tenga índice. */
 function indiceDe(dias: DiaRow[]): HaciendaIndice | null {
-  const conValor = dias.filter((d) => !d.abierto && d.indice != null && d.indice > 0);
-  const last = conValor.at(-1);
+  const cerrados = dias.filter((d) => !d.abierto && (d.importe ?? 0) > 0);
+  const last = cerrados.at(-1);
   if (!last) return null;
-  const prev = conValor.at(-2) ?? null;
+  const val = last.indice != null && last.indice > 0 ? last.indice : null;
+  const prev = cerrados.slice(0, -1).filter((d) => d.indice != null && d.indice > 0).at(-1) ?? null;
   return {
-    valor: last.indice!,
+    valor: val,
     fecha: last.fecha,
     prev: prev?.indice ?? null,
     prevFecha: prev?.fecha ?? null,
-    varPct: prev?.indice ? last.indice! / prev.indice - 1 : null,
+    varPct: val != null && prev?.indice ? val / prev.indice - 1 : null,
   };
 }
 
