@@ -130,7 +130,7 @@ function seccionGrano(mercado: MercadoSnapshot, g: "soja" | "maiz" | "trigo"): C
   const leido = horaLeido(cbot.hora);
   const partes: string[] = [];
   partes.push(
-    `Chicago ${sube ? "sube" : "cae"} ${pct1(v)}% a ${cbot.valor} USD/t (precio demorado${leido ? `, leído ${leido}` : ""}).`,
+    `Chicago ${sube ? "sube" : "cae"} ${pct1(v)}% a ${cbot.valor} USD/t ${leido ? `(act. ${leido})` : ""}.`,
   );
   const fis: string[] = [];
   if (afa) {
@@ -151,7 +151,7 @@ function seccionGrano(mercado: MercadoSnapshot, g: "soja" | "maiz" | "trigo"): C
     titulo,
     resumen: partes.join(" "),
     fuente: fuentes.join(" · "),
-    hora: leido ? `leído ${leido}` : null,
+    hora: leido ? `act. ${leido}` : null,
   };
 }
 

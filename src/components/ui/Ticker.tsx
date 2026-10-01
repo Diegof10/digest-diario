@@ -24,7 +24,7 @@ function Item({ it }: { it: TickerItem }) {
 export default function Ticker({ items }: { items: TickerItem[] }) {
   if (items.length === 0) return null;
   return (
-    <div className="ticker zona-oscura" role="region" aria-label="Cinta de precios (datos demorados o de cierre)">
+    <div className="ticker zona-oscura" role="region" aria-label="Cinta de precios">
       <div className="ticker-track">
         <div className="ticker-group">
           {items.map((it) => (

@@ -140,7 +140,7 @@ export async function getFiscal(): Promise<FiscalSnapshot> {
       fuente:
         typeof data.fuente === "string" && data.fuente.trim()
           ? data.fuente.trim()
-          : "Fiscal & Estructura AR · BO/ARCA/CPCE",
+          : "ARCA · BO",
       fetchedAt,
       fecha:
         typeof data.fecha === "string" && data.fecha.trim()

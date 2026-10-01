@@ -27,7 +27,7 @@ export default function ClimaVivo({ clima, tema = "base" }: { clima: ClimaVivoSn
           <a href={clima.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">
             {clima.fuente}
           </a>
-          {" · "}leído {leido} ART
+          {" · "}act. {leido}
         </span>
       </div>
       <div className="grid grid-cols-1 divide-y divide-slate-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
@@ -50,13 +50,13 @@ export default function ClimaVivo({ clima, tema = "base" }: { clima: ClimaVivoSn
                       : "viento sin dato"}
                   </div>
                   <div className="text-[9px] opacity-50">
-                    {clima.fuente} · dato {hora ?? "—"} ART · leído {leido}
+                    {clima.fuente} · dato {hora ?? "—"} ART · act. {leido}
                   </div>
                 </>
               ) : (
                 <div className="text-[11px] opacity-60">
                   sin dato · {clima.fuente}
-                  <span className="block text-[9px] opacity-70">leído {leido} ART</span>
+                  <span className="block text-[9px] opacity-70">act. {leido}</span>
                 </div>
               )}
             </div>
@@ -77,7 +77,7 @@ function ClimaVivoUi({ clima, leido }: { clima: ClimaVivoSnapshot; leido: string
           <a href={clima.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
             {clima.fuente}
           </a>
-          {" · "}leído {leido} ART
+          {" · "}act. {leido}
         </span>
       </div>
       <div className="grid grid-cols-3 divide-x divide-slate-200/60">

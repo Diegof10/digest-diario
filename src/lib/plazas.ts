@@ -379,7 +379,7 @@ const ACA_GRANO: Record<Grano, string> = { soja: "SOJA", maiz: "MAIZ", trigo: "T
  * compra ofrecido por ACA, disponible/posiciones), que NO es pizarra. → s/d con la fuente; nunca 0.
  */
 export const ACA_PIZARRA_SD =
-  "s/d · ACA no publica pizarra propia de Timbúes (la «Pizarra» de acabase.com.ar es la CAC Rosario)";
+  "Sin dato";
 
 async function getAcaTimbues(): Promise<PlazaSnapshot> {
   return emptyPlaza("aca", "ACA Timbúes", "Timbúes", "ACA · pizarra Timbúes", ACA_URL, ACA_PIZARRA_SD);

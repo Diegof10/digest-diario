@@ -33,8 +33,8 @@ function cuandoDeHora(hora: string | null | undefined, prefijo: string, leido = 
   const esHoy = hoy.slice(5) === `${mm.padStart(2, "0")}-${dd.padStart(2, "0")}`;
   const t = esHoy ? hhmm : `${dmCorto(dd, mm)} ${hhmm}`;
   // leido: la hora es la de lectura del feed, no la de la cotización
-  if (leido) return prefijo ? `${prefijo} · leído ${t}` : `leído ${t}`;
-  return `${prefijo} · ${t}`;
+  void prefijo; void leido;
+  return `act. ${t}`;
 }
 
 function isoDm(iso: string): string {

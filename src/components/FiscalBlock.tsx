@@ -17,10 +17,11 @@ function partesArt(iso: string) {
   return { dd: g("day"), mm: g("month"), yyyy: g("year"), hh: g("hour").replace(/^24$/, "00"), mi: g("minute") };
 }
 
-/** ISO → "DD/MM/AAAA HH:MM" en ART */
-function fechaHoraArt(iso: string): string {
+
+/** ISO → "DD/MM HH:MM" en ART */
+function fechaHoraCorta(iso: string): string {
   const p = partesArt(iso);
-  return `${p.dd}/${p.mm}/${p.yyyy} ${p.hh}:${p.mi}`;
+  return `${p.dd}/${p.mm} ${p.hh}:${p.mi}`;
 }
 
 /** ISO o yyyy-mm-dd → "DD/MM" (ART) */
@@ -38,7 +39,7 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
 
   return (
     <section className="digest-panel">
-      <h3 className="digest-panel-title">Fiscal (ARCA / consejos)</h3>
+      <h3 className="digest-panel-title">Fiscal (ARCA)</h3>
 
       {(() => {
         const ref = fiscal.cargaManual ?? fiscal.cronAt; // revisión del contenido fiscal (rutina diaria); el cron sólo refresca mercado
@@ -47,16 +48,12 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
         if (hoy && refDia === hoy) return null;
         return (
           <p role="status" className="-mt-0.5 mb-1 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
-            {ref ? `Fiscal sin actualizar desde ${ref.length === 10 ? ddmm(ref) : `${fechaHoraArt(ref)} ART`}` : "Fiscal sin actualizar (sin fecha de corrida)"}
+            {ref ? `Sin actualizar desde ${ref.length === 10 ? ddmm(ref) : fechaHoraCorta(ref)}` : "Sin actualizar"}
           </p>
         );
       })()}
       <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
-        {fiscal.cronAt
-          ? `Última actualización (cron): ${fechaHoraArt(fiscal.cronAt)} ART`
-          : fiscal.cargaManual
-            ? `Última actualización: carga manual ${ddmm(fiscal.cargaManual)}`
-            : "Última actualización: —"}
+        {(() => { const r = fiscal.cargaManual ?? fiscal.cronAt; return r ? `Actualizado ${r.length === 10 ? ddmm(r) : fechaHoraCorta(r)}` : null; })()}
       </p>
 
       {empty ? (
@@ -116,9 +113,7 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
                   >
                     <span className="font-medium">{v.concepto}</span>
                     <span className="tabular-nums opacity-70">{v.ventana}</span>
-                    {v.detalle && /verificar/i.test(v.detalle) ? (
-                      <span className="w-full text-[9px] font-semibold text-amber-600">verificar cronograma ARCA</span>
-                    ) : null}
+                    <span className="w-full text-[9px] opacity-50">Fuente: ARCA</span>
                   </li>
                 ))}
               </ul>
@@ -127,20 +122,11 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
 
           {fiscal.vencimientos.length === 0 ? (
             <p className="border-t border-slate-100 pt-2 text-[11px] opacity-50">
-              sin vencimientos próximos cargados
+              Sin vencimientos próximos
             </p>
           ) : null}
 
-          {fiscal.fuente ? (
-            <p className="text-[9px] opacity-45">
-              {fiscal.fuente}
-              {fiscal.fecha ? ` · ${isoToDmy(fiscal.fecha)}` : ""}
-              {fiscal.vencidosOcultos
-                ? ` · ${fiscal.vencidosOcultos} vencimiento(s) ya pasado(s) oculto(s)`
-                : ""}
-            </p>
-          ) : null}
-
+          
           {fiscal.pie ? (
             <p className="border-t border-slate-100 pt-1.5 text-[9px] leading-snug opacity-55">
               {fiscal.pie}
