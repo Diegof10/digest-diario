@@ -1,74 +1,84 @@
 {
-  "asOf": "2026-09-29T09:55:32.000Z",
-  "asOfArg": "29/09/2026, 06:55",
+  "asOf": "2026-10-01T11:15:00.000Z",
+  "asOfArg": "01/10/2026, 08:15",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT últimas 48 h · 29/09 06:55 ARG (corrida manual: rutinas 28/9 fallaron por infraestructura)",
+  "note": "Búsqueda web ES/EN/PT últimas 48 h · 01/10 08:15 ARG (corrida manual: rutina 6:53 falló por infraestructura)",
   "items": [
     {
-      "title": "Ley de semillas: pese al acercamiento y tras la falta de acuerdo, el Gobierno decidirá quiénes pagarán por el uso propio",
-      "source": "La Nación",
-      "handle": "La Nación",
-      "text": "Ley de semillas: pese al acercamiento y tras la falta de acuerdo, el Gobierno decidirá quiénes pagarán por el uso propio",
-      "url": "https://www.lanacion.com.ar/economia/campo/ley-de-semillas-pese-al-acercamiento-y-tras-la-falta-de-acuerdo-el-gobierno-decidira-quienes-pagaran-nid28092026/",
-      "publishedAt": "2026-09-28T22:42:40.455Z",
-      "publishedAtArg": "28/09 19:42",
+      "title": "USDA: los stocks de maíz de EE.UU. al 1/9 suben 35% (2.095 M bu) y superan todas las estimaciones; soja 315 M bu (−3%) y trigo 1.845 M bu (−14%)",
+      "source": "USDA NASS",
+      "handle": "USDA NASS",
+      "text": "USDA: los stocks de maíz de EE.UU. al 1/9 suben 35% (2.095 M bu) y superan todas las estimaciones; soja 315 M bu (−3%) y trigo 1.845 M bu (−14%)",
+      "url": "https://www.nass.usda.gov/Newsroom/2026/09-30-2026.php",
+      "publishedAt": "2026-09-30T16:00:00.000Z",
+      "publishedAtArg": "30/09 13:00",
       "rank": 1
     },
     {
-      "title": "“Ciclogénesis”: septiembre termina con tormentas severas y lluvias heterogéneas en la región agrícola",
-      "source": "TN Campo",
-      "handle": "TN Campo",
-      "text": "“Ciclogénesis”: septiembre termina con tormentas severas y lluvias heterogéneas en la región agrícola",
-      "url": "https://tn.com.ar/campo/2026/09/28/ciclogenesis-septiembre-termina-con-tormentas-severas-y-lluvias-heterogeneas-en-la-region-agricola/",
-      "publishedAt": "2026-09-28T15:07:29.236Z",
-      "publishedAtArg": "28/09 12:07",
+      "title": "China: la demanda débil y los márgenes negativos frenan las compras de soja; los molinos privados ya se cubrieron con Brasil y Argentina hasta febrero",
+      "source": "Reuters",
+      "handle": "Reuters",
+      "text": "China: la demanda débil y los márgenes negativos frenan las compras de soja; los molinos privados ya se cubrieron con Brasil y Argentina hasta febrero",
+      "url": "https://www.reuters.com/world/china/chinas-weak-soybean-demand-dims-prospects-us-cargoes-after-tariff-snub-2026-09-30/",
+      "publishedAt": null,
+      "publishedAtArg": "30/09",
       "rank": 2
     },
     {
-      "title": "EE.UU. y China extienden la tregua comercial, sin nuevos compromisos de compra de soja",
-      "source": "DTN · traducido del inglés",
-      "handle": "DTN",
-      "text": "EE.UU. y China extienden la tregua comercial, sin nuevos compromisos de compra de soja",
-      "url": "https://www.dtnpf.com/agriculture/web/ag/columns/washington-insider/article/2026/09/28/us-china-extends-trade-truce-new",
-      "publishedAt": "2026-09-28T05:03:00.000Z",
-      "publishedAtArg": "28/09 02:03",
+      "title": "Calor, tormentas fuertes y riesgo de heladas: se viene un escenario climático cambiante para la primera semana de octubre",
+      "source": "Clarín Rural",
+      "handle": "Clarín",
+      "text": "Calor, tormentas fuertes y riesgo de heladas: se viene un escenario climático cambiante para la primera semana de octubre",
+      "url": "https://www.clarin.com/rural/calor-tormentas-fuertes-riesgo-heladas-viene-escenario-climatico-cambiante-primera-semana-octubre_0_tcUyAjtmFX.html",
+      "publishedAt": "2026-09-30T15:05:08.000Z",
+      "publishedAtArg": "30/09 12:05",
       "rank": 3
     },
     {
-      "title": "Brasil: la siembra de soja 2026/27 avanza levemente por delante del año pasado, estima AgRural",
-      "source": "Terra (Reuters/AgRural) · traducido del portugués",
-      "handle": "Terra (Reuters/AgRural)",
-      "text": "Brasil: la siembra de soja 2026/27 avanza levemente por delante del año pasado, estima AgRural",
-      "url": "https://www.terra.com.br/economia/plantio-de-soja-do-brasil-tem-leve-avanco-anual-na-safra-2627-estima-agrural,cd78ab07656effdd95bbcc7313f54996t163fbgp.html",
-      "publishedAt": "2026-09-28T14:42:18.000Z",
-      "publishedAtArg": "28/09 11:42",
+      "title": "“Que no vuelvan nunca más”: fuerte reclamo de Federación Agraria para poner fin a las retenciones por ley",
+      "source": "La Nación",
+      "handle": "La Nación",
+      "text": "“Que no vuelvan nunca más”: fuerte reclamo de Federación Agraria para poner fin a las retenciones por ley",
+      "url": "https://www.lanacion.com.ar/economia/campo/que-no-vuelvan-nunca-mas-fuerte-reclamo-de-federacion-agraria-para-poner-fin-a-las-retenciones-por-nid29092026/",
+      "publishedAt": "2026-09-29T21:37:11.706Z",
+      "publishedAtArg": "29/09 18:37",
       "rank": 4
+    },
+    {
+      "title": "El Gobierno evaluará las propuestas de los ruralistas sobre la Ley de Semillas para definir quiénes pagarán por el uso propio",
+      "source": "TN Campo",
+      "handle": "TN",
+      "text": "El Gobierno evaluará las propuestas de los ruralistas sobre la Ley de Semillas para definir quiénes pagarán por el uso propio",
+      "url": "https://tn.com.ar/campo/2026/09/29/el-gobierno-evaluara-las-propuestas-de-los-ruralistas-sobre-la-ley-de-semillas-para-definir-quienes-pagaran-por-el-uso-propio/",
+      "publishedAt": "2026-09-29T16:24:21.525Z",
+      "publishedAtArg": "29/09 13:24",
+      "rank": 5
     }
   ],
   "descartadas": [
     {
-      "motivo": "duplicado",
-      "fuente": "Infocampo / El Tribuno / LT15",
-      "item": "Ley de semillas uso propio (se deja LN 28/9)"
+      "motivo": "fuera de 48 h",
+      "fuente": "La Nación 28/09 · DTN 28/09",
+      "item": "Ley de semillas (LN) y tregua EE.UU.–China (DTN); el tema sigue con TN 29/09 y Reuters 30/09"
     },
     {
       "motivo": "duplicado",
-      "fuente": "Farm Progress / Feedstuffs / Ag Bull",
-      "item": "Tregua EE.UU.–China sin soja comercial (se deja DTN)"
+      "fuente": "Puntal / La Voz / Agroempresario",
+      "item": "FAA pide fin de retenciones por ley (se deja LN 29/9)"
     },
     {
-      "motivo": "vieja",
-      "fuente": "BCR / La Nación / Palabra de Campo",
-      "item": "70% de la región núcleo en escasez/sequía (25/9, >48 h)"
+      "motivo": "menor impacto",
+      "fuente": "Conab / Exame",
+      "item": "Brasil: siembra de soja 3,9% al 30/9"
     },
     {
       "motivo": "precio",
       "fuente": "varios",
-      "item": "Cierres de pizarra/Chicago 28/9"
+      "item": "Movimientos de Chicago tras el informe de stocks"
     }
   ],
-  "updatedAt": "2026-09-29T09:55:32.000Z",
+  "updatedAt": "2026-10-01T11:15:00.000Z",
   "updatedBy": "búsqueda web manual (criterio eventos, sin precios)"
 }
