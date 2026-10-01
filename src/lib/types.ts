@@ -111,6 +111,7 @@ export interface NoticiasSnapshot {
   fetchedAt: string;
   asOf: string | null;
   maxAgeHours: number;
+  aviso?: string | null;
 }
 
 export interface MercadoSnapshot {

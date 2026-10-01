@@ -458,7 +458,7 @@ export default function MarketBoard({
         </Panel>
 
         {tema !== "base" ? (
-          <NoticiasUi items={noticiasItems} fallback={noticias?.valor ?? null} stale={noticiasStale} />
+          <NoticiasUi items={noticiasItems} fallback={noticias?.valor ?? null} stale={noticiasStale} aviso={mercado.noticias?.aviso ?? null} />
         ) : (
         <Panel title="Noticias">
           {noticiasStale ? <p className="mb-1 text-[10px] font-bold text-amber-700">{noticiasStale}</p> : null}

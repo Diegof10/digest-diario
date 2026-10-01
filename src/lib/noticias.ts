@@ -1,6 +1,7 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import type { EtiquetaDato } from "@/lib/types";
+import { readNoticiasBlob } from "@/lib/noticias-cron";
 
 /**
  * Noticias agro — snapshot fechado de EVENTOS que mueven la decisión del
@@ -36,6 +37,8 @@ export interface NoticiasItem {
 
 export interface NoticiasFile {
   asOf: string | null;
+  /** "Sin noticias nuevas · HH:MM" cuando la última tanda no trajo nada nuevo */
+  aviso?: string | null;
   asOfArg?: string | null;
   maxAgeHours?: number;
   valor: string | null;
@@ -59,6 +62,7 @@ export interface NoticiasSnapshot {
   fetchedAt: string;
   asOf: string | null;
   maxAgeHours: number;
+  aviso?: string | null;
 }
 
 const SNAPSHOT_REL = path.join("src", "data", "noticias-snapshot.json");
@@ -128,13 +132,27 @@ function emptySnap(note: string): NoticiasSnapshot {
   };
 }
 
-export async function loadNoticiasFile(): Promise<NoticiasFile | null> {
+async function loadRepoFile(): Promise<NoticiasFile | null> {
   try {
     const raw = await readFile(snapshotPath(), "utf8");
     return JSON.parse(raw) as NoticiasFile;
   } catch {
     return null;
   }
+}
+
+/** El más nuevo entre el Blob del cron (noticias/latest.json) y el snapshot del repo. */
+export async function loadNoticiasFile(): Promise<NoticiasFile | null> {
+  const [repo, blob] = await Promise.all([
+    loadRepoFile(),
+    process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID
+      ? readNoticiasBlob().catch(() => null)
+      : Promise.resolve(null),
+  ]);
+  const t = (f: NoticiasFile | null) => (f?.asOf ? Date.parse(f.asOf) || 0 : 0);
+  if (!blob) return repo;
+  if (!repo) return blob;
+  return t(blob) >= t(repo) ? blob : repo;
 }
 
 /**
@@ -216,6 +234,7 @@ export async function getNoticias(): Promise<NoticiasSnapshot> {
     etiqueta: "HECHO",
     items,
     note: file.note || `Snapshot noticias · ${items.length} items`,
+    aviso: file.aviso ?? null,
     fetchedAt: new Date().toISOString(),
     asOf: file.asOf,
     maxAgeHours: maxAge,
