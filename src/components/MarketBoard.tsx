@@ -6,6 +6,8 @@ import { GrainLabel } from "@/components/ui/GrainIcon";
 import NoticiasUi from "@/components/ui/NoticiasUi";
 import { noticiasStaleLabel } from "@/lib/noticias";
 import TradingBoard from "@/components/ui/TradingBoard";
+import HaciendaBlock from "@/components/HaciendaBlock";
+import type { HaciendaSnapshot } from "@/lib/hacienda";
 
 const CROP = {
   soja: { accent: "#1f6b3a", label: "SOJA" },
@@ -366,7 +368,15 @@ function SignalChip({ r }: { r: MercadoRow | undefined }) {
   );
 }
 
-export default function MarketBoard({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tema?: Tema }) {
+export default function MarketBoard({
+  mercado,
+  tema = "base",
+  hacienda,
+}: {
+  mercado: MercadoSnapshot;
+  tema?: Tema;
+  hacienda?: HaciendaSnapshot | null;
+}) {
   const sojaChi = rowById(mercado.rows, "chicago-soja");
   const maizChi = rowById(mercado.rows, "chicago-maiz");
   const trigoChi = rowById(mercado.rows, "chicago-trigo");
@@ -488,6 +498,8 @@ export default function MarketBoard({ mercado, tema = "base" }: { mercado: Merca
           <ClimaBlock mercado={mercado} />
         </Panel>
       </div>
+
+      {hacienda ? <HaciendaBlock hacienda={hacienda} /> : null}
 
       {/* Señales */}
       {tema !== "base" ? (

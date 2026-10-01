@@ -5,6 +5,7 @@ import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
 import { getClimaVivo } from "@/lib/clima-vivo";
+import { getHacienda } from "@/lib/hacienda";
 import { loadResumenMatutino } from "@/lib/resumen-matutino";
 import { parseTema } from "@/lib/tema";
 import { buildTicker } from "@/lib/ticker";
@@ -27,10 +28,11 @@ export default async function Home({
       : DEFAULT_KM;
 
   const tema = parseTema(sp.tema);
-  const [digest, climaVivo, cos] = await Promise.all([
+  const [digest, climaVivo, cos, hacienda] = await Promise.all([
     assembleDigest({ km }),
     getClimaVivo(),
     tema !== "base" ? loadResumenMatutino() : Promise.resolve(null),
+    getHacienda(),
   ]);
   const lecturaCards = await buildLecturaCards(digest.mercado, digest.fiscal, climaVivo);
   const ticker = tema !== "base" ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null) : [];
@@ -81,7 +83,7 @@ export default async function Home({
 
       <ClimaVivo clima={climaVivo} tema={tema} />
 
-      <MarketBoard mercado={digest.mercado} tema={tema} />
+      <MarketBoard mercado={digest.mercado} tema={tema} hacienda={hacienda} />
 
       <div className="mt-3">
         <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
