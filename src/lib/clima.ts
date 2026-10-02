@@ -10,12 +10,13 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "AR",
     countryLabel: "Argentina",
     bullet:
-      "Tendencia primavera más húmeda en zona núcleo (SMN trimestral).",
-    fuente: "SMN Pronóstico Climático Trimestral",
-    fecha: "ago-2026",
+      "Trimestre oct–dic: lluvias superiores a lo normal en Litoral, Córdoba, oeste Santa Fe, Cuyo centro-sur, La Pampa, oeste BA y NE Patagonia; temps inferiores en Cuyo/Córdoba/oeste Santa Fe/La Pampa/oeste BA (SMN 30/9).",
+    fuente: "SMN Pronóstico Climático Trimestral oct–dic 2026",
+    fecha: "30/9/2026",
     url: "https://ws2.smn.gob.ar/pronostico-trimestral",
-    secondaryUrl: null,
-    secondaryNote: null,
+    secondaryUrl:
+      "https://www.clarin.com/sociedad/dan-pronostico-clima-fin-ano-super-nino-suma-raro-desvio-termico-exceso-lluvias_0_lA4hofaODb.html",
+    secondaryNote: "Cobertura Clarín del boletín SMN OND (elaborado 30/9)",
   },
   {
     country: "BR",
@@ -33,13 +34,13 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "US",
     countryLabel: "Estados Unidos",
     bullet:
-      "Mapa USDM 22/9 (publicado 24/9): más sequía Sur/Planicies (D3–D4 TX–OK–AR); lluvias mejoran Medio Oeste. CPC a dic: mejora Este/Sur, persistencia Norte/Montañas (17/9).",
+      "Mapa USDM 29/9 (publicado 1/10): sequía intensa Sur/Planicies (TX–OK–AR) con lluvias que alivian Suroeste/High Plains; Medio Oeste mixto. CPC SDO a dic (30/9): mejora sur/centro, desarrollo Norte Rocosas–Noroeste.",
     fuente: "US Drought Monitor · NOAA CPC Seasonal Drought Outlook",
-    fecha: "22–24/9/2026",
+    fecha: "29/9–1/10/2026",
     url: "https://droughtmonitor.unl.edu/",
     secondaryUrl:
       "https://www.cpc.ncep.noaa.gov/products/expert_assessment/sdo_summary.php/",
-    secondaryNote: "CPC Seasonal Drought Outlook (17/9; próximo 15/10)",
+    secondaryNote: "CPC Seasonal Drought Outlook (30/9; próximo 15/10)",
   },
 ];
 
@@ -118,13 +119,13 @@ export async function getClima(): Promise<ClimaSnapshot> {
       return snapshotFromHecho(
         "HECHO",
         true,
-        "Fuentes climáticos alcanzables · snapshot HECHO aprobado (SMN ago-2026 / INMET 10/9 / USDM 22–24/9 · CPC 17/9).",
+        "Fuentes climáticos alcanzables · snapshot HECHO aprobado (SMN OND 30/9 / INMET 10/9 / USDM 29/9–1/10 · CPC 30/9).",
       );
     }
     return snapshotFromHecho(
       "ÚLTIMO_GUARDADO",
       false,
-      "último valor guardado — probe parcial/fallido; bullets HECHO aprobados (SMN ago-2026 · INMET 10/9 · USDM 22–24/9 · CPC 17/9).",
+      "último valor guardado — probe parcial/fallido; bullets HECHO aprobados (SMN OND 30/9 · INMET 10/9 · USDM 29/9–1/10 · CPC 30/9).",
     );
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);

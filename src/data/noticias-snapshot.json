@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-10-01T21:02:05.000Z",
-  "asOfArg": "01/10/2026, 18:02",
+  "asOf": "2026-10-02T09:43:00.000Z",
+  "asOfArg": "02/10/2026, 06:43",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT · 01/10/2026, 18:02 ARG (respaldo manual: cron 17:43 no actualizó el bloque; logs Vercel 403)",
+  "note": "Búsqueda web ES/EN/PT · 02/10/2026, 06:43 ARG (respaldo manual matutino 02/10: SMN OND + visita China; se mantienen Carta de Porte, maíz 64 Mt y USDA stocks)",
   "items": [
     {
       "title": "INASE y ARCA: desde el 1/10 vale la Carta de Porte de Semillas; será obligatoria desde el 1/12 para especies con apertura por variedad en SISA",
@@ -27,6 +27,26 @@
       "rank": 2
     },
     {
+      "title": "SMN (30/9): trimestre oct–dic con lluvias superiores a lo normal en Litoral y zona centro, y temperaturas inferiores a lo normal en Cuyo, Córdoba, La Pampa y oeste bonaerense",
+      "source": "Clarín",
+      "handle": "Clarín",
+      "text": "SMN (30/9): trimestre oct–dic con lluvias superiores a lo normal en Litoral y zona centro, y temperaturas inferiores a lo normal en Cuyo, Córdoba, La Pampa y oeste bonaerense",
+      "url": "https://www.clarin.com/sociedad/dan-pronostico-clima-fin-ano-super-nino-suma-raro-desvio-termico-exceso-lluvias_0_lA4hofaODb.html",
+      "publishedAt": "2026-10-01T16:47:00.000Z",
+      "publishedAtArg": "01/10",
+      "rank": 3
+    },
+    {
+      "title": "El Gobierno evalúa una visita de alto nivel a China antes de fin de año; el agro pide avanzar con accesos (pellet de girasol, maíz, carnes) y Cancillería confirma que se analiza",
+      "source": "La Nación Campo",
+      "handle": "LN Campo",
+      "text": "El Gobierno evalúa una visita de alto nivel a China antes de fin de año; el agro pide avanzar con accesos (pellet de girasol, maíz, carnes) y Cancillería confirma que se analiza",
+      "url": "https://www.lanacion.com.ar/economia/campo/el-gobierno-evalua-una-visita-de-alto-nivel-a-china-y-el-agro-espera-avances-para-abrir-mas-negocios-nid01102026/",
+      "publishedAt": "2026-10-01T13:30:00.000Z",
+      "publishedAtArg": "01/10 10:30",
+      "rank": 4
+    },
+    {
       "title": "USDA: los stocks de maíz de EE.UU. al 1/9 suben 35% (2.095 M bu) y superan todas las estimaciones; soja 315 M bu (−3%) y trigo 1.845 M bu (−14%)",
       "source": "USDA NASS",
       "handle": "USDA NASS",
@@ -34,56 +54,41 @@
       "url": "https://www.nass.usda.gov/Newsroom/2026/09-30-2026.php",
       "publishedAt": "2026-09-30T16:00:00.000Z",
       "publishedAtArg": "30/09 13:00",
-      "rank": 3
-    },
-    {
-      "title": "China: la demanda débil y los márgenes negativos frenan las compras de soja; los molinos privados ya se cubrieron con Brasil y Argentina hasta febrero",
-      "source": "Reuters",
-      "handle": "Reuters",
-      "text": "China: la demanda débil y los márgenes negativos frenan las compras de soja; los molinos privados ya se cubrieron con Brasil y Argentina hasta febrero",
-      "url": "https://www.reuters.com/world/china/chinas-weak-soybean-demand-dims-prospects-us-cargoes-after-tariff-snub-2026-09-30/",
-      "publishedAt": null,
-      "publishedAtArg": "30/09",
-      "rank": 4
-    },
-    {
-      "title": "Calor, tormentas fuertes y riesgo de heladas: se viene un escenario climático cambiante para la primera semana de octubre",
-      "source": "Clarín Rural",
-      "handle": "Clarín",
-      "text": "Calor, tormentas fuertes y riesgo de heladas: se viene un escenario climático cambiante para la primera semana de octubre",
-      "url": "https://www.clarin.com/rural/calor-tormentas-fuertes-riesgo-heladas-viene-escenario-climatico-cambiante-primera-semana-octubre_0_tcUyAjtmFX.html",
-      "publishedAt": "2026-09-30T15:05:08.000Z",
-      "publishedAtArg": "30/09 12:05",
       "rank": 5
     }
   ],
   "descartadas": [
     {
-      "motivo": "duplicado/menor frescura",
-      "fuente": "La Nación / Agrofy / Infocampo FAA",
-      "item": "FAA pide fin de retenciones por ley (ya cubierto en tanda previa)"
+      "motivo": "superseded por SMN OND",
+      "fuente": "Clarín Rural 30/09",
+      "item": "Calor/tormentas/heladas primera semana de octubre"
     },
     {
-      "motivo": "menor impacto vs top 5",
-      "fuente": "TN / LN 28-29/09",
-      "item": "Ley de Semillas: Gobierno define pago por uso propio"
+      "motivo": "reemplazada por visita China LN (más AR-específica)",
+      "fuente": "Reuters 30/09",
+      "item": "China demanda soja débil / molinos cubiertos hasta febrero"
     },
     {
-      "motivo": "menor impacto",
-      "fuente": "Portal do Agronegócio / CONAB",
-      "item": "Brasil: siembra de soja 2026/27 en 3,9% al 25/9"
+      "motivo": "opinión / sin hecho operativo nuevo",
+      "fuente": "LN Campo 01/10",
+      "item": "Expectativas gruesa + cautela El Niño/chicharrita/costos (Congreso Maíz)"
     },
     {
-      "motivo": "precio",
-      "fuente": "Infocampo / Ruralnet",
-      "item": "Precios Rosario/Chicago y liquidación CIARA (flujo de divisas)"
+      "motivo": "precio / liquidación divisas",
+      "fuente": "Infobae 01/10",
+      "item": "Soja liquidó USD 3.200 M en septiembre"
     },
     {
-      "motivo": "fuera de ventana / viejo",
-      "fuente": "Palabra de Campo",
-      "item": "Acsoja pide acelerar baja de retenciones (publicado jun/2026)"
+      "motivo": "menor impacto vs top 5 / solapado con 64 Mt",
+      "fuente": "DataPortuaria / CIARA 30/09",
+      "item": "Exportaciones maíz ya superan 37 Mt; camino a >40 Mt"
+    },
+    {
+      "motivo": "sin cotización fertilizantes nueva",
+      "fuente": "Bichos/IF",
+      "item": "Último RIF urea sigue siendo 26/9"
     }
   ],
-  "updatedAt": "2026-10-01T21:02:05.000Z",
-  "updatedBy": "respaldo manual post cierre Matba (rutina Noticias tarde)"
+  "updatedAt": "2026-10-02T09:43:00.000Z",
+  "updatedBy": "respaldo manual matutino 02/10 (Costos/Clima/Noticias)"
 }
