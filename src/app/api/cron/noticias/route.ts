@@ -4,7 +4,7 @@ import { refreshNoticias, writeNoticiasRun } from "@/lib/noticias-cron";
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
 
-/** Vercel Cron: 6:38 ART diario y 17:43 ART lun–vie (vercel.json). Protegido con CRON_SECRET. */
+/** Vercel Cron (noticias por RSS): 6:38 ART diario y 17:43 ART lun–vie (vercel.json). Protegido con CRON_SECRET. */
 export async function GET(req: NextRequest) {
   const secret = process.env.CRON_SECRET;
   if (secret && req.headers.get("authorization") !== `Bearer ${secret}`) {
