@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { refreshNoticias } from "@/lib/noticias-cron";
+import { refreshNoticias, writeNoticiasRun } from "@/lib/noticias-cron";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -15,10 +15,12 @@ export async function GET(req: NextRequest) {
   try {
     const r = await refreshNoticias();
     console.log(`[cron/noticias] ok ${Date.now() - t0}ms ${JSON.stringify(r)}`);
+    await writeNoticiasRun({ at: new Date().toISOString(), ok: true, ms: Date.now() - t0, resumen: r }).catch(() => {});
     return NextResponse.json({ ok: true, ...r });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     console.error(`[cron/noticias] FAIL ${Date.now() - t0}ms ${msg}`);
+    await writeNoticiasRun({ at: new Date().toISOString(), ok: false, ms: Date.now() - t0, error: msg }).catch(() => {});
     return NextResponse.json({ ok: false, error: msg }, { status: 500 });
   }
 }

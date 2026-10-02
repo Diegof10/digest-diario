@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import vercelJson from "../../../../vercel.json";
+import { readNoticiasRun } from "@/lib/noticias-cron";
 import { blobConfigured, blobLastError, readCronLog, readSerie } from "@/lib/serie-blob";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const [serie, cronRuns] = await Promise.all([
+  const [serie, cronRuns, noticiasCron] = await Promise.all([
     readSerie(true).catch(() => null),
     readCronLog().catch(() => []),
+    readNoticiasRun().catch(() => null),
   ]);
   const puntos = serie
     ? Object.fromEntries(
@@ -32,6 +34,8 @@ export async function GET() {
     cronSecretPresent: Boolean(process.env.CRON_SECRET),
     /** Últimas corridas autenticadas de /api/cron/digest (persistidas en Blob) */
     cronRuns: cronRuns.slice(0, 5).map((r) => ({ at: r.at, ms: r.ms, userAgent: r.userAgent, blobWritten: r.blobWritten })),
+    /** Última corrida de /api/cron/noticias (ok o error) */
+    noticiasCron,
     blob: {
       configured: blobConfigured(),
       storeIdPresent: Boolean(process.env.BLOB_STORE_ID),

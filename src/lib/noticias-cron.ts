@@ -187,3 +187,32 @@ export async function refreshNoticias(now = new Date()) {
     aviso: file.aviso ?? null,
   };
 }
+
+const RUN_PATH = "noticias/last-run.json";
+
+export type NoticiasRunStatus = { at: string; ok: boolean; ms: number; error?: string; resumen?: unknown };
+
+export async function writeNoticiasRun(s: NoticiasRunStatus): Promise<void> {
+  const body = JSON.stringify({ ...s, error: s.error?.slice(0, 300) });
+  for (const access of ["private", "public"] as const) {
+    try {
+      await put(RUN_PATH, body, { access, addRandomSuffix: false, allowOverwrite: true, contentType: "application/json", cacheControlMaxAge: 60 });
+      return;
+    } catch {
+      /* probar el otro modo */
+    }
+  }
+}
+
+export async function readNoticiasRun(): Promise<NoticiasRunStatus | null> {
+  for (const access of ["private", "public"] as const) {
+    try {
+      const res = await get(RUN_PATH, { access, useCache: false });
+      if (!res || res.statusCode !== 200) return null;
+      return JSON.parse(await new Response(res.stream).text()) as NoticiasRunStatus;
+    } catch {
+      /* probar el otro modo */
+    }
+  }
+  return null;
+}
