@@ -1,20 +1,30 @@
 {
-  "asOf": "2026-10-02T09:43:00.000Z",
-  "asOfArg": "02/10/2026, 06:43",
+  "asOf": "2026-10-03T09:50:00.000Z",
+  "asOfArg": "03/10/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT · 02/10/2026, 06:43 ARG (respaldo manual matutino 02/10: SMN OND + visita China; se mantienen Carta de Porte, maíz 64 Mt y USDA stocks)",
+  "note": "Búsqueda web ES/EN/PT · 03/10/2026, 06:50 ARG (respaldo manual matutino 03/10: GEA lluvias/siembra maíz + Niño BCR + trigo norte + Japón carne; se mantiene maíz 64 Mt)",
   "items": [
     {
-      "title": "INASE y ARCA: desde el 1/10 vale la Carta de Porte de Semillas; será obligatoria desde el 1/12 para especies con apertura por variedad en SISA",
-      "source": "Argentina.gob.ar",
-      "handle": "INASE/ARCA",
-      "text": "INASE y ARCA: desde el 1/10 vale la Carta de Porte de Semillas; será obligatoria desde el 1/12 para especies con apertura por variedad en SISA",
-      "url": "https://www.argentina.gob.ar/noticias/inase-y-arca-implementan-la-carta-de-porte-de-semillas",
-      "publishedAt": "2026-10-01T03:00:00.000Z",
-      "publishedAtArg": "01/10",
+      "title": "GEA/BCR: lluvias en la Región Núcleo (≈25 mm en 7 días) redujeron a la mitad los lotes de trigo en estado regular y habilitan completar la siembra de maíz temprano (quedan ≈750 mil ha)",
+      "source": "TN Campo",
+      "handle": "TN Campo",
+      "text": "GEA/BCR: lluvias en la Región Núcleo (≈25 mm en 7 días) redujeron a la mitad los lotes de trigo en estado regular y habilitan completar la siembra de maíz temprano (quedan ≈750 mil ha)",
+      "url": "https://tn.com.ar/campo/2026/10/02/lluvias-clave-en-la-region-nucleo-alivio-para-el-trigo-y-luz-verde-para-completar-la-siembra-de-maiz/",
+      "publishedAt": "2026-10-02T17:03:00.000Z",
+      "publishedAtArg": "02/10 14:03",
       "rank": 1
+    },
+    {
+      "title": "BCR/GEA: El Niño está instalado pero no trae las lluvias esperadas; bajaron las proyecciones de intensidad (pico dic. ≈2 °C) y podrían recortarse las lluvias de oct–dic, aún por encima de la media",
+      "source": "La Nación Campo",
+      "handle": "LN Campo",
+      "text": "BCR/GEA: El Niño está instalado pero no trae las lluvias esperadas; bajaron las proyecciones de intensidad (pico dic. ≈2 °C) y podrían recortarse las lluvias de oct–dic, aún por encima de la media",
+      "url": "https://www.lanacion.com.ar/economia/campo/el-nino-ya-esta-instalado-pero-no-trae-las-lluvias-esperadas-y-ahora-bajan-las-proyecciones-nid02102026/",
+      "publishedAt": "2026-10-02T21:43:00.000Z",
+      "publishedAtArg": "02/10 18:43",
+      "rank": 2
     },
     {
       "title": "Bolsa de Cereales: se da por finalizada la cosecha de maíz 2025/26 con récord de 64 Mt; la siembra 2026/27 ya lleva 22,2% de 8,4 M ha",
@@ -24,71 +34,71 @@
       "url": "https://www.infocampo.com.ar/y-un-dia-termino-la-cosecha-de-maiz-otra-campana-en-la-que-el-campo-argentino-hizo-historia/",
       "publishedAt": "2026-10-01T19:53:52.000Z",
       "publishedAtArg": "01/10 16:53",
-      "rank": 2
-    },
-    {
-      "title": "SMN (30/9): trimestre oct–dic con lluvias superiores a lo normal en Litoral y zona centro, y temperaturas inferiores a lo normal en Cuyo, Córdoba, La Pampa y oeste bonaerense",
-      "source": "Clarín",
-      "handle": "Clarín",
-      "text": "SMN (30/9): trimestre oct–dic con lluvias superiores a lo normal en Litoral y zona centro, y temperaturas inferiores a lo normal en Cuyo, Córdoba, La Pampa y oeste bonaerense",
-      "url": "https://www.clarin.com/sociedad/dan-pronostico-clima-fin-ano-super-nino-suma-raro-desvio-termico-exceso-lluvias_0_lA4hofaODb.html",
-      "publishedAt": "2026-10-01T16:47:00.000Z",
-      "publishedAtArg": "01/10",
       "rank": 3
     },
     {
-      "title": "El Gobierno evalúa una visita de alto nivel a China antes de fin de año; el agro pide avanzar con accesos (pellet de girasol, maíz, carnes) y Cancillería confirma que se analiza",
-      "source": "La Nación Campo",
-      "handle": "LN Campo",
-      "text": "El Gobierno evalúa una visita de alto nivel a China antes de fin de año; el agro pide avanzar con accesos (pellet de girasol, maíz, carnes) y Cancillería confirma que se analiza",
-      "url": "https://www.lanacion.com.ar/economia/campo/el-gobierno-evalua-una-visita-de-alto-nivel-a-china-y-el-agro-espera-avances-para-abrir-mas-negocios-nid01102026/",
-      "publishedAt": "2026-10-01T13:30:00.000Z",
-      "publishedAtArg": "01/10 10:30",
+      "title": "BCBA/SAGyP: comenzó la cosecha de trigo 2026/27 en el norte (pruebas y lotes tempranos en Salta); Bolsas de BA y Córdoba + FAIM buscan el primer lote para remate",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "text": "BCBA/SAGyP: comenzó la cosecha de trigo 2026/27 en el norte (pruebas y lotes tempranos en Salta); Bolsas de BA y Córdoba + FAIM buscan el primer lote para remate",
+      "url": "https://www.infocampo.com.ar/el-trigo-ya-comenzo-su-cosecha-2026-27-y-salen-a-buscar-el-primer-lote-para-rematarlo/",
+      "publishedAt": "2026-10-02T18:16:21.000Z",
+      "publishedAtArg": "02/10 15:16",
       "rank": 4
     },
     {
-      "title": "USDA: los stocks de maíz de EE.UU. al 1/9 suben 35% (2.095 M bu) y superan todas las estimaciones; soja 315 M bu (−3%) y trigo 1.845 M bu (−14%)",
-      "source": "USDA NASS",
-      "handle": "USDA NASS",
-      "text": "USDA: los stocks de maíz de EE.UU. al 1/9 suben 35% (2.095 M bu) y superan todas las estimaciones; soja 315 M bu (−3%) y trigo 1.845 M bu (−14%)",
-      "url": "https://www.nass.usda.gov/Newsroom/2026/09-30-2026.php",
-      "publishedAt": "2026-09-30T16:00:00.000Z",
-      "publishedAtArg": "30/09 13:00",
+      "title": "Japón habilitó la carne bovina argentina de todo el territorio (zonas libres de aftosa con vacunación) tras 20 años de negociación; primeros embarques estimados en 1T 2027 tras auditorías",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "text": "Japón habilitó la carne bovina argentina de todo el territorio (zonas libres de aftosa con vacunación) tras 20 años de negociación; primeros embarques estimados en 1T 2027 tras auditorías",
+      "url": "https://www.clarin.com/rural/agroindustria-pie-firme-japon-europa_0_BlgsCvw1Gm.html",
+      "publishedAt": "2026-10-03T08:06:03.000Z",
+      "publishedAtArg": "03/10 05:06",
       "rank": 5
     }
   ],
   "descartadas": [
     {
-      "motivo": "superseded por SMN OND",
-      "fuente": "Clarín Rural 30/09",
-      "item": "Calor/tormentas/heladas primera semana de octubre"
+      "motivo": ">48 h desde publicación",
+      "fuente": "Argentina.gob.ar 01/10",
+      "item": "Carta de Porte de Semillas INASE/ARCA"
     },
     {
-      "motivo": "reemplazada por visita China LN (más AR-específica)",
-      "fuente": "Reuters 30/09",
-      "item": "China demanda soja débil / molinos cubiertos hasta febrero"
+      "motivo": ">48 h desde publicación",
+      "fuente": "USDA NASS 30/09",
+      "item": "Stocks maíz/soja/trigo EE.UU. al 1/9"
     },
     {
-      "motivo": "opinión / sin hecho operativo nuevo",
+      "motivo": "ya en bloque Clima / supersedida por noticias frescas de clima Núcleo/Niño",
+      "fuente": "Clarín 01/10",
+      "item": "SMN OND lluvias superiores / temps inferiores"
+    },
+    {
+      "motivo": "reemplazada por Japón carne (más fresca 03/10)",
       "fuente": "LN Campo 01/10",
-      "item": "Expectativas gruesa + cautela El Niño/chicharrita/costos (Congreso Maíz)"
+      "item": "Visita alto nivel a China / accesos agro"
     },
     {
-      "motivo": "precio / liquidación divisas",
-      "fuente": "Infobae 01/10",
-      "item": "Soja liquidó USD 3.200 M en septiembre"
+      "motivo": "precio / cotizaciones",
+      "fuente": "TN 02/10",
+      "item": "Soja cierre semanal Chicago/Rosario"
     },
     {
-      "motivo": "menor impacto vs top 5 / solapado con 64 Mt",
-      "fuente": "DataPortuaria / CIARA 30/09",
-      "item": "Exportaciones maíz ya superan 37 Mt; camino a >40 Mt"
+      "motivo": "proyección precampaña vieja (09/09)",
+      "fuente": "Clarín Rural",
+      "item": "Soja 17 M ha 2026/27"
     },
     {
-      "motivo": "sin cotización fertilizantes nueva",
+      "motivo": "sin RIF nuevo con precios",
       "fuente": "Bichos/IF",
-      "item": "Último RIF urea sigue siendo 26/9"
+      "item": "Último RIF urea sigue 26/9 (600–620 FCA)"
+    },
+    {
+      "motivo": "CATAC sin cuadro nuevo",
+      "fuente": "catac.org.ar / api.apicatac.com",
+      "item": "Sigue vigente tarifa 10/04/2026"
     }
   ],
-  "updatedAt": "2026-10-02T09:43:00.000Z",
-  "updatedBy": "respaldo manual matutino 02/10 (Costos/Clima/Noticias)"
+  "updatedAt": "2026-10-03T09:50:00.000Z",
+  "updatedBy": "respaldo manual matutino 03/10 (Costos/Clima/Noticias)"
 }
