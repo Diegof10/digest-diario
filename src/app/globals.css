@@ -151,7 +151,7 @@ code {
 [data-tema="a"] .bg-red-50 { background: #2a0a0a; color: #fca5a5; border-color: #7f1d1d; }
 [data-tema="a"] .clima-ui { background: #0d1117; }
 
-/* Plazas en celular: que entren las 3 plazas (CAC, AFA, ACA) en 360 px sin scroll */
+/* Plazas en celular: que entren las plazas (CAC, AFA) en 360 px sin scroll */
 @media (max-width: 480px) {
   .plazas-ui table { table-layout: fixed; }
   .plazas-ui th, .plazas-ui td { padding: 0.4rem 0.25rem !important; }

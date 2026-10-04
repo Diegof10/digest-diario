@@ -141,7 +141,7 @@ export interface MercadoSnapshot {
   clima?: ClimaSnapshot | null;
   /** Noticias agro (eventos, no precios) — snapshot fechado; vacío si vencido */
   noticias?: NoticiasSnapshot | null;
-  /** Plazas físicas (CAC / AFA) + ACA por puerto, desde fuentes directas */
+  /** Plazas físicas (CAC / AFA), desde fuentes directas */
   plazas?: import("@/lib/plazas").PlazasSnapshot | null;
 }
 

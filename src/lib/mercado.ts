@@ -303,7 +303,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     }
   }
 
-  // Plazas físicas (Pizarra CAC Rosario / AFA San Martín; ACA por puerto aparte):
+  // Plazas físicas (Pizarra CAC Rosario / AFA San Martín):
   // se agregan en applyPlazas() desde fuentes directas (src/lib/plazas.ts).
 
   // Pizarra MAGYP (FAS) eliminada: estaba clavada y duplicaba CAC Rosario.
@@ -612,7 +612,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         ...base,
         unidad: null,
         etiqueta: "VACÍO",
-        extra: p.id === "aca" ? "s/d" : `sin dato fresco · última fuente ${fechaLabel}`,
+        extra: `sin dato fresco · última fuente ${fechaLabel}`,
       });
       continue;
     }
@@ -638,34 +638,6 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
         : null,
     });
   }
-  // ACA: grano sin pizarra → celda "s/d" con la fuente (nunca 0 ni otro precio).
-  if (p.id === "aca") {
-    const hora = p.granos[0] ? rows[0]?.hora ?? null : null;
-    for (const g of ["soja", "maiz", "trigo", "girasol", "sorgo"] as const) {
-      if (rows.some((r) => r.id === `aca-${g}`)) continue;
-      rows.push({
-        id: `aca-${g}`,
-        mercado: p.nombre,
-        producto: GRANO_LABEL[g],
-        valor: null,
-        unidad: null,
-        fuente: p.fuente,
-        hora,
-        etiqueta: "VACÍO",
-        varPct: null,
-        senal: null,
-        extra: "s/d",
-        contrato: null,
-        url: p.url,
-        fecha: null,
-        frescura: null,
-        varAbs: null,
-        valorUsd: null,
-        tc: null,
-        prevFecha: null,
-      } as MercadoRow);
-    }
-  }
   return rows;
 }
 
@@ -675,7 +647,6 @@ function applyPlazas(snap: MercadoSnapshot, plazas: PlazasSnapshot | null): Merc
   const rows = [
     ...plazaRows(plazas.cac),
     ...plazaRows(plazas.afa),
-    ...plazaRows(plazas.aca),
     ...rest,
   ];
   return {

@@ -137,7 +137,6 @@ function CropLine({
 const PLAZAS = [
   { id: "cac", titulo: "CAC Rosario" },
   { id: "afa", titulo: "AFA San Martín" },
-  { id: "aca", titulo: "ACA" },
 ] as const;
 
 const PIZARRA_GRANOS = ["soja", "maiz", "trigo", "girasol", "sorgo"] as const;
