@@ -71,6 +71,12 @@ export interface ClimaEntry {
   secondaryUrl?: string | null;
   secondaryNote?: string | null;
   etiqueta: EtiquetaDato;
+  /** Pronóstico 7 días automático (cron clima, Open-Meteo modelo) */
+  pronostico?: { texto: string; fuente: string; url: string; at: string } | null;
+  /** Otra línea automática (US: Drought Monitor semanal) */
+  dato?: { texto: string; fuente: string; url: string; fecha: string } | null;
+  /** Aviso: hay un boletín oficial más nuevo que el texto curado */
+  aviso?: { texto: string; url: string } | null;
 }
 
 export interface ClimaSnapshot {
@@ -80,6 +86,13 @@ export interface ClimaSnapshot {
   fetchedAt: string;
   fuente: "live" | "snapshot";
   etiqueta: EtiquetaDato;
+  /** Última actualización automática OK (cron clima, ISO) o null si nunca corrió */
+  actualizadoAt?: string | null;
+  /** Horas desde actualizadoAt (null si nunca) */
+  horasSinActualizar?: number | null;
+  cronAt?: string | null;
+  cronOk?: boolean | null;
+  cronErrores?: string[];
 }
 
 

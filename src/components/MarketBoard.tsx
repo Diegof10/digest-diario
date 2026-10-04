@@ -250,6 +250,20 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
 
 
 
+/** ISO → "DD/MM HH:MM" en ART */
+function fechaHoraArt(iso: string): string {
+  const p = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "America/Argentina/Cordoba",
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date(iso));
+  const g = (t: string) => p.find((x) => x.type === t)?.value ?? "";
+  return `${g("day")}/${g("month")} ${g("hour").replace(/^24$/, "00")}:${g("minute")}`;
+}
+
 function ClimaCountry({ e }: { e: ClimaEntry }) {
   const flagEmoji =
     e.country === "AR" ? "🇦🇷" : e.country === "BR" ? "🇧🇷" : "🇺🇸";
@@ -268,7 +282,31 @@ function ClimaCountry({ e }: { e: ClimaEntry }) {
           {e.fecha}
         </span>
       </div>
-      <p className="mt-0.5 text-[11px] leading-snug">{e.bullet}</p>
+      {e.pronostico ? (
+        <p className="mt-0.5 text-[11px] leading-snug">
+          {e.pronostico.texto}{" "}
+          <a href={e.pronostico.url} target="_blank" rel="noopener noreferrer" className="text-[9px] underline decoration-slate-300 underline-offset-2 opacity-55">
+            {e.pronostico.fuente}
+          </a>
+        </p>
+      ) : null}
+      {e.dato ? (
+        <p className="mt-0.5 text-[11px] leading-snug">
+          {e.dato.texto}{" "}
+          <a href={e.dato.url} target="_blank" rel="noopener noreferrer" className="text-[9px] underline decoration-slate-300 underline-offset-2 opacity-55">
+            {e.dato.fuente}
+          </a>
+        </p>
+      ) : null}
+      <p className="mt-0.5 text-[11px] leading-snug">{e.pronostico || e.dato ? <span className="opacity-60">Perspectiva: </span> : null}{e.bullet}</p>
+      {e.aviso ? (
+        <p className="mt-0.5 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] leading-snug text-amber-800">
+          {e.aviso.texto}{" "}
+          <a href={e.aviso.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+            ver
+          </a>
+        </p>
+      ) : null}
       <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[9px] opacity-55">
         <span>{e.fuente}</span>
         <a
@@ -300,18 +338,24 @@ function ClimaBlock({ mercado }: { mercado: MercadoSnapshot }) {
   if (!clima?.ok || entries.length === 0) {
     return <p className="text-[11px] opacity-40">— sin fuente</p>;
   }
-  const tag =
-    clima.etiqueta === "ÚLTIMO_GUARDADO"
-      ? "último valor guardado"
-      : clima.etiqueta === "HECHO"
-        ? "HECHO"
-        : clima.etiqueta;
+  const act = clima.actualizadoAt ?? null;
+  const stale = clima.etiqueta !== "HECHO";
   return (
     <div className="flex flex-col gap-2">
+      {stale ? (
+        <p role="status" className="rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
+          {act ? `Sin actualizar desde ${fechaHoraArt(act)}` : "Actualización automática pendiente · último valor guardado"}
+        </p>
+      ) : null}
+      {act ? (
+        <p className="-mt-1 text-[9px] opacity-55">
+          Actualizado {fechaHoraArt(act)} · pronóstico Open-Meteo + USDM
+          {clima.cronOk === false ? " · última corrida con errores" : null}
+        </p>
+      ) : null}
       {entries.map((e) => (
         <ClimaCountry key={e.country} e={e} />
       ))}
-      <p className="text-[9px] uppercase tracking-wide opacity-40">{tag}</p>
     </div>
   );
 }

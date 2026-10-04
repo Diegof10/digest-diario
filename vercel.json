@@ -21,6 +21,10 @@
       "schedule": "43 20 * * 1-5"
     },
     {
+      "path": "/api/cron/clima",
+      "schedule": "50 9 * * *"
+    },
+    {
       "path": "/api/cron/fiscal",
       "schedule": "0 11 * * 1-5"
     }
