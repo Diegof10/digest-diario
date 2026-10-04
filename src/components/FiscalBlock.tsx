@@ -42,19 +42,39 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
       <h3 className="digest-panel-title">Fiscal (ARCA)</h3>
 
       {(() => {
-        const ref = fiscal.cargaManual ?? fiscal.cronAt; // revisión del contenido fiscal (rutina diaria); el cron sólo refresca mercado
-        const hoy = fiscal.hoy ?? null;
-        const refDia = ref ? new Intl.DateTimeFormat("en-CA", { timeZone: "America/Argentina/Cordoba" }).format(new Date(ref.length === 10 ? `${ref}T12:00:00-03:00` : ref)) : null;
-        if (hoy && refDia === hoy) return null;
+        // Fecha de revisión del contenido fiscal (cron BO/ARCA o carga manual), NO la corrida del cron de mercado.
+        const ref = fiscal.revisadoAt ?? null;
+        const label = ref ? (ref.length === 10 ? ddmm(ref) : fechaHoraCorta(ref)) : null;
+        const atraso = fiscal.habilesSinRevisar ?? null;
+        const stale = !ref || atraso == null || atraso > 1;
         return (
-          <p role="status" className="-mt-0.5 mb-1 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
-            {ref ? `Sin actualizar desde ${ref.length === 10 ? ddmm(ref) : fechaHoraCorta(ref)}` : "Sin actualizar"}
-          </p>
+          <>
+            {stale ? (
+              <p role="status" className="-mt-0.5 mb-1 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
+                {ref ? `Sin revisar desde ${ddmm(ref)}` : "Sin revisar"}
+              </p>
+            ) : null}
+            <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
+              {label ? `Revisado ${label}${fiscal.revisadoPor === "manual" ? " (manual)" : " · BO/ARCA"}` : null}
+              {fiscal.cronOk === false ? " · última revisión automática con errores" : null}
+            </p>
+            {fiscal.sisaCambioAt ? (
+              <p className="-mt-1 mb-1.5 text-[10px] leading-snug">
+                ARCA actualizó la página{" "}
+                <a
+                  href="https://www.arca.gob.ar/actividadesAgropecuarias/sector-agro/sisa/informacion-productiva.asp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-slate-300 underline-offset-2"
+                >
+                  SISA · Información productiva
+                </a>{" "}
+                ({ddmm(fiscal.sisaCambioAt)})
+              </p>
+            ) : null}
+          </>
         );
       })()}
-      <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
-        {(() => { const r = fiscal.cargaManual ?? fiscal.cronAt; return r ? `Actualizado ${r.length === 10 ? ddmm(r) : fechaHoraCorta(r)}` : null; })()}
-      </p>
 
       {empty ? (
         <p className="text-[12px] opacity-50">Sin novedad fiscal</p>
@@ -64,7 +84,13 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
             <ul className="space-y-1">
               {fiscal.novedades.map((n, i) => (
                 <li key={i} className="text-[12px] leading-snug">
-                  {n.texto}
+                  {n.url ? (
+                    <a href={n.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">
+                      {n.texto}
+                    </a>
+                  ) : (
+                    n.texto
+                  )}
                   {n.fuente ? (
                     <span className="ml-1 text-[9px] opacity-50">
                       · {n.fuente}

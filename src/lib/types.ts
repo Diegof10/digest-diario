@@ -141,6 +141,8 @@ export interface FiscalNovedad {
   boFecha?: string | null;
   /** Link oficial (BO / ARCA) */
   url?: string | null;
+  /** true = detectada por el cron (BO), no curada a mano */
+  auto?: boolean;
 }
 
 export interface FiscalVencimiento {
@@ -174,10 +176,20 @@ export interface FiscalSnapshot {
   vencidosOcultos?: number;
   /** Normas publicadas en BO hace más de 7 días (ART): línea "Normas vigentes:" */
   normasVigentes?: FiscalNovedad[];
-  /** Última corrida registrada del cron (ISO) o null */
+  /** Última corrida del cron fiscal (/api/cron/fiscal, ISO) o null */
   cronAt?: string | null;
-  /** Fecha de carga manual del snapshot (ISO o yyyy-mm-dd), fallback si no hay cron */
+  /** Resultado de la última corrida del cron fiscal (null = nunca corrió) */
+  cronOk?: boolean | null;
+  cronErrores?: string[];
+  /** Fecha de carga manual del snapshot (ISO o yyyy-mm-dd) */
   cargaManual?: string | null;
+  /** Última revisión del contenido fiscal (ISO o yyyy-mm-dd): la más nueva entre cron OK y carga manual */
+  revisadoAt?: string | null;
+  revisadoPor?: "cron" | "manual" | null;
+  /** Días hábiles desde la última revisión hasta hoy (ART) */
+  habilesSinRevisar?: number | null;
+  /** ARCA cambió la página SISA "Información productiva" (ISO), si fue en los últimos 7 días */
+  sisaCambioAt?: string | null;
 }
 
 export interface CostoInsumoSlot {

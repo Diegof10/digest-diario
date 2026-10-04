@@ -177,3 +177,19 @@ export function isoToDmy(iso: string | null | undefined): string {
   const [y, m, d] = iso.split("-");
   return `${d}/${m}/${y}`;
 }
+
+/**
+ * Días hábiles (lun–vie) h con desdeIso < h <= hastaIso. Ej.: revisado vie → lun = 1; jue → lun = 2.
+ * 0 si desde >= hasta.
+ */
+export function habilesEntre(desdeIso: string, hastaIso: string): number {
+  if (desdeIso >= hastaIso) return 0;
+  let n = 0;
+  const d = toUtcDate(desdeIso);
+  const end = toUtcDate(hastaIso);
+  while (d < end) {
+    d.setUTCDate(d.getUTCDate() + 1);
+    if (isHabil(d)) n++;
+  }
+  return n;
+}

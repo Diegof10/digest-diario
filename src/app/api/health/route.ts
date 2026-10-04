@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 import vercelJson from "../../../../vercel.json";
 import { readNoticiasRun } from "@/lib/noticias-cron";
+import { readFiscalBlob } from "@/lib/fiscal-cron";
 import { blobConfigured, blobLastError, readCronLog, readSerie } from "@/lib/serie-blob";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const [serie, cronRuns, noticiasCron] = await Promise.all([
+  const [serie, cronRuns, noticiasCron, fiscalBlob] = await Promise.all([
     readSerie(true).catch(() => null),
     readCronLog().catch(() => []),
     readNoticiasRun().catch(() => null),
+    readFiscalBlob().catch(() => null),
   ]);
   const puntos = serie
     ? Object.fromEntries(
@@ -29,13 +31,17 @@ export async function GET() {
     app: "resumen-agrario",
     producto: "Resumen agrario",
     crons: (vercelJson.crons ?? []).map((c) => `${c.schedule} → ${c.path}`),
-    cronNote: "UTC: 0 10 * * * = 07:00 ART; 15 14 * * 1-5 = 11:15 ART; 30 21 * * 1-5 = 18:30 ART",
+    cronNote: "UTC: 0 10 * * * = 07:00 ART; 15 14 * * 1-5 = 11:15 ART; 30 21 * * 1-5 = 18:30 ART; fiscal 0 11 * * 1-5 = 08:00 ART",
     vercel: Boolean(process.env.VERCEL),
     cronSecretPresent: Boolean(process.env.CRON_SECRET),
     /** Últimas corridas autenticadas de /api/cron/digest (persistidas en Blob) */
     cronRuns: cronRuns.slice(0, 5).map((r) => ({ at: r.at, ms: r.ms, userAgent: r.userAgent, blobWritten: r.blobWritten })),
     /** Última corrida de /api/cron/noticias (ok o error) */
     noticiasCron,
+    /** Última corrida de /api/cron/fiscal (BO/ARCA) y última revisión OK */
+    fiscalCron: fiscalBlob
+      ? { revisadoAt: fiscalBlob.revisadoAt, items: fiscalBlob.items.length, ultimaCorrida: fiscalBlob.ultimaCorrida }
+      : null,
     blob: {
       configured: blobConfigured(),
       storeIdPresent: Boolean(process.env.BLOB_STORE_ID),
