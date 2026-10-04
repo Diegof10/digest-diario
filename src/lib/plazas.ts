@@ -29,9 +29,12 @@ import { ACA_URL } from "@/lib/aca";
 
 export type Grano = "soja" | "maiz" | "trigo";
 export const GRANOS: Grano[] = ["soja", "maiz", "trigo"];
+/** Granos de la pizarra CAC Rosario (incluye girasol y sorgo, sólo CAC). */
+export type GranoPizarra = Grano | "girasol" | "sorgo";
+export const GRANOS_CAC: GranoPizarra[] = ["soja", "maiz", "trigo", "girasol", "sorgo"];
 
 export interface CotizacionGrano {
-  grano: Grano;
+  grano: GranoPizarra;
   /** Precio publicado en la moneda de la fuente */
   valor: number;
   unidad: "ARS/t" | "US$/t";
@@ -76,7 +79,7 @@ const UA =
 
 export const CAC_URL = "https://www.cac.bcr.com.ar/es/precios-de-pizarra";
 const CAC_CONSULTA_URL = "https://www.cac.bcr.com.ar/es/precios-de-pizarra/consultas";
-const CAC_PRODUCT: Record<Grano, string> = { soja: "13", maiz: "3", trigo: "8" };
+const CAC_PRODUCT: Record<GranoPizarra, string> = { soja: "13", maiz: "3", trigo: "8", girasol: "9", sorgo: "6" };
 
 export const AFA_URL = "https://www.afascl.coop/afadiario/mercados-en-linea";
 const AFA_COMP_URL = "https://www.afascl.coop/afadiario/comparativo-pizarra";
@@ -174,7 +177,7 @@ async function fetchBnaDivisa(o: FetchOpts): Promise<{ valor: number; fecha: str
 interface CacBoard {
   fecha: string;
   tc: { valor: number; fecha: string } | null;
-  granos: Partial<Record<Grano, { ars: number | null; usd: number | null; estimativo: boolean }>>;
+  granos: Partial<Record<GranoPizarra, { ars: number | null; usd: number | null; estimativo: boolean }>>;
 }
 
 function parseCacBoard(html: string): CacBoard | null {
@@ -182,7 +185,7 @@ function parseCacBoard(html: string): CacBoard | null {
   const fecha = dmyToIso(fm?.[1]);
   if (!fecha) return null;
   const granos: CacBoard["granos"] = {};
-  for (const g of GRANOS) {
+  for (const g of GRANOS_CAC) {
     const re = new RegExp(`class="board board-${g}[^"]*"([\\s\\S]*?)<div class="bottom" style="text-align: center;">`, "i");
     const bm = html.match(re);
     if (!bm) continue;
@@ -191,7 +194,9 @@ function parseCacBoard(html: string): CacBoard | null {
     const priceTxt = stripHtml(priceHtml);
     const usdHtml = block.match(/<strong>US\$<\/strong>([\s\S]*?)<\/div>/i)?.[1] ?? "";
     const usdTxt = stripHtml(usdHtml);
-    const estimativo = /\(E\)|S\/C/i.test(priceTxt);
+    // "S/C (E) $765.328" = sin cotización, precio estimativo de la Cámara → se muestra marcado (E).
+    // "S/C" sin precio → ars null → s/d (nunca 0).
+    const estimativo = /\(E\)/i.test(priceTxt);
     granos[g] = { ars: parseArNum(priceTxt.replace(/S\/C/gi, "")), usd: parseArNum(usdTxt), estimativo };
   }
   const tm = html.match(/Comprador\s*(\d{2}\/\d{2}\/\d{4})\s*:\s*<strong>\s*\$\s*([0-9.,]+)/i);
@@ -201,7 +206,7 @@ function parseCacBoard(html: string): CacBoard | null {
 }
 
 async function fetchCacHistorial(
-  g: Grano,
+  g: GranoPizarra,
   hoy: string,
   o: FetchOpts,
 ): Promise<Array<{ fecha: string; ars: number; estimativo: boolean }>> {
@@ -245,11 +250,11 @@ async function getCac(
   try {
     const [boardHtml, ...hists] = await Promise.all([
       fetchText(CAC_URL, o).catch(() => ""),
-      ...GRANOS.map((g) => fetchCacHistorial(g, hoy, o).catch(() => [])),
+      ...GRANOS_CAC.map((g) => fetchCacHistorial(g, hoy, o).catch(() => [])),
     ]);
     const board = boardHtml ? parseCacBoard(boardHtml) : null;
     const granos: CotizacionGrano[] = [];
-    GRANOS.forEach((g, i) => {
+    GRANOS_CAC.forEach((g, i) => {
       const hist = hists[i];
       const last = hist[hist.length - 1];
       const b = board?.granos[g];
@@ -460,7 +465,7 @@ export function fmtVar(g: CotizacionGrano): string | null {
   return `${sign(g.abs)}${fmt(g.abs, absDigits)} · ${sign(pctR)}${fmt(pctR, 1)}%`;
 }
 
-const LABEL: Record<Grano, string> = { soja: "soja", maiz: "maíz", trigo: "trigo" };
+const LABEL: Record<GranoPizarra, string> = { soja: "soja", maiz: "maíz", trigo: "trigo", girasol: "girasol", sorgo: "sorgo" };
 
 /**
  * Línea del Resumen matutino, mismo formato visual que el texto CoS:
@@ -472,7 +477,8 @@ export function lineaResumen(p: PlazaSnapshot): string | null {
   const head =
     p.id === "cac" ? "Rosario CAC" : "AFA San Martín";
   const tag = `${isoToDm(p.fecha)}${p.frescura === "viejo" ? " · viejo" : ""}`;
-  const parts = p.granos.map((g) => {
+  // Resumen: mismo formato de siempre (soja · maíz · trigo).
+  const parts = p.granos.filter((g) => (GRANOS as string[]).includes(g.grano)).map((g) => {
     const unit = g.unidad === "ARS/t" ? "$/t" : "US$/t";
     const v = fmtVar(g);
     return `${LABEL[g.grano]} ${fmtPrecio(g)} ${unit}${v ? ` (${v})` : ""}`;

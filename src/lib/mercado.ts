@@ -578,7 +578,7 @@ function applyWti(snap: MercadoSnapshot, wti: WtiQuote | null): MercadoSnapshot 
   };
 }
 
-const GRANO_LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo" } as const;
+const GRANO_LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo", girasol: "Girasol", sorgo: "Sorgo" } as const;
 
 /** Filas de plazas físicas desde fuentes directas; nunca rellena huecos. */
 function plazaRows(p: PlazaSnapshot): MercadoRow[] {

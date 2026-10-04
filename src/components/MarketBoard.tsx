@@ -140,8 +140,14 @@ const PLAZAS = [
   { id: "aca", titulo: "ACA Timbúes" },
 ] as const;
 
-function PlazaCell({ r }: { r: MercadoRow | undefined }) {
-  if (!r) return <div className="text-sm opacity-30">—</div>;
+const PIZARRA_GRANOS = ["soja", "maiz", "trigo", "girasol", "sorgo"] as const;
+const PIZARRA_EXTRA: Record<"girasol" | "sorgo", { accent: string; label: string }> = {
+  girasol: { accent: "#b7791f", label: "GIRASOL" },
+  sorgo: { accent: "#b5532e", label: "SORGO" },
+};
+
+function PlazaCell({ r, sd }: { r: MercadoRow | undefined; sd?: boolean }) {
+  if (!r) return <div className={sd ? "text-[10px] leading-snug opacity-50" : "text-sm opacity-30"}>{sd ? "s/d" : "—"}</div>;
   if (!r.valor) {
     return <div className="text-[10px] leading-snug opacity-50">{r.extra ?? "—"}</div>;
   }
@@ -153,6 +159,9 @@ function PlazaCell({ r }: { r: MercadoRow | undefined }) {
         <span className="text-lg font-bold tabular-nums leading-none">
           {r.unidad === "ARS/t" ? `$${r.valor}` : `US$${r.valor}`}
         </span>
+        {r.extra?.includes("estimativo") ? (
+          <span className="text-[9px] font-semibold opacity-70" title="Precio estimativo de la Cámara (sin cotización)">(E)</span>
+        ) : null}
         <span className="text-[9px] opacity-50">{r.unidad}</span>
       </div>
       {r.valorUsd ? (
@@ -167,7 +176,7 @@ function PlazaCell({ r }: { r: MercadoRow | undefined }) {
 
 function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tema?: Tema }) {
   const cols = PLAZAS.map((p) => {
-    const rows = (["soja", "maiz", "trigo"] as const).map((g) =>
+    const rows = PIZARRA_GRANOS.map((g) =>
       rowById(mercado.rows, `${p.id}-${g}`),
     );
     const any = rows.find(Boolean);
@@ -218,30 +227,36 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
               </tr>
             </thead>
             <tbody>
-              {(["soja", "maiz", "trigo"] as const).map((g, gi) => (
-                <tr key={g} className="border-b border-slate-100 align-top last:border-0">
-                  <td className="px-3 py-2">
-                    {tema !== "base" ? (
-                      <span className="text-[10px]"><GrainLabel grano={g} /></span>
-                    ) : (
-                      <span className="text-[10px] font-bold tracking-wide" style={{ color: CROP[g].accent }}>
-                        {CROP[g].label}
-                      </span>
-                    )}
-                  </td>
-                  {cols.map((c) => (
-                    <td key={c.id} className="px-3 py-2">
-                      <PlazaCell r={c.rows[gi]} />
+              {PIZARRA_GRANOS.map((g, gi) => {
+                const extra = g === "girasol" || g === "sorgo";
+                // girasol y sorgo: sólo publica la CAC Rosario; fila visible si la CAC respondió.
+                if (extra && !cols.some((c) => c.id === "cac")) return null;
+                const style = extra ? PIZARRA_EXTRA[g] : CROP[g];
+                return (
+                  <tr key={g} className="border-b border-slate-100 align-top last:border-0">
+                    <td className="px-3 py-2">
+                      {tema !== "base" ? (
+                        <span className="text-[10px]"><GrainLabel grano={g} /></span>
+                      ) : (
+                        <span className="text-[10px] font-bold tracking-wide" style={{ color: style.accent }}>
+                          {style.label}
+                        </span>
+                      )}
                     </td>
-                  ))}
-                </tr>
-              ))}
+                    {cols.map((c) => (
+                      <td key={c.id} className="px-3 py-2">
+                        <PlazaCell r={c.rows[gi]} sd={extra && c.id === "cac"} />
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       )}
       <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
-        Pizarras en $/t sin IVA. ACA Timbúes: s/d mientras ACA no publique pizarra propia de Timbúes (su «Pizarra» web es la CAC Rosario). US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
+        Pizarras en $/t sin IVA. (E) = precio estimativo de la Cámara. Girasol y sorgo: sólo CAC Rosario. ACA Timbúes: s/d mientras ACA no publique pizarra propia de Timbúes (su «Pizarra» web es la CAC Rosario). US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
         {" "}&quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
       </div>
     </section>
