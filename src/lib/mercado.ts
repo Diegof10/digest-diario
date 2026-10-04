@@ -641,7 +641,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
   // ACA: grano sin pizarra → celda "s/d" con la fuente (nunca 0 ni otro precio).
   if (p.id === "aca") {
     const hora = p.granos[0] ? rows[0]?.hora ?? null : null;
-    for (const g of ["soja", "maiz", "trigo"] as const) {
+    for (const g of ["soja", "maiz", "trigo", "girasol", "sorgo"] as const) {
       if (rows.some((r) => r.id === `aca-${g}`)) continue;
       rows.push({
         id: `aca-${g}`,

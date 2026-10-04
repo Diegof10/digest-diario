@@ -137,7 +137,7 @@ function CropLine({
 const PLAZAS = [
   { id: "cac", titulo: "CAC Rosario" },
   { id: "afa", titulo: "AFA San Martín" },
-  { id: "aca", titulo: "ACA Timbúes" },
+  { id: "aca", titulo: "ACA" },
 ] as const;
 
 const PIZARRA_GRANOS = ["soja", "maiz", "trigo", "girasol", "sorgo"] as const;
@@ -256,7 +256,7 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
         </div>
       )}
       <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
-        Pizarras en $/t sin IVA. (E) = precio estimativo de la Cámara. Girasol y sorgo: sólo CAC Rosario. ACA Timbúes: s/d mientras ACA no publique pizarra propia de Timbúes (su «Pizarra» web es la CAC Rosario). US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
+        Pizarras en $/t sin IVA. (E) = precio estimativo de la Cámara. Girasol y sorgo: sólo CAC Rosario. US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
         {" "}&quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
       </div>
     </section>

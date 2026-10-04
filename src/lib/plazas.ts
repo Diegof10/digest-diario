@@ -21,7 +21,7 @@ import { ACA_URL } from "@/lib/aca";
  *      https://www.cac.bcr.com.ar/es/precios-de-pizarra (+ /consultas para el cierre previo)
  *  - AFA San Martín: pizarra diaria AFA SCL (AFA Diario · Mercados en línea
  *      + Comparativo Pizarra para el cierre previo)
- *  - ACA Timbúes: sólo PIZARRA publicada por ACA para Timbúes; hoy no existe → "s/d" con fuente
+ *  - ACA: pizarra del bloque "Pizarra" de ACA Base; sin fuente pública sin clave → "s/d" con fuente
  *      (29/9: el físico disponible de ACA dejó de usarse). FOB Up River (MAGYP) retirado 25/9.
  * Var diaria = último cierre publicado vs cierre publicado anterior de la MISMA fuente.
  * Sin cierre previo → var null. Nunca se inventan precios ni variaciones.
@@ -65,7 +65,7 @@ export interface PlazaSnapshot {
 export interface PlazasSnapshot {
   cac: PlazaSnapshot;
   afa: PlazaSnapshot;
-  /** ACA Timbúes · pizarra (s/d mientras ACA no publique pizarra propia de Timbúes) */
+  /** ACA · pizarra de ACA Base (s/d si no hay dato público) */
   aca: PlazaSnapshot;
   fxBnaDivisa: { valor: number; fecha: string; fuente: string } | null;
   /** Cierre BNA divisa comprador anterior (serie Blob o TC de la CAC), para la variación */
@@ -387,7 +387,7 @@ export const ACA_PIZARRA_SD =
   "Sin dato";
 
 async function getAcaTimbues(): Promise<PlazaSnapshot> {
-  return emptyPlaza("aca", "ACA Timbúes", "Timbúes", "ACA · pizarra Timbúes", ACA_URL, ACA_PIZARRA_SD);
+  return emptyPlaza("aca", "ACA", "Rosario", "ACA Base · pizarra", ACA_URL, ACA_PIZARRA_SD);
 }
 
 /* ------------------------------ Público ----------------------------- */
