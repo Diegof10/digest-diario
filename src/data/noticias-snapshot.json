@@ -1,30 +1,41 @@
 {
-  "asOf": "2026-10-04T09:50:00.000Z",
-  "asOfArg": "04/10/2026, 06:50",
+  "asOf": "2026-10-05T09:48:00.000Z",
+  "asOfArg": "05/10/2026, 06:48",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Búsqueda web ES/EN/PT · 04/10/2026, 06:50 ARG (Visec/EUDR soja + lluvias/siembra BCBA-BCR + fusariosis trigo + Niño BCR + Japón carne; cae maíz 64 Mt por >48 h)",
+  "note": "Búsqueda web ES/EN/PT · 05/10/2026, 06:48 ARG (ballotage Brasil + China maíz USDA + lluvias fin de semana + fusariosis trigo + paro regional Rosario; caen Visec, BCBA siembra, Niño BCR y Japón por >48 h)",
   "items": [
     {
-      "title": "Visec/EUDR: ya está operativa la plataforma de soja libre de deforestación para vender oct–dic a la UE; sin adhesión el productor puede sufrir descuentos al descargar",
-      "source": "La Nación Campo",
-      "handle": "LN Campo",
-      "text": "Visec/EUDR: ya está operativa la plataforma de soja libre de deforestación para vender oct–dic a la UE; sin adhesión el productor puede sufrir descuentos al descargar",
-      "url": "https://www.lanacion.com.ar/economia/campo/agricultura/nuevas-exigencias-de-trazabilidad-para-la-soja-en-la-union-europea-nid03102026/",
-      "publishedAt": "2026-10-03T08:50:00.000Z",
-      "publishedAtArg": "03/10 05:50",
-      "rank": 1
+      "title": "Brasil va a ballotage el 25/10: Flávio Bolsonaro 47,14% vs. Lula 45,03% (99,45% escrutado); qué promete cada uno al agro (seguro rural, deuda, almacenaje, fertilizantes, Plano Safra)",
+      "source": "Globo Rural · traducido del portugués",
+      "handle": "Globo Rural",
+      "text": "Brasil va a ballotage el 25/10: Flávio Bolsonaro 47,14% vs. Lula 45,03% (99,45% escrutado); qué promete cada uno al agro (seguro rural, deuda, almacenaje, fertilizantes, Plano Safra)",
+      "url": "https://globorural.globo.com/politica/noticia/2026/10/lula-e-flavio-bolsonaro-vao-ao-segundo-turno-o-que-eles-prometem-ao-agro.ghtml",
+      "publishedAt": "2026-10-05T00:39:00.000Z",
+      "publishedAtArg": "04/10 21:39",
+      "rank": 1,
+      "titleOriginal": "Lula e Flávio Bolsonaro vão ao segundo turno. O que eles prometem ao agro"
     },
     {
-      "title": "BCBA/BCR: lluvias de fin de septiembre reactivan la siembra de maíz (22,2% de 8,4 M ha; +5,1 p.p.) y suben 8 p.p. el trigo Bueno/Excelente; en Núcleo quedan ≈750 mil ha de maíz temprano",
-      "source": "Meteored",
-      "handle": "Meteored",
-      "text": "BCBA/BCR: lluvias de fin de septiembre reactivan la siembra de maíz (22,2% de 8,4 M ha; +5,1 p.p.) y suben 8 p.p. el trigo Bueno/Excelente; en Núcleo quedan ≈750 mil ha de maíz temprano",
-      "url": "https://www.meteored.com.ar/noticias/actualidad/las-lluvias-cambian-el-inicio-de-octubre-en-el-campo-se-reactiva-la-siembra-y-el-trigo-recupera-terreno.html",
-      "publishedAt": "2026-10-03T09:08:00.000Z",
-      "publishedAtArg": "03/10 06:08",
+      "title": "USDA (agregaduría Pekín): China importaría al menos 6 Mt de maíz en 2026/27 (vs. 4,0 Mt), mayormente sudamericano; Argentina ya es su 3.er proveedor (≈344 mil t a julio + 200 mil t ago–sep)",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "text": "USDA (agregaduría Pekín): China importaría al menos 6 Mt de maíz en 2026/27 (vs. 4,0 Mt), mayormente sudamericano; Argentina ya es su 3.er proveedor (≈344 mil t a julio + 200 mil t ago–sep)",
+      "url": "https://bichosdecampo.com/chau-estados-unidos-el-mercosur-paso-a-ser-el-mayor-proveedor-de-maiz-de-china/",
+      "publishedAt": "2026-10-04T22:51:30.000Z",
+      "publishedAtArg": "04/10 19:51",
       "rank": 2
+    },
+    {
+      "title": "Lluvias del viernes y sábado: más de 20 mm en el norte bonaerense y norte santafesino (hasta 85 mm en Plu Nogues), justo con el trigo hacia floración; Entre Ríos y Córdoba con registros modestos (≤10 mm)",
+      "source": "TN Campo",
+      "handle": "TN Campo",
+      "text": "Lluvias del viernes y sábado: más de 20 mm en el norte bonaerense y norte santafesino (hasta 85 mm en Plu Nogues), justo con el trigo hacia floración; Entre Ríos y Córdoba con registros modestos (≤10 mm)",
+      "url": "https://tn.com.ar/campo/2026/10/04/dos-dias-de-lluvias-dejaron-buenos-acumulados-en-la-franja-agricola/",
+      "publishedAt": "2026-10-04T23:30:31.000Z",
+      "publishedAtArg": "04/10 20:30",
+      "rank": 3
     },
     {
       "title": "Aapresid/INTA: con El Niño, la fusariosis es la próxima amenaza del trigo en encañazón/floración; mapas de riesgo y fungicidas preventivos (~16 USD/ha)",
@@ -34,69 +45,69 @@
       "url": "https://www.lanacion.com.ar/economia/campo/fusariosis-la-proxima-amenaza-para-los-trigos-en-un-ano-con-evento-el-nino-nid03102026/",
       "publishedAt": "2026-10-03T21:44:00.000Z",
       "publishedAtArg": "03/10 18:44",
-      "rank": 3
-    },
-    {
-      "title": "BCR/GEA: El Niño está instalado pero no trae las lluvias esperadas; bajaron las proyecciones de intensidad (pico dic. ≈2 °C) y podrían recortarse las lluvias de oct–dic, aún por encima de la media",
-      "source": "La Nación Campo",
-      "handle": "LN Campo",
-      "text": "BCR/GEA: El Niño está instalado pero no trae las lluvias esperadas; bajaron las proyecciones de intensidad (pico dic. ≈2 °C) y podrían recortarse las lluvias de oct–dic, aún por encima de la media",
-      "url": "https://www.lanacion.com.ar/economia/campo/el-nino-ya-esta-instalado-pero-no-trae-las-lluvias-esperadas-y-ahora-bajan-las-proyecciones-nid02102026/",
-      "publishedAt": "2026-10-02T21:43:00.000Z",
-      "publishedAtArg": "02/10 18:43",
       "rank": 4
     },
     {
-      "title": "Japón habilitó la carne bovina argentina de todo el territorio (zonas libres de aftosa con vacunación) tras 20 años de negociación; primeros embarques estimados en 1T 2027 tras auditorías",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "text": "Japón habilitó la carne bovina argentina de todo el territorio (zonas libres de aftosa con vacunación) tras 20 años de negociación; primeros embarques estimados en 1T 2027 tras auditorías",
-      "url": "https://www.clarin.com/rural/agroindustria-pie-firme-japon-europa_0_BlgsCvw1Gm.html",
-      "publishedAt": "2026-10-03T08:06:03.000Z",
-      "publishedAtArg": "03/10 05:06",
+      "title": "Rosario: Aceiteros, Dragado y Balizamiento y otros gremios de la CATT organizan un paro regional (todavía sin fecha) y acompañan la movilización del 8/10; riesgo para puertos y fábricas del Gran Rosario",
+      "source": "La Capital (Rosario)",
+      "handle": "La Capital",
+      "text": "Rosario: Aceiteros, Dragado y Balizamiento y otros gremios de la CATT organizan un paro regional (todavía sin fecha) y acompañan la movilización del 8/10; riesgo para puertos y fábricas del Gran Rosario",
+      "url": "https://www.lacapital.com.ar/economia/los-gremios-rosario-preparan-un-paro-regional-n10284827.html",
+      "publishedAt": "2026-10-04T21:08:00.000Z",
+      "publishedAtArg": "04/10 18:08",
       "rank": 5
     }
   ],
   "descartadas": [
     {
       "motivo": ">48 h desde publicación",
-      "fuente": "Infocampo 01/10",
-      "item": "BCBA maíz 64 Mt cosecha 2025/26 finalizada"
+      "fuente": "La Nación Campo 03/10 05:50",
+      "item": "Visec/EUDR soja libre de deforestación"
     },
     {
-      "motivo": ">48 h / supersedida por Meteored 03/10",
-      "fuente": "TN Campo 02/10",
-      "item": "GEA lluvias Núcleo / siembra maíz"
-    },
-    {
-      "motivo": ">48 h / cubierta en Meteored",
-      "fuente": "Infocampo 02/10",
-      "item": "Cosecha trigo norte + remate primer lote"
+      "motivo": ">48 h / supersedida por TN 04/10",
+      "fuente": "Meteored 03/10 06:08",
+      "item": "Lluvias reactivan siembra maíz BCBA/BCR"
     },
     {
       "motivo": ">48 h",
-      "fuente": "LN Campo 01/10",
-      "item": "Visita alto nivel a China / accesos agro"
+      "fuente": "La Nación Campo 02/10",
+      "item": "El Niño instalado sin las lluvias esperadas (BCR/GEA)"
     },
     {
-      "motivo": "precio / cotizaciones",
-      "fuente": "Bichos 03/10",
-      "item": "FOB compuesto soja industria más alto desde 2022"
+      "motivo": ">48 h",
+      "fuente": "Clarín Rural 03/10 05:06",
+      "item": "Japón habilita carne bovina argentina"
     },
     {
-      "motivo": "precio / cotizaciones",
-      "fuente": "Agrositio / El Esquiu",
-      "item": "Soja/maíz piso Chicago · soja +12% septiembre"
+      "motivo": "anuncio de julio 2026 republicado con fecha nueva; no es hecho nuevo",
+      "fuente": "Merlo al Aire / Imago 04/10",
+      "item": "Milei baja retenciones soja 33→26% (Vaca Viva, Rural de Palermo)"
     },
     {
-      "motivo": "fecha/contexto no verificable como evento fresco 48 h",
-      "fuente": "Monitor Gremial / Nueva Data R4",
-      "item": "Paros aceiteros/camioneros sin datación clara"
+      "motivo": "nota de precio de insumo (va al bloque Costos)",
+      "fuente": "Bichos/IF 03/10",
+      "item": "Urea en paridad de importación 610–620 USD/t"
     },
     {
-      "motivo": "sin RIF nuevo con precios",
-      "fuente": "Bichos/IF",
-      "item": "Último RIF urea sigue 26/9 (600–620 FCA)"
+      "motivo": "análisis/opinión sin hecho nuevo",
+      "fuente": "Bichos de Campo 03/10",
+      "item": "Cifras USDA no reflejan la cosecha EE. UU."
+    },
+    {
+      "motivo": "panel de congreso sin dato nuevo",
+      "fuente": "La Capital 04/10",
+      "item": "Chicharrita y otras plagas: más monitoreo en maíz"
+    },
+    {
+      "motivo": "precio/mercado",
+      "fuente": "La Voz 04/10",
+      "item": "Soja: ventana de venta en octubre"
+    },
+    {
+      "motivo": ">48 h",
+      "fuente": "Reuters 30/09 · Portal do Agronegócio 01/10",
+      "item": "China baja demanda soja EE. UU. · Conab plantío soja 3,9%"
     },
     {
       "motivo": "CATAC sin cuadro nuevo",
@@ -106,9 +117,9 @@
     {
       "motivo": "sin boletín nuevo",
       "fuente": "SMN/INMET/USDM",
-      "item": "SMN OND 30/9 · INMET agro set 10/9 · USDM 29/9–1/10 · CPC 30/9"
+      "item": "SMN OND 30/9 · INMET agro set 10/9 (oct aún no publicado) · USDM 29/9–1/10 · CPC 30/9"
     }
   ],
-  "updatedAt": "2026-10-04T09:50:00.000Z",
-  "updatedBy": "rutina matutina Costos/Clima/Noticias 04/10"
+  "updatedAt": "2026-10-05T09:48:00.000Z",
+  "updatedBy": "rutina matutina Costos/Clima/Noticias 05/10"
 }

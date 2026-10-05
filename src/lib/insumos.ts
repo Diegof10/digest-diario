@@ -5,17 +5,17 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF vía Bichos de Campo — weekly RIF republished 26 Sep 2026. Curated snapshot only. */
+/** IF vía Bichos de Campo — weekly RIF republished 3 Oct 2026. Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://bichosdecampo.com/no-digas-que-no-te-avisamos-el-precio-de-la-urea-en-el-mercado-argentino-se-acerca-cada-vez-mas-al-valor-de-reposicion/";
+  "https://bichosdecampo.com/el-precio-de-la-urea-sigue-subiendo-en-el-mercado-argentino-con-valores-que-se-encuentran-ya-en-paridad-de-importacion/";
 
-const FERT_AS_OF = "2026-09-26";
+const FERT_AS_OF = "2026-10-03";
 const FERT_SOURCE_LABEL = "Bichos/IF";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 4 Oct 2026). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 5 Oct 2026). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-10-04";
+const GLIFO_AS_OF = "2026-10-05";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
@@ -164,14 +164,14 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Bichos de Campo / IF RIF dated 26 Sep 2026.
+ * Curated weekly snapshot from Bichos de Campo / IF RIF dated 3 Oct 2026.
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(600, 620, "FCA", "wholesale"),
-      import: fertPoint(530, 540, "CFR", "import_replacement"),
+      local: fertPoint(610, 620, "FCA", "wholesale"),
+      import: fertPoint(515, 535, "CFR", "import_replacement"),
     },
     map: {
       local: fertPoint(
@@ -181,7 +181,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(870, 880, "CFR", "import_replacement"),
+      import: fertPoint(865, 880, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
     },
     dap: {
       local: fertPoint(
@@ -191,7 +191,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(865, 870, "CFR", "import_replacement"),
+      import: fertPoint(865, 880, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
     },
   };
 }
@@ -427,7 +427,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   );
 
   const noteParts = [
-    "Fertilizantes: snapshot curado IF vía Bichos (26/9/2026), no scrape en vivo.",
+    "Fertilizantes: snapshot curado IF vía Bichos (3/10/2026), no scrape en vivo.",
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
