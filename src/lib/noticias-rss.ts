@@ -134,7 +134,8 @@ const EVENTOS: [string, RegExp][] = [
   ["retenciones", /\bretencion(es)?\b|derechos de exportacion|\bdex\b/],
   ["ARCA", /\barca\b/],
   ["gobierno", /\bgobierno\b|\bdecreto\b|\bresolucion\b|boletin oficial|\bministerio\b|secretaria de agricultura|\bmilei\b|\bcaputo\b|\biraeta\b|\bsenasa\b|\bley\b/],
-  ["China", /\bchina\b|\bchino(s)?\b/],
+  // "China" como país (compras, demanda, mercado), no como adjetivo de empresa ("una gigante china de tractores").
+  ["China", /(?<!\b(?:gigante|empresa|firma|marca|compania|fabricante|automotriz|tecnologica|startup|multinacional|grupo|capitales)s? (?:\w+ )?)\bchin(?:a|o)s?\b(?! de (?:tractores|maquinaria|autos|motos|celulares|electronica))/],
   ["conflicto", /\bparo\b|\bhuelga\b|\bgremio\b|aceiter|\bpuerto(s)?\b|\bportuari|\bsoea\b|\burgara\b|\bbloqueo\b/],
   ["clima", /\bsequia\b|inundacion|anegamiento|\bhelada(s)?\b|\bgranizo\b|\bsmn\b|\btormenta(s)?\b|\bnina\b|\bnino\b|\balerta (meteorologica|amarilla|naranja|roja|por)\b|\blluvia(s)?\b|deficit hidrico|ola de calor/],
   ["estimaciones", /\busda\b|\bconab\b|\bbolsa de cereales\b|\bbcr\b|\bbcba\b|bolsa de comercio|\bmillones de toneladas\b|\b(estimacion|proyeccion|produccion|cosecha|siembra|rindes?)\b.*\d|\d.*\b(estimacion|proyeccion|produccion|cosecha|siembra|rindes?|toneladas|hectareas)\b|\brecord\b/],
@@ -142,6 +143,9 @@ const EVENTOS: [string, RegExp][] = [
   ["política EE. UU./Brasil", /\bestados unidos\b|\bee\.? ?uu\.?\b|\btrump\b|\baranceles?\b|\bbrasil\b|farm bill/],
   ["exportaciones", /\bexportacion(es)?\b|\bembarques?\b|\bliquidacion\b|\bciara\b/],
 ];
+
+const MAQUINARIA = /\btractor(es)?\b|\bmaquinaria\b|\bcosechadora(s)?\b|\bsembradora(s)?\b|\bautos?\b|\bmotos?\b|\bmarcas?\b/;
+const CHINA_COMPRA = /\b(compra|compras|compro|importa|importaria|importaciones|demanda|habilita|suspende|exporta|exportaciones|embarques?|toneladas)\b/;
 
 /** Notas de PRECIOS: se excluyen. */
 const PRECIOS = /\bcierre\b|\bcierra\b|\bchicago\b|\bpizarra(s)?\b|\bdolar\b|\bcotizacion|\bcotiza\b|\bprecio(s)?\b|\bmatba\b|\brofex\b|\bfuturos?\b|\bmercado de granos\b|\bhacienda en\b|\bmercado agroganadero\b|\bremates?\b|\b(soja|maiz|trigo|girasol|granos?|cereales)\b.*\b(sube|suben|baja|bajan|subio|bajo|cae|caen|repunta|rebota|se dispara|se desploma)\b|\b(sube|baja|cae|repunta|rebota)\b.*\b(soja|maiz|trigo|girasol|granos?)\b/;
@@ -164,7 +168,9 @@ export function puntuar(it: RssItem): NoticiaCandidata | null {
   if (!pareceEspanol(it.titulo)) return null;
   if (PRECIOS.test(t) && !SIEMPRE_EVENTO.test(t)) return null;
   if (it.general && !AGRO.test(t)) return null;
-  const keywords = EVENTOS.filter(([, re]) => re.test(t)).map(([k]) => k);
+  let keywords = EVENTOS.filter(([, re]) => re.test(t)).map(([k]) => k);
+  // Notas de maquinaria/marcas chinas no son compras de China.
+  if (MAQUINARIA.test(t) && !CHINA_COMPRA.test(t)) keywords = keywords.filter((k) => k !== "China");
   if (keywords.length === 0) return null;
   return { ...it, score: keywords.length, keywords };
 }
