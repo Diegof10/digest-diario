@@ -1,7 +1,7 @@
-fecha: 2026-10-05 ART
+fecha: 2026-10-06 ART
 titulo_ui: Resumen matutino
 
-CBOT (cierre 02/10): soja 469,7 US$/t (−0,4%) · maíz 196,0 (−0,9%) · trigo 251,0 (+0,0%)
-FX: oficial 1.540 · blue 1.560 · MEP 1.552 · CCL 1.624 · riesgo país 655
-Mercados (02/10): S&P +0,7% · Nasdaq +1,2% · WTI 90,8 · Brent 102,9 · UST 10a 5,28%
-Nota: En la previa del lunes Chicago sube: trigo +1,8%, soja +0,8% y maíz +0,6%.
+CBOT (06/10, 6:49 ART): soja 471,8 US$/t (+0,3%) · maíz 196,7 (+0,5%) · trigo 256,3 (+0,8%)
+FX: oficial 1.540 · blue 1.545 · MEP 1.538 · CCL 1.611 · riesgo país 599
+Mercados (05/10): S&P +0,7% · Nasdaq +1,1% · WTI 87,2 · Brent 98,0 · UST 10a 5,31%
+Nota: Riesgo país perfora 600 pb con bonos en alza; el crudo cede cerca de 2,5%.
