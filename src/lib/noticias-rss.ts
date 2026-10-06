@@ -138,7 +138,8 @@ const EVENTOS: [string, RegExp][] = [
   ["China", /(?<!\b(?:gigante|empresa|firma|marca|compania|fabricante|automotriz|tecnologica|startup|multinacional|grupo|capitales)s? (?:\w+ )?)\bchin(?:a|o)s?\b(?! de (?:tractores|maquinaria|autos|motos|celulares|electronica))/],
   ["conflicto", /\bparo\b|\bhuelga\b|\bgremio\b|aceiter|\bpuerto(s)?\b|\bportuari|\bsoea\b|\burgara\b|\bbloqueo\b/],
   ["clima", /\bsequia\b|inundacion|anegamiento|\bhelada(s)?\b|\bgranizo\b|\bsmn\b|\btormenta(s)?\b|\bnina\b|\bnino\b|\balerta (meteorologica|amarilla|naranja|roja|por)\b|\blluvia(s)?\b|deficit hidrico|ola de calor/],
-  ["estimaciones", /\busda\b|\bconab\b|\bbolsa de cereales\b|\bbcr\b|\bbcba\b|bolsa de comercio|\bmillones de toneladas\b|\b(estimacion|proyeccion|produccion|cosecha|siembra|rindes?)\b.*\d|\d.*\b(estimacion|proyeccion|produccion|cosecha|siembra|rindes?|toneladas|hectareas)\b|\brecord\b/],
+  // Cifras de producción/siembra/cosecha. "Récord" sólo con contexto de producción (no remates ni hacienda).
+  ["estimaciones", /\busda\b|\bconab\b|\bbolsa de cereales\b|\bbcr\b|\bbcba\b|bolsa de comercio|\bmillones de toneladas\b|\b(estimacion|proyeccion|produccion|cosecha|siembra|area sembrada)\b.*\d|\d.*\b(estimacion|proyeccion|produccion|cosecha|siembra|toneladas)\b|\b(cosecha|produccion|siembra|molienda|exportaciones?|embarques?)\b.*\brecord\b|\brecord\b.*\b(cosecha|produccion|siembra|molienda|exportaciones?|toneladas)\b/],
   ["plagas", /\bplaga(s)?\b|chicharrita|\benfermedad(es)?\b|\blangosta(s)?\b|spiroplasma|\broya\b|\bisoca\b/],
   ["política EE. UU./Brasil", /\bestados unidos\b|\bee\.? ?uu\.?\b|\btrump\b|\baranceles?\b|\bbrasil\b|farm bill/],
   ["exportaciones", /\bexportacion(es)?\b|\bembarques?\b|\bliquidacion\b|\bciara\b/],
@@ -148,7 +149,26 @@ const MAQUINARIA = /\btractor(es)?\b|\bmaquinaria\b|\bcosechadora(s)?\b|\bsembra
 const CHINA_COMPRA = /\b(compra|compras|compro|importa|importaria|importaciones|demanda|habilita|suspende|exporta|exportaciones|embarques?|toneladas)\b/;
 
 /** Notas de PRECIOS: se excluyen. */
-const PRECIOS = /\bcierre\b|\bcierra\b|\bchicago\b|\bpizarra(s)?\b|\bdolar\b|\bcotizacion|\bcotiza\b|\bprecio(s)?\b|\bmatba\b|\brofex\b|\bfuturos?\b|\bmercado de granos\b|\bhacienda en\b|\bmercado agroganadero\b|\bremates?\b|\b(soja|maiz|trigo|girasol|granos?|cereales)\b.*\b(sube|suben|baja|bajan|subio|bajo|cae|caen|repunta|rebota|se dispara|se desploma)\b|\b(sube|baja|cae|repunta|rebota)\b.*\b(soja|maiz|trigo|girasol|granos?)\b/;
+const PRECIOS = /\bpagaron\b|\bse pago\b|\bse pagaron\b|\bgran campeon(a)?\b|\bremataron\b|\bcierre\b|\bcierra\b|\bchicago\b|\bpizarra(s)?\b|\bdolar\b|\bcotizacion|\bcotiza\b|\bprecio(s)?\b|\bmatba\b|\brofex\b|\bfuturos?\b|\bmercado de granos\b|\bhacienda en\b|\bmercado agroganadero\b|\bremates?\b|\b(soja|maiz|trigo|girasol|granos?|cereales)\b.*\b(sube|suben|baja|bajan|subio|bajo|cae|caen|repunta|rebota|se dispara|se desploma)\b|\b(sube|baja|cae|repunta|rebota)\b.*\b(soja|maiz|trigo|girasol|granos?)\b/;
+/** Notas que no son eventos aunque tengan palabras clave: perfiles, ensayos de variedades, jornadas, eventos sociales. */
+const NO_EVENTO = /\bensayos?\b|\bjornada(s)?\b|\bcongreso\b|\bvariedades\b|\bque eligio\b|\bdueno de\b|\bduena de\b|\bse endeudo\b|\barriesgue\b|\bemprendedor(a|es)?\b|\bstartup\b|\bexposicion rural\b|\bremate\b/;
+
+/** Peso por tipo de evento: lo que mueve caja/decisión pesa más que un clima genérico. */
+const PESO: Record<string, number> = {
+  retenciones: 3,
+  ARCA: 3,
+  conflicto: 3,
+  China: 2,
+  gobierno: 2,
+  estimaciones: 2,
+  plagas: 2,
+  "política EE. UU./Brasil": 2,
+  exportaciones: 2,
+  clima: 1,
+};
+/** Clima extremo concreto (alerta, sequía, inundación, helada, granizo) suma sobre el clima genérico. */
+const CLIMA_EXTREMO = /\bsequia\b|inundacion|anegamiento|\bhelada(s)?\b|\bgranizo\b|\balerta (meteorologica|amarilla|naranja|roja|por)\b|ola de calor|deficit hidrico/;
+
 /** Retenciones siempre es evento, aunque el título hable de precios. */
 const SIEMPRE_EVENTO = /\bretencion(es)?\b|derechos de exportacion/;
 
@@ -172,7 +192,10 @@ export function puntuar(it: RssItem): NoticiaCandidata | null {
   // Notas de maquinaria/marcas chinas no son compras de China.
   if (MAQUINARIA.test(t) && !CHINA_COMPRA.test(t)) keywords = keywords.filter((k) => k !== "China");
   if (keywords.length === 0) return null;
-  return { ...it, score: keywords.length, keywords };
+  if (NO_EVENTO.test(t) && !SIEMPRE_EVENTO.test(t)) return null;
+  let score = keywords.reduce((acc, k) => acc + (PESO[k] ?? 1), 0);
+  if (keywords.includes("clima") && CLIMA_EXTREMO.test(t)) score += 1;
+  return { ...it, score, keywords };
 }
 
 // ---------- dedupe ----------
