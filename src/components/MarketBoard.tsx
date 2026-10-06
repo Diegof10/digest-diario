@@ -278,9 +278,16 @@ function fechaHoraArt(iso: string): string {
   return `${g("day")}/${g("month")} ${g("hour").replace(/^24$/, "00")}:${g("minute")}`;
 }
 
+/** yyyy-mm-dd → "DD/MM" */
+const ddmmIso = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
+
 function ClimaCountry({ e }: { e: ClimaEntry }) {
   const flagEmoji =
     e.country === "AR" ? "🇦🇷" : e.country === "BR" ? "🇧🇷" : "🇺🇸";
+  // Esquina derecha = ventana del pronóstico vigente (cron Open-Meteo). La fecha del boletín
+  // curado (e.fecha) pasa a la línea de fuente de la perspectiva. Sin pronóstico → e.fecha.
+  const pr = e.pronostico;
+  const fechaPronostico = pr?.desde && pr?.hasta ? `${ddmmIso(pr.desde)}–${ddmmIso(pr.hasta)}` : null;
   return (
     <div className="border-b border-slate-100 pb-2 last:border-b-0 last:pb-0">
       <div className="flex items-baseline justify-between gap-2">
@@ -292,8 +299,11 @@ function ClimaCountry({ e }: { e: ClimaEntry }) {
             {e.country} · {e.countryLabel}
           </span>
         </span>
-        <span className="shrink-0 text-[9px] tabular-nums opacity-50">
-          {e.fecha}
+        <span
+          className="shrink-0 text-[9px] tabular-nums opacity-50"
+          title={fechaPronostico ? "Pronóstico 7 días (Open-Meteo)" : "Fecha del boletín"}
+        >
+          {fechaPronostico ?? e.fecha}
         </span>
       </div>
       {e.pronostico ? (
@@ -322,7 +332,10 @@ function ClimaCountry({ e }: { e: ClimaEntry }) {
         </p>
       ) : null}
       <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[9px] opacity-55">
-        <span>{e.fuente}</span>
+        <span>
+          {e.fuente}
+          {fechaPronostico ? ` · ${e.fecha}` : null}
+        </span>
         <a
           href={e.url}
           target="_blank"
