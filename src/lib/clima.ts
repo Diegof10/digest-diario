@@ -105,7 +105,9 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
     const out: ClimaEntry = {
       ...e,
       etiqueta,
-      pronostico: pr ? { texto: pr.texto, fuente: "Open-Meteo (modelo)", url: OPEN_METEO_URL, at: pr.at } : null,
+      pronostico: pr
+        ? { texto: pr.texto, fuente: "Open-Meteo (modelo)", url: OPEN_METEO_URL, at: pr.at, desde: pr.desde, hasta: pr.hasta }
+        : null,
       dato: null,
       aviso: null,
     };

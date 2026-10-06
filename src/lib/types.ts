@@ -72,7 +72,7 @@ export interface ClimaEntry {
   secondaryNote?: string | null;
   etiqueta: EtiquetaDato;
   /** Pronóstico 7 días automático (cron clima, Open-Meteo modelo) */
-  pronostico?: { texto: string; fuente: string; url: string; at: string } | null;
+  pronostico?: { texto: string; fuente: string; url: string; at: string; desde?: string; hasta?: string } | null;
   /** Otra línea automática (US: Drought Monitor semanal) */
   dato?: { texto: string; fuente: string; url: string; fecha: string } | null;
   /** Aviso: hay un boletín oficial más nuevo que el texto curado */
