@@ -1,31 +1,11 @@
 {
-  "asOf": "2026-10-05T21:02:27.000Z",
-  "asOfArg": "05/10/2026, 18:02",
+  "asOf": "2026-10-06T09:55:00.000Z",
+  "asOfArg": "06/10/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Medios agro (RSS) · 05/10/2026, 18:02 ARG",
+  "note": "Búsqueda web ES/EN/PT + RSS · 06/10/2026, 06:55 ARG (vuelve ballotage Brasil; entran USDA Crop Progress y AgRural soja Brasil; salen El Niño Clarín, dragas BA y granos por vender por análisis sin hecho nuevo)",
   "items": [
-    {
-      "title": "Una temible plaga continúa en pleno retroceso y despeja fantasmas de cara a una posible campaña récord de maíz",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "text": "Una temible plaga continúa en pleno retroceso y despeja fantasmas de cara a una posible campaña récord de maíz",
-      "url": "https://www.clarin.com/rural/temible-plaga-continua-pleno-retroceso-despeja-fantasmas-cara-posible-campana-record-maiz_0_lBCqjkyVJc.html",
-      "publishedAt": "2026-10-05T12:43:57.000Z",
-      "publishedAtArg": "05/10 09:43",
-      "rank": 1
-    },
-    {
-      "title": "El Niño ya está instalado y pone al agua en el centro de la campaña gruesa: cómo manejar los lotes y la logística",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "text": "El Niño ya está instalado y pone al agua en el centro de la campaña gruesa: cómo manejar los lotes y la logística",
-      "url": "https://www.clarin.com/rural/nino-instalado-pone-agua-centro-campana-gruesa-manejar-lotes-logistica_0_a6j5GjElwp.html",
-      "publishedAt": "2026-10-05T18:43:45.000Z",
-      "publishedAtArg": "05/10 15:43",
-      "rank": 2
-    },
     {
       "title": "La letra chica explicada: ¿Qué cambia con la Ley de Inocencia Fiscal II y por qué esos cambios favorecen al productor?",
       "source": "Bichos de Campo",
@@ -34,30 +14,53 @@
       "url": "https://bichosdecampo.com/la-letra-chica-explicada-que-cambia-con-la-ley-de-inocencia-fiscal-ii-y-por-que-esos-cambios-favorecen-al-productor/",
       "publishedAt": "2026-10-05T14:21:38.000Z",
       "publishedAtArg": "05/10 11:21",
+      "rank": 1
+    },
+    {
+      "title": "Lula y Flávio Bolsonaro van al ballotage del 25/10: qué le prometen al agro",
+      "source": "Globo Rural · traducido del portugués",
+      "handle": "Globo Rural",
+      "text": "Lula y Flávio Bolsonaro van al ballotage del 25/10: qué le prometen al agro",
+      "url": "https://globorural.globo.com/politica/noticia/2026/10/lula-e-flavio-bolsonaro-vao-ao-segundo-turno-o-que-eles-prometem-ao-agro.ghtml",
+      "publishedAt": "2026-10-05T00:39:00.000Z",
+      "publishedAtArg": "04/10 21:39",
+      "titleOriginal": "Lula e Flávio Bolsonaro vão ao segundo turno. O que eles prometem ao agro",
+      "rank": 2
+    },
+    {
+      "title": "Una temible plaga continúa en pleno retroceso y despeja fantasmas de cara a una posible campaña récord de maíz",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "text": "Una temible plaga continúa en pleno retroceso y despeja fantasmas de cara a una posible campaña récord de maíz",
+      "url": "https://www.clarin.com/rural/temible-plaga-continua-pleno-retroceso-despeja-fantasmas-cara-posible-campana-record-maiz_0_lBCqjkyVJc.html",
+      "publishedAt": "2026-10-05T12:43:57.000Z",
+      "publishedAtArg": "05/10 09:43",
       "rank": 3
     },
     {
-      "title": "Con once dragas: avanza una obra reclamada por los productores contra las inundaciones en Buenos Aires",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "text": "Con once dragas: avanza una obra reclamada por los productores contra las inundaciones en Buenos Aires",
-      "url": "https://www.lanacion.com.ar/economia/campo/con-once-dragas-avanza-una-obra-reclamada-por-los-productores-contra-las-inundaciones-en-buenos-nid05102026/",
-      "publishedAt": "2026-10-05T19:41:24.000Z",
-      "publishedAtArg": "05/10 16:41",
+      "title": "Avance de cultivos USDA al 4/10: EE. UU. cosechó 23% del maíz y 25% de la soja, debajo del promedio (27% y 33%)",
+      "source": "USDA NASS · traducido del inglés",
+      "handle": "USDA NASS",
+      "text": "Avance de cultivos USDA al 4/10: EE. UU. cosechó 23% del maíz y 25% de la soja, debajo del promedio (27% y 33%)",
+      "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/prog4026.pdf",
+      "publishedAt": "2026-10-05T20:00:00.000Z",
+      "publishedAtArg": "05/10 17:00",
+      "titleOriginal": "Crop Progress – Released October 5, 2026",
       "rank": 4
     },
     {
-      "title": "Cosecha y dólares: quedan granos por vender por más de US$9000 millones",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "text": "Cosecha y dólares: quedan granos por vender por más de US$9000 millones",
-      "url": "https://www.lanacion.com.ar/economia/campo/cosecha-y-dolares-quedan-granos-por-vender-por-mas-de-us9000-millones-nid05102026/",
-      "publishedAt": "2026-10-05T18:20:04.000Z",
-      "publishedAtArg": "05/10 15:20",
+      "title": "AgRural eleva su previsión de cosecha de soja de Brasil a 182,7 millones de toneladas",
+      "source": "Reuters vía Terra · traducido del portugués",
+      "handle": "Reuters",
+      "text": "AgRural eleva su previsión de cosecha de soja de Brasil a 182,7 millones de toneladas",
+      "url": "https://www.terra.com.br/economia/agrural-eleva-previsao-de-safra-de-soja-do-brasil-para-1827-mi-t,37cf5dbc9f0002aac20135fbfcd1094awsl4irvz.html",
+      "publishedAt": "2026-10-05T13:10:24.000Z",
+      "publishedAtArg": "05/10 10:10",
+      "titleOriginal": "AgRural eleva previsão de safra de soja do Brasil para 182,7 mi t",
       "rank": 5
     }
   ],
   "descartadas": [],
-  "updatedAt": "2026-10-05T09:48:00.000Z",
-  "updatedBy": "rutina matutina Costos/Clima/Noticias 05/10"
+  "updatedAt": "2026-10-06T09:55:00.000Z",
+  "updatedBy": "rutina matutina Costos/Clima/Noticias 06/10"
 }
