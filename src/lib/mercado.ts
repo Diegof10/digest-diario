@@ -4,7 +4,8 @@ import {
   climaResumen,
   getClima,
 } from "@/lib/clima";
-import { frescura, hoyArtIso, isoToDmy, REGLAS } from "@/lib/habiles";
+import { frescura, hoyArtIso, isoToDm, isoToDmy, REGLAS } from "@/lib/habiles";
+import { getMatba, type MatbaSnapshot } from "@/lib/matba";
 import { getNoticias } from "@/lib/noticias";
 import {
   fmtPrecio,
@@ -44,17 +45,6 @@ type GranosLocal = {
   unit?: string;
 };
 
-type GranosMatba = {
-  id: string;
-  label: string;
-  contract: string;
-  value: number;
-  change: number | null;
-  volume?: number;
-  openInterest?: number;
-  asOf?: string;
-};
-
 type GranosFas = {
   grain: string;
   label: string;
@@ -79,8 +69,6 @@ type GranosPayload = {
   cbot?: GranosCbot[];
   local?: GranosLocal[];
   fas?: GranosFas[];
-  matba?: GranosMatba[];
-  matbaAsOf?: string;
   usda?: {
     wasde?: GranosUsdaBlock;
     progress?: GranosUsdaBlock;
@@ -176,11 +164,59 @@ function pickCbot(list: GranosCbot[] | undefined, id: string): GranosCbot | null
   return list?.find((c) => c.id === id) ?? null;
 }
 
-function pickMatba(
-  list: GranosMatba[] | undefined,
-  pred: (m: GranosMatba) => boolean,
-): GranosMatba | null {
-  return list?.find(pred) ?? null;
+/** Posiciones Matba del tablero (contrato vivo más cercano de cada mes; ver src/lib/matba.ts). */
+const MATBA_SLOTS = [
+  { id: "matba-soja-may", producto: "Soja May", grano: "soja", mes: "MAY" },
+  { id: "matba-soja-nov", producto: "Soja Nov", grano: "soja", mes: "NOV" },
+  { id: "matba-maiz", producto: "Maíz Abr", grano: "maiz", mes: "ABR" },
+  { id: "matba-maiz-dic", producto: "Maíz Dic", grano: "maiz", mes: "DIC" },
+  { id: "matba-trigo", producto: "Trigo Ene", grano: "trigo", mes: "ENE" },
+] as const;
+
+/** Rellena las filas Matba con ajustes oficiales A3; sin dato → vacío con la última fecha real. */
+function applyMatba(snap: MercadoSnapshot, m: MatbaSnapshot): MercadoSnapshot {
+  const rows = snap.rows.map((r) => {
+    const slot = MATBA_SLOTS.find((x) => x.id === r.id);
+    if (!slot) return r;
+    const c = m.contratos.find((x) => x.grano === slot.grano && x.mes === slot.mes);
+    if (!c) {
+      return {
+        ...emptyRow(slot.id, "A3/Matba futuros", slot.producto),
+        fuente: "A3 Matba",
+        extra: m.error ? `sin dato · A3: ${m.error}` : "sin dato",
+      };
+    }
+    const base: MercadoRow = {
+      id: slot.id,
+      mercado: "A3/Matba futuros",
+      producto: slot.producto,
+      valor: fmtNum(c.value, 1),
+      unidad: "US$/t",
+      fuente: m.origen === "blob" ? "A3 Matba ajuste (guardado)" : "A3 Matba ajuste",
+      hora: isoToDmy(c.asOf),
+      etiqueta: "HECHO",
+      varPct: c.change,
+      senal: senalFromChange(c.change),
+      extra: fmtPct(c.change),
+      contrato: c.contract,
+      url: m.fuenteUrl,
+      fecha: c.asOf,
+      frescura: c.frescura,
+    };
+    if (c.frescura === "vencido") {
+      return {
+        ...base,
+        valor: null,
+        unidad: null,
+        senal: null,
+        varPct: null,
+        etiqueta: "VACÍO" as const,
+        extra: `sin dato fresco · último ajuste ${c.contract} ${isoToDm(c.asOf)}`,
+      };
+    }
+    return base;
+  });
+  return { ...snap, rows, matba: m };
 }
 
 function mapGranos(data: GranosPayload): MercadoSnapshot {
@@ -250,57 +286,11 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
     }
   }
 
-  // Matba futuros: soja May/Nov, maíz, trigo
-  const matbaHora = data.matbaAsOf
-    ? horaArg(`${data.matbaAsOf}T12:00:00-03:00`)
-    : hora;
-  const matbaSlots: Array<{
-    id: string;
-    producto: string;
-    pick: (m: GranosMatba) => boolean;
-  }> = [
-    {
-      id: "matba-soja-may",
-      producto: "Soja May",
-      pick: (m) => /soja/i.test(m.id) && /MAY/i.test(m.contract),
-    },
-    {
-      id: "matba-soja-nov",
-      producto: "Soja Nov",
-      pick: (m) => /soja/i.test(m.id) && /NOV/i.test(m.contract),
-    },
-    {
-      id: "matba-maiz",
-      producto: "Maíz",
-      pick: (m) => /maiz/i.test(m.id),
-    },
-    {
-      id: "matba-trigo",
-      producto: "Trigo",
-      pick: (m) => /trigo/i.test(m.id),
-    },
-  ];
-  for (const slot of matbaSlots) {
-    const m = pickMatba(data.matba, slot.pick);
-    if (m && Number.isFinite(m.value)) {
-      rows.push(
-        filled({
-          id: slot.id,
-          mercado: "A3/Matba futuros",
-          producto: slot.producto,
-          valor: fmtNum(m.value, 1),
-          unidad: "US$/t",
-          fuente: "Matba",
-          hora: matbaHora,
-          fecha: m.asOf ?? data.matbaAsOf ?? null,
-          varPct: m.change,
-          contrato: m.contract,
-          extra: fmtPct(m.change),
-        }),
-      );
-    } else {
-      rows.push(emptyRow(slot.id, "A3/Matba futuros", slot.producto));
-    }
+  // Matba futuros: NO se toman del feed externo (traía números clavados, p. ej.
+  // soja May-27 332,5 con fecha de hoy). Se rellenan en applyMatba() con los
+  // ajustes oficiales de A3 (src/lib/matba.ts), cada uno con su fecha de rueda.
+  for (const slot of MATBA_SLOTS) {
+    rows.push(emptyRow(slot.id, "A3/Matba futuros", slot.producto));
   }
 
   // Plazas físicas (Pizarra CAC Rosario / AFA San Martín):
@@ -405,10 +395,7 @@ function stubSnapshot(note: string): MercadoSnapshot {
     ["cbot-soja", "Cierres CBOT", "Soja"],
     ["cbot-maiz", "Cierres CBOT", "Maíz"],
     ["cbot-trigo", "Cierres CBOT", "Trigo"],
-    ["matba-soja-may", "A3/Matba futuros", "Soja May"],
-    ["matba-soja-nov", "A3/Matba futuros", "Soja Nov"],
-    ["matba-maiz", "A3/Matba futuros", "Maíz"],
-    ["matba-trigo", "A3/Matba futuros", "Trigo"],
+    ...MATBA_SLOTS.map((m) => [m.id, "A3/Matba futuros", m.producto] as const),
     ["fx-bna", "FX", "BNA"],
     ["usda", "USDA/WASDE", "Reporte"],
     ["crop-progress", "Crop Progress", "Condición"],
@@ -684,6 +671,7 @@ export async function getMercado(opts: { fresh?: boolean } = {}): Promise<Mercad
   const noticiasPromise = getNoticias();
   const wtiPromise = fetchWti();
   const plazasPromise = getPlazas({ fresh: opts.fresh }).catch(() => null);
+  const matbaPromise = getMatba({ fresh: opts.fresh });
   let base: MercadoSnapshot;
   try {
     const res = await fetch(GRANOS_URL, {
@@ -704,14 +692,18 @@ export async function getMercado(opts: { fresh?: boolean } = {}): Promise<Mercad
       `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
     );
   }
-  const [clima, noticias, wti, plazas] = await Promise.all([
+  const [clima, noticias, wti, plazas, matba] = await Promise.all([
     climaPromise,
     noticiasPromise,
     wtiPromise,
     plazasPromise,
+    matbaPromise,
   ]);
   return applyFrescura(
-    applyPlazas(applyWti(applyNoticias(applyClima(base, clima), noticias), wti), plazas),
+    applyMatba(
+      applyPlazas(applyWti(applyNoticias(applyClima(base, clima), noticias), wti), plazas),
+      matba,
+    ),
   );
 }
 

@@ -143,6 +143,8 @@ export interface MercadoSnapshot {
   noticias?: NoticiasSnapshot | null;
   /** Plazas físicas (CAC / AFA), desde fuentes directas */
   plazas?: import("@/lib/plazas").PlazasSnapshot | null;
+  /** Ajustes oficiales A3 Matba Rofex (contrato, precio y fecha de rueda) */
+  matba?: import("@/lib/matba").MatbaSnapshot | null;
 }
 
 export interface FiscalNovedad {

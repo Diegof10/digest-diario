@@ -24,11 +24,16 @@ Repo GitHub: `Diegof10/alerta-sisa` (mismo remote; el deploy Vercel de ese proye
 | `GET /api/mercado` | Mercado live vía feed granos (Chicago/Matba/CAC/USDA/BNA) |
 | `GET /api/fiscal` | Snapshot fiscal (novedades + vencimientos; never invent) |
 | `GET /api/resumen-matutino` | Resumen matutino activo (CoS o fallback) |
+| `GET /api/granos` | Feed granos con ajustes oficiales A3 Matba (contrato, US$/t, fecha de rueda) |
 | `GET /api/cron/digest` | Cron diario (Bearer `CRON_SECRET`) |
 
 ## Mercado (feed granos)
 
-`GET https://lark-lake-solar-craft.grok.me/api/granos` — server-side, User-Agent browser-like. Mapea CBOT, CAC Rosario, Matba, FAS/pizarra, BNA, WASDE/Crop Progress. **No inventa precios**; celdas vacías si falta fuente.
+`GET https://lark-lake-solar-craft.grok.me/api/granos` — server-side, User-Agent browser-like. Mapea CBOT, CAC Rosario, FAS/pizarra, BNA, WASDE/Crop Progress. **No inventa precios**; celdas vacías si falta fuente.
+
+**Matba** ya no sale de ese feed (su bloque `matba` devolvía valores clavados, p. ej. soja May-27 332,5 con la fecha del día). Sale de `src/lib/matba.ts`: precios de **ajuste** oficiales de A3 Matba Rofex desde la API pública de cierres `https://apicem.matbarofex.com.ar/api/v2/closing-prices?from=YYYY-MM-DD&to=YYYY-MM-DD` (sin usuario ni key). Posiciones: soja Nov/May, maíz Dic/Abr, trigo Dic/Ene (contrato vivo más cercano de cada mes; nunca el disponible `DIS`). Cada contrato lleva `symbol`, `contract`, `value` (US$/t) y `asOf` = fecha de la rueda. Frescura con `REGLAS.matba` (ajuste de D esperado desde las 19:00 de D): 1–3 hábiles de atraso → `viejo`, más → `vencido` (no se muestra el precio). Si A3 no responde se usa el último ajuste guardado en Blob (`series/plazas.json`, serie `matba.usd`) con su fecha real.
+
+`GET /api/granos` (este proyecto) = feed lark-lake + bloque `matba` reemplazado por A3 (`matba`, `matbaAsOf`, `matbaStatus`). Lo consume también `dhf-margenes`.
 
 ## Clima AR / BR / US
 

@@ -141,17 +141,19 @@ export async function assembleDigest(opts?: {
     .filter(Boolean)
     .join(" · ") || "—";
 
-  const matba = [
+  const matbaFecha = [sojaMay, sojaNov, maizMat, trigoMat].find((r) => r?.valor && r.fecha)?.fecha ?? null;
+  const matbaItems = [
     sojaMay?.valor
-      ? `Soja May ${sojaMay.valor}`
+      ? `Soja ${sojaMay.contrato ?? "May"} ${sojaMay.valor}`
       : sojaNov?.valor
-        ? `Soja Nov ${sojaNov.valor}`
+        ? `Soja ${sojaNov.contrato ?? "Nov"} ${sojaNov.valor}`
         : null,
-    maizMat?.valor ? `Maíz ${maizMat.valor}` : null,
-    trigoMat?.valor ? `Trigo ${trigoMat.valor}` : null,
-  ]
-    .filter(Boolean)
-    .join(" · ") || "—";
+    maizMat?.valor ? `Maíz ${maizMat.contrato ?? "Abr"} ${maizMat.valor}` : null,
+    trigoMat?.valor ? `Trigo ${trigoMat.contrato ?? ""} ${trigoMat.valor}`.replace("  ", " ") : null,
+  ].filter(Boolean);
+  const matba = matbaItems.length
+    ? `${matbaItems.join(" · ")} (ajuste ${matbaFecha ? isoToDm(matbaFecha) : "s/f"})`
+    : "—";
 
   const lectura = buildLectura(mercado.note, mercado.wasdeHeadline);
 

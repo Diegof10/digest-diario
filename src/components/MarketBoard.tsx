@@ -455,6 +455,7 @@ export default function MarketBoard({
   const sojaMay = rowById(mercado.rows, "matba-soja-may");
   const sojaNov = rowById(mercado.rows, "matba-soja-nov");
   const maizMat = rowById(mercado.rows, "matba-maiz");
+  const maizDic = rowById(mercado.rows, "matba-maiz-dic");
   const trigoMat = rowById(mercado.rows, "matba-trigo");
 
   const sojaCac = rowById(mercado.rows, "cac-soja");
@@ -498,8 +499,29 @@ export default function MarketBoard({
               </div>
             </div>
           </div>
-          <CropLine crop="maiz" r={maizMat} tema={tema} />
+          <div className="flex items-start gap-2 border-l-4 pl-2" style={{ borderColor: tema !== "base" ? "var(--g-maiz)" : CROP.maiz.accent }}>
+            {tema !== "base" ? (
+              <span className="w-16 shrink-0 pt-0.5 text-[10px]"><GrainLabel grano="maiz" /></span>
+            ) : (
+              <span className="w-14 shrink-0 pt-0.5 text-[10px] font-bold" style={{ color: CROP.maiz.accent }}>
+                {CROP.maiz.label}
+              </span>
+            )}
+            <div className="grid w-full grid-cols-2 gap-2">
+              <div>
+                <div className="text-[9px] opacity-50">Abr</div>
+                <Cell r={maizMat} dense />
+              </div>
+              <div>
+                <div className="text-[9px] opacity-50">Dic</div>
+                <Cell r={maizDic} dense />
+              </div>
+            </div>
+          </div>
           <CropLine crop="trigo" r={trigoMat} tema={tema} />
+          <p className="text-[9px] opacity-45">
+            Futuros (no disponible) · precio de ajuste A3 Matba Rofex de la rueda indicada
+          </p>
         </Panel>
 
       </div>

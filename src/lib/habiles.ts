@@ -80,6 +80,8 @@ export const REGLAS: Record<string, ReglaPublicacion> = {
   cac: { offsetHabiles: 1, hora: "10:30" },
   // AFA San Martín: horario de publicación no documentado → hábil anterior.
   afa: REGLA_DEFAULT,
+  // A3 Matba Rofex: el ajuste de la rueda D se publica D después del cierre (17 h) → esperado desde las 19:00.
+  matba: { offsetHabiles: 0, hora: "19:00" },
 };
 
 function ahoraArt(now = new Date()): { fecha: string; hhmm: string } {
