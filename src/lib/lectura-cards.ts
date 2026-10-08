@@ -36,11 +36,11 @@ const LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo" } as const;
 
 /** Texto fijo de Fiscal mientras haya una norma en "novedad" (regla 7 días del panel). */
 const FISCAL_NOVEDAD = {
-  titulo: "Fiscal · DJ Ganancias al 13/10",
+  titulo: "Fiscal · DJ Ganancias al 30/10",
   resumen:
-    "La RG 5898 (Boletín Oficial del 21/09) extiende hasta el 13/10 la DJ de Ganancias 2025 de personas humanas. El 2° anticipo de Ganancias y Bienes Personales vence entre el 13 y el 15/10, según la terminación del CUIT. Fuente: Boletín Oficial y ARCA.",
+    "La RG 5911 (Boletín Oficial del 08/10) extiende hasta el 30/10 la presentación de la DJ de Ganancias 2025 de personas humanas; el pago del saldo venció el 27/07 y no cambia. El 2° anticipo de Ganancias y Bienes Personales sigue igual: vence entre el 13 y el 15/10, según la terminación del CUIT. Fuente: Boletín Oficial y ARCA.",
   fuente: "Boletín Oficial · ARCA",
-  hora: "BO 21/09",
+  hora: "BO 08/10",
 };
 
 function isoMasDias(iso: string, n: number): string {

@@ -1,8 +1,15 @@
 {
-  "fecha": "2026-10-01",
-  "actualizadoAt": "2026-10-01T08:15:00.000-03:00",
+  "fecha": "2026-10-08",
+  "actualizadoAt": "2026-10-08T08:00:00.000-03:00",
   "fuente": "ARCA · BO",
   "novedades": [
+    {
+      "texto": "RG ARCA 5911/2026 (BO 08/10/2026): DJ Ganancias PH 2025 presentación hasta 30/10/2026; pago saldo 27/07/2026 (sin cambios).",
+      "fuente": "BO",
+      "norma": "RG ARCA 5911/2026",
+      "boFecha": "2026-10-08",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/348714/20261008"
+    },
     {
       "texto": "RG ARCA 5894/2026 (BO 01/09/2026): calendario SISA IP1/IP2 + reintegro retenciones IVA…",
       "fuente": "BO",
@@ -11,7 +18,7 @@
       "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/346725/20260901"
     },
     {
-      "texto": "RG ARCA 5898/2026 (BO 21/09/2026): DJ Ganancias PH 2025 presentación hasta 13/10/2026; pago saldo 27/07/2026.",
+      "texto": "RG ARCA 5898/2026 (BO 21/09/2026): DJ Ganancias PH 2025 presentación hasta 13/10/2026 (prorrogada al 30/10/2026 por RG 5911); pago saldo 27/07/2026.",
       "fuente": "BO",
       "norma": "RG ARCA 5898/2026",
       "boFecha": "2026-09-21",
@@ -41,19 +48,19 @@
       "vence": "2026-09-24"
     },
     {
-      "concepto": "Ganancias PH DJ 2025",
-      "ventana": "presentación hasta 13/10/2026 (todas las terminaciones de CUIT)",
-      "detalle": "Pago saldo venció 27/07/2026",
-      "fuente": "RG 5898 (BO 21/09/2026)",
-      "vence": "2026-10-13"
-    },
-    {
       "concepto": "2° anticipo Ganancias y Bienes Personales PH 2026",
       "ventana": "13/10 CUIT 0-3 · 14/10 4-6 · 15/10 7-9",
       "fuente": "ARCA · Anticipos vencimientos período fiscal 2026 (PDF)",
       "vence": "2026-10-15"
+    },
+    {
+      "concepto": "Ganancias PH DJ 2025",
+      "ventana": "presentación hasta 30/10/2026 (todas las terminaciones de CUIT)",
+      "detalle": "Pago saldo venció 27/07/2026 (sin cambios)",
+      "fuente": "ARCA · RG 5911 (BO 08/10/2026)",
+      "vence": "2026-10-30"
     }
   ],
-  "lineaTablero": "Próximo: 13/10 DJ Ganancias PH 2025 (todas las CUIT) y 13–15/10 2° anticipo Ganancias y BP según terminación de CUIT.",
+  "lineaTablero": "Próximo: 13–15/10 2° anticipo Ganancias y BP según terminación de CUIT y 30/10 DJ Ganancias PH 2025 (todas las CUIT, RG 5911).",
   "pie": "Análisis de gestión. No es dictamen impositivo. · @dhferrari"
 }
