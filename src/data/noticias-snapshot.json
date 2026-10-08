@@ -1,11 +1,21 @@
 {
-  "asOf": "2026-10-07T09:43:24.000Z",
-  "asOfArg": "07/10/2026, 06:43",
+  "asOf": "2026-10-08T09:55:00.000Z",
+  "asOfArg": "08/10/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "RSS + búsqueda web · 07/10/2026, 06:43 ARG",
+  "note": "RSS + búsqueda web · 08/10/2026, 06:55 ARG",
   "items": [
+    {
+      "title": "Alerta por tormentas: hay 15 provincias afectadas y las lluvias pueden acumular de hasta 100 milímetros",
+      "source": "Agrofy News",
+      "handle": "Agrofy News",
+      "text": "Alerta por tormentas: hay 15 provincias afectadas y las lluvias pueden acumular de hasta 100 milímetros",
+      "url": "https://news.agrofy.com.ar/noticia/216746/alerta-tormentas-hay-15-provincias-afectadas-lluvias-pueden-acumular-100-milimetros",
+      "publishedAt": "2026-10-07T10:14:00.000Z",
+      "publishedAtArg": "07/10 07:14",
+      "rank": 1
+    },
     {
       "title": "Compras de China impulsan las ventas de soja de EE. UU.: se llevó más de la mitad de lo vendido en la última semana (USDA)",
       "source": "RFD-TV · traducido del inglés",
@@ -15,51 +25,42 @@
       "publishedAt": "2026-10-06T15:35:57.000Z",
       "publishedAtArg": "06/10 12:35",
       "titleOriginal": "China Purchases Boost U.S. Soybean Export Sales",
-      "rank": 1
-    },
-    {
-      "title": "Alerta por lluvias y acumulados de hasta 70 milímetros: llegaría a los campos que no recibieron agua en las últimas semanas",
-      "source": "Agrofy News",
-      "handle": "Agrofy News",
-      "text": "Alerta por lluvias y acumulados de hasta 70 milímetros: llegaría a los campos que no recibieron agua en las últimas semanas",
-      "url": "https://news.agrofy.com.ar/noticia/216738/alerta-lluvias-acumulados-70-milimetros-llegaria-campos-no-recibieron-agua-ultimas-semanas",
-      "publishedAt": "2026-10-06T12:26:00.000Z",
-      "publishedAtArg": "06/10 09:26",
       "rank": 2
     },
     {
-      "title": "¡Se les pudrió todo a los productores estadounidenses de soja! (literal: no en sentido figurado)",
+      "title": "No digas que no te avisamos: Los molinos brasileños adelantan importaciones de trigo ayudados por el efecto “Bolsonaro”",
       "source": "Bichos de Campo",
       "handle": "Bichos de Campo",
-      "text": "¡Se les pudrió todo a los productores estadounidenses de soja! (literal: no en sentido figurado)",
-      "url": "https://bichosdecampo.com/se-les-pudrio-todo-a-los-productores-estadounidenses-de-soja-literal-no-en-sentido-figurado/",
-      "publishedAt": "2026-10-06T23:27:14.000Z",
-      "publishedAtArg": "06/10 20:27",
+      "text": "No digas que no te avisamos: Los molinos brasileños adelantan importaciones de trigo ayudados por el efecto “Bolsonaro”",
+      "url": "https://bichosdecampo.com/no-digas-que-no-te-avisamos-los-molinos-brasilenos-adelantan-importaciones-de-trigo-ayudados-por-el-efecto-bolsonaro/",
+      "publishedAt": "2026-10-07T21:15:12.000Z",
+      "publishedAtArg": "07/10 18:15",
       "rank": 3
     },
     {
-      "title": "Se destrabó un negocio clave con Europa y las exportaciones ya son más de cuatro veces las del primer semestre",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "text": "Se destrabó un negocio clave con Europa y las exportaciones ya son más de cuatro veces las del primer semestre",
-      "url": "https://www.lanacion.com.ar/economia/campo/se-destrabo-un-negocio-clave-con-europa-y-las-exportaciones-ya-son-mas-de-cuatro-veces-las-del-nid06102026/",
-      "publishedAt": "2026-10-06T21:26:24.000Z",
-      "publishedAtArg": "06/10 18:26",
+      "title": "Productores del Medio Oeste de EE. UU. reportan maíz brotado y soja con mancha púrpura en plena cosecha",
+      "source": "Brownfield Ag News · traducido del inglés",
+      "handle": "Brownfield Ag News",
+      "text": "Productores del Medio Oeste de EE. UU. reportan maíz brotado y soja con mancha púrpura en plena cosecha",
+      "url": "https://www.brownfieldagnews.com/news/midwest-farmers-report-sprouting-corn-purple-soybeans-during-harvest/",
+      "publishedAt": "2026-10-07T21:03:00.000Z",
+      "publishedAtArg": "07/10 18:03",
+      "titleOriginal": "Midwest farmers report sprouting corn, purple soybeans during harvest",
       "rank": 4
     },
     {
-      "title": "Contra esto competimos: Trump suspendió la aplicación de impuestos en el gasoil para reducir los costos de los fletes en plena cosecha de granos gruesos",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "text": "Contra esto competimos: Trump suspendió la aplicación de impuestos en el gasoil para reducir los costos de los fletes en plena cosecha de granos gruesos",
-      "url": "https://bichosdecampo.com/contra-esto-competimos-trump-suspendio-la-aplicacion-de-impuestos-en-el-gasoil-para-reducir-los-costos-de-los-fletes-en-plena-cosecha-de-granos-gruesos/",
-      "publishedAt": "2026-10-06T19:25:19.000Z",
-      "publishedAtArg": "06/10 16:25",
+      "title": "Alertan por pérdida de sensibilidad de Bidens spp. a herbicidas en la zona núcleo",
+      "source": "TodoAgro",
+      "handle": "TodoAgro",
+      "text": "Alertan por pérdida de sensibilidad de Bidens spp. a herbicidas en la zona núcleo",
+      "url": "https://www.todoagro.com.ar/alertan-por-perdida-de-sensibilidad-de-bidens-spp-a-herbicidas-en-la-zona-nucleo/",
+      "publishedAt": "2026-10-07T13:10:00.000Z",
+      "publishedAtArg": "07/10 10:10",
       "rank": 5
     }
   ],
   "descartadas": [],
-  "updatedAt": "2026-10-07T09:43:24.000Z",
-  "updatedBy": "rutina mañana Noticias 07/10",
+  "updatedAt": "2026-10-08T09:55:00.000Z",
+  "updatedBy": "rutina mañana Noticias 08/10",
   "aviso": null
 }
