@@ -149,9 +149,9 @@ const MAQUINARIA = /\btractor(es)?\b|\bmaquinaria\b|\bcosechadora(s)?\b|\bsembra
 const CHINA_COMPRA = /\b(compra|compras|compro|importa|importaria|importaciones|demanda|habilita|suspende|exporta|exportaciones|embarques?|toneladas)\b/;
 
 /** Notas de PRECIOS: se excluyen. */
-const PRECIOS = /\bpagaron\b|\bse pago\b|\bse pagaron\b|\bgran campeon(a)?\b|\bremataron\b|\bcierre\b|\bcierra\b|\bchicago\b|\bpizarra(s)?\b|\bdolar\b|\bcotizacion|\bcotiza\b|\bprecio(s)?\b|\bmatba\b|\brofex\b|\bfuturos?\b|\bmercado de granos\b|\bhacienda en\b|\bmercado agroganadero\b|\bremates?\b|\b(soja|maiz|trigo|girasol|granos?|cereales)\b.*\b(sube|suben|baja|bajan|subio|bajo|cae|caen|repunta|rebota|se dispara|se desploma)\b|\b(sube|baja|cae|repunta|rebota)\b.*\b(soja|maiz|trigo|girasol|granos?)\b/;
+const PRECIOS = /\bpagaron\b|\bse pago\b|\bse pagaron\b|\bgran campeon(a)?\b|\bremataron\b|\bcierre\b|\bcierra\b|\bchicago\b|\bpizarra(s)?\b|\bdolar\b|\bcotizacion|\bcotiza\b|\bprecio(s)?\b|\bmatba\b|\brofex\b|\bfuturos?\b|\bmercado de granos\b|\bhacienda en\b|\bmercado agroganadero\b|\bremates?\b|\bbajista\b|\balcista\b|\bmazazo\b|\bno vendiste\b|\btomo por sorpresa al mercado\b|\b(soja|maiz|trigo|girasol|granos?|cereales)\b.*\b(sube|suben|baja|bajan|subio|bajo|cae|caen|repunta|rebota|se dispara|se desploma)\b|\b(sube|baja|cae|repunta|rebota)\b.*\b(soja|maiz|trigo|girasol|granos?)\b/;
 /** Notas que no son eventos aunque tengan palabras clave: perfiles, ensayos de variedades, jornadas, eventos sociales. */
-const NO_EVENTO = /\bensayos?\b|\bjornada(s)?\b|\bcongreso\b|\bvariedades\b|\bque eligio\b|\bdueno de\b|\bduena de\b|\bse endeudo\b|\barriesgue\b|\bemprendedor(a|es)?\b|\bstartup\b|\bexposicion rural\b|\bremate\b/;
+const NO_EVENTO = /\bensayos?\b|\bjornada(s)?\b|\bcongreso\b|\bvariedades\b|\bque eligio\b|\bdueno de\b|\bduena de\b|\bse endeudo\b|\barriesgue\b|\bemprendedor(a|es)?\b|\bstartup\b|\bexposicion rural\b|\bremate\b|\bintegro\b|\bhace pie en\b|\bgrupo \w+\b.*\bexportacion\b/;
 
 /** Peso por tipo de evento: lo que mueve caja/decisión pesa más que un clima genérico. */
 const PESO: Record<string, number> = {
