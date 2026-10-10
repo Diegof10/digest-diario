@@ -1,11 +1,21 @@
 {
-  "asOf": "2026-10-09T21:06:20.615Z",
-  "asOfArg": "09/10/2026, 18:06",
+  "asOf": "2026-10-10T09:48:45.000Z",
+  "asOfArg": "10/10/2026, 06:48",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Respaldo tarde · filtro RSS · 09/10/2026, 18:06 ARG",
+  "note": "Respaldo mañana · filtro manual · 10/10/2026, 06:48 ARG",
   "items": [
+    {
+      "title": "El USDA proyecta 52,5 Mt de soja argentina 2026/27 y eleva la molienda a 44,8 Mt",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "text": "El USDA proyecta 52,5 Mt de soja argentina 2026/27 y eleva la molienda a 44,8 Mt",
+      "url": "https://bichosdecampo.com/el-usda-preve-una-gran-cosecha-de-soja-argentina-y-asegura-que-un-ajuste-gradual-del-tipo-de-cambio-podria-brindar-cierto-apoyo-adicional-a-la-competitividad-de-los-productores/",
+      "publishedAt": "2026-10-09T14:44:44.000Z",
+      "publishedAtArg": "09/10 11:44",
+      "rank": 1
+    },
     {
       "title": "Las lluvias aceleraron la siembra: el maíz ya cubre el 29,9 % del área y el girasol alcanza el 36,1%",
       "source": "Agrofy News",
@@ -14,16 +24,6 @@
       "url": "https://news.agrofy.com.ar/noticia/216768/lluvias-aceleraron-siembra-maiz-ya-cubre-299-area-girasol-alcanza-361",
       "publishedAt": "2026-10-09T11:42:13.000Z",
       "publishedAtArg": "09/10 08:42",
-      "rank": 1
-    },
-    {
-      "title": "Axel Kicillof nombró a un nuevo presidente en uno de los puertos más importantes",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "text": "Axel Kicillof nombró a un nuevo presidente en uno de los puertos más importantes",
-      "url": "https://www.lanacion.com.ar/economia/campo/axel-kicillof-nombro-a-un-nuevo-presidente-en-uno-de-los-puertos-mas-importantes-nid08102026/",
-      "publishedAt": "2026-10-09T11:34:04.000Z",
-      "publishedAtArg": "09/10 08:34",
       "rank": 2
     },
     {
@@ -37,16 +37,6 @@
       "rank": 3
     },
     {
-      "title": "“Como el gol de Enzo Fernández a los ingleses”: el campo celebró la lluvia que permitió la recuperación de los trigos afectados por la sequía y el frío",
-      "source": "Agrofy News",
-      "handle": "Agrofy News",
-      "text": "“Como el gol de Enzo Fernández a los ingleses”: el campo celebró la lluvia que permitió la recuperación de los trigos afectados por la sequía y el frío",
-      "url": "https://news.agrofy.com.ar/noticia/216767/como-gol-enzo-fernandez-ingleses-campo-celebro-lluvia-permitio-recuperacion-trigos-afectados-sequia",
-      "publishedAt": "2026-10-09T10:11:00.000Z",
-      "publishedAtArg": "09/10 07:11",
-      "rank": 4
-    },
-    {
       "title": "No era sólo para sacar los dólares del colchón: Se puso en marcha la Ley de Inocencia Fiscal II, con multas de hasta 7 millones y medio de pesos por cada peón rural “en negro”",
       "source": "Bichos de Campo",
       "handle": "Bichos de Campo",
@@ -54,11 +44,25 @@
       "url": "https://bichosdecampo.com/no-era-solo-para-sacar-los-dolares-del-colchon-se-puso-en-marcha-la-ley-de-inocencia-fiscal-ii-con-multas-de-hasta-7-millones-y-medio-de-pesos-por-cada-peon-rural-en-negro/",
       "publishedAt": "2026-10-09T12:10:49.000Z",
       "publishedAtArg": "09/10 09:10",
+      "rank": 4
+    },
+    {
+      "title": "Axel Kicillof nombró a un nuevo presidente en uno de los puertos más importantes",
+      "source": "La Nación Campo",
+      "handle": "La Nación Campo",
+      "text": "Axel Kicillof nombró a un nuevo presidente en uno de los puertos más importantes",
+      "url": "https://www.lanacion.com.ar/economia/campo/axel-kicillof-nombro-a-un-nuevo-presidente-en-uno-de-los-puertos-mas-importantes-nid08102026/",
+      "publishedAt": "2026-10-09T11:34:04.000Z",
+      "publishedAtArg": "09/10 08:34",
       "rank": 5
     }
   ],
-  "descartadas": [],
-  "updatedAt": "2026-10-09T21:06:20.615Z",
-  "updatedBy": "rutina Noticias tarde 09/10",
+  "descartadas": [
+    "WASDE EE.UU. maíz/stocks (encuadre de precios Chicago)",
+    "Nota lluvia trigo estilo 'gol de Enzo' (opinión/color)",
+    "SAF YPF–TotalEnergies (07/10, fuera de ventana 48 h)"
+  ],
+  "updatedAt": "2026-10-10T09:48:45.000Z",
+  "updatedBy": "rutina Costos/Clima/Noticias 10/10",
   "aviso": null
 }
