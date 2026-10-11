@@ -5,11 +5,11 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF vía Bichos de Campo — weekly RIF republished 3 Oct 2026. Curated snapshot only. */
+/** IF vía Bichos de Campo — weekly RIF republished 10 Oct 2026. Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://bichosdecampo.com/el-precio-de-la-urea-sigue-subiendo-en-el-mercado-argentino-con-valores-que-se-encuentran-ya-en-paridad-de-importacion/";
+  "https://bichosdecampo.com/gracias-india-caen-fuerte-los-precios-de-los-fertilizantes-nitrogenados-luego-de-una-licitacion-que-arrojo-resultados-sorpresivos/";
 
-const FERT_AS_OF = "2026-10-03";
+const FERT_AS_OF = "2026-10-10";
 const FERT_SOURCE_LABEL = "Bichos/IF";
 
 /** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 9 Oct 2026). */
@@ -164,34 +164,35 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Bichos de Campo / IF RIF dated 3 Oct 2026.
+ * Curated weekly snapshot from Bichos de Campo / IF RIF dated 10 Oct 2026.
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
+ * Urea import CFR AR no cotizada con rango nombrado en ese informe → null.
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(610, 620, "FCA", "wholesale"),
-      import: fertPoint(515, 535, "CFR", "import_replacement"),
+      local: fertPoint(595, 605, "FCA", "wholesale"),
+      import: null,
     },
     map: {
       local: fertPoint(
-        970,
-        1000,
+        965,
+        985,
         "FCA",
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(865, 880, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
+      import: fertPoint(855, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
     },
     dap: {
       local: fertPoint(
-        970,
-        1000,
+        965,
+        985,
         "FCA",
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(865, 880, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
+      import: fertPoint(855, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
     },
   };
 }
@@ -427,7 +428,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   );
 
   const noteParts = [
-    "Fertilizantes: snapshot curado IF vía Bichos (3/10/2026), no scrape en vivo.",
+    "Fertilizantes: snapshot curado IF vía Bichos (10/10/2026), no scrape en vivo.",
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
