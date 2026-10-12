@@ -1,7 +1,7 @@
-fecha: 2026-10-09 ART
+fecha: 2026-10-12 ART
 titulo_ui: Resumen matutino
 
-CBOT (09/10, 6:55 ART): soja 475,2 US$/t (+0,4%) · maíz 197,2 (+0,2%) · trigo 250,7 (−0,1%)
-FX: oficial 1.540 · blue 1.540 · MEP 1.543 · CCL 1.614 · riesgo país 588
-Mercados (08/10): S&P −0,5% · Nasdaq −1,3% · WTI 90,9 · Brent 103,2 · UST 10a 5,23%
-Nota: Blue iguala al oficial (brecha 0); Nasdaq −1,3% y Brent sigue alto cerca de US$103.
+CBOT (12/10, 6:50 ART): soja 472,1 US$/t (−0,6%) · maíz 189,8 (+0,5%) · trigo 246,8 (+0,1%)
+FX: oficial 1.535 · blue 1.540 · MEP 1.543 · CCL 1.607 · riesgo país 589
+Mercados (09/10): S&P +0,6% · Nasdaq +0,6% · WTI 92,8 · Brent 105,7 · UST 10a 5,24%
+Nota: WASDE de octubre subió stocks mundiales de maíz (+8,3 mill. t); maíz CBOT en 189,8 desde 197,2 del 09/10 a la mañana.
