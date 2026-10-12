@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-10-11T09:44:15.000Z",
-  "asOfArg": "11/10/2026, 06:44",
+  "asOf": "2026-10-12T09:47:20.000Z",
+  "asOfArg": "12/10/2026, 06:47",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Respaldo mañana · filtro manual · 11/10/2026, 06:44 ARG",
+  "note": "Respaldo mañana · filtro manual · 12/10/2026, 06:47 ARG",
   "items": [
     {
       "title": "La Pampa: emergencia agropecuaria por sequía al sur y excesos hídricos que traban la cosecha en Chapaleufú y Maracó",
@@ -17,6 +17,26 @@
       "rank": 1
     },
     {
+      "title": "Vandalismo rural: obtuvo dictamen de mayoría en Diputados y queda habilitado para media sanción (penas de hasta 8 años)",
+      "source": "Infobae",
+      "handle": "Infobae",
+      "text": "Vandalismo rural: obtuvo dictamen de mayoría en Diputados y queda habilitado para media sanción (penas de hasta 8 años)",
+      "url": "https://www.infobae.com/politica/2026/10/11/vandalismo-rural-que-dice-el-proyecto-de-ley-que-obtuvo-dictamen-de-comision-y-por-que-lo-cuestiona-la-oposicion/",
+      "publishedAt": "2026-10-11T19:59:00.000Z",
+      "publishedAtArg": "11/10 16:59",
+      "rank": 2
+    },
+    {
+      "title": "El Niño y las lluvias de octubre: el maíz ya cubre el 29,9 % del área, el girasol el 36,1 % y el trigo mejora en zona núcleo",
+      "source": "Meteored",
+      "handle": "Meteored",
+      "text": "El Niño y las lluvias de octubre: el maíz ya cubre el 29,9 % del área, el girasol el 36,1 % y el trigo mejora en zona núcleo",
+      "url": "https://www.meteored.com.ar/noticias/actualidad/el-nino-empezo-a-cambiar-la-campana-agricola-las-lluvias-llegaron-justo-para-el-trigo-y-aceleran-la-siembra.html",
+      "publishedAt": "2026-10-11T09:10:00.000Z",
+      "publishedAtArg": "11/10 06:10",
+      "rank": 3
+    },
+    {
       "title": "Brasil podría triplicar el uso industrial de maíz (de 19 a 37 Mt); la Argentina espera la nueva ley de biocombustibles",
       "source": "Bichos de Campo",
       "handle": "Bichos de Campo",
@@ -24,48 +44,23 @@
       "url": "https://bichosdecampo.com/cuando-sea-grande-quiero-ser-como-brasil-el-gigante-sudamericado-va-camino-a-triplicar-el-uso-industrial-de-maiz-en-apenas-un-lustro/",
       "publishedAt": "2026-10-10T15:00:00.000Z",
       "publishedAtArg": "10/10",
-      "rank": 2
-    },
-    {
-      "title": "El USDA proyecta 52,5 Mt de soja argentina 2026/27 y eleva la molienda a 44,8 Mt",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "text": "El USDA proyecta 52,5 Mt de soja argentina 2026/27 y eleva la molienda a 44,8 Mt",
-      "url": "https://bichosdecampo.com/el-usda-preve-una-gran-cosecha-de-soja-argentina-y-asegura-que-un-ajuste-gradual-del-tipo-de-cambio-podria-brindar-cierto-apoyo-adicional-a-la-competitividad-de-los-productores/",
-      "publishedAt": "2026-10-09T14:44:44.000Z",
-      "publishedAtArg": "09/10 11:44",
-      "rank": 3
-    },
-    {
-      "title": "Las lluvias aceleraron la siembra: el maíz ya cubre el 29,9 % del área y el girasol alcanza el 36,1%",
-      "source": "Agrofy News",
-      "handle": "Agrofy News",
-      "text": "Las lluvias aceleraron la siembra: el maíz ya cubre el 29,9 % del área y el girasol alcanza el 36,1%",
-      "url": "https://news.agrofy.com.ar/noticia/216768/lluvias-aceleraron-siembra-maiz-ya-cubre-299-area-girasol-alcanza-361",
-      "publishedAt": "2026-10-09T11:42:13.000Z",
-      "publishedAtArg": "09/10 08:42",
       "rank": 4
-    },
-    {
-      "title": "Ley de Tierras: la Corte Suprema emitió un nuevo fallo y vuelven a regir los límites para compras de extranjeros",
-      "source": "Infocampo",
-      "handle": "Infocampo",
-      "text": "Ley de Tierras: la Corte Suprema emitió un nuevo fallo y vuelven a regir los límites para compras de extranjeros",
-      "url": "https://www.infocampo.com.ar/ley-de-tierras-la-corte-suprema-emitio-un-nuevo-fallo-y-vuelven-a-regir-los-limites-para-compras-de-extranjeros/",
-      "publishedAt": "2026-10-09T16:27:49.000Z",
-      "publishedAtArg": "09/10 13:27",
-      "rank": 5
     }
   ],
   "descartadas": [
+    "USDA soja ARG 52,5 Mt (09/10, fuera de ventana 48 h)",
+    "PAS Agrofy 09/10 (solapa con Meteored 11/10; fuera de ventana)",
+    "Ley de Tierras Corte Suprema (09/10, fuera de ventana 48 h)",
+    "La Nación atraso maíz núcleo 10/10 (solapa con Meteored/PAS)",
+    "Clarín Rural 'gol de Enzo' / color lluvias trigo",
+    "WASDE EE.UU. maíz/stocks y Grain Central wire (encuadre de precios)",
+    "Dictamen vandalismo HCDN 06/10 (hecho viejo; se usa cobertura Infobae 11/10)",
     "IF/Bichos urea India 10/10 (precios de fertilizantes, no evento)",
-    "Clarín Rural 'gol de Enzo' / lluvias trigo (opinión/color)",
-    "La Nación atraso maíz núcleo (solapa con PAS BCBA 29,9%)",
-    "WASDE EE.UU. maíz/stocks (encuadre de precios Chicago)",
-    "Inocencia Fiscal II y Puerto Quequén (prioridad vs. entradas más frescas)",
-    "Importación carne porcina / agtech pluviómetro (fuera de filtro granos/decisión)"
+    "BCCBA rentabilidad Córdoba (márgenes/precios, no evento)",
+    "Paro prácticos agosto 2026 (fuera de ventana)",
+    "India aceites récord BCR (cobertura ~05/10, fuera de ventana)"
   ],
-  "updatedAt": "2026-10-11T09:44:15.000Z",
-  "updatedBy": "rutina Costos/Clima/Noticias 11/10",
+  "updatedAt": "2026-10-12T09:47:20.000Z",
+  "updatedBy": "rutina Costos/Clima/Noticias 12/10",
   "aviso": null
 }
