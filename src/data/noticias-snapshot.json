@@ -1,20 +1,51 @@
 {
-  "asOf": "2026-10-12T09:47:20.000Z",
-  "asOfArg": "12/10/2026, 06:47",
+  "asOf": "2026-10-13T09:41:46.000Z",
+  "asOfArg": "13/10/2026, 06:41",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Respaldo mañana · filtro manual · 12/10/2026, 06:47 ARG",
+  "note": "Respaldo mañana · filtro manual · 13/10/2026, 06:41 ARG",
   "items": [
     {
-      "title": "La Pampa: emergencia agropecuaria por sequía al sur y excesos hídricos que traban la cosecha en Chapaleufú y Maracó",
-      "source": "La Arena",
-      "handle": "La Arena",
-      "text": "La Pampa: emergencia agropecuaria por sequía al sur y excesos hídricos que traban la cosecha en Chapaleufú y Maracó",
-      "url": "https://www.laarena.com.ar/la-pampa/sequia-y-excesos-de-agua-complican-la-cosecha-en-distintos-puntos-de-la-pampa-2026101019350",
-      "publishedAt": "2026-10-10T22:35:00.000Z",
-      "publishedAtArg": "10/10 19:35",
+      "title": "En nueve meses el agro argentino ya exportó casi 90 Mt (88,9), más que el récord anual de 2021; maíz 30,2 Mt en campaña",
+      "source": "Infobae (BCR)",
+      "handle": "Infobae",
+      "text": "En nueve meses el agro argentino ya exportó casi 90 Mt (88,9), más que el récord anual de 2021; maíz 30,2 Mt en campaña",
+      "url": "https://www.infobae.com/economia/2026/10/12/en-nueve-meses-el-agro-argentino-ya-exporto-casi-90-millones-de-toneladas-mas-que-el-record-anual-historico-de-2021/",
+      "publishedAt": "2026-10-12T13:06:00.000Z",
+      "publishedAtArg": "12/10 10:06",
       "rank": 1
+    },
+    {
+      "title": "AgRural: la siembra de soja en Brasil salta al 15 % del área (al 8/10) y el maíz verão al 44 % en el centro-sur",
+      "source": "Globo Rural · traducido del portugués",
+      "handle": "Globo Rural",
+      "text": "AgRural: la siembra de soja en Brasil salta al 15 % del área (al 8/10) y el maíz verão al 44 % en el centro-sur",
+      "url": "https://globorural.globo.com/agricultura/soja/noticia/2026/10/plantio-de-soja-do-brasil-salta-para-15percent-da-area-com-melhora-das-chuvas.ghtml",
+      "publishedAt": "2026-10-12T17:58:00.000Z",
+      "publishedAtArg": "12/10 14:58",
+      "rank": 2,
+      "titleOriginal": "Plantio de soja do Brasil salta para 15% da área com melhora das chuvas"
+    },
+    {
+      "title": "Derechos de exportación: la Sociedad Rural de Rosario exigió que la baja de retenciones sea ley (no solo por decreto)",
+      "source": "NewsDigitales",
+      "handle": "NewsDigitales",
+      "text": "Derechos de exportación: la Sociedad Rural de Rosario exigió que la baja de retenciones sea ley (no solo por decreto)",
+      "url": "https://www.newsdigitales.com/nota/347288/derechos-de-exportacion-la-sociedad-rural-de-rosario-exigio-que-la-baja-sea-ley/",
+      "publishedAt": "2026-10-12T15:00:00.000Z",
+      "publishedAtArg": "12/10",
+      "rank": 3
+    },
+    {
+      "title": "Los biocombustibles se consolidan como motor de demanda de soja y maíz en EE. UU. y Brasil (informe BCR)",
+      "source": "TN Campo (BCR)",
+      "handle": "TN Campo",
+      "text": "Los biocombustibles se consolidan como motor de demanda de soja y maíz en EE. UU. y Brasil (informe BCR)",
+      "url": "https://tn.com.ar/campo/2026/10/12/los-biocombustibles-se-consolidan-como-un-nuevo-motor-para-la-demanda-de-soja-y-de-maiz/",
+      "publishedAt": "2026-10-12T23:32:00.000Z",
+      "publishedAtArg": "12/10 20:32",
+      "rank": 4
     },
     {
       "title": "Vandalismo rural: obtuvo dictamen de mayoría en Diputados y queda habilitado para media sanción (penas de hasta 8 años)",
@@ -24,43 +55,22 @@
       "url": "https://www.infobae.com/politica/2026/10/11/vandalismo-rural-que-dice-el-proyecto-de-ley-que-obtuvo-dictamen-de-comision-y-por-que-lo-cuestiona-la-oposicion/",
       "publishedAt": "2026-10-11T19:59:00.000Z",
       "publishedAtArg": "11/10 16:59",
-      "rank": 2
-    },
-    {
-      "title": "El Niño y las lluvias de octubre: el maíz ya cubre el 29,9 % del área, el girasol el 36,1 % y el trigo mejora en zona núcleo",
-      "source": "Meteored",
-      "handle": "Meteored",
-      "text": "El Niño y las lluvias de octubre: el maíz ya cubre el 29,9 % del área, el girasol el 36,1 % y el trigo mejora en zona núcleo",
-      "url": "https://www.meteored.com.ar/noticias/actualidad/el-nino-empezo-a-cambiar-la-campana-agricola-las-lluvias-llegaron-justo-para-el-trigo-y-aceleran-la-siembra.html",
-      "publishedAt": "2026-10-11T09:10:00.000Z",
-      "publishedAtArg": "11/10 06:10",
-      "rank": 3
-    },
-    {
-      "title": "Brasil podría triplicar el uso industrial de maíz (de 19 a 37 Mt); la Argentina espera la nueva ley de biocombustibles",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "text": "Brasil podría triplicar el uso industrial de maíz (de 19 a 37 Mt); la Argentina espera la nueva ley de biocombustibles",
-      "url": "https://bichosdecampo.com/cuando-sea-grande-quiero-ser-como-brasil-el-gigante-sudamericado-va-camino-a-triplicar-el-uso-industrial-de-maiz-en-apenas-un-lustro/",
-      "publishedAt": "2026-10-10T15:00:00.000Z",
-      "publishedAtArg": "10/10",
-      "rank": 4
+      "rank": 5
     }
   ],
   "descartadas": [
-    "USDA soja ARG 52,5 Mt (09/10, fuera de ventana 48 h)",
-    "PAS Agrofy 09/10 (solapa con Meteored 11/10; fuera de ventana)",
-    "Ley de Tierras Corte Suprema (09/10, fuera de ventana 48 h)",
-    "La Nación atraso maíz núcleo 10/10 (solapa con Meteored/PAS)",
-    "Clarín Rural 'gol de Enzo' / color lluvias trigo",
-    "WASDE EE.UU. maíz/stocks y Grain Central wire (encuadre de precios)",
-    "Dictamen vandalismo HCDN 06/10 (hecho viejo; se usa cobertura Infobae 11/10)",
-    "IF/Bichos urea India 10/10 (precios de fertilizantes, no evento)",
-    "BCCBA rentabilidad Córdoba (márgenes/precios, no evento)",
-    "Paro prácticos agosto 2026 (fuera de ventana)",
-    "India aceites récord BCR (cobertura ~05/10, fuera de ventana)"
+    "La Pampa emergencia La Arena 10/10 (fuera de ventana 48 h)",
+    "Meteored/PAS siembra 29,9% 11/10 (borde 48 h; solapa con AgRural BR más fresco)",
+    "Brasil maíz industrial Bichos 10/10 (fuera de ventana; reemplazado por TN/BCR biocombustibles 12/10)",
+    "Excesos hídricos sudeste BA NAP 11/10 (escenario hipotético, no emergencia nueva)",
+    "Infocampo/R2820 10.000 camiones (cobertura ~fin sep; republicación)",
+    "Ley de Tierras Corte 09/10 (fuera de ventana)",
+    "PAS BCBA 08/10 (fuera de ventana)",
+    "USDM/WASDE/cierres Chicago (precio o sin boletín nuevo)",
+    "IF/Bichos fert 10/10 (precios insumos, no evento)",
+    "Remate Rosgan aniversario (agenda, no evento decisión granos)"
   ],
-  "updatedAt": "2026-10-12T09:47:20.000Z",
-  "updatedBy": "rutina Costos/Clima/Noticias 12/10",
+  "updatedAt": "2026-10-13T09:41:46.000Z",
+  "updatedBy": "rutina Costos/Clima/Noticias 13/10",
   "aviso": null
 }
