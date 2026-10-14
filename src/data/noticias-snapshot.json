@@ -1,11 +1,21 @@
 {
-  "asOf": "2026-10-13T09:41:46.000Z",
-  "asOfArg": "13/10/2026, 06:41",
+  "asOf": "2026-10-14T09:48:05.000Z",
+  "asOfArg": "14/10/2026, 06:48",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Respaldo mañana · filtro manual · 13/10/2026, 06:41 ARG",
+  "note": "Respaldo mañana · filtro manual · 14/10/2026, 06:48 ARG",
   "items": [
+    {
+      "title": "El Niño extremo en el Litoral: Itaipú y Yacyretá abrieron compuertas; alerta en islas ganaderas y traslados de hacienda",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "text": "El Niño extremo en el Litoral: Itaipú y Yacyretá abrieron compuertas; alerta en islas ganaderas y traslados de hacienda",
+      "url": "https://www.infocampo.com.ar/el-nino-extremo-ya-impacta-en-el-litoral-itaipu-y-yacireta-abrieron-compuertas-y-hay-temor-en-las-islas-ganaderas/",
+      "publishedAt": "2026-10-13T12:00:21.000Z",
+      "publishedAtArg": "13/10 09:00",
+      "rank": 1
+    },
     {
       "title": "En nueve meses el agro argentino ya exportó casi 90 Mt (88,9), más que el récord anual de 2021; maíz 30,2 Mt en campaña",
       "source": "Infobae (BCR)",
@@ -14,18 +24,28 @@
       "url": "https://www.infobae.com/economia/2026/10/12/en-nueve-meses-el-agro-argentino-ya-exporto-casi-90-millones-de-toneladas-mas-que-el-record-anual-historico-de-2021/",
       "publishedAt": "2026-10-12T13:06:00.000Z",
       "publishedAtArg": "12/10 10:06",
-      "rank": 1
+      "rank": 2
     },
     {
-      "title": "AgRural: la siembra de soja en Brasil salta al 15 % del área (al 8/10) y el maíz verão al 44 % en el centro-sur",
-      "source": "Globo Rural · traducido del portugués",
-      "handle": "Globo Rural",
-      "text": "AgRural: la siembra de soja en Brasil salta al 15 % del área (al 8/10) y el maíz verão al 44 % en el centro-sur",
-      "url": "https://globorural.globo.com/agricultura/soja/noticia/2026/10/plantio-de-soja-do-brasil-salta-para-15percent-da-area-com-melhora-das-chuvas.ghtml",
-      "publishedAt": "2026-10-12T17:58:00.000Z",
-      "publishedAtArg": "12/10 14:58",
-      "rank": 2,
-      "titleOriginal": "Plantio de soja do Brasil salta para 15% da área com melhora das chuvas"
+      "title": "CONAB: la siembra de soja en Brasil llega al 15,6 % del área y el maíz de primera al 33,5 % (al 9/10)",
+      "source": "Rio Verde Rural · traducido del portugués",
+      "handle": "CONAB",
+      "text": "CONAB: la siembra de soja en Brasil llega al 15,6 % del área y el maíz de primera al 33,5 % (al 9/10)",
+      "url": "https://rioverderural.com.br/safra-2026-27-o-avanco-do-plantio-no-brasil/",
+      "publishedAt": "2026-10-13T15:00:00.000Z",
+      "publishedAtArg": "13/10",
+      "rank": 3,
+      "titleOriginal": "Safra 2026/27: Plantio da soja chega a 15,6% no Brasil"
+    },
+    {
+      "title": "Vandalismo rural: el proyecto con dictamen entra al temario de Diputados para la sesión del 21/10 (aún sin media sanción)",
+      "source": "Digital San Luis",
+      "handle": "Digital San Luis",
+      "text": "Vandalismo rural: el proyecto con dictamen entra al temario de Diputados para la sesión del 21/10 (aún sin media sanción)",
+      "url": "https://digitalsanluis.com.ar/vandalismo-rural-el-proyecto-con-dictamen-fue-incluido-en-el-temario-de-diputados/",
+      "publishedAt": "2026-10-13T15:00:00.000Z",
+      "publishedAtArg": "13/10",
+      "rank": 4
     },
     {
       "title": "Derechos de exportación: la Sociedad Rural de Rosario exigió que la baja de retenciones sea ley (no solo por decreto)",
@@ -35,42 +55,21 @@
       "url": "https://www.newsdigitales.com/nota/347288/derechos-de-exportacion-la-sociedad-rural-de-rosario-exigio-que-la-baja-sea-ley/",
       "publishedAt": "2026-10-12T15:00:00.000Z",
       "publishedAtArg": "12/10",
-      "rank": 3
-    },
-    {
-      "title": "Los biocombustibles se consolidan como motor de demanda de soja y maíz en EE. UU. y Brasil (informe BCR)",
-      "source": "TN Campo (BCR)",
-      "handle": "TN Campo",
-      "text": "Los biocombustibles se consolidan como motor de demanda de soja y maíz en EE. UU. y Brasil (informe BCR)",
-      "url": "https://tn.com.ar/campo/2026/10/12/los-biocombustibles-se-consolidan-como-un-nuevo-motor-para-la-demanda-de-soja-y-de-maiz/",
-      "publishedAt": "2026-10-12T23:32:00.000Z",
-      "publishedAtArg": "12/10 20:32",
-      "rank": 4
-    },
-    {
-      "title": "Vandalismo rural: obtuvo dictamen de mayoría en Diputados y queda habilitado para media sanción (penas de hasta 8 años)",
-      "source": "Infobae",
-      "handle": "Infobae",
-      "text": "Vandalismo rural: obtuvo dictamen de mayoría en Diputados y queda habilitado para media sanción (penas de hasta 8 años)",
-      "url": "https://www.infobae.com/politica/2026/10/11/vandalismo-rural-que-dice-el-proyecto-de-ley-que-obtuvo-dictamen-de-comision-y-por-que-lo-cuestiona-la-oposicion/",
-      "publishedAt": "2026-10-11T19:59:00.000Z",
-      "publishedAtArg": "11/10 16:59",
       "rank": 5
     }
   ],
   "descartadas": [
-    "La Pampa emergencia La Arena 10/10 (fuera de ventana 48 h)",
-    "Meteored/PAS siembra 29,9% 11/10 (borde 48 h; solapa con AgRural BR más fresco)",
-    "Brasil maíz industrial Bichos 10/10 (fuera de ventana; reemplazado por TN/BCR biocombustibles 12/10)",
-    "Excesos hídricos sudeste BA NAP 11/10 (escenario hipotético, no emergencia nueva)",
-    "Infocampo/R2820 10.000 camiones (cobertura ~fin sep; republicación)",
-    "Ley de Tierras Corte 09/10 (fuera de ventana)",
-    "PAS BCBA 08/10 (fuera de ventana)",
+    "AgRural soja BR 15% Globo 12/10 (solapa con CONAB 15,6% más fresco y oficial)",
+    "Biocombustibles TN/BCR 12/10 (espacio; EPA reallocation US sin cobertura AR primaria)",
+    "Infobae vandalismo dictamen 11/10 (fuera de ventana 48 h; reemplazado por temario 21/10 Digital San Luis 13/10)",
+    "La Nación Yieldata simulación El Niño 13/10 (análisis privado, no evento/boletín)",
+    "TN Campo soja Rosario / día fertilizantes 13/10 (precios o agenda, no evento decisión)",
+    "PAS BCBA 08/10 (fuera de ventana; sin PAS nuevo esta semana al cierre)",
     "USDM/WASDE/cierres Chicago (precio o sin boletín nuevo)",
     "IF/Bichos fert 10/10 (precios insumos, no evento)",
-    "Remate Rosgan aniversario (agenda, no evento decisión granos)"
+    "CATAC peajes BA/Cba 08/10 (no cuadro flete granos)"
   ],
-  "updatedAt": "2026-10-13T09:41:46.000Z",
-  "updatedBy": "rutina Costos/Clima/Noticias 13/10",
+  "updatedAt": "2026-10-14T09:48:05.000Z",
+  "updatedBy": "rutina Costos/Clima/Noticias 14/10",
   "aviso": null
 }
