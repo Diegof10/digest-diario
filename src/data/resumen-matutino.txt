@@ -1,7 +1,7 @@
-fecha: 2026-10-13 ART
+fecha: 2026-10-14 ART
 titulo_ui: Resumen matutino
 
-CBOT (13/10, 6:52 ART): soja 471,3 US$/t (−0,4%) · maíz 189,4 (−0,4%) · trigo 245,8 (−0,5%)
-FX: oficial 1.535 · blue 1.540 · MEP 1.543 · CCL 1.607 · riesgo país 589
-Mercados: S&P −0,1% · Nasdaq −0,4% · WTI 92,1 · Brent 104,8 · UST 10a 5,24%
-Nota: CBOT sigue flojo post-WASDE; petróleo cede ~1,8% (WTI 92,1 / Brent 104,8) y el CCL baja a 1.607 (−0,7%).
+CBOT (14/10, 6:54 ART): soja 473,9 US$/t (+0,5%) · maíz 189,3 (−0,4%) · trigo 244,7 (−0,5%)
+FX: oficial 1.535 · blue 1.550 · MEP 1.539 · CCL 1.614 · riesgo país 597
+Mercados: S&P −0,02% · Nasdaq −0,2% · WTI 94,8 · Brent 105,9 · UST 10a 5,22%
+Nota: soja rebota en CBOT mientras maíz y trigo siguen flojos; WTI vuelve a 94,8 (92,1 ayer) y el riesgo país sube a 597 (589).
