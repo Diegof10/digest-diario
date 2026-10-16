@@ -24,32 +24,32 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "BR",
     countryLabel: "Brasil",
     bullet:
-      "Octubre: lluvia sobre lo normal en Sul, MS, SP, SE de MG y RJ; bajo lo normal en Norte, Nordeste y gran parte del Centro-Oeste; temps sobre lo normal (INMET 25/9, act. 30/9).",
-    fuente: "INMET prognóstico climático outubro/2026",
-    fecha: "25/9/2026",
-    url: "https://portal.inmet.gov.br/noticias/outubro-como-ser%C3%A1-o-clima-no-brasil-5",
+      "Trimestre oct–dic: lluvias sobre lo normal en todo el Sul (RS, SC, sur y este de PR con +100 mm), MS y sur de GO; bajo lo normal en centro-norte de MT, norte de GO, Norte y Nordeste; temps sobre lo normal; excesos hídricos en el Sul complican cosecha de invierno y siembra de soja (INMET 13/10).",
+    fuente: "INMET Boletim Agroclimatológico Mensal outubro/2026 (OND)",
+    fecha: "13/10/2026",
+    url: "https://portal.inmet.gov.br/uploads/boletinsAgroclimatologicos/Boletim_AGRO_Outubro_2026.pdf",
     secondaryUrl:
-      "https://portal.inmet.gov.br/noticias/outubro-como-ser%C3%A1-o-clima-no-brasil-5",
-    secondaryNote: "Publicado 25/9 · última modificación 30/9",
+      "https://portal.inmet.gov.br/noticias/boletim-agroclimatol%C3%B3gico-mensal-outubro-2026",
+    secondaryNote: "Nota INMET publicada 13/10/2026 15h02",
   },
   {
     country: "US",
     countryLabel: "Estados Unidos",
     bullet:
-      "Mapa USDM 6/10 (publicado 8/10): lluvias fuertes alivian TX–OK y Planicies centro-sur; D4 se expande en norte de Wisconsin y D2 en Upper Peninsula. CPC SDO a dic: mejora sur/centro, desarrollo Norte Rocosas–Noroeste (próximo 15/10).",
+      "Mapa USDM 13/10 (publicado 15/10): calor 8–16 °F sobre lo normal empeora la sequía en Wisconsin, Upper Peninsula y del sur de Illinois/Indiana a Missouri, Kentucky y bajo Mississippi; el huracán Isaias alivia el Sudeste. CPC SDO (15/10, hasta enero): mejora en Este, Sudeste, bajo Mississippi y Planicies del sur; sin cambios en Planicies del norte y alto Mississippi.",
     fuente: "US Drought Monitor · NOAA CPC Seasonal Drought Outlook",
-    fecha: "6–8/10/2026",
-    url: "https://droughtmonitor.unl.edu/",
+    fecha: "13–15/10/2026",
+    url: "https://droughtmonitor.unl.edu/Summary.aspx",
     secondaryUrl:
-      "https://www.cpc.ncep.noaa.gov/products/expert_assessment/sdo_summary.php/",
-    secondaryNote: "CPC Seasonal Drought Outlook (act. Oct; próximo 15/10)",
+      "https://www.cpc.ncep.noaa.gov/products/expert_assessment/sdo_summary.php",
+    secondaryNote: "CPC Seasonal Drought Outlook emitido 15/10 (próximo 19/11)",
   },
 ];
 
 const CURADO_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-09-30",
-  BR: "2026-09-25",
-  US: "2026-10-08",
+  BR: "2026-10-13",
+  US: "2026-10-15",
 };
 /** Mes (portugués) del boletín INMET curado arriba */
 const INMET_CURADO = "outubro/2026";
@@ -126,9 +126,9 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
   const corrida = blob?.ultimaCorrida ?? null;
   const note = actualizadoAt
     ? vigente
-      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 25/9 · USDM 6–8/10 curados.`
-      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 25/9 · USDM 6–8/10.`
-    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 25/9 · USDM 6–8/10 · CPC Oct.";
+      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 13/10 · USDM 13–15/10 curados.`
+      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 13/10 · USDM 13–15/10.`
+    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 13/10 · USDM 13–15/10 · CPC 15/10";
 
   return {
     ok: true,
