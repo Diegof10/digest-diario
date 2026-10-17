@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-10-16T09:55:00.000Z",
-  "asOfArg": "16/10/2026, 06:55",
+  "asOf": "2026-10-17T09:55:00.000Z",
+  "asOfArg": "17/10/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 16/10/2026, 06:55 ARG",
+  "note": "Rutina mañana · filtro manual · 17/10/2026, 06:55 ARG",
   "items": [
     {
       "title": "Compradores estatales chinos compran otros 10 a 13 cargamentos de soja de EE. UU. (embarque dic–mar); en la semana suman 1,2–1,5 Mt",
@@ -28,6 +28,26 @@
       "rank": 2
     },
     {
+      "title": "Avanza el consenso federal para reformar la ley de biocombustibles (el plenario de comisiones de Diputados podría dictaminar el martes y votarse el miércoles)",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "text": "Avanza el consenso federal para reformar la ley de biocombustibles (el plenario de comisiones de Diputados podría dictaminar el martes y votarse el miércoles)",
+      "url": "https://www.clarin.com/rural/avanza-consenso-federal-reformar-ley-biocombustibles_0_LVc6Ygktw4.html",
+      "publishedAt": "2026-10-17T08:13:41.000Z",
+      "publishedAtArg": "17/10 05:13",
+      "rank": 3
+    },
+    {
+      "title": "“El agua viene fuerte”: la crecida acecha y el éxodo de animales y de pobladores en el Litoral entró en su hora más crítica",
+      "source": "La Nación Campo",
+      "handle": "La Nación",
+      "text": "“El agua viene fuerte”: la crecida acecha y el éxodo de animales y de pobladores en el Litoral entró en su hora más crítica",
+      "url": "https://www.lanacion.com.ar/economia/campo/el-agua-viene-fuerte-en-las-islas-del-litoral-se-profundiza-el-exodo-de-miles-de-animales-y-de-nid16102026/",
+      "publishedAt": "2026-10-16T20:50:43.000Z",
+      "publishedAtArg": "16/10 17:50",
+      "rank": 4
+    },
+    {
       "title": "Súper Niño: Brasil proyecta una cosecha récord de 354,5 millones de toneladas de granos, pero hay una amenaza",
       "source": "La Nación Campo",
       "handle": "La Nación",
@@ -35,37 +55,17 @@
       "url": "https://www.lanacion.com.ar/economia/campo/super-nino-brasil-proyecta-una-cosecha-record-de-3545-millones-de-toneladas-de-granos-pero-hay-una-nid15102026/",
       "publishedAt": "2026-10-15T19:44:00.000Z",
       "publishedAtArg": "15/10 16:44",
-      "rank": 3
-    },
-    {
-      "title": "El Gobierno reglamentó la libre elección de veterinarios para la vacunación contra la aftosa",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "text": "El Gobierno reglamentó la libre elección de veterinarios para la vacunación contra la aftosa",
-      "url": "https://www.clarin.com/rural/gobierno-reglamento-libre-eleccion-veterinarios-vacunacion-aftosa_0_LMttMKrWKT.html",
-      "publishedAt": "2026-10-15T19:41:00.000Z",
-      "publishedAtArg": "15/10 16:41",
-      "rank": 4
-    },
-    {
-      "title": "Crecida histórica: el agua avanza y con lanchas y barcazas la misión es salvar a miles de animales",
-      "source": "La Nación Campo",
-      "handle": "La Nación",
-      "text": "Crecida histórica: el agua avanza y con lanchas y barcazas la misión es salvar a miles de animales",
-      "url": "https://www.lanacion.com.ar/economia/campo/hay-que-salir-con-todo-barcazas-lanchas-y-una-carrera-contra-reloj-para-salvar-a-los-animales-de-la-nid15102026/",
-      "publishedAt": "2026-10-15T23:37:00.000Z",
-      "publishedAtArg": "15/10 20:37",
       "rank": 5
     }
   ],
   "descartadas": [
-    "China 8–10 cargamentos 14/10 (reemplazado por la segunda tanda Reuters 15/10)",
-    "'Milei baja retenciones soja 33% a 26%' en sitios locales fechados 16/10: es el anuncio de jul-2025 republicado (alícuota vigente soja 24%, Decreto 423/2026); descartada",
-    "Trigo BR importación récord (Bichos 15/10) y crecida Paraná Clarín 14/10 (espacio / reemplazada por nota más nueva)",
-    "Profertil megaplanta Techint-Saipem, clausura de pulverizadoras en Elena, quiebra Algodonera Avellaneda (bajo impacto en caja de corto plazo)",
-    "Coberturas en soja, pollo chino US$/t, aceite de girasol, trigo nuevo (precio/opinión)"
+    "China ≥20 cargamentos soja EE. UU. (Bloomberg 16/10): mismo hecho que Reuters 15/10, se deja la fuente más temprana",
+    "Crecida Paraná La Nación 15/10 y aftosa veterinarios Clarín 15/10 (reemplazada por nota más nueva / espacio)",
+    "Retenciones: sin medida nueva en BO 16/10; nota La Nación 17/10 sobre DJVE y cronograma 2027 es análisis sin hecho nuevo; 'Milei baja retenciones 33% a 26%' republicado de jul-2025",
+    "Soja GM tolerante a herbicidas aprobada (Bichos 16/10), Senasa caravanas electrónicas, >100 Mt comercializadas 2025/26, Ley de Tierras/CRA (bajo impacto en caja de corto plazo)",
+    "Soja cae 5ª rueda en Chicago, fondos liquidan maíz, trigo Rosario vs Chicago, leche (precio/opinión)"
   ],
-  "updatedAt": "2026-10-16T09:55:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 16/10",
+  "updatedAt": "2026-10-17T09:55:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 17/10",
   "aviso": null
 }
