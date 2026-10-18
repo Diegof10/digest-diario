@@ -1,31 +1,21 @@
 {
-  "asOf": "2026-10-17T09:55:00.000Z",
-  "asOfArg": "17/10/2026, 06:55",
+  "asOf": "2026-10-18T09:55:00.000Z",
+  "asOfArg": "18/10/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 17/10/2026, 06:55 ARG",
+  "note": "Rutina mañana · filtro manual · 18/10/2026, 06:55 ARG",
   "items": [
     {
-      "title": "Compradores estatales chinos compran otros 10 a 13 cargamentos de soja de EE. UU. (embarque dic–mar); en la semana suman 1,2–1,5 Mt",
-      "source": "Reuters (vía Devdiscourse) · traducido del inglés",
-      "handle": "Reuters",
-      "text": "Compradores estatales chinos compran otros 10 a 13 cargamentos de soja de EE. UU. (embarque dic–mar); en la semana suman 1,2–1,5 Mt",
-      "url": "https://www.devdiscourse.com/article/international/3993114-china-state-buyers-snap-up-more-us-soybeans-in-latest-post-summit-purchases",
-      "publishedAt": "2026-10-15T14:35:21.000Z",
-      "titleOriginal": "China state buyers snap up more US soybeans in latest post-summit purchases",
-      "publishedAtArg": "15/10 11:35",
+      "title": "China extiende su racha de compras de soja de EE. UU.: al menos 20 cargamentos (~1,3 Mt) para embarque dic–mar; el USDA confirmó 1,36 Mt en tres días",
+      "source": "Bloomberg (vía Bloomberg Law) · traducido del inglés",
+      "handle": "Bloomberg",
+      "text": "China extiende su racha de compras de soja de EE. UU.: al menos 20 cargamentos (~1,3 Mt) para embarque dic–mar; el USDA confirmó 1,36 Mt en tres días",
+      "url": "https://news.bloomberglaw.com/international-trade/china-buys-more-us-soybeans-as-purchasing-spree-gathers-pace",
+      "publishedAt": "2026-10-16T15:00:00.000Z",
+      "titleOriginal": "China Buys More US Soybeans as Purchasing Spree Gathers Pace",
+      "publishedAtArg": "16/10 12:00",
       "rank": 1
-    },
-    {
-      "title": "La siembra de los cultivos presenta demoras pese a la mejora de las reservas de agua (Panorama Agrícola Semanal BCBA: maíz 34,8%, trigo con mermas de 10–30% en el centro)",
-      "source": "Bolsa de Cereales de Buenos Aires (vía TN)",
-      "handle": "BCBA",
-      "text": "La siembra de los cultivos presenta demoras pese a la mejora de las reservas de agua (Panorama Agrícola Semanal BCBA: maíz 34,8%, trigo con mermas de 10–30% en el centro)",
-      "url": "https://tn.com.ar/campo/2026/10/15/la-siembra-de-los-cultivos-se-demora-por-las-lluvias-que-mejora-las-reservas-de-agua/",
-      "publishedAt": "2026-10-15T20:09:00.000Z",
-      "publishedAtArg": "15/10 17:09",
-      "rank": 2
     },
     {
       "title": "Avanza el consenso federal para reformar la ley de biocombustibles (el plenario de comisiones de Diputados podría dictaminar el martes y votarse el miércoles)",
@@ -35,37 +25,48 @@
       "url": "https://www.clarin.com/rural/avanza-consenso-federal-reformar-ley-biocombustibles_0_LVc6Ygktw4.html",
       "publishedAt": "2026-10-17T08:13:41.000Z",
       "publishedAtArg": "17/10 05:13",
+      "rank": 2
+    },
+    {
+      "title": "Cambia el escenario para la chicharrita del maíz: cae la población y los análisis muestran una baja infectividad",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "text": "Cambia el escenario para la chicharrita del maíz: cae la población y los análisis muestran una baja infectividad",
+      "url": "https://www.clarin.com/rural/cambia-escenario-chicharrita-maiz-cae-poblacion-analisis-muestran-baja-infectividad_0_JChnIzqXNt.html",
+      "publishedAt": "2026-10-17T09:00:00.000Z",
+      "publishedAtArg": "17/10 06:00",
       "rank": 3
     },
     {
-      "title": "“El agua viene fuerte”: la crecida acecha y el éxodo de animales y de pobladores en el Litoral entró en su hora más crítica",
-      "source": "La Nación Campo",
-      "handle": "La Nación",
-      "text": "“El agua viene fuerte”: la crecida acecha y el éxodo de animales y de pobladores en el Litoral entró en su hora más crítica",
-      "url": "https://www.lanacion.com.ar/economia/campo/el-agua-viene-fuerte-en-las-islas-del-litoral-se-profundiza-el-exodo-de-miles-de-animales-y-de-nid16102026/",
-      "publishedAt": "2026-10-16T20:50:43.000Z",
-      "publishedAtArg": "16/10 17:50",
+      "title": "En Santa Fe también esperan la crecida del Paraná y trabajan a contrarreloj para salvar a miles de animales de las islas",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "text": "En Santa Fe también esperan la crecida del Paraná y trabajan a contrarreloj para salvar a miles de animales de las islas",
+      "url": "https://www.clarin.com/rural/santa-fe-esperan-crecida-parana-trabajan-contrarreloj-salvar-miles-animales-islas_0_rG19FPTIac.html",
+      "publishedAt": "2026-10-17T09:04:00.000Z",
+      "publishedAtArg": "17/10 06:04",
       "rank": 4
     },
     {
-      "title": "Súper Niño: Brasil proyecta una cosecha récord de 354,5 millones de toneladas de granos, pero hay una amenaza",
-      "source": "La Nación Campo",
-      "handle": "La Nación",
-      "text": "Súper Niño: Brasil proyecta una cosecha récord de 354,5 millones de toneladas de granos, pero hay una amenaza",
-      "url": "https://www.lanacion.com.ar/economia/campo/super-nino-brasil-proyecta-una-cosecha-record-de-3545-millones-de-toneladas-de-granos-pero-hay-una-nid15102026/",
-      "publishedAt": "2026-10-15T19:44:00.000Z",
-      "publishedAtArg": "15/10 16:44",
+      "title": "Tres modelos climáticos prevén lluvias menores a las normales en las zonas sojeras de Mato Grosso para las próximas dos semanas",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "text": "Tres modelos climáticos prevén lluvias menores a las normales en las zonas sojeras de Mato Grosso para las próximas dos semanas",
+      "url": "https://bichosdecampo.com/para-seguir-de-cerca-tres-modelos-climaticos-preven-lluvias-menores-a-las-normales-en-las-regiones-productoras-de-soja-de-mato-grosso-para-las-proximas-dos-semanas/",
+      "publishedAt": "2026-10-18T03:36:00.000Z",
+      "publishedAtArg": "18/10 00:36",
       "rank": 5
     }
   ],
   "descartadas": [
-    "China ≥20 cargamentos soja EE. UU. (Bloomberg 16/10): mismo hecho que Reuters 15/10, se deja la fuente más temprana",
-    "Crecida Paraná La Nación 15/10 y aftosa veterinarios Clarín 15/10 (reemplazada por nota más nueva / espacio)",
-    "Retenciones: sin medida nueva en BO 16/10; nota La Nación 17/10 sobre DJVE y cronograma 2027 es análisis sin hecho nuevo; 'Milei baja retenciones 33% a 26%' republicado de jul-2025",
-    "Soja GM tolerante a herbicidas aprobada (Bichos 16/10), Senasa caravanas electrónicas, >100 Mt comercializadas 2025/26, Ley de Tierras/CRA (bajo impacto en caja de corto plazo)",
-    "Soja cae 5ª rueda en Chicago, fondos liquidan maíz, trigo Rosario vs Chicago, leche (precio/opinión)"
+    "Reuters 15/10 (China 10–13 cargamentos), PAS BCBA 15/10, Conab 1er levantamiento 2026/27 (15/10), cosecha BR 354,5 Mt (La Nación 15/10): más de 48 h",
+    "Crecida: 'Ganarle al agua' islas entrerrianas (La Nación 17/10) y 'El agua viene fuerte' (La Nación 16/10), mismo hecho que Clarín Santa Fe 17/10",
+    "EPA reasignación SRE 770M RINs: anuncio 13/10, publicación en Federal Register 16/10 es formal (sin hecho nuevo)",
+    "Récord 105 Mt comercializadas (La Nación 17/10), cupo carne China (Bichos 17/10), premios trigo calidad (Bichos 17/10): menor impacto en caja de corto plazo",
+    "Urea rebota con import 510–520 CFR (IF vía Bichos 17/10): es precio, va al bloque Costos; soja cae 5ª rueda Chicago, leche, dólar (precio)",
+    "Retenciones: sin decreto nuevo en BO (vigente Decreto 423/2026); paros portuarios/aceiteros sin medida nueva en 48 h"
   ],
-  "updatedAt": "2026-10-17T09:55:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 17/10",
+  "updatedAt": "2026-10-18T09:55:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 18/10",
   "aviso": null
 }

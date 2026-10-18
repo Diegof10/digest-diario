@@ -5,17 +5,17 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF vía Bichos de Campo — weekly RIF republished 10 Oct 2026. Curated snapshot only. */
+/** IF vía Bichos de Campo — weekly RIF republished 17 Oct 2026. Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://bichosdecampo.com/gracias-india-caen-fuerte-los-precios-de-los-fertilizantes-nitrogenados-luego-de-una-licitacion-que-arrojo-resultados-sorpresivos/";
+  "https://bichosdecampo.com/se-retobaron-los-chinos-y-los-precios-de-la-urea-revirtieron-la-tendencia-bajista/";
 
-const FERT_AS_OF = "2026-10-10";
+const FERT_AS_OF = "2026-10-17";
 const FERT_SOURCE_LABEL = "Bichos/IF";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 17 Oct 2026; mismos 5,50–5,90). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 18 Oct 2026; mismos 5,50–5,90). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-10-17";
+const GLIFO_AS_OF = "2026-10-18";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
@@ -164,15 +164,16 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Bichos de Campo / IF RIF dated 10 Oct 2026.
+ * Curated weekly snapshot from Bichos de Campo / IF RIF dated 17 Oct 2026.
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
- * Urea import CFR AR no cotizada con rango nombrado en ese informe → null.
+ * Urea local: oferta al cierre de semana 605–615 (venía estable 595–605); import granular CFR 510–520 (ofertas al jueves).
+ * MAP/DAP local 965–985 sin cambio; referencia import DAP/MAP nominal 850–870 CFR.
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(595, 605, "FCA", "wholesale"),
-      import: null,
+      local: fertPoint(605, 615, "FCA", "wholesale", "IF: oferta al cierre de semana (venía 595–605)"),
+      import: fertPoint(510, 520, "CFR", "import_replacement", "IF: urea granular, ofertas hacia el jueves"),
     },
     map: {
       local: fertPoint(
@@ -182,7 +183,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(855, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
+      import: fertPoint(850, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range (nominal)"),
     },
     dap: {
       local: fertPoint(
@@ -192,7 +193,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(855, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range"),
+      import: fertPoint(850, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range (nominal)"),
     },
   };
 }
