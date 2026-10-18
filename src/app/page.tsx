@@ -1,19 +1,76 @@
+import { Suspense } from "react";
 import ClimaVivo from "@/components/ClimaVivo";
 import CostsBlock from "@/components/CostsBlock";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
-import { getClimaVivo } from "@/lib/clima-vivo";
-import { getHacienda } from "@/lib/hacienda";
-import { loadResumenMatutino } from "@/lib/resumen-matutino";
-import { parseTema } from "@/lib/tema";
+import { parseTema, type Tema } from "@/lib/tema";
 import { buildTicker } from "@/lib/ticker";
 import Ticker from "@/components/ui/Ticker";
-import { buildLecturaCards } from "@/lib/lectura-cards";
-import { assembleDigest, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
+import { cordobaParts, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
+import { getHomeData } from "@/lib/home-data";
 
-export const dynamic = "force-dynamic";
+// Sigue siendo dinámica (lee ?km= y ?tema=), pero los datos salen del cache de 10 min
+// (src/lib/home-data.ts) y el header se envía antes que los bloques de datos (streaming).
+
+async function TickerConDatos({ km, tema }: { km: number; tema: Tema }) {
+  const { digest, cos } = await getHomeData(km, tema !== "base");
+  const ticker = buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null);
+  return <Ticker items={ticker} />;
+}
+
+/** Reserva la altura de la cinta mientras llegan los datos (evita saltos de layout). */
+function TickerPlaceholder() {
+  return (
+    <div className="ticker zona-oscura" aria-hidden>
+      <div className="ticker-track">
+        <div className="ticker-group">
+          <span className="tk-item">
+            <span className="tk-label">&nbsp;</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+async function BloquesConDatos({ km, tema }: { km: number; tema: Tema }) {
+  const { digest, climaVivo, hacienda, lecturaCards } = await getHomeData(km, tema !== "base");
+  return (
+    <>
+      <ClimaVivo clima={climaVivo} tema={tema} />
+
+      <MarketBoard mercado={digest.mercado} tema={tema} hacienda={hacienda} />
+
+      <div className="mt-3">
+        <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
+      </div>
+
+      <div className="mt-3">
+        <FiscalBlock fiscal={digest.fiscal} />
+      </div>
+
+
+      <div className="mt-3">
+        <MorningBrief lines={digest.resumenMatutino} tema={tema} cards={lecturaCards} />
+      </div>
+
+      <SiteFooter pie={digest.pie} />
+    </>
+  );
+}
+
+function BloquesPlaceholder() {
+  return (
+    <div aria-busy="true" aria-live="polite" className="space-y-3">
+      <p className="sr-only">Cargando datos del día…</p>
+      {[96, 420, 220, 200, 260].map((h, i) => (
+        <div key={i} className="animate-pulse rounded-sm bg-slate-200/70" style={{ height: h }} />
+      ))}
+    </div>
+  );
+}
 
 export default async function Home({
   searchParams,
@@ -28,18 +85,17 @@ export default async function Home({
       : DEFAULT_KM;
 
   const tema = parseTema(sp.tema);
-  const [digest, climaVivo, cos, hacienda] = await Promise.all([
-    assembleDigest({ km }),
-    getClimaVivo(),
-    tema !== "base" ? loadResumenMatutino() : Promise.resolve(null),
-    getHacienda(),
-  ]);
-  const lecturaCards = await buildLecturaCards(digest.mercado, digest.fiscal, climaVivo);
-  const ticker = tema !== "base" ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null) : [];
+  const { fechaCorta, label: fechaLabel } = cordobaParts();
+  // Arranca el armado ya (no bloquea el envío del header).
+  void getHomeData(km, tema !== "base");
 
   return (
     <div data-tema={tema} className="tema-root">
-    {tema !== "base" ? <Ticker items={ticker} /> : null}
+    {tema !== "base" ? (
+      <Suspense fallback={<TickerPlaceholder />}>
+        <TickerConDatos km={km} tema={tema} />
+      </Suspense>
+    ) : null}
     <main className="mx-auto w-full max-w-5xl px-2 py-3 sm:px-4 sm:py-5">
       {/* Header bar — placa style */}
       <header className="mb-3 flex items-center justify-between gap-3 rounded-sm bg-[#0b1f3a] px-3 py-2.5 text-white sm:px-4">
@@ -73,32 +129,17 @@ export default async function Home({
         </div>
         <div className="text-right">
           <div className="text-sm font-semibold tabular-nums">
-            {digest.fechaCorta}
+            {fechaCorta}
           </div>
           <div className="hidden text-[10px] capitalize opacity-70 sm:block">
-            {digest.fechaLabel}
+            {fechaLabel}
           </div>
         </div>
       </header>
 
-      <ClimaVivo clima={climaVivo} tema={tema} />
-
-      <MarketBoard mercado={digest.mercado} tema={tema} hacienda={hacienda} />
-
-      <div className="mt-3">
-        <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
-      </div>
-
-      <div className="mt-3">
-        <FiscalBlock fiscal={digest.fiscal} />
-      </div>
-
-
-      <div className="mt-3">
-        <MorningBrief lines={digest.resumenMatutino} tema={tema} cards={lecturaCards} />
-      </div>
-
-      <SiteFooter pie={digest.pie} />
+      <Suspense fallback={<BloquesPlaceholder />}>
+        <BloquesConDatos km={km} tema={tema} />
+      </Suspense>
     </main>
     </div>
   );
