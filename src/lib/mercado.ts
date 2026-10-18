@@ -23,6 +23,8 @@ import type {
 } from "@/lib/types";
 
 const GRANOS_URL = "https://lark-lake-solar-craft.grok.me/api/granos";
+const GRANOS_TIMEOUT_MS = 10_000;
+const WTI_TIMEOUT_MS = 6_000;
 
 const UA =
   "Mozilla/5.0 (compatible; digest-diario/0.1; +https://github.com/Diegof10/digest-diario) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
@@ -462,6 +464,7 @@ async function fetchWti(): Promise<WtiQuote | null> {
         "User-Agent": UA,
       },
       cache: "no-store",
+      signal: AbortSignal.timeout(WTI_TIMEOUT_MS),
     });
     if (!res.ok) return null;
     const data = (await res.json()) as {
@@ -667,11 +670,13 @@ function applyFrescura(snap: MercadoSnapshot): MercadoSnapshot {
 }
 
 export async function getMercado(opts: { fresh?: boolean } = {}): Promise<MercadoSnapshot> {
+  // Sólo el refresh "fresh" (cron) escribe la serie en Blob; las visitas sólo leen.
+  const persist = opts.fresh === true;
   const climaPromise = getClima();
   const noticiasPromise = getNoticias();
   const wtiPromise = fetchWti();
-  const plazasPromise = getPlazas({ fresh: opts.fresh }).catch(() => null);
-  const matbaPromise = getMatba({ fresh: opts.fresh });
+  const plazasPromise = getPlazas({ fresh: opts.fresh, persist }).catch(() => null);
+  const matbaPromise = getMatba({ fresh: opts.fresh, persist });
   let base: MercadoSnapshot;
   try {
     const res = await fetch(GRANOS_URL, {
@@ -680,6 +685,7 @@ export async function getMercado(opts: { fresh?: boolean } = {}): Promise<Mercad
         "User-Agent": UA,
       },
       cache: "no-store",
+      signal: AbortSignal.timeout(GRANOS_TIMEOUT_MS),
     });
     base = res.ok
       ? mapGranos((await res.json()) as GranosPayload)

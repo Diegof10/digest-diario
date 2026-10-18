@@ -1,6 +1,8 @@
 import { getCatac } from "@/lib/catac";
 import { getFiscal } from "@/lib/fiscal";
 import { getInsumos } from "@/lib/insumos";
+import { unstable_cache } from "next/cache";
+import { hoyArtIso } from "@/lib/habiles";
 import { getMercado, rowById } from "@/lib/mercado";
 import { frescura, isoToDm } from "@/lib/habiles";
 import { lineaResumen } from "@/lib/plazas";
@@ -16,7 +18,21 @@ export const DEFAULT_KM = 180;
 
 const EMPTY_INSUMO_SLOTS: CostoInsumoSlot[] = [];
 
-function cordobaParts(d = new Date()) {
+/**
+ * Insumos (incluye el CSV de surtidores de datos.energia.gob.ar, pesado y lento) con
+ * cache de 6 h por día ART: el gasoil es de ciclo semanal, no hace falta bajarlo por visita.
+ * El cron (fresh) lo sigue consultando en vivo.
+ */
+const getInsumosCached = unstable_cache(
+  async (dia: string) => {
+    void dia;
+    return getInsumos();
+  },
+  ["insumos-v1"],
+  { revalidate: 21_600, tags: ["insumos"] },
+);
+
+export function cordobaParts(d = new Date()) {
   const fmt = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Argentina/Cordoba",
     year: "numeric",
@@ -101,7 +117,7 @@ export async function assembleDigest(opts?: {
     getMercado({ fresh: opts?.fresh }),
     getCatac(km),
     getFiscal(),
-    getInsumos().catch(() => null),
+    (opts?.fresh ? getInsumos() : getInsumosCached(hoyArtIso())).catch(() => null),
   ]);
 
   let catacLine = "sin dato";

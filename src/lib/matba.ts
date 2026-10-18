@@ -230,7 +230,7 @@ async function desdeBlob(): Promise<MatbaContrato[]> {
  * Último ajuste publicado: arranca en hoy (ART) y retrocede hábiles hasta
  * encontrar una rueda con datos (máx. 6 consultas).
  */
-export async function getMatba(opts: { fresh?: boolean; now?: Date } = {}): Promise<MatbaSnapshot> {
+export async function getMatba(opts: { fresh?: boolean; now?: Date; persist?: boolean } = {}): Promise<MatbaSnapshot> {
   const now = opts.now ?? new Date();
   const fetchedAt = now.toISOString();
   let contratos: MatbaContrato[] = [];
@@ -257,7 +257,7 @@ export async function getMatba(opts: { fresh?: boolean; now?: Date } = {}): Prom
   }
 
   if (origen === "a3") {
-    await guardar(contratos).catch(() => undefined);
+    if (opts.persist !== false) await guardar(contratos).catch(() => undefined);
   } else {
     const viejos = await desdeBlob().catch(() => []);
     if (viejos.length > 0) {

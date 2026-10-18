@@ -230,11 +230,20 @@ async function fetchCacHistorial(
   return out.sort((a, b) => a.fecha.localeCompare(b.fecha));
 }
 
+/** Red de la CAC (pizarra + historiales). Nunca rechaza: cada fetch cae a vacío. */
+function fetchCacRaw(hoy: string, o: FetchOpts) {
+  return Promise.all([
+    fetchText(CAC_URL, o).catch(() => ""),
+    ...GRANOS_CAC.map((g) => fetchCacHistorial(g, hoy, o).catch(() => [] as Awaited<ReturnType<typeof fetchCacHistorial>>)),
+  ] as const);
+}
+
 async function getCac(
   hoy: string,
   o: FetchOpts,
   serie: SerieFile,
   fx: (fecha: string) => { valor: number; fecha: string; fuente: string } | null,
+  raw?: ReturnType<typeof fetchCacRaw>,
 ): Promise<PlazaSnapshot> {
   const base = {
     id: "cac" as const,
@@ -244,10 +253,7 @@ async function getCac(
     url: CAC_URL,
   };
   try {
-    const [boardHtml, ...hists] = await Promise.all([
-      fetchText(CAC_URL, o).catch(() => ""),
-      ...GRANOS_CAC.map((g) => fetchCacHistorial(g, hoy, o).catch(() => [])),
-    ]);
+    const [boardHtml, ...hists] = await (raw ?? fetchCacRaw(hoy, o));
     const board = boardHtml ? parseCacBoard(boardHtml) : null;
     const granos: CotizacionGrano[] = [];
     GRANOS_CAC.forEach((g, i) => {
@@ -315,11 +321,20 @@ async function fetchAfaComparativo(g: Grano, hoy: string, o: FetchOpts): Promise
   return out.sort((a, b) => a.fecha.localeCompare(b.fecha));
 }
 
+/** Red de AFA (pizarra + comparativos). Nunca rechaza: cada fetch cae a vacío. */
+function fetchAfaRaw(hoy: string, o: FetchOpts) {
+  return Promise.all([
+    fetchText(AFA_URL, o).catch(() => ""),
+    ...GRANOS.map((g) => fetchAfaComparativo(g, hoy, o).catch(() => [] as Array<{ fecha: string; ars: number }>)),
+  ] as const);
+}
+
 async function getAfa(
   hoy: string,
   o: FetchOpts,
   serie: SerieFile,
   fx: (fecha: string) => { valor: number; fecha: string; fuente: string } | null,
+  raw?: ReturnType<typeof fetchAfaRaw>,
 ): Promise<PlazaSnapshot> {
   const base = {
     id: "afa" as const,
@@ -329,10 +344,7 @@ async function getAfa(
     url: AFA_URL,
   };
   try {
-    const [pageHtml, ...comps] = await Promise.all([
-      fetchText(AFA_URL, o).catch(() => ""),
-      ...GRANOS.map((g) => fetchAfaComparativo(g, hoy, o).catch(() => [])),
-    ]);
+    const [pageHtml, ...comps] = await (raw ?? fetchAfaRaw(hoy, o));
     const txt = pageHtml ? stripHtml(pageHtml) : "";
     const granos: CotizacionGrano[] = [];
     GRANOS.forEach((g, i) => {
@@ -373,6 +385,10 @@ async function getAfa(
 export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {}): Promise<PlazasSnapshot> {
   const hoy = hoyArtIso();
   const o: FetchOpts = { fresh: opts.fresh };
+  // Toda la red en paralelo (BNA, serie, CAC, AFA); el armado sigue en el mismo orden
+  // porque AFA usa el TC de la CAC como respaldo. Mismo resultado, sin cascada.
+  const cacRaw = fetchCacRaw(hoy, o);
+  const afaRaw = fetchAfaRaw(hoy, o);
   const [serie, bna] = await Promise.all([readSerie().catch(() => ({ updatedAt: null, series: {} })), fetchBnaDivisa(o)]);
 
   const fx = (fecha: string) => {
@@ -381,11 +397,11 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
     return v != null ? { valor: v, fecha, fuente: "BNA divisa comprador" } : null;
   };
 
-  const cac = await getCac(hoy, o, serie, fx);
+  const cac = await getCac(hoy, o, serie, fx, cacRaw);
   // TC de la CAC (BNA divisa comprador de su fecha) también sirve para AFA de esa fecha.
   const cacTc = cac.granos.find((g) => g.tc?.fuente.includes("CAC"))?.tc ?? null;
   const fx2 = (fecha: string) => fx(fecha) ?? (cacTc && cacTc.fecha === fecha ? cacTc : null);
-  const afa = await getAfa(hoy, o, serie, fx2);
+  const afa = await getAfa(hoy, o, serie, fx2, afaRaw);
 
   let persistencia: PlazasSnapshot["persistencia"] = { written: false, error: null, updatedAt: serie.updatedAt };
   if (opts.persist !== false) {
