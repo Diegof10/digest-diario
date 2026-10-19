@@ -46,6 +46,15 @@ export interface CotizacionGrano {
   tc?: { valor: number; fecha: string; fuente: string } | null;
   /** Hora de publicación de la fuente (hh:mm ART), si la informa */
   hora?: string | null;
+  /** Plaza del precio cuando difiere de la plaza de la columna (ej. AFA sorgo → Rosario) */
+  lugar?: string | null;
+}
+
+/** Producto que la fuente lista ese día sin precio ("sin cotización"). */
+export interface SinCotizacion {
+  grano: GranoPizarra;
+  fecha: string; // yyyy-mm-dd de la pizarra
+  lugar: string | null;
 }
 
 export interface PlazaSnapshot {
@@ -57,6 +66,8 @@ export interface PlazaSnapshot {
   fecha: string | null;
   frescura: Frescura;
   granos: CotizacionGrano[];
+  /** Productos publicados sin precio ese día (se muestran como "sin cotización"). */
+  sinCotizacion?: SinCotizacion[];
   error: string | null;
 }
 
@@ -79,7 +90,11 @@ const CAC_PRODUCT: Record<GranoPizarra, string> = { soja: "13", maiz: "3", trigo
 
 export const AFA_URL = "https://www.afascl.coop/afadiario/mercados-en-linea";
 const AFA_COMP_URL = "https://www.afascl.coop/afadiario/comparativo-pizarra";
-const AFA_GRANO: Record<Grano, string> = { soja: "Soja", maiz: "Maiz", trigo: "Trigo" };
+const AFA_GRANO: Record<GranoPizarra, string> = { soja: "Soja", maiz: "Maiz", trigo: "Trigo", girasol: "Girasol", sorgo: "Sorgo" };
+/** Productos que se leen de la pizarra AFA (mismos que la CAC). */
+const GRANOS_AFA: GranoPizarra[] = ["soja", "maiz", "trigo", "girasol", "sorgo"];
+/** Soja, maíz y trigo se toman sólo de San Martín (como siempre); girasol y sorgo, de la plaza que publique AFA. */
+const AFA_SOLO_SAN_MARTIN: GranoPizarra[] = ["soja", "maiz", "trigo"];
 
 const BNA_URL = "https://www.bna.com.ar/Personas";
 
@@ -302,7 +317,7 @@ async function getCac(
 
 /* ------------------------------- AFA -------------------------------- */
 
-async function fetchAfaComparativo(g: Grano, hoy: string, o: FetchOpts): Promise<Array<{ fecha: string; ars: number }>> {
+async function fetchAfaComparativo(g: GranoPizarra, hoy: string, o: FetchOpts): Promise<Array<{ fecha: string; ars: number }>> {
   const body = new URLSearchParams({ cboGranos: AFA_GRANO[g], txtFD: isoDaysAgo(hoy, 21), txtFH: hoy, submit: "" });
   const html = await fetchText(AFA_COMP_URL, {
     method: "POST",
@@ -325,7 +340,7 @@ async function fetchAfaComparativo(g: Grano, hoy: string, o: FetchOpts): Promise
 function fetchAfaRaw(hoy: string, o: FetchOpts) {
   return Promise.all([
     fetchText(AFA_URL, o).catch(() => ""),
-    ...GRANOS.map((g) => fetchAfaComparativo(g, hoy, o).catch(() => [] as Array<{ fecha: string; ars: number }>)),
+    ...GRANOS_AFA.map((g) => fetchAfaComparativo(g, hoy, o).catch(() => [] as Array<{ fecha: string; ars: number }>)),
   ] as const);
 }
 
@@ -347,18 +362,31 @@ async function getAfa(
     const [pageHtml, ...comps] = await (raw ?? fetchAfaRaw(hoy, o));
     const txt = pageHtml ? stripHtml(pageHtml) : "";
     const granos: CotizacionGrano[] = [];
-    GRANOS.forEach((g, i) => {
+    const sinCotizacion: SinCotizacion[] = [];
+    GRANOS_AFA.forEach((g, i) => {
       const label = g === "maiz" ? "Ma[ií]z" : AFA_GRANO[g];
-      const m = txt.match(new RegExp(`(\\d{2}/\\d{2}/\\d{4})\\s+${label}\\s+San Mart[ií]n\\s+\\$\\s*([0-9.]+)`, "i"));
+      const soloSM = AFA_SOLO_SAN_MARTIN.includes(g);
+      const plaza = soloSM ? "San Mart[ií]n" : "[A-Za-zÁÉÍÓÚáéíóúÑñ. ]+?";
+      // Tarjeta de la pizarra: "dd/mm/aaaa <Producto> <Plaza> $ <precio>" (o sin precio: "S/C", "-").
+      const m = txt.match(
+        new RegExp(`(\\d{2}/\\d{2}/\\d{4})\\s+${label}\\s+(${plaza})\\s+(?:\\$\\s*([0-9.]+)|(S/?C|sin cotizaci[oó]n|-+))`, "i"),
+      );
       const comp = comps[i];
       let fecha: string | null = null;
       let ars: number | null = null;
       const pf = dmyToIso(m?.[1]);
-      const pv = m ? Number(m[2].replace(/\./g, "")) : NaN;
+      const lugarPag = m?.[2]?.trim() ?? null;
+      const pv = m?.[3] ? Number(m[3].replace(/\./g, "")) : NaN;
       const lastComp = comp[comp.length - 1];
+      // Lugar sólo si no es la plaza de la columna (San Martín).
+      const lugar = lugarPag && !/^San Mart[ií]n$/i.test(lugarPag) ? lugarPag : null;
       if (pf && Number.isFinite(pv) && pv > 0 && (!lastComp || pf >= lastComp.fecha)) {
         fecha = pf;
         ars = pv;
+      } else if (pf && !(pv > 0) && (!lastComp || pf > lastComp.fecha)) {
+        // AFA lista el producto ese día sin precio: "sin cotización", no se rellena con días anteriores.
+        sinCotizacion.push({ grano: g, fecha: pf, lugar });
+        return;
       } else if (lastComp) {
         fecha = lastComp.fecha;
         ars = lastComp.ars;
@@ -370,11 +398,13 @@ async function getAfa(
         : previoEnSerie(serie, "afa.ars", g, fecha);
       const t = fx(fecha);
       const usd = t ? Math.round((ars / t.valor) * 100) / 100 : null;
-      granos.push({ grano: g, valor: ars, unidad: "ARS/t", fecha, prev, ...varDe(ars, prev), usd, tc: t });
+      granos.push({ grano: g, valor: ars, unidad: "ARS/t", fecha, prev, ...varDe(ars, prev), usd, tc: t, lugar: fecha === pf ? lugar : null });
     });
     if (granos.length === 0) return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, "AFA: sin precios parseables");
-    const fecha = granos.map((x) => x.fecha).sort().pop()!;
-    return { ...base, fecha, frescura: frescura(fecha, REGLAS.afa), granos, error: null };
+    // Fecha de la plaza: la de soja/maíz/trigo como siempre (girasol/sorgo sólo si no hay ninguno de esos).
+    const core = granos.filter((x) => AFA_SOLO_SAN_MARTIN.includes(x.grano));
+    const fecha = (core.length ? core : granos).map((x) => x.fecha).sort().pop()!;
+    return { ...base, fecha, frescura: frescura(fecha, REGLAS.afa), granos, sinCotizacion, error: null };
   } catch (err) {
     return emptyPlaza(base.id, base.nombre, base.lugar, base.fuente, base.url, `AFA: ${err instanceof Error ? err.message : String(err)}`);
   }
