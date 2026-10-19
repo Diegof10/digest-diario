@@ -38,7 +38,7 @@ const LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo" } as const;
 const FISCAL_NOVEDAD = {
   titulo: "Fiscal · DJ Ganancias al 30/10",
   resumen:
-    "La RG 5911 (Boletín Oficial del 08/10) extiende hasta el 30/10 la presentación de la DJ de Ganancias 2025 de personas humanas; el pago del saldo venció el 27/07 y no cambia. El 2° anticipo de Ganancias y Bienes Personales sigue igual: vence entre el 13 y el 15/10, según la terminación del CUIT. Fuente: Boletín Oficial y ARCA.",
+    "La RG 5911 (Boletín Oficial del 08/10) extiende hasta el 30/10 la presentación de la DJ de Ganancias 2025 de personas humanas; el pago del saldo venció el 27/07 y no cambia. Después vienen el SISA IP1, hasta el 31/10, y el 3° anticipo de Ganancias y Bienes Personales, del 13 al 15/12 según la terminación del CUIT. Fuente: Boletín Oficial y ARCA.",
   fuente: "Boletín Oficial · ARCA",
   hora: "BO 08/10",
 };
