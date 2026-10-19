@@ -596,6 +596,7 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
       valorUsd: null,
       tc: null,
       prevFecha: g.prev?.fecha ?? null,
+      lugar: g.lugar ?? null,
     };
     if (est === "vencido") {
       rows.push({
@@ -626,6 +627,25 @@ function plazaRows(p: PlazaSnapshot): MercadoRow[] {
       tc: g.tc
         ? `${g.tc.fuente} ${isoToDmy(g.tc.fecha).slice(0, 5)}: ${g.tc.valor.toLocaleString("es-AR", { maximumFractionDigits: 2 })}`
         : null,
+    });
+  }
+  // Producto publicado por la fuente ese día sin precio: "sin cotización" (nunca se inventa un valor).
+  for (const s of p.sinCotizacion ?? []) {
+    const fechaLabel = isoToDmy(s.fecha);
+    rows.push({
+      id: `${p.id}-${s.grano}`,
+      mercado: p.nombre,
+      producto: GRANO_LABEL[s.grano],
+      valor: null,
+      unidad: null,
+      fuente: p.fuente,
+      hora: fechaLabel,
+      etiqueta: "VACÍO",
+      extra: `sin cotización · ${fechaLabel}`,
+      url: p.url,
+      fecha: s.fecha,
+      frescura: frescura(s.fecha, REGLAS[p.id]),
+      lugar: s.lugar,
     });
   }
   return rows;

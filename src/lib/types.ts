@@ -58,6 +58,8 @@ export interface MercadoRow {
   /** Tipo de cambio usado en la conversión (fuente + fecha) */
   tc?: string | null;
   prevFecha?: string | null;
+  /** Plaza del precio cuando difiere de la de la columna (ej. "Rosario") */
+  lugar?: string | null;
 }
 
 export interface ClimaEntry {
