@@ -1,30 +1,52 @@
 {
-  "asOf": "2026-10-19T09:55:00.000Z",
-  "asOfArg": "19/10/2026, 06:55",
+  "asOf": "2026-10-20T09:55:00.000Z",
+  "asOfArg": "20/10/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 19/10/2026, 06:55 ARG",
+  "note": "Rutina mañana · filtro manual · 20/10/2026, 06:55 ARG",
   "items": [
     {
-      "title": "El Niño: crecen los ríos en el Litoral, prevén nuevas lluvias y aumenta la cantidad de evacuados (Paraná 6,91 m en Corrientes; Itatí, Paso de la Patria e Ituzaingó superaron sus cotas críticas)",
-      "source": "Infobae",
-      "handle": "Infobae",
-      "text": "El Niño: crecen los ríos en el Litoral, prevén nuevas lluvias y aumenta la cantidad de evacuados (Paraná 6,91 m en Corrientes; Itatí, Paso de la Patria e Ituzaingó superaron sus cotas críticas)",
-      "url": "https://www.infobae.com/sociedad/2026/10/18/el-nino-crecen-los-rios-en-el-litoral-preven-nuevas-lluvias-y-aumenta-la-cantidad-de-evacuados/",
-      "publishedAt": "2026-10-18T17:37:45.000Z",
-      "publishedAtArg": "18/10 14:37",
+      "title": "Arranca hoy (mar 20/10) en Diputados el debate de la ley de biocombustibles: el proyecto sube el corte de bioetanol al 15% y el de biodiésel al 10% (Ley 26.093 original), con más demanda potencial de maíz y aceite de soja",
+      "source": "Agrofy News",
+      "handle": "Agrofy News",
+      "text": "Arranca hoy (mar 20/10) en Diputados el debate de la ley de biocombustibles: el proyecto sube el corte de bioetanol al 15% y el de biodiésel al 10% (Ley 26.093 original), con más demanda potencial de maíz y aceite de soja",
+      "url": "https://news.agrofy.com.ar/noticia/216821/sorpresa-puede-aumentar-gasoil-se-aprueba-ley-biocombustibles",
+      "publishedAt": "2026-10-20T09:35:00.000Z",
+      "publishedAtArg": "20/10 06:35",
       "rank": 1
     },
     {
-      "title": "El martes 20/10 arranca en Diputados el debate de la nueva ley de biocombustibles (proyecto con media sanción: corte de biodiésel del 5% al 7,5% y al 10% en un año; bioetanol del 12% al 15%)",
-      "source": "APF Digital",
-      "handle": "APF Digital",
-      "text": "El martes 20/10 arranca en Diputados el debate de la nueva ley de biocombustibles (proyecto con media sanción: corte de biodiésel del 5% al 7,5% y al 10% en un año; bioetanol del 12% al 15%)",
-      "url": "https://www.apfdigital.com.ar/noticias/2026/10/17/475298-el-martes-comenzara-el-debate-de-la-nueva-ley-de-biocombustibles-en-la-camara-de-diputados-de-la-nacion",
-      "publishedAt": "2026-10-17T15:22:12.000Z",
-      "publishedAtArg": "17/10 12:22",
+      "title": "Crecida del Paraná: en Goya (Corrientes) apuran el retiro de 11.000 vacas de las islas ante la previsión de que el río llegue a 5,70 m el viernes; ya movieron entre el 60% y el 70% de la hacienda isleña",
+      "source": "La Nación",
+      "handle": "La Nación",
+      "text": "Crecida del Paraná: en Goya (Corrientes) apuran el retiro de 11.000 vacas de las islas ante la previsión de que el río llegue a 5,70 m el viernes; ya movieron entre el 60% y el 70% de la hacienda isleña",
+      "url": "https://www.lanacion.com.ar/economia/campo/antes-del-viernes-la-fecha-limite-que-obliga-a-una-region-a-sacar-11000-vacas-en-medio-de-la-nid19102026/",
+      "publishedAt": "2026-10-19T18:15:54.000Z",
+      "publishedAtArg": "19/10 15:15",
       "rank": 2
+    },
+    {
+      "title": "El USDA anunció la venta de 114.000 t de soja de EE. UU. a China y 261.000 t a destinos desconocidos (19/10), cuarto día hábil seguido con ventas anunciadas; acumulado 2.252.450 t, todo para 2026/27",
+      "titleOriginal": "Harvest expectations put more pressure on soybeans, corn",
+      "source": "Brownfield Ag News · traducido del inglés",
+      "handle": "Brownfield Ag News",
+      "text": "El USDA anunció la venta de 114.000 t de soja de EE. UU. a China y 261.000 t a destinos desconocidos (19/10), cuarto día hábil seguido con ventas anunciadas; acumulado 2.252.450 t, todo para 2026/27",
+      "url": "https://brownfieldagnews.com/news/harvest-expectations-put-more-pressure-on-soybeans-corn/",
+      "publishedAt": "2026-10-19T20:31:33.000Z",
+      "publishedAtArg": "19/10 17:31",
+      "rank": 3
+    },
+    {
+      "title": "Conab: la siembra de soja 2026/27 en Brasil llega al 30,1% y la de maíz de primera al 36,0%; el exceso de lluvias frena el plantío en Mato Grosso do Sul, São Paulo y el Sur",
+      "titleOriginal": "Monitoramento Semanal das Condições das Lavouras – 19 de outubro de 2026",
+      "source": "Conab · traducido del portugués",
+      "handle": "Conab",
+      "text": "Conab: la siembra de soja 2026/27 en Brasil llega al 30,1% y la de maíz de primera al 36,0%; el exceso de lluvias frena el plantío en Mato Grosso do Sul, São Paulo y el Sur",
+      "url": "https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/safras/progresso-de-safra/acompanhamento-das-lavouras-12-10-a-18-10-26/monitoramento-das-condicoes-das-lavouras",
+      "publishedAt": "2026-10-19T22:00:00.000Z",
+      "publishedAtArg": "19/10 19:00",
+      "rank": 4
     },
     {
       "title": "Sorgo: AZ-Group anticipa exportaciones argentinas de 1,7 Mt en 2026/27 (área 750.000 ha, 4,2 t/ha) por la caída de producción de EE. UU. (−33%) y Australia (−16%); China concentra el 75% de las importaciones",
@@ -34,29 +56,20 @@
       "url": "https://www.lanacion.com.ar/economia/campo/boom-a-china-anticipan-la-exportacion-de-17-millones-de-toneladas-de-un-cultivo-argentino-que-caera-nid19102026/",
       "publishedAt": "2026-10-19T06:00:00.000Z",
       "publishedAtArg": "19/10 03:00",
-      "rank": 3
-    },
-    {
-      "title": "Se completó el programa previsto de embarques de trigo 2025/26 con más de un mes de anticipación: DJVE por 18,07 Mt sobre 18 Mt proyectados por Agricultura",
-      "source": "Bichos de Campo (Valor Soja)",
-      "handle": "Bichos de Campo",
-      "text": "Se completó el programa previsto de embarques de trigo 2025/26 con más de un mes de anticipación: DJVE por 18,07 Mt sobre 18 Mt proyectados por Agricultura",
-      "url": "https://bichosdecampo.com/hito-comercial-se-completo-el-programa-previsto-de-embarques-de-trigo-argentino-2025-26-con-mas-de-un-mes-de-anticipacion/",
-      "publishedAt": "2026-10-18T15:39:39.000Z",
-      "publishedAtArg": "18/10 12:39",
-      "rank": 4
+      "rank": 5
     }
   ],
   "descartadas": [
-    "China ≥20 cargamentos soja EE. UU. (Bloomberg 16/10) y 10–13 cargamentos (Reuters 15/10): más de 48 h; sin compra nueva confirmada 17–19/10",
-    "Chicharrita baja infectividad (Clarín 17/10 06:00) y biocombustibles (Clarín 17/10 05:13): más de 48 h; biocombustibles se mantiene con APF Digital 17/10 12:22",
-    "Crecida: Clarín Santa Fe 17/10 y 'Están totalmente desesperados' (Clarín 14/10) reemplazadas por la actualización Infobae 18/10 (mismo hecho)",
-    "Plataforma 'Evento Climático El Niño 2026-2027' de la SAGyP (Infocampo 18/10): anuncio oficial del 14/10 (argentina.gob.ar), sin hecho nuevo",
-    "Mato Grosso lluvias bajo lo normal (Bichos 18/10 00:36): reemplazada por eventos de mayor impacto local; BCR intención soja núcleo 4,5 M ha (16/10): más de 48 h",
-    "Costos del agro vs. competidores (Clarín/La Nación 18/10) y EUDR Urcía (Bichos 18/10): análisis/opinión sin hecho nuevo; 'guerra comercial' y precio soja EE. UU. (Bichos 18/10): precio",
-    "Paros aceiteros (Monitor Gremial): notas de 2024–2026 sin medida nueva en 48 h; Boletín Oficial 19/10: Res. SAGyP 197/2026 (sello bioproducto lana), sin medidas de granos; retenciones sin decreto nuevo (vigente Decreto 423/2026)"
+    "Biocombustibles APF Digital (17/10 12:22): más de 48 h; reemplazada por Agrofy 20/10 (mismo hecho, debate arranca hoy)",
+    "Crecida Litoral Infobae (18/10) y retiro de 15.000 vacas San Javier (La Nación 19/10 14:48) / Clarín 19/10: mismo hecho, queda La Nación Goya 19/10 15:15; INA reporte 19/10: Rosario 3,45 m sin alerta",
+    "Trigo DJVE 18,07 Mt (Bichos 18/10 12:39): casi 48 h y ya publicada 18–19/10",
+    "USDA Crop Progress 19/10 (soja 64% / maíz 44% cosechado): avance de cosecha, menor impacto que compras de China",
+    "Baja de retenciones soja 33%→26% (portal Merlo al Aire fechado 20/10): anuncio de la SRA de 2025 refechado, sin decreto nuevo (vigente Decreto 423/2026)",
+    "Boletín Oficial 20/10: sin normas de granos (ARCA RG 5913 seguridad social, aduanas del interior); prórroga empleo rural temporario y libre elección de veterinarios aftosa/brucelosis (La Nación 19/10): menor impacto en granos",
+    "INTA girasol enfermedades por El Niño (Bichos 19/10) y Newcastle en Brasil 133 granjas (Agrofy 19/10): sanidad de menor impacto en caja; soja 'carnicería' en disponible (Bichos 19/10): precio",
+    "Paros aceiteros: sin medida nueva confirmada en 48 h (notas de Monitor Gremial sin fecha reciente)"
   ],
-  "updatedAt": "2026-10-19T09:55:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 19/10",
+  "updatedAt": "2026-10-20T09:55:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 20/10",
   "aviso": null
 }
