@@ -36,9 +36,9 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "US",
     countryLabel: "Estados Unidos",
     bullet:
-      "Mapa USDM 13/10 (publicado 15/10): calor 8–16 °F sobre lo normal empeora la sequía en Wisconsin, Upper Peninsula y del sur de Illinois/Indiana a Missouri, Kentucky y bajo Mississippi; el huracán Isaias alivia el Sudeste. CPC SDO (15/10, hasta enero): mejora en Este, Sudeste, bajo Mississippi y Planicies del sur; sin cambios en Planicies del norte y alto Mississippi.",
+      "Mapa USDM 20/10 (publicado 22/10): lluvias de 3 a 5 pulgadas, con picos de 6 a 8 (13–15/10), alivian la sequía en Texas y Oklahoma, con mejoras también en Kansas, Nebraska, Colorado y el oeste; la sequía se intensifica del bajo Mississippi al oeste del valle del Ohio (Arkansas, Luisiana, Mississippi, Tennessee, sur de Missouri), con sequía excepcional (D4) en el sur de Arkansas y norte de Luisiana; Medio Oeste norte sin cambios. CPC SDO (15/10, hasta enero): mejora en Este, Sudeste, bajo Mississippi y Planicies del sur; sin cambios en Planicies del norte y alto Mississippi.",
     fuente: "US Drought Monitor · NOAA CPC Seasonal Drought Outlook",
-    fecha: "13–15/10/2026",
+    fecha: "20–22/10/2026",
     url: "https://droughtmonitor.unl.edu/Summary.aspx",
     secondaryUrl:
       "https://www.cpc.ncep.noaa.gov/products/expert_assessment/sdo_summary.php",
@@ -49,7 +49,7 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
 const CURADO_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-09-30",
   BR: "2026-10-13",
-  US: "2026-10-15",
+  US: "2026-10-22",
 };
 /** Mes (portugués) del boletín INMET curado arriba */
 const INMET_CURADO = "outubro/2026";
@@ -126,9 +126,9 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
   const corrida = blob?.ultimaCorrida ?? null;
   const note = actualizadoAt
     ? vigente
-      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 13/10 · USDM 13–15/10 curados.`
-      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 13/10 · USDM 13–15/10.`
-    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 13/10 · USDM 13–15/10 · CPC 15/10";
+      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 13/10 · USDM 20–22/10 curados.`
+      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 13/10 · USDM 20–22/10.`
+    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 13/10 · USDM 20–22/10 · CPC 15/10";
 
   return {
     ok: true,
