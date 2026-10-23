@@ -378,7 +378,6 @@ function ClimaBlock({ mercado }: { mercado: MercadoSnapshot }) {
       {act ? (
         <p className="-mt-1 text-[9px] opacity-55">
           Actualizado {fechaHoraArt(act)} · pronóstico Open-Meteo + USDM
-          {clima.cronOk === false ? " · última corrida con errores" : null}
         </p>
       ) : null}
       {entries.map((e) => (

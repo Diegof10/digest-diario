@@ -51,12 +51,11 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
           <>
             {stale ? (
               <p role="status" className="-mt-0.5 mb-1 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
-                {ref ? `Sin revisar desde ${ddmm(ref)}` : "Sin revisar"}
+                {ref ? `Última revisión ${ddmm(ref)}` : "Revisión pendiente"}
               </p>
             ) : null}
             <p className="-mt-1 mb-1.5 text-[9px] opacity-55">
-              {label ? `Revisado ${label}${fiscal.revisadoPor === "manual" ? " (manual)" : " · BO/ARCA"}` : null}
-              {fiscal.cronOk === false ? " · última revisión automática con errores" : null}
+              {label && !stale ? `Revisado ${label} · BO/ARCA` : null}
             </p>
             {fiscal.sisaCambioAt ? (
               <p className="-mt-1 mb-1.5 text-[10px] leading-snug">
