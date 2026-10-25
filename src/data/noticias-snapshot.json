@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-10-24T09:50:00.000Z",
-  "asOfArg": "24/10/2026, 06:50",
+  "asOf": "2026-10-25T09:50:00.000Z",
+  "asOfArg": "25/10/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 24/10/2026, 06:50 ARG",
+  "note": "Rutina mañana · filtro manual · 25/10/2026, 06:50 ARG",
   "items": [
     {
       "title": "A3 Mercados habilita desde el lunes 26/10 la condición de entrega Soja Visec (libre de deforestación, EUDR) en el futuro de Soja Rosario: por ahora solo se negocia el pase Soja Cámara–Soja Visec, que cotiza el premio en USD/t; las posiciones abiertas no se convierten",
@@ -17,6 +17,16 @@
       "rank": 1
     },
     {
+      "title": "IF: el mercado argentino de fertilizantes opera con lo justo; en urea el saldo oferta–despachos a septiembre dio −71.000 t (el primero negativo desde 2021) y en fósforo el stock es el menor de la serie, con importaciones paralizadas: la disponibilidad para el maíz tardío y la soja depende de que se aceleren los arribos",
+      "source": "Bichos de Campo (informe semanal IF Ingeniería en Fertilizantes)",
+      "handle": "Bichos de Campo",
+      "text": "IF: el mercado argentino de fertilizantes opera con lo justo; en urea el saldo oferta–despachos a septiembre dio −71.000 t (el primero negativo desde 2021) y en fósforo el stock es el menor de la serie, con importaciones paralizadas: la disponibilidad para el maíz tardío y la soja depende de que se aceleren los arribos",
+      "url": "https://bichosdecampo.com/el-mercado-argentino-de-fertilizantes-operan-con-lo-justo-ante-productores-que-se-habituaron-a-comprar-a-ultimo-momento/",
+      "publishedAt": "2026-10-24T19:46:09.000Z",
+      "publishedAtArg": "24/10 16:46",
+      "rank": 2
+    },
+    {
       "title": "Granizo en el este de Córdoba y el centro de Santa Fe dañó lotes, mientras en Entre Ríos llovieron hasta 80 mm y en el oeste y centro bonaerense de 40 a 60 mm, alivio para el trigo; para la semana próxima se espera una ventana de buen tiempo",
       "source": "Agrofy News",
       "handle": "Agrofy News",
@@ -24,7 +34,7 @@
       "url": "https://news.agrofy.com.ar/noticia/216851/llovio-80-mm-rios-granizo-arraso-campos-santa-fe-cordoba-sigue-tiempo",
       "publishedAt": "2026-10-23T14:45:00.000Z",
       "publishedAtArg": "23/10 11:45",
-      "rank": 2
+      "rank": 3
     },
     {
       "title": "Brasil proyecta importar más de 9 millones de toneladas de trigo, el mayor volumen en 30 años, tras la caída de su producción por el clima; se abre una oportunidad para el trigo argentino de calidad",
@@ -34,40 +44,31 @@
       "url": "https://www.clarin.com/rural/ahora-brasil-necesitara-importar-volumen-record-trigo-abre-gran-oportunidad-cadena-argentina-cereal_0_kAQqxRDAKn.html",
       "publishedAt": "2026-10-23T16:51:23.000Z",
       "publishedAtArg": "23/10 13:51",
-      "rank": 3
-    },
-    {
-      "title": "BCR: las exportaciones de maíz avanzan a ritmo récord y entre marzo y octubre podrían llegar a 34,2 Mt (máximo previo 32,5 Mt en 2020/21); octubre apunta a 3,9 Mt, récord para el mes, con 39 Mt ya registradas en ventas externas",
-      "source": "Infocampo (informativo semanal BCR)",
-      "handle": "Infocampo",
-      "text": "BCR: las exportaciones de maíz avanzan a ritmo récord y entre marzo y octubre podrían llegar a 34,2 Mt (máximo previo 32,5 Mt en 2020/21); octubre apunta a 3,9 Mt, récord para el mes, con 39 Mt ya registradas en ventas externas",
-      "url": "https://www.infocampo.com.ar/exportaciones-record-el-maiz-argentino-avanza-a-todo-ritmo-y-domina-el-mercado-mundial/",
-      "publishedAt": "2026-10-23T19:30:52.000Z",
-      "publishedAtArg": "23/10 16:30",
       "rank": 4
     },
     {
-      "title": "Conab: las lluvias favorecen la siembra de verano en el Centro-Oeste de Brasil (Mato Grosso supera el 60% de la soja), pero el exceso de humedad afecta los cultivos de invierno en el Sur y frena la siembra en Mato Grosso do Sul, Rio Grande do Sul y São Paulo",
-      "titleOriginal": "Chuvas favorecem cultivos de verão no Centro-Oeste, mas o excesso de umidade afeta lavouras de inverno no Sul",
-      "source": "Conab · traducido del portugués",
-      "handle": "Conab",
-      "text": "Conab: las lluvias favorecen la siembra de verano en el Centro-Oeste de Brasil (Mato Grosso supera el 60% de la soja), pero el exceso de humedad afecta los cultivos de invierno en el Sur y frena la siembra en Mato Grosso do Sul, Rio Grande do Sul y São Paulo",
-      "url": "https://www.gov.br/conab/pt-br/assuntos/noticias/chuvas-favorecem-cultivos-de-verao-no-centro-oeste-mas-o-excesso-de-umidade-afeta-lavouras-de-inverno-no-sul",
-      "publishedAt": "2026-10-23T21:56:00.000Z",
-      "publishedAtArg": "23/10 18:56",
+      "title": "El agregado del USDA en Brasilia proyecta una cosecha de soja de Brasil 2026/27 de 184 Mt, el tercer récord consecutivo (+2% vs 180,5 Mt), con área de 49,7 M ha (+1,4%), recortada por cautela ante el clima, las tasas altas y los costos",
+      "titleOriginal": "Adido do USDA prevê safra de soja de 184 milhões de toneladas no Brasil",
+      "source": "CNN Brasil · traducido del portugués",
+      "handle": "CNN Brasil",
+      "text": "El agregado del USDA en Brasilia proyecta una cosecha de soja de Brasil 2026/27 de 184 Mt, el tercer récord consecutivo (+2% vs 180,5 Mt), con área de 49,7 M ha (+1,4%), recortada por cautela ante el clima, las tasas altas y los costos",
+      "url": "https://www.cnnbrasil.com.br/agro/adido-do-usda-preve-safra-de-soja-de-184-milhoes-de-toneladas-no-brasil/",
+      "publishedAt": "2026-10-24T14:43:33.000Z",
+      "publishedAtArg": "24/10 11:43",
       "rank": 5
     }
   ],
   "descartadas": [
-    "Heladas trigo BCBA (Chacra 22/10), granizo San Justo (Aire Agro 22/10), cogollero SAGyP (22/10), USDA 202 kt soja a China (22/10), Belgrano Cargas (Infobae 22/10): ya publicadas",
-    "USDA ventas semanales 2,18 Mt soja a China (semana 9–15/10, publicado 22/10) y sin anuncio diario nuevo a China el 23/10: mismo tema ya publicado",
-    "EUDR harina de soja Brasil vs Argentina (Bichos 23/10): mismo tema que Soja Visec, con precios FOB",
-    "Heló en período crítico del trigo (Agrofy 23/10): mismo hecho que las heladas BCBA ya publicadas",
-    "Encuesta Universidad Austral incertidumbre electoral 2027 (Clarín/La Nación 23/10), S&P crisis alimentaria 2027 (Agrofy 24/10), CRA vs frigoríficos Visec carne (23/10), primer lote trigo Córdoba (Infocampo 23/10), pedido de la industria por aranceles (La Nación 22/10): sin hecho nuevo de impacto en caja de granos",
-    "Subsidio Trump US$ 8.000 M a farmers (Clarín 22/10): ya considerado el 22/10",
-    "Semana negra para el trigo (Clarín 23/10), fondos liquidando en Chicago (Bichos 24/10), cosecha EE. UU. achata precios (La Nación 24/10): movimientos de precio, fuera de criterio"
+    "Soja Visec (Bichos 23/10), granizo este Córdoba/centro SF (Agrofy 23/10), Brasil >9 Mt trigo (Clarín 23/10): ya publicadas, se mantienen dentro de 48 h",
+    "BCR maíz exportaciones récord 34,2 Mt (Infocampo 23/10) y Conab monitoreo agrícola oct (23/10): desplazadas por eventos nuevos de mayor impacto (máx. 5)",
+    "Brasil podría importar 9,5–10 Mt de trigo según Bunge en Abitrigo (Bichos 24/10): mismo hecho que la nota de Clarín ya publicada",
+    "Granizo mató 40 animales en granja de Santa Fe (Agrofy 24/10) y violento granizo (La Nación 23/10): mismo evento ya publicado",
+    "Nota 'baja permanente de retenciones, soja 33% a 26%' fechada 24/10/2026 en merloalaire.com.ar: anuncio de la Expo Rural de julio 2025 sin respaldo en medios nacionales ni Boletín Oficial; descartada por no verificable",
+    "Gorina descuentos a hacienda sin VISEC (Bichos 24/10), garrapata bovina (Infocampo 24/10), bioinsumos US$ 7 M (Infocampo 24/10): fuera de granos o sin impacto en caja",
+    "Avanza la cosecha de EE. UU. y achata precios (La Nación 25/10), Semana negra para el trigo (Clarín 23/10): movimientos de precio, fuera de criterio",
+    "El Niño (La Nación 24/10, Clarín silobolsas 24/10): notas de opinión sin hecho nuevo"
   ],
-  "updatedAt": "2026-10-24T09:50:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 24/10",
+  "updatedAt": "2026-10-25T09:50:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 25/10",
   "aviso": null
 }
