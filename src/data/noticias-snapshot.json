@@ -1,21 +1,11 @@
 {
-  "asOf": "2026-10-25T09:50:00.000Z",
-  "asOfArg": "25/10/2026, 06:50",
+  "asOf": "2026-10-26T09:55:00.000Z",
+  "asOfArg": "26/10/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 25/10/2026, 06:50 ARG",
+  "note": "Rutina mañana · filtro manual · 26/10/2026, 06:55 ARG",
   "items": [
-    {
-      "title": "A3 Mercados habilita desde el lunes 26/10 la condición de entrega Soja Visec (libre de deforestación, EUDR) en el futuro de Soja Rosario: por ahora solo se negocia el pase Soja Cámara–Soja Visec, que cotiza el premio en USD/t; las posiciones abiertas no se convierten",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "text": "A3 Mercados habilita desde el lunes 26/10 la condición de entrega Soja Visec (libre de deforestación, EUDR) en el futuro de Soja Rosario: por ahora solo se negocia el pase Soja Cámara–Soja Visec, que cotiza el premio en USD/t; las posiciones abiertas no se convierten",
-      "url": "https://bichosdecampo.com/eudr-la-soja-visec-llega-al-mercado-argentino-de-futuros-agricolas-por-el-momento-con-un-pase/",
-      "publishedAt": "2026-10-23T21:19:00.000Z",
-      "publishedAtArg": "23/10 18:19",
-      "rank": 1
-    },
     {
       "title": "IF: el mercado argentino de fertilizantes opera con lo justo; en urea el saldo oferta–despachos a septiembre dio −71.000 t (el primero negativo desde 2021) y en fósforo el stock es el menor de la serie, con importaciones paralizadas: la disponibilidad para el maíz tardío y la soja depende de que se aceleren los arribos",
       "source": "Bichos de Campo (informe semanal IF Ingeniería en Fertilizantes)",
@@ -24,26 +14,37 @@
       "url": "https://bichosdecampo.com/el-mercado-argentino-de-fertilizantes-operan-con-lo-justo-ante-productores-que-se-habituaron-a-comprar-a-ultimo-momento/",
       "publishedAt": "2026-10-24T19:46:09.000Z",
       "publishedAtArg": "24/10 16:46",
+      "rank": 1
+    },
+    {
+      "title": "Las estatales chinas compraron soja de EE. UU. por segunda semana seguida y el acumulado 2026/27 ronda 15 Mt, lejos de la meta de 25 Mt; los molinos privados siguen afuera porque la soja de EE. UU. paga 13% de arancel contra 3% la de Brasil",
+      "titleOriginal": "China’s Soybean Buying Picks Up, But a Tariff Wall Still Blocks Full Trade Recovery",
+      "source": "Global Agriculture (fuentes del comercio citadas por Reuters) · traducido del inglés",
+      "handle": "Global Agriculture",
+      "text": "Las estatales chinas compraron soja de EE. UU. por segunda semana seguida y el acumulado 2026/27 ronda 15 Mt, lejos de la meta de 25 Mt; los molinos privados siguen afuera porque la soja de EE. UU. paga 13% de arancel contra 3% la de Brasil",
+      "url": "https://www.global-agriculture.com/farming-agriculture/chinas-soybean-buying-picks-up-but-a-tariff-wall-still-blocks-full-trade-recovery/",
+      "publishedAt": "2026-10-26T08:07:20.000Z",
+      "publishedAtArg": "26/10 05:07",
       "rank": 2
     },
     {
-      "title": "Granizo en el este de Córdoba y el centro de Santa Fe dañó lotes, mientras en Entre Ríos llovieron hasta 80 mm y en el oeste y centro bonaerense de 40 a 60 mm, alivio para el trigo; para la semana próxima se espera una ventana de buen tiempo",
-      "source": "Agrofy News",
-      "handle": "Agrofy News",
-      "text": "Granizo en el este de Córdoba y el centro de Santa Fe dañó lotes, mientras en Entre Ríos llovieron hasta 80 mm y en el oeste y centro bonaerense de 40 a 60 mm, alivio para el trigo; para la semana próxima se espera una ventana de buen tiempo",
-      "url": "https://news.agrofy.com.ar/noticia/216851/llovio-80-mm-rios-granizo-arraso-campos-santa-fe-cordoba-sigue-tiempo",
-      "publishedAt": "2026-10-23T14:45:00.000Z",
-      "publishedAtArg": "23/10 11:45",
+      "title": "Lula da Silva fue reelecto presidente de Brasil con casi 52% de los votos en el balotaje contra Flavio Bolsonaro; el gobierno argentino esperaba un triunfo de Bolsonaro y los mercados reaccionaron en forma negativa",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "text": "Lula da Silva fue reelecto presidente de Brasil con casi 52% de los votos en el balotaje contra Flavio Bolsonaro; el gobierno argentino esperaba un triunfo de Bolsonaro y los mercados reaccionaron en forma negativa",
+      "url": "https://www.infocampo.com.ar/elecciones-en-brasil-lula-da-silva-fue-reelecto-en-un-renido-y-polemico-balotaje/",
+      "publishedAt": "2026-10-26T00:23:31.000Z",
+      "publishedAtArg": "25/10 21:23",
       "rank": 3
     },
     {
-      "title": "Brasil proyecta importar más de 9 millones de toneladas de trigo, el mayor volumen en 30 años, tras la caída de su producción por el clima; se abre una oportunidad para el trigo argentino de calidad",
-      "source": "Clarín Rural",
+      "title": "Trigo: las heladas del 17 al 19/10 en la región central agarraron lotes en floración y el daño todavía no se puede dimensionar; el INTA reporta alta incidencia de mancha amarilla en lotes trigo/soja y roya amarilla moderada",
+      "source": "Clarín Rural (INTA Barrow y Pergamino)",
       "handle": "Clarín Rural",
-      "text": "Brasil proyecta importar más de 9 millones de toneladas de trigo, el mayor volumen en 30 años, tras la caída de su producción por el clima; se abre una oportunidad para el trigo argentino de calidad",
-      "url": "https://www.clarin.com/rural/ahora-brasil-necesitara-importar-volumen-record-trigo-abre-gran-oportunidad-cadena-argentina-cereal_0_kAQqxRDAKn.html",
-      "publishedAt": "2026-10-23T16:51:23.000Z",
-      "publishedAtArg": "23/10 13:51",
+      "text": "Trigo: las heladas del 17 al 19/10 en la región central agarraron lotes en floración y el daño todavía no se puede dimensionar; el INTA reporta alta incidencia de mancha amarilla en lotes trigo/soja y roya amarilla moderada",
+      "url": "https://www.clarin.com/rural/carrera-obstaculos-heladas-enfermedades-mantienen-vilo-productores-trigo_0_DLjfBum9xA.html",
+      "publishedAt": "2026-10-25T08:45:49.000Z",
+      "publishedAtArg": "25/10 05:45",
       "rank": 4
     },
     {
@@ -59,16 +60,16 @@
     }
   ],
   "descartadas": [
-    "Soja Visec (Bichos 23/10), granizo este Córdoba/centro SF (Agrofy 23/10), Brasil >9 Mt trigo (Clarín 23/10): ya publicadas, se mantienen dentro de 48 h",
-    "BCR maíz exportaciones récord 34,2 Mt (Infocampo 23/10) y Conab monitoreo agrícola oct (23/10): desplazadas por eventos nuevos de mayor impacto (máx. 5)",
-    "Brasil podría importar 9,5–10 Mt de trigo según Bunge en Abitrigo (Bichos 24/10): mismo hecho que la nota de Clarín ya publicada",
-    "Granizo mató 40 animales en granja de Santa Fe (Agrofy 24/10) y violento granizo (La Nación 23/10): mismo evento ya publicado",
-    "Nota 'baja permanente de retenciones, soja 33% a 26%' fechada 24/10/2026 en merloalaire.com.ar: anuncio de la Expo Rural de julio 2025 sin respaldo en medios nacionales ni Boletín Oficial; descartada por no verificable",
-    "Gorina descuentos a hacienda sin VISEC (Bichos 24/10), garrapata bovina (Infocampo 24/10), bioinsumos US$ 7 M (Infocampo 24/10): fuera de granos o sin impacto en caja",
-    "Avanza la cosecha de EE. UU. y achata precios (La Nación 25/10), Semana negra para el trigo (Clarín 23/10): movimientos de precio, fuera de criterio",
-    "El Niño (La Nación 24/10, Clarín silobolsas 24/10): notas de opinión sin hecho nuevo"
+    "Soja Visec (Bichos/Clarín 23/10), granizo este Córdoba/centro SF (Agrofy 23/10), Brasil >9 Mt trigo (Clarín 23/10): más de 48 h",
+    "IF fertilizantes (Bichos 24/10) y agregado USDA Brasil soja 184 Mt (CNN Brasil 24/10): se mantienen, dentro de 48 h",
+    "NASS/USDA corrigió por error de procesamiento el rinde de maíz de septiembre en Kansas y Nebraska, octubre sin cambios (Valor Soja/Bichos 25/10): sin cambio en la estimación vigente",
+    "China recorta producción de soja 2026/27 a 20,36 Mt (OFI 26/10): dato CASDE del 9/10, ya viejo",
+    "Puertos públicos de Santa Fe movieron 3,3 Mt en nueve meses (varios 25/10): balance sin impacto en decisión",
+    "Soja toca mínimo de dos meses tras triunfo de Lula (Bloomberg 26/10), avanza la cosecha de EE. UU. y achata precios (La Nación 25/10): movimientos de precio, fuera de criterio",
+    "Visec carne y Visec 'no puede ser barrera' (La Nación 25–26/10), sorgo (Clarín 26/10), 'No a todo el campo le va bien' (La Nación 25/10): opinión/análisis sin hecho nuevo",
+    "Ayuda de US$ 8.000 M a farmers (AgroLatam 24/10): sin impacto directo en caja del productor argentino"
   ],
-  "updatedAt": "2026-10-25T09:50:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 25/10",
+  "updatedAt": "2026-10-26T09:55:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 26/10",
   "aviso": null
 }
