@@ -1,19 +1,19 @@
 {
-  "asOf": "2026-10-26T09:55:00.000Z",
-  "asOfArg": "26/10/2026, 06:55",
+  "asOf": "2026-10-27T09:52:00.000Z",
+  "asOfArg": "27/10/2026, 06:52",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 26/10/2026, 06:55 ARG",
+  "note": "Rutina mañana · filtro manual · 27/10/2026, 06:52 ARG",
   "items": [
     {
-      "title": "IF: el mercado argentino de fertilizantes opera con lo justo; en urea el saldo oferta–despachos a septiembre dio −71.000 t (el primero negativo desde 2021) y en fósforo el stock es el menor de la serie, con importaciones paralizadas: la disponibilidad para el maíz tardío y la soja depende de que se aceleren los arribos",
-      "source": "Bichos de Campo (informe semanal IF Ingeniería en Fertilizantes)",
-      "handle": "Bichos de Campo",
-      "text": "IF: el mercado argentino de fertilizantes opera con lo justo; en urea el saldo oferta–despachos a septiembre dio −71.000 t (el primero negativo desde 2021) y en fósforo el stock es el menor de la serie, con importaciones paralizadas: la disponibilidad para el maíz tardío y la soja depende de que se aceleren los arribos",
-      "url": "https://bichosdecampo.com/el-mercado-argentino-de-fertilizantes-operan-con-lo-justo-ante-productores-que-se-habituaron-a-comprar-a-ultimo-momento/",
-      "publishedAt": "2026-10-24T19:46:09.000Z",
-      "publishedAtArg": "24/10 16:46",
+      "title": "El Ministerio de Economía homologó la emergencia agropecuaria por inundaciones en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea, con vigencia del 1/5 al 31/10/2026",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "text": "El Ministerio de Economía homologó la emergencia agropecuaria por inundaciones en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea, con vigencia del 1/5 al 31/10/2026",
+      "url": "https://www.clarin.com/rural/inundaciones-declaran-emergencia-agropecuaria-partidos-buenos-aires_0_ycP1zKWRHi.html",
+      "publishedAt": "2026-10-26T13:45:06.000Z",
+      "publishedAtArg": "26/10 10:45",
       "rank": 1
     },
     {
@@ -38,38 +38,37 @@
       "rank": 3
     },
     {
-      "title": "Trigo: las heladas del 17 al 19/10 en la región central agarraron lotes en floración y el daño todavía no se puede dimensionar; el INTA reporta alta incidencia de mancha amarilla en lotes trigo/soja y roya amarilla moderada",
-      "source": "Clarín Rural (INTA Barrow y Pergamino)",
-      "handle": "Clarín Rural",
-      "text": "Trigo: las heladas del 17 al 19/10 en la región central agarraron lotes en floración y el daño todavía no se puede dimensionar; el INTA reporta alta incidencia de mancha amarilla en lotes trigo/soja y roya amarilla moderada",
-      "url": "https://www.clarin.com/rural/carrera-obstaculos-heladas-enfermedades-mantienen-vilo-productores-trigo_0_DLjfBum9xA.html",
-      "publishedAt": "2026-10-25T08:45:49.000Z",
-      "publishedAtArg": "25/10 05:45",
+      "title": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
+      "source": "TodoAgro (Bolsa de Comercio de Rosario, GEA)",
+      "handle": "TodoAgro",
+      "text": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
+      "url": "https://www.todoagro.com.ar/el-trigo-de-la-region-nucleo-desafia-al-frio-y-la-falta-de-sol-proyectan-67-millones-de-toneladas/",
+      "publishedAt": "2026-10-26T15:06:55.000Z",
+      "publishedAtArg": "26/10 12:06",
       "rank": 4
     },
     {
-      "title": "El agregado del USDA en Brasilia proyecta una cosecha de soja de Brasil 2026/27 de 184 Mt, el tercer récord consecutivo (+2% vs 180,5 Mt), con área de 49,7 M ha (+1,4%), recortada por cautela ante el clima, las tasas altas y los costos",
-      "titleOriginal": "Adido do USDA prevê safra de soja de 184 milhões de toneladas no Brasil",
-      "source": "CNN Brasil · traducido del portugués",
-      "handle": "CNN Brasil",
-      "text": "El agregado del USDA en Brasilia proyecta una cosecha de soja de Brasil 2026/27 de 184 Mt, el tercer récord consecutivo (+2% vs 180,5 Mt), con área de 49,7 M ha (+1,4%), recortada por cautela ante el clima, las tasas altas y los costos",
-      "url": "https://www.cnnbrasil.com.br/agro/adido-do-usda-preve-safra-de-soja-de-184-milhoes-de-toneladas-no-brasil/",
-      "publishedAt": "2026-10-24T14:43:33.000Z",
-      "publishedAtArg": "24/10 11:43",
+      "title": "ARCA reglamentó con la RG 5916/2026 los cambios de la ley de inocencia fiscal al régimen simplificado de Ganancias: elimina los topes de ingresos y patrimonio para personas humanas y la falta de bancarización ya no excluye por sí sola",
+      "source": "Agrofy News (RG ARCA 5916/2026, Boletín Oficial)",
+      "handle": "Agrofy News",
+      "text": "ARCA reglamentó con la RG 5916/2026 los cambios de la ley de inocencia fiscal al régimen simplificado de Ganancias: elimina los topes de ingresos y patrimonio para personas humanas y la falta de bancarización ya no excluye por sí sola",
+      "url": "https://news.agrofy.com.ar/noticia/216859/impuesto-ganancias-arca-reglamento-ley-inocencia-fiscal-elimino-topes-ingresos",
+      "publishedAt": "2026-10-26T11:38:00.000Z",
+      "publishedAtArg": "26/10 08:38",
       "rank": 5
     }
   ],
   "descartadas": [
-    "Soja Visec (Bichos/Clarín 23/10), granizo este Córdoba/centro SF (Agrofy 23/10), Brasil >9 Mt trigo (Clarín 23/10): más de 48 h",
-    "IF fertilizantes (Bichos 24/10) y agregado USDA Brasil soja 184 Mt (CNN Brasil 24/10): se mantienen, dentro de 48 h",
-    "NASS/USDA corrigió por error de procesamiento el rinde de maíz de septiembre en Kansas y Nebraska, octubre sin cambios (Valor Soja/Bichos 25/10): sin cambio en la estimación vigente",
-    "China recorta producción de soja 2026/27 a 20,36 Mt (OFI 26/10): dato CASDE del 9/10, ya viejo",
-    "Puertos públicos de Santa Fe movieron 3,3 Mt en nueve meses (varios 25/10): balance sin impacto en decisión",
-    "Soja toca mínimo de dos meses tras triunfo de Lula (Bloomberg 26/10), avanza la cosecha de EE. UU. y achata precios (La Nación 25/10): movimientos de precio, fuera de criterio",
-    "Visec carne y Visec 'no puede ser barrera' (La Nación 25–26/10), sorgo (Clarín 26/10), 'No a todo el campo le va bien' (La Nación 25/10): opinión/análisis sin hecho nuevo",
-    "Ayuda de US$ 8.000 M a farmers (AgroLatam 24/10): sin impacto directo en caja del productor argentino"
+    "IF fertilizantes (Bichos 24/10), heladas/mancha amarilla trigo (Clarín 25/10) y agregado USDA Brasil soja 184 Mt (CNN Brasil 24/10): desplazadas por eventos más nuevos o cerca de 48 h",
+    "China supera 3 Mt de soja de EE. UU. en seis ruedas (Clarín 26/10) y ventas semanales USDA 2,18 Mt a China (Feed & Grain): mismo hecho que el ítem de compras estatales chinas",
+    "Gobierno: alimento balanceado a 90 días con tasa 0% y baja de aranceles a insumos de alimento animal 'en carpeta' (Agrofy 26/10): ganadería, sin medida firme",
+    "Ley de Semillas: la industria amplía la propuesta de excepción al uso propio (Clarín/La Nación/Bichos/Infocampo 26/10): propuesta sectorial, sin norma",
+    "Soja a mínimo de dos meses tras Lula y devaluación del real (Clarín/La Nación/Bichos/Agrofy 26/10): movimientos de precio, fuera de criterio",
+    "Lluvias el fin de semana (Bichos 27/10), excesos hídricos en Buenos Aires (Clarín 26/10), red federal por El Niño (Infocampo 26/10): pronóstico/análisis sin alerta oficial nueva",
+    "Japón abre mercado a carne bovina (TodoAgro 26/10), exportaciones agroindustriales récord septiembre (TodoAgro 26/10), maíz récord exportaciones octubre (Clarín 26/10): ganadería o balance sin decisión nueva",
+    "Pehuajó prohíbe circulación 48 h por caminos (La Nación/Bichos 26–27/10), tractorazo hortícola La Plata: local, fuera de zona núcleo granos"
   ],
-  "updatedAt": "2026-10-26T09:55:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 26/10",
+  "updatedAt": "2026-10-27T09:52:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 27/10",
   "aviso": null
 }
