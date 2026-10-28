@@ -1,11 +1,21 @@
 {
-  "asOf": "2026-10-27T09:52:00.000Z",
-  "asOfArg": "27/10/2026, 06:52",
+  "asOf": "2026-10-28T09:58:00.000Z",
+  "asOfArg": "28/10/2026, 06:58",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 27/10/2026, 06:52 ARG",
+  "note": "Rutina mañana · filtro manual · 28/10/2026, 06:58 ARG",
   "items": [
+    {
+      "title": "Un estudio de Serasa Experian advierte que un “Súper Niño” como el de 2023/24 podría recortar 9,7% la cosecha de soja de Brasil 2026/27: 17,6 Mt menos sobre la proyección de 181,2 Mt, con el golpe concentrado en Mato Grosso (hasta 9,7 Mt)",
+      "source": "Bichos de Campo / Valor Soja (estudio Serasa Experian)",
+      "handle": "Bichos de Campo",
+      "text": "Un estudio de Serasa Experian advierte que un “Súper Niño” como el de 2023/24 podría recortar 9,7% la cosecha de soja de Brasil 2026/27: 17,6 Mt menos sobre la proyección de 181,2 Mt, con el golpe concentrado en Mato Grosso (hasta 9,7 Mt)",
+      "url": "https://bichosdecampo.com/ojo-al-piojo-un-estudio-advierte-que-el-super-nino-puede-liquidar-casi-un-10-de-la-cosecha-prevista-de-soja-en-brasil/",
+      "publishedAt": "2026-10-27T21:44:25.000Z",
+      "publishedAtArg": "27/10 18:44",
+      "rank": 1
+    },
     {
       "title": "El Ministerio de Economía homologó la emergencia agropecuaria por inundaciones en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea, con vigencia del 1/5 al 31/10/2026",
       "source": "Clarín Rural",
@@ -14,38 +24,17 @@
       "url": "https://www.clarin.com/rural/inundaciones-declaran-emergencia-agropecuaria-partidos-buenos-aires_0_ycP1zKWRHi.html",
       "publishedAt": "2026-10-26T13:45:06.000Z",
       "publishedAtArg": "26/10 10:45",
-      "rank": 1
-    },
-    {
-      "title": "Las estatales chinas compraron soja de EE. UU. por segunda semana seguida y el acumulado 2026/27 ronda 15 Mt, lejos de la meta de 25 Mt; los molinos privados siguen afuera porque la soja de EE. UU. paga 13% de arancel contra 3% la de Brasil",
-      "titleOriginal": "China’s Soybean Buying Picks Up, But a Tariff Wall Still Blocks Full Trade Recovery",
-      "source": "Global Agriculture (fuentes del comercio citadas por Reuters) · traducido del inglés",
-      "handle": "Global Agriculture",
-      "text": "Las estatales chinas compraron soja de EE. UU. por segunda semana seguida y el acumulado 2026/27 ronda 15 Mt, lejos de la meta de 25 Mt; los molinos privados siguen afuera porque la soja de EE. UU. paga 13% de arancel contra 3% la de Brasil",
-      "url": "https://www.global-agriculture.com/farming-agriculture/chinas-soybean-buying-picks-up-but-a-tariff-wall-still-blocks-full-trade-recovery/",
-      "publishedAt": "2026-10-26T08:07:20.000Z",
-      "publishedAtArg": "26/10 05:07",
       "rank": 2
     },
     {
-      "title": "Lula da Silva fue reelecto presidente de Brasil con casi 52% de los votos en el balotaje contra Flavio Bolsonaro; el gobierno argentino esperaba un triunfo de Bolsonaro y los mercados reaccionaron en forma negativa",
-      "source": "Infocampo",
-      "handle": "Infocampo",
-      "text": "Lula da Silva fue reelecto presidente de Brasil con casi 52% de los votos en el balotaje contra Flavio Bolsonaro; el gobierno argentino esperaba un triunfo de Bolsonaro y los mercados reaccionaron en forma negativa",
-      "url": "https://www.infocampo.com.ar/elecciones-en-brasil-lula-da-silva-fue-reelecto-en-un-renido-y-polemico-balotaje/",
-      "publishedAt": "2026-10-26T00:23:31.000Z",
-      "publishedAtArg": "25/10 21:23",
+      "title": "Bunge cerró su planta de Campana, donde fabricaba el fertilizante líquido tiosulfato de amonio (marca SolMix) y amoníaco; la empresa lo atribuyó a costos industriales y competencia de importados, y los trabajadores acampan en la puerta",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "text": "Bunge cerró su planta de Campana, donde fabricaba el fertilizante líquido tiosulfato de amonio (marca SolMix) y amoníaco; la empresa lo atribuyó a costos industriales y competencia de importados, y los trabajadores acampan en la puerta",
+      "url": "https://bichosdecampo.com/las-razones-de-bunge-los-detalles-detras-del-cierre-de-la-planta-de-campana-donde-la-multinacional-producia-un-popular-fertilizante-liquido/",
+      "publishedAt": "2026-10-27T18:38:32.000Z",
+      "publishedAtArg": "27/10 15:38",
       "rank": 3
-    },
-    {
-      "title": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
-      "source": "TodoAgro (Bolsa de Comercio de Rosario, GEA)",
-      "handle": "TodoAgro",
-      "text": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
-      "url": "https://www.todoagro.com.ar/el-trigo-de-la-region-nucleo-desafia-al-frio-y-la-falta-de-sol-proyectan-67-millones-de-toneladas/",
-      "publishedAt": "2026-10-26T15:06:55.000Z",
-      "publishedAtArg": "26/10 12:06",
-      "rank": 4
     },
     {
       "title": "ARCA reglamentó con la RG 5916/2026 los cambios de la ley de inocencia fiscal al régimen simplificado de Ganancias: elimina los topes de ingresos y patrimonio para personas humanas y la falta de bancarización ya no excluye por sí sola",
@@ -55,20 +44,29 @@
       "url": "https://news.agrofy.com.ar/noticia/216859/impuesto-ganancias-arca-reglamento-ley-inocencia-fiscal-elimino-topes-ingresos",
       "publishedAt": "2026-10-26T11:38:00.000Z",
       "publishedAtArg": "26/10 08:38",
+      "rank": 4
+    },
+    {
+      "title": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
+      "source": "TodoAgro (Bolsa de Comercio de Rosario, GEA)",
+      "handle": "TodoAgro",
+      "text": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
+      "url": "https://www.todoagro.com.ar/el-trigo-de-la-region-nucleo-desafia-al-frio-y-la-falta-de-sol-proyectan-67-millones-de-toneladas/",
+      "publishedAt": "2026-10-26T15:06:55.000Z",
+      "publishedAtArg": "26/10 12:06",
       "rank": 5
     }
   ],
   "descartadas": [
-    "IF fertilizantes (Bichos 24/10), heladas/mancha amarilla trigo (Clarín 25/10) y agregado USDA Brasil soja 184 Mt (CNN Brasil 24/10): desplazadas por eventos más nuevos o cerca de 48 h",
-    "China supera 3 Mt de soja de EE. UU. en seis ruedas (Clarín 26/10) y ventas semanales USDA 2,18 Mt a China (Feed & Grain): mismo hecho que el ítem de compras estatales chinas",
-    "Gobierno: alimento balanceado a 90 días con tasa 0% y baja de aranceles a insumos de alimento animal 'en carpeta' (Agrofy 26/10): ganadería, sin medida firme",
-    "Ley de Semillas: la industria amplía la propuesta de excepción al uso propio (Clarín/La Nación/Bichos/Infocampo 26/10): propuesta sectorial, sin norma",
-    "Soja a mínimo de dos meses tras Lula y devaluación del real (Clarín/La Nación/Bichos/Agrofy 26/10): movimientos de precio, fuera de criterio",
-    "Lluvias el fin de semana (Bichos 27/10), excesos hídricos en Buenos Aires (Clarín 26/10), red federal por El Niño (Infocampo 26/10): pronóstico/análisis sin alerta oficial nueva",
-    "Japón abre mercado a carne bovina (TodoAgro 26/10), exportaciones agroindustriales récord septiembre (TodoAgro 26/10), maíz récord exportaciones octubre (Clarín 26/10): ganadería o balance sin decisión nueva",
-    "Pehuajó prohíbe circulación 48 h por caminos (La Nación/Bichos 26–27/10), tractorazo hortícola La Plata: local, fuera de zona núcleo granos"
+    "Compras estatales chinas de soja de EE. UU. ~15 Mt (Global Agriculture/Reuters 26/10) y Lula reelecto (Infocampo 25/10): más de 48 h",
+    "Dragas desde Singapur y Croacia para la navegabilidad del Paraná y obras preventivas por El Niño (Bichos/Infocampo 27/10): preventivo, sin alerta ni medida nueva sobre la operatoria",
+    "AmCham pide adherir a UPOV y advierte por el acuerdo con EE. UU. (La Nación 27/10): pedido sectorial, sin norma",
+    "Créditos ganaderos a valor producto con nuevo cupo de garantías (Bichos/Infocampo/TodoAgro 27/10): ganadería",
+    "Aceite de soja argentino sube por incentivo al biodiésel (Bichos 27/10) y Crop Progress EE. UU. maíz cosechado >50% (Farm Progress 27/10): precio o avance de cosecha sin decisión nueva",
+    "Productores van a la Justicia por los $2,3 billones anunciados por Kicillof para El Niño (Clarín 27/10), caminos rurales cerrados 48 h (Clarín 27/10): judicial/local",
+    "Exportaciones de carne y cuotas de China (TodoAgro/Rosgan 27/10), siembra de soja Mato Grosso 75,8% (Canal Rural 27/10): ganadería o avance sin cambio de decisión"
   ],
-  "updatedAt": "2026-10-27T09:52:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 27/10",
+  "updatedAt": "2026-10-28T09:58:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 28/10",
   "aviso": null
 }
