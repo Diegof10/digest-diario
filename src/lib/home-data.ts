@@ -1,7 +1,6 @@
 import { cache } from "react";
 import { getCatac } from "@/lib/catac";
 import { getClimaVivo } from "@/lib/clima-vivo";
-import { leerAlertas, type AlertaCron } from "@/lib/cron-alertas";
 import { assembleDigest } from "@/lib/digest";
 import { readHomeBlob, writeHomeBlob, type HomeBlobFile } from "@/lib/digest-blob";
 import { getFiscal } from "@/lib/fiscal";
@@ -28,7 +27,6 @@ async function armarHome(km: number, conCos: boolean, fresh = false) {
 
 export type HomeData = Awaited<ReturnType<typeof armarHome>> & {
   origen: "blob" | "vivo";
-  alertas: AlertaCron[];
 };
 
 function fileDe(data: Awaited<ReturnType<typeof armarHome>>, km: number): HomeBlobFile {
@@ -50,7 +48,7 @@ export async function captureHome(km: number) {
   return { data, blob, file };
 }
 
-async function desdeBlob(saved: HomeBlobFile, km: number, conCos: boolean): Promise<Omit<HomeData, "alertas">> {
+async function desdeBlob(saved: HomeBlobFile, km: number, conCos: boolean): Promise<HomeData> {
   // El fiscal vive en su propio blob (otro cron). Releerlo no pega al Boletín:
   // así un ok:false de las 08:00 se ve aunque el resumen sea el de las 07:00.
   const [catac, fiscal] = await Promise.all([
@@ -74,11 +72,8 @@ async function desdeBlob(saved: HomeBlobFile, km: number, conCos: boolean): Prom
 
 /** Deduplicado por request (la cinta y el cuerpo comparten la misma promesa). */
 export const getHomeData = cache(async (km: number, conCos: boolean): Promise<HomeData> => {
-  const [saved, alertas] = await Promise.all([readHomeBlob().catch(() => null), leerAlertas().catch(() => [])]);
-  if (saved?.digest) {
-    const data = await desdeBlob(saved, km, conCos);
-    return { ...data, alertas };
-  }
+  const saved = await readHomeBlob().catch(() => null);
+  if (saved?.digest) return desdeBlob(saved, km, conCos);
   const live = await armarHome(km, conCos, false);
-  return { ...live, origen: "vivo", alertas };
+  return { ...live, origen: "vivo" };
 });

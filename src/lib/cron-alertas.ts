@@ -6,7 +6,7 @@ import { readCronLog, type CronRun } from "@/lib/serie-blob";
 
 export interface AlertaCron {
   cron: "digest" | "fiscal" | "clima" | "noticias";
-  /** true = la última corrida falló o no guardó. La home lo muestra en el banner. */
+  /** true = la última corrida falló o no guardó. Solo lo expone /api/health. */
   severo: boolean;
   at: string | null;
   mensaje: string;
