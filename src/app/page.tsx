@@ -1,6 +1,5 @@
 import ClimaVivo from "@/components/ClimaVivo";
 import CostsBlock from "@/components/CostsBlock";
-import CronBanner from "@/components/CronBanner";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
@@ -28,7 +27,7 @@ export default async function Home({
 
   const tema = parseTema(sp.tema);
   const { fechaCorta, label: fechaLabel } = cordobaParts();
-  const { digest, climaVivo, cos, hacienda, lecturaCards, alertas } = await getHomeData(km, tema !== "base");
+  const { digest, climaVivo, cos, hacienda, lecturaCards } = await getHomeData(km, tema !== "base");
   const ticker = tema !== "base"
     ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null)
     : null;
@@ -76,8 +75,6 @@ export default async function Home({
           </div>
         </div>
       </header>
-
-      <CronBanner alertas={alertas} />
 
       <ClimaVivo clima={climaVivo} tema={tema} />
 
