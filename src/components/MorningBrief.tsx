@@ -58,9 +58,7 @@ function CropRow({
 }) {
   const ui = tema !== "base";
   const meta = ui ? { ...CROP_META[crop], color: GRAIN_COLOR[crop] } : CROP_META[crop];
-  const Icon = ui
-    ? ({ className }: { className?: string; color?: string }) => <GrainIcon grano={crop} className={className} />
-    : meta.Icon;
+  const FallbackIcon = meta.Icon;
   return (
     <div className="flex items-stretch gap-2 border-b border-slate-100 py-2 last:border-0 sm:gap-3">
       <div
@@ -69,7 +67,7 @@ function CropRow({
         aria-hidden
       />
       <div className="flex w-[4.5rem] shrink-0 flex-col items-center justify-center gap-0.5 sm:w-16">
-        <Icon className="h-7 w-7" color={meta.color} />
+        {ui ? <GrainIcon grano={crop} className="h-7 w-7" /> : <FallbackIcon className="h-7 w-7" color={meta.color} />}
         <span
           className="text-[10px] font-bold uppercase tracking-wide"
           style={{ color: meta.color }}

@@ -1,5 +1,5 @@
 import type { ClimaEntry, ClimaSnapshot, EtiquetaDato } from "@/lib/types";
-import { hoyArtIso } from "@/lib/habiles";
+import { hoyArtIso, marcaAntiguedad, UMBRAL_CLIMA_BASE_DIAS } from "@/lib/habiles";
 import { readClimaBlob, type ClimaBlobFile } from "@/lib/clima-cron";
 
 /**
@@ -49,7 +49,14 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
 const CURADO_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-09-30",
   BR: "2026-10-13",
+  /** Publicación del mapa (el mapa en sí es del 20/10; la antigüedad mira esa fecha). */
   US: "2026-10-22",
+};
+/** Fecha del dato de base que se muestra (no la de la corrida del cron). USDM = fecha del mapa. */
+const BASE_ISO: Record<ClimaEntry["country"], string> = {
+  AR: "2026-09-30",
+  BR: "2026-10-13",
+  US: "2026-10-20",
 };
 /** Mes (portugués) del boletín INMET curado arriba */
 const INMET_CURADO = "outubro/2026";
@@ -102,9 +109,12 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
 
   const entries: ClimaEntry[] = CLIMA_HECHO.map((e) => {
     const pr = blob?.pronostico?.[e.country];
+    const fechaIso = BASE_ISO[e.country];
     const out: ClimaEntry = {
       ...e,
       etiqueta,
+      fechaIso,
+      antiguedad: marcaAntiguedad(fechaIso, UMBRAL_CLIMA_BASE_DIAS, hoy),
       pronostico: pr
         ? { texto: pr.texto, fuente: "Open-Meteo (modelo)", url: OPEN_METEO_URL, at: pr.at, desde: pr.desde, hasta: pr.hasta }
         : null,

@@ -1,76 +1,18 @@
-import { Suspense } from "react";
 import ClimaVivo from "@/components/ClimaVivo";
 import CostsBlock from "@/components/CostsBlock";
+import CronBanner from "@/components/CronBanner";
 import FiscalBlock from "@/components/FiscalBlock";
 import MarketBoard from "@/components/MarketBoard";
 import MorningBrief from "@/components/MorningBrief";
 import SiteFooter from "@/components/SiteFooter";
-import { parseTema, type Tema } from "@/lib/tema";
+import { parseTema } from "@/lib/tema";
 import { buildTicker } from "@/lib/ticker";
 import Ticker from "@/components/ui/Ticker";
 import { cordobaParts, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 import { getHomeData } from "@/lib/home-data";
 
-// Sigue siendo dinámica (lee ?km= y ?tema=), pero los datos salen del cache de 10 min
-// (src/lib/home-data.ts) y el header se envía antes que los bloques de datos (streaming).
-
-async function TickerConDatos({ km, tema }: { km: number; tema: Tema }) {
-  const { digest, cos } = await getHomeData(km, tema !== "base");
-  const ticker = buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null);
-  return <Ticker items={ticker} />;
-}
-
-/** Reserva la altura de la cinta mientras llegan los datos (evita saltos de layout). */
-function TickerPlaceholder() {
-  return (
-    <div className="ticker zona-oscura" aria-hidden>
-      <div className="ticker-track">
-        <div className="ticker-group">
-          <span className="tk-item">
-            <span className="tk-label">&nbsp;</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-async function BloquesConDatos({ km, tema }: { km: number; tema: Tema }) {
-  const { digest, climaVivo, hacienda, lecturaCards } = await getHomeData(km, tema !== "base");
-  return (
-    <>
-      <ClimaVivo clima={climaVivo} tema={tema} />
-
-      <MarketBoard mercado={digest.mercado} tema={tema} hacienda={hacienda} />
-
-      <div className="mt-3">
-        <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
-      </div>
-
-      <div className="mt-3">
-        <FiscalBlock fiscal={digest.fiscal} />
-      </div>
-
-
-      <div className="mt-3">
-        <MorningBrief lines={digest.resumenMatutino} tema={tema} cards={lecturaCards} />
-      </div>
-
-      <SiteFooter pie={digest.pie} />
-    </>
-  );
-}
-
-function BloquesPlaceholder() {
-  return (
-    <div aria-busy="true" aria-live="polite" className="space-y-3">
-      <p className="sr-only">Cargando datos del día…</p>
-      {[96, 420, 220, 200, 260].map((h, i) => (
-        <div key={i} className="animate-pulse rounded-sm bg-slate-200/70" style={{ height: h }} />
-      ))}
-    </div>
-  );
-}
+// El HTML sale completo: el resumen es el último guardado por el cron (Blob),
+// no un esqueleto que espera a que /api/digest consulte las fuentes.
 
 export default async function Home({
   searchParams,
@@ -86,16 +28,14 @@ export default async function Home({
 
   const tema = parseTema(sp.tema);
   const { fechaCorta, label: fechaLabel } = cordobaParts();
-  // Arranca el armado ya (no bloquea el envío del header).
-  void getHomeData(km, tema !== "base");
+  const { digest, climaVivo, cos, hacienda, lecturaCards, alertas } = await getHomeData(km, tema !== "base");
+  const ticker = tema !== "base"
+    ? buildTicker(digest.mercado, cos ? { fecha: cos.fecha, lineas: cos.lineas } : null)
+    : null;
 
   return (
     <div data-tema={tema} className="tema-root">
-    {tema !== "base" ? (
-      <Suspense fallback={<TickerPlaceholder />}>
-        <TickerConDatos km={km} tema={tema} />
-      </Suspense>
-    ) : null}
+    {ticker ? <Ticker items={ticker} /> : null}
     <main className="mx-auto w-full max-w-5xl px-2 py-3 sm:px-4 sm:py-5">
       {/* Header bar — placa style */}
       <header className="mb-3 flex items-center justify-between gap-3 rounded-sm bg-[#0b1f3a] px-3 py-2.5 text-white sm:px-4">
@@ -137,9 +77,25 @@ export default async function Home({
         </div>
       </header>
 
-      <Suspense fallback={<BloquesPlaceholder />}>
-        <BloquesConDatos km={km} tema={tema} />
-      </Suspense>
+      <CronBanner alertas={alertas} />
+
+      <ClimaVivo clima={climaVivo} tema={tema} />
+
+      <MarketBoard mercado={digest.mercado} tema={tema} hacienda={hacienda} />
+
+      <div className="mt-3">
+        <CostsBlock catac={digest.catac} insumos={digest.insumos} km={km} />
+      </div>
+
+      <div className="mt-3">
+        <FiscalBlock fiscal={digest.fiscal} />
+      </div>
+
+      <div className="mt-3">
+        <MorningBrief lines={digest.resumenMatutino} tema={tema} cards={lecturaCards} />
+      </div>
+
+      <SiteFooter pie={digest.pie} />
     </main>
     </div>
   );

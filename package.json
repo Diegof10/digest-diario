@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "tsx --test src/lib/auditoria.test.ts",
     "noticias:status": "node scripts/refresh-noticias.mjs",
     "noticias:empty": "node scripts/refresh-noticias.mjs --empty",
     "noticias:refresh": "node scripts/refresh-noticias.mjs --from",
@@ -27,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

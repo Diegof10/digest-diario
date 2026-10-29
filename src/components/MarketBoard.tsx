@@ -256,9 +256,63 @@ function PlazasBlock({ mercado, tema = "base" }: { mercado: MercadoSnapshot; tem
         </div>
       )}
       <div className="border-t border-slate-200 bg-slate-50 px-3 py-1.5 text-[9px] leading-snug opacity-70">
-        Pizarras en $/t sin IVA. (E) = precio estimativo de la Cámara. Girasol y sorgo: CAC Rosario y AFA (si AFA lo cotiza en otra plaza, se indica). US$ ≈ conversión a {tcNotes.length ? tcNotes.join(" · ") : "BNA divisa comprador de la fecha del dato (sin TC de esa fecha → sólo ARS)"}.
+        Pizarras en $/t sin IVA. (E) = precio estimativo de la Cámara. Girasol y sorgo: CAC Rosario y AFA (si AFA lo cotiza en otra plaza, se indica). US$ ≈ conversión con BCRA A3500 (tipo de cambio de referencia) de la fecha del dato{tcNotes.length ? ` · ${tcNotes.join(" · ")}` : " (sin A3500 de esa fecha → sólo ARS)"}.
         {" "}&quot;viejo&quot; = 1–3 días hábiles de atraso; más de 3 no se muestra.
       </div>
+      <TiposDeCambio mercado={mercado} />
+    </section>
+  );
+}
+
+function tiposLinea(label: string, valor: number, fecha: string, nota: string) {
+  const v = valor.toLocaleString("es-AR", { minimumFractionDigits: valor % 1 === 0 ? 0 : 2, maximumFractionDigits: 2 });
+  const f = `${fecha.slice(8, 10)}/${fecha.slice(5, 7)}/${fecha.slice(0, 4)}`;
+  return `${label} ${f}: $${v} (${nota})`;
+}
+
+function TiposDeCambio({ mercado }: { mercado: MercadoSnapshot }) {
+  const p = mercado.plazas;
+  if (!p) return null;
+  const partes = [
+    p.fxA3500 ? tiposLinea("BCRA A3500", p.fxA3500.valor, p.fxA3500.fecha, "referencia, convierte las pizarras") : null,
+    p.fxBilleteVenta ? tiposLinea("BNA billete venta", p.fxBilleteVenta.valor, p.fxBilleteVenta.fecha, "minorista, no convierte granos") : null,
+    p.fxBnaDivisa ? tiposLinea("BNA divisa comprador", p.fxBnaDivisa.valor, p.fxBnaDivisa.fecha, "no es el A3500") : null,
+  ].filter(Boolean);
+  if (partes.length === 0) return null;
+  return (
+    <p className="border-t border-slate-200 px-3 py-1.5 text-[9px] leading-snug">
+      {partes.join(" · ")}
+    </p>
+  );
+}
+
+function FobFasBlock({ mercado }: { mercado: MercadoSnapshot }) {
+  const f = mercado.fobFas;
+  if (!f || f.items.length === 0) return null;
+  const fecha = f.fecha ? `${f.fecha.slice(8, 10)}/${f.fecha.slice(5, 7)}/${f.fecha.slice(0, 4)}` : "s/f";
+  const stale = f.antiguedad === "desactualizado";
+  return (
+    <section className="digest-panel">
+      <h3 className="digest-panel-title">FOB / FAS oficial · MAGyP</h3>
+      <p className="text-[10px] font-semibold">
+        dato al {fecha}
+        {stale ? <span className="ml-1 rounded bg-amber-100 px-1 py-px text-amber-800">desactualizado</span> : null}
+      </p>
+      <ul className="mt-1 space-y-0.5">
+        {f.items.map((it) => (
+          <li key={it.grano} className="text-[11px] tabular-nums">
+            <span className="font-semibold uppercase">{it.grano}</span>
+            {it.fobUsd != null ? ` · FOB ${it.fobUsd.toLocaleString("es-AR")} US$/t` : ""}
+            {it.fasArs != null ? ` · FAS ${Math.round(it.fasArs).toLocaleString("es-AR")} $/t` : ""}
+          </li>
+        ))}
+      </ul>
+      <p className="mt-1 text-[9px] opacity-60">
+        <a href={f.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">
+          {f.fuente}
+        </a>
+        . FAS de soja y girasol: capacidad de pago de la industria. Más de 3 días se marca desactualizado.
+      </p>
     </section>
   );
 }
@@ -324,6 +378,11 @@ function ClimaCountry({ e }: { e: ClimaEntry }) {
         </p>
       ) : null}
       <p className="mt-0.5 text-[11px] leading-snug">{e.pronostico || e.dato ? <span className="opacity-60">Perspectiva: </span> : null}{e.bullet}</p>
+      {e.antiguedad === "desactualizado" ? (
+        <p className="mt-0.5 text-[10px] font-bold text-amber-800">
+          desactualizado · dato al {e.fecha}
+        </p>
+      ) : null}
       {e.aviso ? (
         <p className="mt-0.5 rounded-sm bg-amber-100 px-1.5 py-0.5 text-[10px] leading-snug text-amber-800">
           {e.aviso.texto}{" "}
@@ -470,10 +529,11 @@ export default function MarketBoard({
   return (
     <div className="flex flex-col gap-3">
       <PlazasBlock mercado={mercado} tema={tema} />
+      <FobFasBlock mercado={mercado} />
 
       {/* Row A */}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-        <Panel title="Chicago · futuro CBOT (Yahoo)">
+        <Panel title="Chicago · cierre CBOT">
           <CropLine crop="soja" r={sojaChi} tema={tema} />
           <CropLine crop="maiz" r={maizChi} tema={tema} />
           <CropLine crop="trigo" r={trigoChi} tema={tema} />

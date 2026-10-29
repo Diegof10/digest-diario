@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import vercelJson from "../../../../vercel.json";
+import { leerAlertas } from "@/lib/cron-alertas";
+import { readHomeBlob } from "@/lib/digest-blob";
 import { readNoticiasRun } from "@/lib/noticias-cron";
 import { readFiscalBlob } from "@/lib/fiscal-cron";
 import { readClimaBlob } from "@/lib/clima-cron";
@@ -8,12 +10,14 @@ import { blobConfigured, blobLastError, readCronLog, readSerie } from "@/lib/ser
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const [serie, cronRuns, noticiasCron, fiscalBlob, climaBlob] = await Promise.all([
+  const [serie, cronRuns, noticiasCron, fiscalBlob, climaBlob, alertas, homeBlob] = await Promise.all([
     readSerie(true).catch(() => null),
     readCronLog().catch(() => []),
     readNoticiasRun().catch(() => null),
     readFiscalBlob().catch(() => null),
     readClimaBlob().catch(() => null),
+    leerAlertas().catch(() => []),
+    readHomeBlob(true).catch(() => null),
   ]);
   const puntos = serie
     ? Object.fromEntries(
@@ -28,16 +32,29 @@ export async function GET() {
         ]),
       )
     : null;
+  const severas = alertas.filter((a) => a.severo);
   return NextResponse.json({
-    ok: true,
+    ok: severas.length === 0,
     app: "resumen-agrario",
     producto: "Resumen agrario",
+    /** Crons con ok: false o blobWritten: false (severo) y notas no severas (serie sin cambios). */
+    alertas,
+    resumenGuardadoAt: homeBlob?.savedAt ?? null,
     crons: (vercelJson.crons ?? []).map((c) => `${c.schedule} → ${c.path}`),
     cronNote: "UTC: 0 10 * * * = 07:00 ART; 15 14 * * 1-5 = 11:15 ART; 30 21 * * 1-5 = 18:30 ART; fiscal 0 11 * * 1-5 = 08:00 ART; clima 50 9 * * * = 06:50 ART",
     vercel: Boolean(process.env.VERCEL),
     cronSecretPresent: Boolean(process.env.CRON_SECRET),
     /** Últimas corridas autenticadas de /api/cron/digest (persistidas en Blob) */
-    cronRuns: cronRuns.slice(0, 5).map((r) => ({ at: r.at, ms: r.ms, userAgent: r.userAgent, blobWritten: r.blobWritten })),
+    cronRuns: cronRuns.slice(0, 5).map((r) => ({
+      at: r.at,
+      ms: r.ms,
+      userAgent: r.userAgent,
+      ok: r.ok ?? null,
+      blobWritten: r.blobWritten,
+      seriesWritten: r.seriesWritten ?? null,
+      seriesReason: r.seriesReason ?? null,
+      granosOk: r.granosOk ?? null,
+    })),
     /** Última corrida de /api/cron/noticias (ok o error) */
     noticiasCron,
     /** Última corrida de /api/cron/fiscal (BO/ARCA) y última revisión OK */
