@@ -1,11 +1,32 @@
 {
-  "asOf": "2026-10-28T09:58:00.000Z",
-  "asOfArg": "28/10/2026, 06:58",
+  "asOf": "2026-10-29T09:58:00.000Z",
+  "asOfArg": "29/10/2026, 06:58",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 28/10/2026, 06:58 ARG",
+  "note": "Rutina mañana · filtro manual · 29/10/2026, 06:58 ARG",
   "items": [
+    {
+      "title": "Diputados no dio dictamen al proyecto de biocombustibles con media sanción del Senado (corte de biodiésel al 7,5% y 10% en un año): PRO, UCR y Unión por la Patria pidieron revisar el cupo de las empresas no integradas y se demora su vigencia prevista para 2027",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "text": "Diputados no dio dictamen al proyecto de biocombustibles con media sanción del Senado (corte de biodiésel al 7,5% y 10% en un año): PRO, UCR y Unión por la Patria pidieron revisar el cupo de las empresas no integradas y se demora su vigencia prevista para 2027",
+      "url": "https://bichosdecampo.com/amigos-son-los-amigos-kirchnerismo-pro-y-ucr-se-unieron-para-frenar-el-proyecto-de-biocombustibles/",
+      "publishedAt": "2026-10-28T22:16:32.000Z",
+      "publishedAtArg": "28/10 19:16",
+      "rank": 1
+    },
+    {
+      "title": "La UE exigirá desde el 30/12 trazabilidad libre de deforestación (EUDR): Brasil podría perder hasta 4–6 Mt de exportaciones de harina de soja y CIARA-CEC dice que Argentina, con riesgo “bajo” según FEFAC y el sistema VISEC, puede cubrir ese hueco",
+      "titleOriginal": "Argentina sees EU soymeal opportunity as deforestation rules threaten Brazil trade",
+      "source": "Reuters · traducido del inglés",
+      "handle": "Reuters",
+      "text": "La UE exigirá desde el 30/12 trazabilidad libre de deforestación (EUDR): Brasil podría perder hasta 4–6 Mt de exportaciones de harina de soja y CIARA-CEC dice que Argentina, con riesgo “bajo” según FEFAC y el sistema VISEC, puede cubrir ese hueco",
+      "url": "https://finance.yahoo.com/markets/commodities/articles/argentina-sees-eu-soymeal-opportunity-101753461.html",
+      "publishedAt": "2026-10-28T10:17:53.000Z",
+      "publishedAtArg": "28/10 07:17",
+      "rank": 2
+    },
     {
       "title": "Un estudio de Serasa Experian advierte que un “Súper Niño” como el de 2023/24 podría recortar 9,7% la cosecha de soja de Brasil 2026/27: 17,6 Mt menos sobre la proyección de 181,2 Mt, con el golpe concentrado en Mato Grosso (hasta 9,7 Mt)",
       "source": "Bichos de Campo / Valor Soja (estudio Serasa Experian)",
@@ -14,17 +35,7 @@
       "url": "https://bichosdecampo.com/ojo-al-piojo-un-estudio-advierte-que-el-super-nino-puede-liquidar-casi-un-10-de-la-cosecha-prevista-de-soja-en-brasil/",
       "publishedAt": "2026-10-27T21:44:25.000Z",
       "publishedAtArg": "27/10 18:44",
-      "rank": 1
-    },
-    {
-      "title": "El Ministerio de Economía homologó la emergencia agropecuaria por inundaciones en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea, con vigencia del 1/5 al 31/10/2026",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "text": "El Ministerio de Economía homologó la emergencia agropecuaria por inundaciones en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea, con vigencia del 1/5 al 31/10/2026",
-      "url": "https://www.clarin.com/rural/inundaciones-declaran-emergencia-agropecuaria-partidos-buenos-aires_0_ycP1zKWRHi.html",
-      "publishedAt": "2026-10-26T13:45:06.000Z",
-      "publishedAtArg": "26/10 10:45",
-      "rank": 2
+      "rank": 3
     },
     {
       "title": "Bunge cerró su planta de Campana, donde fabricaba el fertilizante líquido tiosulfato de amonio (marca SolMix) y amoníaco; la empresa lo atribuyó a costos industriales y competencia de importados, y los trabajadores acampan en la puerta",
@@ -34,39 +45,19 @@
       "url": "https://bichosdecampo.com/las-razones-de-bunge-los-detalles-detras-del-cierre-de-la-planta-de-campana-donde-la-multinacional-producia-un-popular-fertilizante-liquido/",
       "publishedAt": "2026-10-27T18:38:32.000Z",
       "publishedAtArg": "27/10 15:38",
-      "rank": 3
-    },
-    {
-      "title": "ARCA reglamentó con la RG 5916/2026 los cambios de la ley de inocencia fiscal al régimen simplificado de Ganancias: elimina los topes de ingresos y patrimonio para personas humanas y la falta de bancarización ya no excluye por sí sola",
-      "source": "Agrofy News (RG ARCA 5916/2026, Boletín Oficial)",
-      "handle": "Agrofy News",
-      "text": "ARCA reglamentó con la RG 5916/2026 los cambios de la ley de inocencia fiscal al régimen simplificado de Ganancias: elimina los topes de ingresos y patrimonio para personas humanas y la falta de bancarización ya no excluye por sí sola",
-      "url": "https://news.agrofy.com.ar/noticia/216859/impuesto-ganancias-arca-reglamento-ley-inocencia-fiscal-elimino-topes-ingresos",
-      "publishedAt": "2026-10-26T11:38:00.000Z",
-      "publishedAtArg": "26/10 08:38",
       "rank": 4
-    },
-    {
-      "title": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
-      "source": "TodoAgro (Bolsa de Comercio de Rosario, GEA)",
-      "handle": "TodoAgro",
-      "text": "BCR: primera estimación de trigo en la región núcleo de 6,7 Mt sobre 1,6 M ha y rinde de 43,6 qq/ha (+5 qq vs promedio de cinco años), pese a la nubosidad, el frío y las heladas de octubre; el frío también frena el maíz y la siembra de soja",
-      "url": "https://www.todoagro.com.ar/el-trigo-de-la-region-nucleo-desafia-al-frio-y-la-falta-de-sol-proyectan-67-millones-de-toneladas/",
-      "publishedAt": "2026-10-26T15:06:55.000Z",
-      "publishedAtArg": "26/10 12:06",
-      "rank": 5
     }
   ],
   "descartadas": [
-    "Compras estatales chinas de soja de EE. UU. ~15 Mt (Global Agriculture/Reuters 26/10) y Lula reelecto (Infocampo 25/10): más de 48 h",
-    "Dragas desde Singapur y Croacia para la navegabilidad del Paraná y obras preventivas por El Niño (Bichos/Infocampo 27/10): preventivo, sin alerta ni medida nueva sobre la operatoria",
-    "AmCham pide adherir a UPOV y advierte por el acuerdo con EE. UU. (La Nación 27/10): pedido sectorial, sin norma",
-    "Créditos ganaderos a valor producto con nuevo cupo de garantías (Bichos/Infocampo/TodoAgro 27/10): ganadería",
-    "Aceite de soja argentino sube por incentivo al biodiésel (Bichos 27/10) y Crop Progress EE. UU. maíz cosechado >50% (Farm Progress 27/10): precio o avance de cosecha sin decisión nueva",
-    "Productores van a la Justicia por los $2,3 billones anunciados por Kicillof para El Niño (Clarín 27/10), caminos rurales cerrados 48 h (Clarín 27/10): judicial/local",
-    "Exportaciones de carne y cuotas de China (TodoAgro/Rosgan 27/10), siembra de soja Mato Grosso 75,8% (Canal Rural 27/10): ganadería o avance sin cambio de decisión"
+    "Emergencia agropecuaria 9 de Julio/Necochea (Clarín 26/10), ARCA RG 5916 (Agrofy 26/10) y BCR trigo núcleo 6,7 Mt (TodoAgro 26/10): más de 48 h",
+    "Bahillo habla de baja gradual de retenciones (Monitor Gremial) y SRA pide retenciones cero (Valor Agro 28/10): declaraciones sin medida",
+    "Ventas de maíz 65% y soja 50% (Campo Total 28/10), cierres Rosario (Ruralnet 28/10), Coninagro gasoil +58% interanual: precios/comercialización",
+    "Conab plantío soja Brasil 42,8% y MT >75% (Notícias Agrícolas/Canal Rural) y perspectiva agroclimática BCBA 29/10–4/11: avance o pronóstico sin alerta",
+    "Ley de Semillas en vía muerta (Bichos 28/10), Lula y sus urgencias (Bichos 28/10), IICA por pesticidas en la UE (Bichos 28/10): análisis sin hecho nuevo",
+    "Paro aceitero/conciliación (Monitor Gremial): sin nota fechada en las últimas 48 h",
+    "PAS Bolsa de Cereales sigue en 22/10; China compras EE. UU. ~17 Mt (análisis UkrAgroConsult/Datamar): sin dato nuevo fechado"
   ],
-  "updatedAt": "2026-10-28T09:58:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 28/10",
+  "updatedAt": "2026-10-29T09:58:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 29/10",
   "aviso": null
 }
