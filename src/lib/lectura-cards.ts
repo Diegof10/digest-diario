@@ -1,3 +1,4 @@
+import { lineaSinNovedad } from "@/lib/fiscal";
 import { hoyArtIso, isoToDmy } from "@/lib/habiles";
 import type { CotizacionGrano, PlazaSnapshot } from "@/lib/plazas";
 import type { ClimaVivoSnapshot } from "@/lib/clima-vivo";
@@ -10,7 +11,7 @@ import type { FiscalSnapshot, MercadoSnapshot } from "@/lib/types";
  *  - Granos: flecha = variación CBOT de la cinta (● si |var| < 0,3% o sin dato);
  *    local = variación de la última pizarra CAC; resumen con CBOT, AFA y CAC.
  *  - Clima: ● siempre. Condición mayoritaria de BA/SF/Córdoba (Open-Meteo).
- *  - Dólar: variación BNA divisa comprador (● si |var| < 0,3%).
+ *  - Dólar: variación del A3500 (● si |var| < 0,3%). El billete del BNA se menciona aparte.
  *  - Fiscal: ● siempre; texto de Fiscal mientras haya novedad (7 días), si no próximo vencimiento.
  */
 
@@ -63,6 +64,16 @@ function seccionFiscal(fiscal: FiscalSnapshot, hoy: string): CardSection {
       titulo: `Fiscal · vence ${isoToDmy(prox.vence).slice(0, 5)}`,
       resumen: `${prox.concepto}: ${prox.ventana}.`,
       fuente: prox.fuente ?? fiscal.fuente,
+      hora: null,
+    };
+  }
+  if (fiscal.cronOk === false) {
+    const dato = lineaSinNovedad(false, fiscal.revisadoAt ?? fiscal.ultimaRevision ?? null);
+    return {
+      ...base,
+      titulo: dato,
+      resumen: `La última corrida del Boletín Oficial falló. ${dato}.`,
+      fuente: fiscal.fuente,
       hora: null,
     };
   }
@@ -197,23 +208,25 @@ function seccionClima(clima: ClimaVivoSnapshot | null): { s: CardSection; code: 
 }
 
 function seccionDolar(mercado: MercadoSnapshot): CardSection {
-  const bna = mercado.plazas?.fxBnaDivisa ?? null;
-  const prev = mercado.plazas?.fxBnaDivisaPrev ?? null;
-  if (!bna) {
-    return { flecha: "flat", flechaLabel: "sin dato", titulo: "Dólar · sin dato BNA", resumen: "Sin cotización BNA divisa en el feed.", fuente: "BNA", hora: null };
+  const tc = mercado.plazas?.fxA3500 ?? null;
+  const prev = mercado.plazas?.fxA3500Prev ?? null;
+  const billete = mercado.plazas?.fxBilleteVenta ?? null;
+  if (!tc) {
+    return { flecha: "flat", flechaLabel: "sin dato", titulo: "Dólar · sin A3500", resumen: "Sin tipo de cambio de referencia del BCRA (A3500).", fuente: "BCRA A3500", hora: null };
   }
-  const v = prev && prev.valor > 0 ? bna.valor / prev.valor - 1 : null;
+  const v = prev && prev.valor > 0 ? tc.valor / prev.valor - 1 : null;
   const f = flechaUmbral(v);
-  const titulo = v == null ? "Dólar · BNA sin cierre previo" : Math.abs(v) < UMBRAL ? "Dólar · BNA casi sin cambios" : v > 0 ? "Dólar · BNA sube" : "Dólar · BNA baja";
-  const val = (x: number) => x.toLocaleString("es-AR", { maximumFractionDigits: 1 });
+  const titulo = v == null ? "Dólar · A3500 sin cierre previo" : Math.abs(v) < UMBRAL ? "Dólar · A3500 casi sin cambios" : v > 0 ? "Dólar · A3500 sube" : "Dólar · A3500 baja";
+  const val = (x: number) => x.toLocaleString("es-AR", { maximumFractionDigits: 2 });
   const cmp = prev && v != null ? `, contra $${val(prev.valor)} del ${dm(prev.fecha)} (${v >= 0 ? "+" : "−"}${pct1(v)}%)` : "";
+  const bil = billete ? ` El billete minorista del BNA (venta) está en $${val(billete.valor)} al ${dm(billete.fecha)} y no se usa para convertir granos.` : "";
   return {
     flecha: f.flecha,
     flechaLabel: f.label,
     titulo,
-    resumen: `El dólar BNA divisa comprador cerró el ${dm(bna.fecha)} en $${val(bna.valor)}${cmp}. Es el tipo de cambio que usamos para pasar las pizarras a dólares. Fuente: BNA.`,
-    fuente: "BNA divisa comprador",
-    hora: dm(bna.fecha),
+    resumen: `El tipo de cambio de referencia del BCRA (A3500) del ${dm(tc.fecha)} es $${val(tc.valor)}${cmp}. Es el que usamos para pasar las pizarras a dólares.${bil}`,
+    fuente: "BCRA A3500",
+    hora: dm(tc.fecha),
   };
 }
 

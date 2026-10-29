@@ -1,4 +1,5 @@
 import { isoToDmy } from "@/lib/habiles";
+import { lineaSinNovedad } from "@/lib/fiscal";
 import type { FiscalSnapshot } from "@/lib/types";
 
 const TZ = "America/Argentina/Cordoba";
@@ -33,6 +34,7 @@ function ddmm(s: string): string {
 
 export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
   const vigentes = fiscal.normasVigentes ?? [];
+  const sinNovedad = lineaSinNovedad(fiscal.cronOk, fiscal.revisadoAt ?? fiscal.ultimaRevision ?? null);
   const empty =
     !fiscal.ok ||
     (fiscal.novedades.length === 0 && vigentes.length === 0 && fiscal.vencimientos.length === 0);
@@ -75,8 +77,14 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
         );
       })()}
 
+      {fiscal.cronOk === false ? (
+        <p role="status" className="mb-1.5 text-[12px] font-semibold text-amber-800">
+          {sinNovedad}
+        </p>
+      ) : null}
+
       {empty ? (
-        <p className="text-[12px] opacity-50">Sin novedad fiscal</p>
+        fiscal.cronOk === false ? null : <p className="text-[12px] opacity-50">Sin novedad fiscal</p>
       ) : (
         <div className="flex flex-col gap-2">
           {fiscal.novedades.length > 0 ? (
@@ -99,7 +107,9 @@ export default function FiscalBlock({ fiscal }: { fiscal: FiscalSnapshot }) {
               ))}
             </ul>
           ) : (
-            <p className="text-[12px] leading-snug opacity-60">Sin novedad fiscal</p>
+            fiscal.cronOk === false ? null : (
+              <p className="text-[12px] leading-snug opacity-60">Sin novedad fiscal</p>
+            )
           )}
 
           {vigentes.length > 0 ? (

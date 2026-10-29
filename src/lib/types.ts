@@ -53,7 +53,7 @@ export interface MercadoRow {
   frescura?: "fresco" | "viejo" | "vencido" | null;
   /** Var diaria "abs · %" vs cierre publicado anterior de la misma fuente */
   varAbs?: string | null;
-  /** Conversión a US$/t (plazas en ARS) */
+  /** Conversión a US$/t (plazas en ARS) con BCRA A3500 */
   valorUsd?: string | null;
   /** Tipo de cambio usado en la conversión (fuente + fecha) */
   tc?: string | null;
@@ -69,6 +69,10 @@ export interface ClimaEntry {
   fuente: string;
   /** Fecha de referencia de la fuente (ej. ago-2026, 10/9/2026) */
   fecha: string;
+  /** yyyy-mm-dd del boletín de base, para la marca de antigüedad */
+  fechaIso?: string | null;
+  /** ok = dentro del umbral de la fuente; desactualizado = el boletín supera ese umbral */
+  antiguedad?: "ok" | "desactualizado" | null;
   url: string;
   secondaryUrl?: string | null;
   secondaryNote?: string | null;
@@ -145,6 +149,8 @@ export interface MercadoSnapshot {
   noticias?: NoticiasSnapshot | null;
   /** Plazas físicas (CAC / AFA), desde fuentes directas */
   plazas?: import("@/lib/plazas").PlazasSnapshot | null;
+  /** FOB oficial y FAS teórico MAGyP (fecha real; antiguedad según esa fecha) */
+  fobFas?: import("@/lib/fob-fas").FobFasSnapshot | null;
   /** Ajustes oficiales A3 Matba Rofex (contrato, precio y fecha de rueda) */
   matba?: import("@/lib/matba").MatbaSnapshot | null;
 }

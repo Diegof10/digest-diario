@@ -88,6 +88,22 @@ function isoMenosDias(iso: string, n: number): string {
   return dt.toISOString().slice(0, 10);
 }
 
+/**
+ * Cuando la última corrida del cron falló, no decir "sin novedad": el vacío puede ser
+ * el fetch, no la ausencia de normas. Se muestra la fecha del último dato que sí tenemos.
+ */
+export function lineaSinNovedad(
+  cronOk: boolean | null | undefined,
+  revisadoAt: string | null | undefined,
+): string {
+  if (cronOk !== false) return "Sin novedad fiscal";
+  if (!revisadoAt) return "dato al —";
+  const iso = /^\d{4}-\d{2}-\d{2}$/.test(revisadoAt) ? revisadoAt : hoyArtIso(new Date(revisadoAt));
+  return Number.isNaN(Date.parse(iso.length === 10 ? `${iso}T12:00:00Z` : iso))
+    ? "dato al —"
+    : `dato al ${isoToDmy(iso)}`;
+}
+
 /** Fecha BO: campo boFecha o "(BO dd/mm/aaaa)" en el texto. */
 function boFechaDe(n: FiscalNovedad): string | null {
   if (n.boFecha && /^\d{4}-\d{2}-\d{2}$/.test(n.boFecha)) return n.boFecha;

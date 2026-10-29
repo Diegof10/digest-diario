@@ -57,12 +57,15 @@ export function buildTicker(
   const by = (id: string) => mercado.rows.find((r) => r.id === id);
   const hoy = hoyArtIso();
 
-  // CBOT (Yahoo vía feed): el feed no trae hora de la cotización, sólo la de su lectura
-  // → "demorado · hh:mm" (nunca "cierre" porque no se puede saber).
+  // CBOT: cierre con fecha de sesión (vela diaria). No hay fila cbot-* duplicada.
   for (const id of ["chicago-soja", "chicago-maiz", "chicago-trigo"]) {
     const r = by(id);
-    if (!r?.valor) continue;
-    const cuando = cuandoDeHora(r.hora, "demorado", true);
+    if (!r?.valor || r.frescura === "vencido") continue;
+    const cuando = r.fecha
+      ? r.fecha < hoy
+        ? `cierre ${isoDm(r.fecha)}`
+        : `sesión ${isoDm(r.fecha)}`
+      : cuandoDeHora(r.hora, "demorado", true);
     if (!cuando) continue;
     out.push({ id, label: `${r.producto} CBOT`, grano: grano(r), valor: r.valor, unidad: r.unidad, varPct: r.varPct ?? null, cuando });
   }
@@ -83,11 +86,14 @@ export function buildTicker(
     });
   }
 
-  // Dólar BNA (feed, sin variación informada)
+  // Cada tipo de cambio con su nombre. El A3500 es el de la conversión; el billete no.
+  const a3500 = by("fx-a3500");
+  if (a3500?.valor && a3500.fecha) {
+    out.push({ id: "fx-a3500", label: "BCRA A3500", valor: a3500.valor, unidad: null, varPct: null, cuando: `dato ${isoDm(a3500.fecha)}` });
+  }
   const bna = by("fx-bna");
-  if (bna?.valor) {
-    const cuando = cuandoDeHora(bna.hora, "", true);
-    if (cuando) out.push({ id: "fx-bna", label: "Dólar BNA", valor: bna.valor, unidad: null, varPct: null, cuando });
+  if (bna?.valor && bna.fecha) {
+    out.push({ id: "fx-bna", label: "BNA billete venta", valor: bna.valor, unidad: null, varPct: null, cuando: `dato ${isoDm(bna.fecha)}` });
   }
 
   // Otros dólares: sólo si ya están en la línea FX del Resumen matutino (con su fecha).
@@ -115,11 +121,12 @@ export function buildTicker(
 
 /**
  * Pie de fuente para el tablero de señales con el mismo criterio que la cinta:
- * CBOT (hora de lectura del feed) → "demorado · leído hh:mm"; Matba (sólo fecha) → "dato d/m".
+ * CBOT (fecha de cierre) → "cierre d/m"; Matba (sólo fecha) → "dato d/m".
  */
 export function pieFuente(r: MercadoRow): string {
   if (!r.valor) return "sin fuente";
   if (r.id.startsWith("chicago-") || r.id.startsWith("cbot-")) {
+    if (r.fecha) return [r.fuente, `cierre ${isoDm(r.fecha)}`].filter(Boolean).join(" · ");
     const c = cuandoDeHora(r.hora, "demorado", true);
     return [r.fuente, c].filter(Boolean).join(" · ");
   }

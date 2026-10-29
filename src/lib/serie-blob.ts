@@ -67,15 +67,17 @@ export async function readSerie(force = false): Promise<SerieFile> {
   return empty;
 }
 
-/** Mergea puntos nuevos; escribe sólo si hubo cambios. Devuelve true si escribió. */
+export type SerieWriteReason = "written" | "unchanged" | "empty" | "unconfigured" | "error";
+
+/** Mergea puntos nuevos; escribe sólo si hubo cambios. `reason` distingue “nada nuevo” de una falla. */
 export async function mergeSerie(
   puntos: Array<{ serie: string; grano: string; fecha: string; valor: number }>,
-): Promise<{ written: boolean; error: string | null }> {
-  if (!blobConfigured()) return { written: false, error: "blob no configurado" };
+): Promise<{ written: boolean; error: string | null; reason: SerieWriteReason }> {
+  if (!blobConfigured()) return { written: false, error: "blob no configurado", reason: "unconfigured" };
   const valid = puntos.filter(
     (p) => Number.isFinite(p.valor) && p.valor > 0 && /^\d{4}-\d{2}-\d{2}$/.test(p.fecha),
   );
-  if (valid.length === 0) return { written: false, error: null };
+  if (valid.length === 0) return { written: false, error: null, reason: "empty" };
   const file = await readSerie(true);
   let changed = false;
   for (const p of valid) {
@@ -86,7 +88,7 @@ export async function mergeSerie(
       changed = true;
     }
   }
-  if (!changed) return { written: false, error: null };
+  if (!changed) return { written: false, error: null, reason: "unchanged" };
   file.updatedAt = new Date().toISOString();
   const body = JSON.stringify(file);
   const order: Access[] = accessOk ? [accessOk] : ["private", "public"];
@@ -102,12 +104,12 @@ export async function mergeSerie(
       accessOk = access;
       memo = { at: Date.now(), file };
       lastError = null;
-      return { written: true, error: null };
+      return { written: true, error: null, reason: "written" };
     } catch (err) {
       lastError = `write(${access}): ${err instanceof Error ? err.message : String(err)}`;
     }
   }
-  return { written: false, error: lastError };
+  return { written: false, error: lastError, reason: "error" };
 }
 
 /** Último valor con fecha < `antesDe` en la serie. */
@@ -145,7 +147,13 @@ export interface CronRun {
   ms: number;
   userAgent: string | null;
   plazas: unknown;
+  /** true si se guardó el resumen completo (digest/latest.json), no sólo si la serie de precios cambió. */
   blobWritten: boolean;
+  /** Resultado de la corrida. Ausente en logs viejos. */
+  ok?: boolean;
+  seriesWritten?: boolean;
+  seriesReason?: string | null;
+  granosOk?: boolean | null;
 }
 
 export async function readCronLog(): Promise<CronRun[]> {

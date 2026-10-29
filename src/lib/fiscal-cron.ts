@@ -6,10 +6,11 @@ import { blobConfigured } from "@/lib/serie-blob";
 /**
  * Fiscal automático (cron Vercel lun–vie 08:00 ART, ver vercel.json).
  *
- * 1. Boletín Oficial, primera sección, últimas ediciones (ventana NOVEDAD_DIAS):
- *    rubros Resolución general (63), Decretos (24), Resoluciones (1715) y
- *    Resolución conjunta (5001) vía el endpoint público /seccion/buscarRubro
- *    (el listado /seccion/primera corta en 100 avisos y pagina por sesión).
+ * 1. Boletín Oficial, primera sección, últimas ediciones (ventana NOVEDAD_DIAS),
+ *    filtrada a los instrumentos de ARCA y del PEN: Resolución general (63) y
+ *    Decretos (24) en toda la ventana, y Resoluciones (1715) sólo en los 2 días
+ *    más nuevos (Economía / Agricultura). Resolución conjunta queda afuera: casi
+ *    no aporta normas agro y multiplicaba los fetch. Endpoint /seccion/buscarRubro.
  * 2. Filtro: organismo ARCA/AFIP, Economía, Agricultura o Poder Ejecutivo +
  *    palabras clave agro/fiscal (SISA, granos, derechos de exportación, Ganancias,
  *    IVA, Bienes Personales, monotributo…). Para las RG de ARCA se lee el título
@@ -33,12 +34,25 @@ export const VENTANA_DIAS = 7;
 /** Cuánto se conservan en Blob los ítems detectados. */
 const RETENER_DIAS = 30;
 
-const RUBROS: Array<{ id: string; nombre: string }> = [
+/** RG (ARCA) y decretos (PEN) en toda la ventana. */
+const RUBROS_BASE: Array<{ id: string; nombre: string }> = [
   { id: "63", nombre: "Resolución general" },
   { id: "24", nombre: "Decreto" },
-  { id: "1715", nombre: "Resolución" },
-  { id: "5001", nombre: "Resolución conjunta" },
 ];
+/** Resoluciones de ministerios: sólo los días más nuevos, para no bajar toda la sección. */
+const RUBRO_RESOLUCION = { id: "1715", nombre: "Resolución" };
+const DIAS_CON_RESOLUCION = 2;
+
+export function rubrosDe(indiceDia: number): Array<{ id: string; nombre: string }> {
+  return indiceDia < DIAS_CON_RESOLUCION ? [...RUBROS_BASE, RUBRO_RESOLUCION] : RUBROS_BASE;
+}
+
+/** Pausas entre reintentos (ms). El intento 0 no espera. */
+export const BACKOFF_MS = [500, 1500];
+
+export function esperaReintento(intentoFallido: number): number {
+  return BACKOFF_MS[intentoFallido] ?? BACKOFF_MS[BACKOFF_MS.length - 1];
+}
 
 export interface FiscalBoItem {
   /** "RG ARCA 5907/2026", "Decreto 123/2026", "Resolución 400/2026 (Economía)" */
@@ -191,6 +205,19 @@ async function conTimeout<T>(ms: number, fn: (signal: AbortSignal) => Promise<T>
   }
 }
 
+async function conReintentos<T>(fn: () => Promise<T>, intentos = 3): Promise<T> {
+  let last: unknown;
+  for (let i = 0; i < intentos; i++) {
+    if (i > 0) await new Promise((ok) => setTimeout(ok, esperaReintento(i - 1)));
+    try {
+      return await fn();
+    } catch (e) {
+      last = e;
+    }
+  }
+  throw last instanceof Error ? last : new Error(String(last));
+}
+
 async function buscarRubro(f: Fetch, fecha8: string, idRubro: string): Promise<string> {
   const params = {
     numeroPagina: 1,
@@ -206,30 +233,32 @@ async function buscarRubro(f: Fetch, fecha8: string, idRubro: string): Promise<s
     busquedaOriginal: false,
   };
   const body = new URLSearchParams({ params: JSON.stringify(params), array_volver: "[]" });
-  return conTimeout(25_000, async (signal) => {
-    const res = await f(`${BO}/seccion/buscarRubro`, {
-      method: "POST",
-      headers: {
-        "User-Agent": UA,
-        "X-Requested-With": "XMLHttpRequest",
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        Accept: "application/json",
-      },
-      body,
-      signal,
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const j = (await res.json()) as { error?: number; content?: { html?: string } };
-    if (j.error && j.error !== 0) throw new Error(`BO error ${j.error}`);
-    return j.content?.html ?? "";
-  });
+  return conReintentos(() =>
+    conTimeout(8_000, async (signal) => {
+      const res = await f(`${BO}/seccion/buscarRubro`, {
+        method: "POST",
+        headers: {
+          "User-Agent": UA,
+          "X-Requested-With": "XMLHttpRequest",
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          Accept: "application/json",
+        },
+        body,
+        signal,
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const j = (await res.json()) as { error?: number; content?: { html?: string } };
+      if (j.error && j.error !== 0) throw new Error(`BO error ${j.error}`);
+      return j.content?.html ?? "";
+    }),
+  );
 }
 
 /** Título completo del aviso (el listado lo corta en ~150 caracteres). */
 async function tituloCompleto(f: Fetch, url: string): Promise<string | null> {
   try {
-    const html = await conTimeout(20_000, async (signal) => {
+    const html = await conTimeout(8_000, async (signal) => {
       const res = await f(url, { headers: { "User-Agent": UA }, signal, cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.text();
@@ -280,11 +309,17 @@ export function edicionesVentana(hoy: string, dias = VENTANA_DIAS): string[] {
 export interface EscaneoBo {
   items: FiscalBoItem[];
   edicionesOk: string[];
+  /** La edición más nueva de la ventana se leyó completa (todos sus rubros). */
+  ultimaEdicionOk: boolean;
   avisosLeidos: number;
   consultasOk: number;
   consultasTotal: number;
   errores: string[];
 }
+
+/** Tope de la corrida del BO para no chocar con maxDuration (120 s) si el sitio no responde. */
+const PRESUPUESTO_BO_MS = 50_000;
+const PARALELO_BO = 3;
 
 export async function escanearBoletin(
   opts: { hoy?: string; dias?: number; fetchImpl?: Fetch } = {},
@@ -292,16 +327,19 @@ export async function escanearBoletin(
   const f = opts.fetchImpl ?? fetch;
   const hoy = opts.hoy ?? hoyArtIso();
   const fechas = edicionesVentana(hoy, opts.dias ?? VENTANA_DIAS);
-  const tareas = fechas.flatMap((fecha) => RUBROS.map((r) => ({ fecha, r })));
+  const tareas = fechas.flatMap((fecha, idx) => rubrosDe(idx).map((r) => ({ fecha, r, idx })));
+  const esperados = new Map<string, number>();
+  for (const t of tareas) esperados.set(t.fecha, (esperados.get(t.fecha) ?? 0) + 1);
   const errores: string[] = [];
   const okPorFecha = new Map<string, number>();
-  const res = await enLotes(tareas, 4, async ({ fecha, r }) => {
+  const deadline = Date.now() + PRESUPUESTO_BO_MS;
+  const res = await enLotes(tareas, PARALELO_BO, async ({ fecha, r }) => {
+    if (Date.now() > deadline) {
+      errores.push(`BO ${fecha} ${r.nombre}: fuera de presupuesto`);
+      return null;
+    }
     try {
-      // El BO a veces responde {error:1} o corta: un reintento.
-      const html = await buscarRubro(f, fecha.replace(/-/g, ""), r.id).catch(async () => {
-        await new Promise((ok) => setTimeout(ok, 1500));
-        return buscarRubro(f, fecha.replace(/-/g, ""), r.id);
-      });
+      const html = await buscarRubro(f, fecha.replace(/-/g, ""), r.id);
       okPorFecha.set(fecha, (okPorFecha.get(fecha) ?? 0) + 1);
       return parseListadoBo(html, r.nombre, fecha);
     } catch (e) {
@@ -321,9 +359,11 @@ export async function escanearBoletin(
     if (temas) candidatos.push({ ...it, titulo, temas });
   }
   candidatos.sort((a, b) => b.boFecha.localeCompare(a.boFecha) || a.norma.localeCompare(b.norma));
+  const ultima = fechas[0] ?? null;
   return {
     items: candidatos,
-    edicionesOk: fechas.filter((d) => (okPorFecha.get(d) ?? 0) === RUBROS.length),
+    edicionesOk: fechas.filter((d) => (okPorFecha.get(d) ?? 0) === (esperados.get(d) ?? 0) && (esperados.get(d) ?? 0) > 0),
+    ultimaEdicionOk: ultima != null && (okPorFecha.get(ultima) ?? 0) === (esperados.get(ultima) ?? -1),
     avisosLeidos: leidos.length,
     consultasOk: tareas.length - errores.length,
     consultasTotal: tareas.length,
@@ -402,7 +442,8 @@ export async function refreshFiscal(
     ),
   ]);
   const errores = [...bo.errores, ...(sisa.err ? [sisa.err] : [])];
-  const boOk = bo.consultasOk > 0;
+  // La corrida está bien si la edición más nueva se leyó entera. Un día viejo flojo no la tira abajo.
+  const boOk = bo.ultimaEdicionOk;
 
   // Merge: ítems nuevos + anteriores de ediciones no revisadas OK, dentro de RETENER_DIAS.
   const desde = isoMenos(hoy, RETENER_DIAS);
@@ -430,7 +471,7 @@ export async function refreshFiscal(
     sisa: sisaOut,
     ultimaCorrida: {
       at: now.toISOString(),
-      ok: boOk && errores.length === 0,
+      ok: boOk,
       ms: Date.now() - t0,
       errores: errores.slice(0, 10).map((e) => e.slice(0, 200)),
       nuevos,

@@ -1,3 +1,4 @@
+import { a3500Vigente, fetchA3500, FUENTE_A3500, type CotizacionFx } from "@/lib/bcra";
 import {
   dmyToIso,
   frescura,
@@ -10,7 +11,6 @@ import {
   mergeSerie,
   previoEnSerie,
   readSerie,
-  valorEnSerie,
   type SerieFile,
 } from "@/lib/serie-blob";
 
@@ -41,7 +41,7 @@ export interface CotizacionGrano {
   abs: number | null;
   pct: number | null; // decimal
   estimativo?: boolean;
-  /** Conversión a US$ (sólo plazas en ARS) con BNA divisa comprador de la fecha del dato */
+  /** Conversión a US$ (sólo plazas en ARS) con BCRA A3500 de la fecha del dato */
   usd?: number | null;
   tc?: { valor: number; fecha: string; fuente: string } | null;
   /** Hora de publicación de la fuente (hh:mm ART), si la informa */
@@ -74,10 +74,16 @@ export interface PlazaSnapshot {
 export interface PlazasSnapshot {
   cac: PlazaSnapshot;
   afa: PlazaSnapshot;
+  /** Tipo de cambio usado para pasar pizarras a US$/t. */
+  fxA3500: CotizacionFx | null;
+  fxA3500Prev: { valor: number; fecha: string } | null;
+  /** BNA billete minorista venta. No se usa para convertir granos. */
+  fxBilleteVenta: CotizacionFx | null;
+  /** BNA divisa comprador. Informativo: no es el A3500 y no convierte pizarras. */
   fxBnaDivisa: { valor: number; fecha: string; fuente: string } | null;
-  /** Cierre BNA divisa comprador anterior (serie Blob o TC de la CAC), para la variación */
+  /** Cierre BNA divisa comprador anterior (serie Blob), sólo para mostrar la variación de ese tipo. */
   fxBnaDivisaPrev: { valor: number; fecha: string } | null;
-  persistencia: { written: boolean; error: string | null; updatedAt: string | null };
+  persistencia: { written: boolean; error: string | null; updatedAt: string | null; reason: string | null };
   fetchedAt: string;
 }
 
@@ -97,6 +103,8 @@ const GRANOS_AFA: GranoPizarra[] = ["soja", "maiz", "trigo", "girasol", "sorgo"]
 const AFA_SOLO_SAN_MARTIN: GranoPizarra[] = ["soja", "maiz", "trigo"];
 
 const BNA_URL = "https://www.bna.com.ar/Personas";
+export const FUENTE_BILLETE = "BNA billete venta (minorista)";
+export const FUENTE_DIVISA_COMPRA = "BNA divisa comprador";
 
 type FetchOpts = { fresh?: boolean; revalidate?: number };
 
@@ -162,24 +170,44 @@ function emptyPlaza(
   return { id, nombre, lugar, fuente, url, fecha: null, frescura: "vencido", granos: [], error };
 }
 
-/* ---------------------------- BNA divisa ---------------------------- */
+/* ---------------------------- BNA ---------------------------- */
 
-async function fetchBnaDivisa(o: FetchOpts): Promise<{ valor: number; fecha: string; fuente: string } | null> {
+export interface BnaCotizaciones {
+  /** Venta de billete minorista (coma decimal en la página). */
+  billeteVenta: CotizacionFx | null;
+  /** Compra de divisa (punto decimal). No es el A3500. */
+  divisaCompra: CotizacionFx | null;
+}
+
+/** Separa billete (coma) y divisa (punto). El primer bloque de la página es billetes. */
+export function parseBna(txt: string): BnaCotizaciones {
+  const billete = txt.match(
+    /(\d{1,2}\/\d{1,2}\/\d{4})\s+Compra\s+Venta\s+Dolar U\.S\.A\s+[0-9.]+,[0-9]{2}\s+([0-9.]+,[0-9]{2})/,
+  );
+  const divisa = txt.match(
+    /(\d{1,2}\/\d{1,2}\/\d{4})\s+Compra\s+Venta\s+Dolar U\.S\.A\s+([0-9]+\.[0-9]{2,4})\s+[0-9]+\.[0-9]{2,4}/,
+  );
+  const fechaB = dmyToIso(billete?.[1]);
+  const venta = billete ? Number(billete[2].replace(/\./g, "").replace(",", ".")) : NaN;
+  const fechaD = dmyToIso(divisa?.[1]);
+  const compra = divisa ? Number(divisa[2]) : NaN;
+  return {
+    billeteVenta:
+      fechaB && Number.isFinite(venta) && venta > 0
+        ? { valor: venta, fecha: fechaB, fuente: FUENTE_BILLETE }
+        : null,
+    divisaCompra:
+      fechaD && Number.isFinite(compra) && compra > 0
+        ? { valor: compra, fecha: fechaD, fuente: FUENTE_DIVISA_COMPRA }
+        : null,
+  };
+}
+
+async function fetchBna(o: FetchOpts): Promise<BnaCotizaciones> {
   try {
-    const txt = stripHtml(await fetchText(BNA_URL, o));
-    // Tabla "Cotización Divisas": números con punto decimal y 4 decimales (billetes usa coma).
-    const re = /(\d{1,2}\/\d{1,2}\/\d{4})\s+Compra\s+Venta\s+Dolar U\.S\.A\s+([0-9]+\.[0-9]{2,4})\s+([0-9]+\.[0-9]{2,4})/g;
-    let m: RegExpExecArray | null;
-    while ((m = re.exec(txt)) !== null) {
-      const fecha = dmyToIso(m[1]);
-      const valor = Number(m[2]);
-      if (fecha && Number.isFinite(valor) && valor > 0) {
-        return { valor, fecha, fuente: "BNA divisa comprador" };
-      }
-    }
-    return null;
+    return parseBna(stripHtml(await fetchText(BNA_URL, o)));
   } catch {
-    return null;
+    return { billeteVenta: null, divisaCompra: null };
   }
 }
 
@@ -295,15 +323,11 @@ async function getCac(
         : previoEnSerie(serie, "cac.ars", g, fecha) ;
       let usd: number | null = null;
       let tc: CotizacionGrano["tc"] = null;
-      if (board && board.fecha === fecha && b?.usd != null && board.tc) {
-        usd = b.usd;
-        tc = { ...board.tc, fuente: "BNA divisa comprador (CAC)" };
-      } else {
-        const t = fx(fecha);
-        if (t) {
-          usd = Math.round((ars / t.valor) * 100) / 100;
-          tc = t;
-        }
+      // Siempre A3500. El US$ que imprime la CAC usa su propia divisa comprador y no se muestra.
+      const t = fx(fecha);
+      if (t) {
+        usd = Math.round((ars / t.valor) * 100) / 100;
+        tc = t;
       }
       granos.push({ grano: g, valor: ars, unidad: "ARS/t", fecha, prev, ...varDe(ars, prev), estimativo, usd, tc });
     });
@@ -412,28 +436,51 @@ async function getAfa(
 
 /* ------------------------------ Público ----------------------------- */
 
+function isoDiasAtras(iso: string, n: number): string {
+  return isoDaysAgo(iso, n);
+}
+
+function puntosA3500(file: SerieFile): CotizacionFx[] {
+  const g = file.series["fx.a3500"]?.usd ?? {};
+  return Object.entries(g)
+    .filter(([, v]) => Number.isFinite(v) && v > 0)
+    .map(([fecha, valor]) => ({ fecha, valor, fuente: FUENTE_A3500 }))
+    .sort((a, b) => a.fecha.localeCompare(b.fecha));
+}
+
 export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {}): Promise<PlazasSnapshot> {
   const hoy = hoyArtIso();
   const o: FetchOpts = { fresh: opts.fresh };
-  // Toda la red en paralelo (BNA, serie, CAC, AFA); el armado sigue en el mismo orden
-  // porque AFA usa el TC de la CAC como respaldo. Mismo resultado, sin cascada.
+  // Toda la red en paralelo. La conversión a US$ usa sólo el A3500 (no la divisa del BNA ni la de la CAC).
   const cacRaw = fetchCacRaw(hoy, o);
   const afaRaw = fetchAfaRaw(hoy, o);
-  const [serie, bna] = await Promise.all([readSerie().catch(() => ({ updatedAt: null, series: {} })), fetchBnaDivisa(o)]);
+  const [serie, bna, a3500Live] = await Promise.all([
+    readSerie().catch(() => ({ updatedAt: null, series: {} }) as SerieFile),
+    fetchBna(o),
+    fetchA3500({ desde: isoDiasAtras(hoy, 21), hasta: hoy }).catch(() => [] as CotizacionFx[]),
+  ]);
 
-  const fx = (fecha: string) => {
-    if (bna && bna.fecha === fecha) return bna;
-    const v = valorEnSerie(serie, "fx.bna", "usd", fecha);
-    return v != null ? { valor: v, fecha, fuente: "BNA divisa comprador" } : null;
-  };
+  const serieA3500 = puntosA3500(serie);
+  const a3500 = [...serieA3500];
+  for (const c of a3500Live) {
+    const i = a3500.findIndex((x) => x.fecha === c.fecha);
+    if (i >= 0) a3500[i] = c;
+    else a3500.push(c);
+  }
+  a3500.sort((x, y) => x.fecha.localeCompare(y.fecha));
+  const fxA3500 = a3500.length ? a3500[a3500.length - 1] : null;
+
+  const fx = (fecha: string) => a3500Vigente(a3500, fecha);
 
   const cac = await getCac(hoy, o, serie, fx, cacRaw);
-  // TC de la CAC (BNA divisa comprador de su fecha) también sirve para AFA de esa fecha.
-  const cacTc = cac.granos.find((g) => g.tc?.fuente.includes("CAC"))?.tc ?? null;
-  const fx2 = (fecha: string) => fx(fecha) ?? (cacTc && cacTc.fecha === fecha ? cacTc : null);
-  const afa = await getAfa(hoy, o, serie, fx2, afaRaw);
+  const afa = await getAfa(hoy, o, serie, fx, afaRaw);
 
-  let persistencia: PlazasSnapshot["persistencia"] = { written: false, error: null, updatedAt: serie.updatedAt };
+  let persistencia: PlazasSnapshot["persistencia"] = {
+    written: false,
+    error: null,
+    updatedAt: serie.updatedAt,
+    reason: "omitido",
+  };
   if (opts.persist !== false) {
     const puntos: Array<{ serie: string; grano: string; fecha: string; valor: number }> = [];
     for (const [p, serieId] of [[cac, "cac.ars"], [afa, "afa.ars"]] as const) {
@@ -441,30 +488,48 @@ export async function getPlazas(opts: { fresh?: boolean; persist?: boolean } = {
         const gk = g.grano;
         puntos.push({ serie: serieId, grano: gk, fecha: g.fecha, valor: g.valor });
         if (g.prev) puntos.push({ serie: serieId, grano: gk, fecha: g.prev.fecha, valor: g.prev.valor });
-        if (p.id === "cac" && g.usd != null && g.tc?.fuente.includes("CAC")) {
-          puntos.push({ serie: "cac.usd", grano: g.grano, fecha: g.fecha, valor: g.usd });
-        }
+        if (g.usd != null) puntos.push({ serie: p.id === "cac" ? "cac.usd" : "afa.usd", grano: g.grano, fecha: g.fecha, valor: g.usd });
       }
     }
-    if (bna) puntos.push({ serie: "fx.bna", grano: "usd", fecha: bna.fecha, valor: bna.valor });
-    if (cacTc) puntos.push({ serie: "fx.bna", grano: "usd", fecha: cacTc.fecha, valor: cacTc.valor });
+    for (const c of a3500Live) puntos.push({ serie: "fx.a3500", grano: "usd", fecha: c.fecha, valor: c.valor });
+    // La serie fx.bna sigue siendo divisa comprador (histórico). No se mezcla con el billete ni con el A3500.
+    if (bna.divisaCompra) {
+      puntos.push({ serie: "fx.bna", grano: "usd", fecha: bna.divisaCompra.fecha, valor: bna.divisaCompra.valor });
+    }
     try {
       const r = await mergeSerie(puntos);
-      persistencia = { written: r.written, error: r.error, updatedAt: r.written ? new Date().toISOString() : serie.updatedAt };
+      persistencia = {
+        written: r.written,
+        error: r.error,
+        updatedAt: r.written ? new Date().toISOString() : serie.updatedAt,
+        reason: r.reason,
+      };
     } catch (err) {
-      persistencia = { written: false, error: err instanceof Error ? err.message : String(err), updatedAt: serie.updatedAt };
+      persistencia = {
+        written: false,
+        error: err instanceof Error ? err.message : String(err),
+        updatedAt: serie.updatedAt,
+        reason: "error",
+      };
     }
   }
 
-  const fxPrev = bna
-    ? (() => {
-        const cands = [previoEnSerie(serie, "fx.bna", "usd", bna.fecha), cacTc && cacTc.fecha < bna.fecha ? { valor: cacTc.valor, fecha: cacTc.fecha } : null]
-          .filter((x): x is { valor: number; fecha: string } => Boolean(x))
-          .sort((a, b) => b.fecha.localeCompare(a.fecha));
-        return cands[0] ?? null;
-      })()
+  const divisa = bna.divisaCompra;
+  const fxPrev = divisa ? previoEnSerie(serie, "fx.bna", "usd", divisa.fecha) : null;
+  const a3500Prev = fxA3500
+    ? a3500.filter((c) => c.fecha < fxA3500.fecha).pop() ?? null
     : null;
-  return { cac, afa, fxBnaDivisa: bna, fxBnaDivisaPrev: fxPrev, persistencia, fetchedAt: new Date().toISOString() };
+  return {
+    cac,
+    afa,
+    fxA3500,
+    fxA3500Prev: a3500Prev ? { valor: a3500Prev.valor, fecha: a3500Prev.fecha } : null,
+    fxBilleteVenta: bna.billeteVenta,
+    fxBnaDivisa: divisa,
+    fxBnaDivisaPrev: fxPrev,
+    persistencia,
+    fetchedAt: new Date().toISOString(),
+  };
 }
 
 /* ------------------------------ Formato ----------------------------- */

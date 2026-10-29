@@ -1,9 +1,11 @@
+import { aUsdTon, fetchCierresCbot, type CierreCbot, type GranoCbot } from "@/lib/cbot";
 import {
   climaFechaLabel,
   climaFuenteLabel,
   climaResumen,
   getClima,
 } from "@/lib/clima";
+import { getFobFas, type FobFasSnapshot, type GranoOficial } from "@/lib/fob-fas";
 import { frescura, hoyArtIso, isoToDm, isoToDmy, REGLAS } from "@/lib/habiles";
 import { getMatba, type MatbaSnapshot } from "@/lib/matba";
 import { getNoticias } from "@/lib/noticias";
@@ -23,7 +25,12 @@ import type {
 } from "@/lib/types";
 
 const GRANOS_URL = "https://lark-lake-solar-craft.grok.me/api/granos";
-const GRANOS_TIMEOUT_MS = 10_000;
+/**
+ * El feed externo (USDA y respaldo) desde Vercel no responde antes de ~10 s y el cron
+ * cortaba ahí (`AbortSignal` de 10 s → corridas de ~10,5 s). 20 s entra en maxDuration=60
+ * y no se reintenta un abort: un segundo intento sólo duplicaba la espera.
+ */
+const GRANOS_TIMEOUT_MS = 20_000;
 const WTI_TIMEOUT_MS = 6_000;
 
 const UA =
@@ -162,10 +169,6 @@ function filled(
   };
 }
 
-function pickCbot(list: GranosCbot[] | undefined, id: string): GranosCbot | null {
-  return list?.find((c) => c.id === id) ?? null;
-}
-
 /** Posiciones Matba del tablero (contrato vivo más cercano de cada mes; ver src/lib/matba.ts). */
 const MATBA_SLOTS = [
   { id: "matba-soja-may", producto: "Soja May", grano: "soja", mes: "MAY" },
@@ -223,69 +226,18 @@ function applyMatba(snap: MercadoSnapshot, m: MatbaSnapshot): MercadoSnapshot {
 
 function mapGranos(data: GranosPayload): MercadoSnapshot {
   const asOf = data.asOf ?? null;
-  const hora = horaArg(asOf);
   const rows: MercadoRow[] = [];
   const sourcesOk =
     data.sources?.filter((s) => s.ok).map((s) => s.label) ?? [];
 
-  // Chicago / CBOT
-  const cbotMap: Array<{
-    id: string;
-    ticker: string;
-    producto: string;
-  }> = [
-    { id: "chicago-soja", ticker: "ZS=F", producto: "Soja" },
-    { id: "chicago-maiz", ticker: "ZC=F", producto: "Maíz" },
-    { id: "chicago-trigo", ticker: "ZW=F", producto: "Trigo" },
-  ];
-  for (const slot of cbotMap) {
-    const c = pickCbot(data.cbot, slot.ticker);
-    if (c && Number.isFinite(c.value)) {
-      const pct = fmtPct(c.change);
-      rows.push(
-        filled({
-          id: slot.id,
-          mercado: "Chicago nocturno",
-          producto: slot.producto,
-          valor: fmtNum(c.value, 1),
-          unidad: "US$/t",
-          fuente: "Yahoo CBOT",
-          hora,
-          varPct: c.change,
-          extra: [c.hint, pct].filter(Boolean).join(" · ") || null,
-        }),
-      );
-    } else {
-      rows.push(emptyRow(slot.id, "Chicago nocturno", slot.producto));
-    }
-  }
-
-  // Cierres CBOT (same source — mirror with clear label)
-  for (const slot of cbotMap) {
-    const c = pickCbot(data.cbot, slot.ticker);
-    const cid =
-      slot.producto === "Soja"
-        ? "cbot-soja"
-        : slot.producto === "Maíz"
-          ? "cbot-maiz"
-          : "cbot-trigo";
-    if (c && Number.isFinite(c.value)) {
-      rows.push(
-        filled({
-          id: cid,
-          mercado: "Cierres CBOT",
-          producto: slot.producto,
-          valor: fmtNum(c.value, 1),
-          unidad: "US$/t",
-          fuente: "Yahoo CBOT",
-          hora,
-          varPct: c.change,
-          extra: c.hint ?? null,
-        }),
-      );
-    } else {
-      rows.push(emptyRow(cid, "Cierres CBOT", slot.producto));
-    }
+  // Chicago: una sola fila por grano. El precio y la fecha de cierre los pone applyCbot
+  // (velas diarias de Yahoo). No se duplica como cbot-* ni se usa la cotización sin fecha del feed.
+  for (const slot of [
+    ["chicago-soja", "Soja"],
+    ["chicago-maiz", "Maíz"],
+    ["chicago-trigo", "Trigo"],
+  ] as const) {
+    rows.push(emptyRow(slot[0], "Chicago · cierre CBOT", slot[1]));
   }
 
   // Matba futuros: NO se toman del feed externo (traía números clavados, p. ej.
@@ -300,22 +252,10 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
 
   // Pizarra MAGYP (FAS) eliminada: estaba clavada y duplicaba CAC Rosario.
 
-  // BNA FX
-  if (data.fxBna != null && Number.isFinite(data.fxBna)) {
-    rows.push(
-      filled({
-        id: "fx-bna",
-        mercado: "FX",
-        producto: "BNA",
-        valor: fmtNum(data.fxBna, 0),
-        unidad: "ARS/USD",
-        fuente: "BNA",
-        hora,
-      }),
-    );
-  } else {
-    rows.push(emptyRow("fx-bna", "FX", "BNA"));
-  }
+  // Tipos de cambio: los completa applyFx con la fuente y el nombre de cada uno.
+  // El número suelto del feed (billete venta) no se muestra acá sin etiqueta.
+  rows.push(emptyRow("fx-a3500", "FX", "BCRA A3500"));
+  rows.push(emptyRow("fx-bna", "FX", "BNA billete venta"));
 
   // USDA / WASDE
   const wasde = data.usda?.wasde;
@@ -380,7 +320,7 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
           : "Sin datos del feed granos",
     fetchedAt: new Date().toISOString(),
     asOf,
-    fxBna: data.fxBna ?? null,
+    fxBna: null,
     wasdeHeadline: wasde?.headline ?? null,
     progressHeadline: progress?.headline ?? null,
     sourcesOk,
@@ -391,14 +331,12 @@ function mapGranos(data: GranosPayload): MercadoSnapshot {
 
 function stubSnapshot(note: string): MercadoSnapshot {
   const slots = [
-    ["chicago-soja", "Chicago nocturno", "Soja"],
-    ["chicago-maiz", "Chicago nocturno", "Maíz"],
-    ["chicago-trigo", "Chicago nocturno", "Trigo"],
-    ["cbot-soja", "Cierres CBOT", "Soja"],
-    ["cbot-maiz", "Cierres CBOT", "Maíz"],
-    ["cbot-trigo", "Cierres CBOT", "Trigo"],
+    ["chicago-soja", "Chicago · cierre CBOT", "Soja"],
+    ["chicago-maiz", "Chicago · cierre CBOT", "Maíz"],
+    ["chicago-trigo", "Chicago · cierre CBOT", "Trigo"],
     ...MATBA_SLOTS.map((m) => [m.id, "A3/Matba futuros", m.producto] as const),
-    ["fx-bna", "FX", "BNA"],
+    ["fx-a3500", "FX", "BCRA A3500"],
+    ["fx-bna", "FX", "BNA billete venta"],
     ["usda", "USDA/WASDE", "Reporte"],
     ["crop-progress", "Crop Progress", "Condición"],
     ["noticias", "Noticias", "Agro"],
@@ -689,6 +627,155 @@ function applyFrescura(snap: MercadoSnapshot): MercadoSnapshot {
   return { ...snap, rows };
 }
 
+const CHICAGO: Array<{ id: string; grano: GranoCbot; producto: string }> = [
+  { id: "chicago-soja", grano: "soja", producto: "Soja" },
+  { id: "chicago-maiz", grano: "maiz", producto: "Maíz" },
+  { id: "chicago-trigo", grano: "trigo", producto: "Trigo" },
+];
+
+/** Una fila por grano, con la fecha de cierre. No existe la copia cbot-*. */
+function applyCbot(
+  snap: MercadoSnapshot,
+  cierres: Partial<Record<GranoCbot, CierreCbot | null>> | null,
+): MercadoSnapshot {
+  const rows = snap.rows
+    .filter((r) => !r.id.startsWith("cbot-"))
+    .map((r) => {
+      const slot = CHICAGO.find((s) => s.id === r.id);
+      if (!slot) return r;
+      const c = cierres?.[slot.grano];
+      if (!c) return { ...emptyRow(slot.id, "Chicago · cierre CBOT", slot.producto), extra: "sin cierre" };
+      const usd = aUsdTon(slot.grano, c.centavos);
+      const prev = c.prevCentavos != null ? aUsdTon(slot.grano, c.prevCentavos) : null;
+      const varPct = prev && prev > 0 ? usd / prev - 1 : null;
+      const est = frescura(c.fecha, REGLAS.cbot);
+      const base: MercadoRow = {
+        id: slot.id,
+        mercado: "Chicago · cierre CBOT",
+        producto: slot.producto,
+        valor: fmtNum(usd, 1),
+        unidad: "US$/t",
+        fuente: "Yahoo Finance · cierre CBOT",
+        hora: isoToDmy(c.fecha),
+        etiqueta: "HECHO",
+        varPct,
+        senal: senalFromChange(varPct),
+        extra: [
+          `${fmtNum(c.centavos, 2)} ¢/bu`,
+          fmtPct(varPct),
+          c.enCursoDescartada ? "sesión de hoy todavía abierta" : null,
+        ]
+          .filter(Boolean)
+          .join(" · "),
+        fecha: c.fecha,
+        frescura: est,
+        prevFecha: c.prevFecha,
+      };
+      if (est === "vencido") {
+        return {
+          ...base,
+          valor: null,
+          unidad: null,
+          senal: null,
+          varPct: null,
+          etiqueta: "VACÍO" as const,
+          extra: `sin dato fresco · último cierre ${isoToDm(c.fecha)}`,
+        };
+      }
+      return base;
+    });
+  return { ...snap, rows };
+}
+
+function filaFx(
+  id: string,
+  producto: string,
+  fuente: string,
+  valor: number | null | undefined,
+  fecha: string | null | undefined,
+  digits: number,
+): MercadoRow {
+  if (valor == null || !Number.isFinite(valor) || !fecha) {
+    return { ...emptyRow(id, "FX", producto), fuente, extra: "sin dato" };
+  }
+  return {
+    ...filled({
+      id,
+      mercado: "FX",
+      producto,
+      valor: fmtNum(valor, digits),
+      unidad: "ARS/USD",
+      fuente,
+      hora: isoToDmy(fecha),
+      fecha,
+    }),
+    frescura: frescura(fecha),
+  };
+}
+
+function applyFx(snap: MercadoSnapshot, plazas: PlazasSnapshot | null): MercadoSnapshot {
+  const a = plazas?.fxA3500 ?? null;
+  const b = plazas?.fxBilleteVenta ?? null;
+  const rows = snap.rows.map((r) => {
+    if (r.id === "fx-a3500") return filaFx(r.id, "BCRA A3500", a?.fuente ?? "BCRA A3500 · tipo de cambio de referencia", a?.valor, a?.fecha, 2);
+    if (r.id === "fx-bna") return filaFx(r.id, "BNA billete venta", b?.fuente ?? "BNA billete venta (minorista)", b?.valor, b?.fecha, 0);
+    return r;
+  });
+  return { ...snap, rows };
+}
+
+const FOB_LABEL: Record<GranoOficial, string> = {
+  soja: "Soja",
+  maiz: "Maíz",
+  trigo: "Trigo",
+  girasol: "Girasol",
+  sorgo: "Sorgo",
+};
+
+/** Filas fob-* / fas-* con la fecha real. >3 días queda marcado y no se presenta como vigente. */
+function applyFobFas(snap: MercadoSnapshot, fob: FobFasSnapshot | null): MercadoSnapshot {
+  const rest = snap.rows.filter((r) => !/^(fob|fas)-/.test(r.id));
+  if (!fob || fob.items.length === 0 || !fob.fecha) return { ...snap, rows: rest, fobFas: fob };
+  const viejo = fob.antiguedad === "desactualizado";
+  const extraRows: MercadoRow[] = [];
+  for (const it of fob.items) {
+    const marca = viejo ? `desactualizado · dato al ${isoToDm(fob.fecha)}` : null;
+    if (it.fobUsd != null) {
+      extraRows.push({
+        id: `fob-${it.grano}`,
+        mercado: "FOB oficial",
+        producto: FOB_LABEL[it.grano],
+        valor: fmtNum(it.fobUsd, 0),
+        unidad: "US$/t",
+        fuente: fob.fuente,
+        hora: isoToDmy(fob.fecha),
+        etiqueta: viejo ? "ÚLTIMO_GUARDADO" : "HECHO",
+        fecha: fob.fecha,
+        frescura: viejo ? "viejo" : "fresco",
+        url: fob.url,
+        extra: marca,
+      });
+    }
+    if (it.fasArs != null) {
+      extraRows.push({
+        id: `fas-${it.grano}`,
+        mercado: "FAS teórico",
+        producto: FOB_LABEL[it.grano],
+        valor: Math.round(it.fasArs).toLocaleString("es-AR"),
+        unidad: "ARS/t",
+        fuente: fob.fuente,
+        hora: isoToDmy(fob.fecha),
+        etiqueta: viejo ? "ÚLTIMO_GUARDADO" : "HECHO",
+        fecha: fob.fecha,
+        frescura: viejo ? "viejo" : "fresco",
+        url: fob.url,
+        extra: marca ?? (it.grano === "soja" || it.grano === "girasol" ? "FAS teórico (capacidad de pago)" : null),
+      });
+    }
+  }
+  return { ...snap, rows: [...extraRows, ...rest], fobFas: fob };
+}
+
 export async function getMercado(opts: { fresh?: boolean } = {}): Promise<MercadoSnapshot> {
   // Sólo el refresh "fresh" (cron) escribe la serie en Blob; las visitas sólo leen.
   const persist = opts.fresh === true;
@@ -697,7 +784,10 @@ export async function getMercado(opts: { fresh?: boolean } = {}): Promise<Mercad
   const wtiPromise = fetchWti();
   const plazasPromise = getPlazas({ fresh: opts.fresh, persist }).catch(() => null);
   const matbaPromise = getMatba({ fresh: opts.fresh, persist });
+  const cbotPromise = fetchCierresCbot();
+  const fobPromise = getFobFas();
   let base: MercadoSnapshot;
+  let granosOk = false;
   try {
     const res = await fetch(GRANOS_URL, {
       headers: {
@@ -707,30 +797,41 @@ export async function getMercado(opts: { fresh?: boolean } = {}): Promise<Mercad
       cache: "no-store",
       signal: AbortSignal.timeout(GRANOS_TIMEOUT_MS),
     });
-    base = res.ok
-      ? mapGranos((await res.json()) as GranosPayload)
-      : stubSnapshot(
-          `Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`,
-        );
+    if (res.ok) {
+      base = mapGranos((await res.json()) as GranosPayload);
+      granosOk = true;
+    } else {
+      base = stubSnapshot(`Feed granos HTTP ${res.status}. Celdas vacías — no se inventan precios.`);
+    }
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    base = stubSnapshot(
-      `Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`,
-    );
+    base = stubSnapshot(`Error feed granos: ${msg}. Celdas vacías — no se inventan precios.`);
   }
-  const [clima, noticias, wti, plazas, matba] = await Promise.all([
+  const [clima, noticias, wti, plazas, matba, cierres, fob] = await Promise.all([
     climaPromise,
     noticiasPromise,
     wtiPromise,
     plazasPromise,
     matbaPromise,
+    cbotPromise,
+    fobPromise,
   ]);
-  return applyFrescura(
-    applyMatba(
-      applyPlazas(applyWti(applyNoticias(applyClima(base, clima), noticias), wti), plazas),
-      matba,
+  const snap = applyFrescura(
+    applyFobFas(
+      applyFx(
+        applyCbot(
+          applyMatba(
+            applyPlazas(applyWti(applyNoticias(applyClima(base, clima), noticias), wti), plazas),
+            matba,
+          ),
+          cierres,
+        ),
+        plazas,
+      ),
+      fob,
     ),
   );
+  return { ...snap, sourcesOk: [...(snap.sourcesOk ?? []), granosOk ? "feed granos" : "feed granos (sin respuesta)"] };
 }
 
 export function rowById(rows: MercadoRow[], id: string): MercadoRow | undefined {

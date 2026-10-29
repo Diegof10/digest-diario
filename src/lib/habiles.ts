@@ -82,7 +82,37 @@ export const REGLAS: Record<string, ReglaPublicacion> = {
   afa: REGLA_DEFAULT,
   // A3 Matba Rofex: el ajuste de la rueda D se publica D después del cierre (17 h) → esperado desde las 19:00.
   matba: { offsetHabiles: 0, hora: "19:00" },
+  // CBOT: el cierre de la sesión D (liquidación ~13:20 CT = 15:20 ART) se espera desde las 15:30 ART.
+  cbot: { offsetHabiles: 0, hora: "15:30" },
 };
+
+/** FAS / FOB oficial: más de 3 días corridos → desactualizado. */
+export const UMBRAL_FAS_DIAS = 3;
+/** Boletín climático de base (SMN / INMET / USDM): más de 7 días corridos → desactualizado. */
+export const UMBRAL_CLIMA_BASE_DIAS = 7;
+
+export type MarcaAntiguedad = "ok" | "desactualizado";
+
+/** Días corridos de `fechaIso` a `hoyIso` (negativo si la fecha es futura). */
+export function diasCorridos(fechaIso: string, hoyIso = hoyArtIso()): number | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaIso) || !/^\d{4}-\d{2}-\d{2}$/.test(hoyIso)) return null;
+  return Math.round((toUtcDate(hoyIso).getTime() - toUtcDate(fechaIso).getTime()) / 86_400_000);
+}
+
+/**
+ * Frescura por antigüedad del dato, no por "la fuente respondió".
+ * Sin fecha, fecha inválida o más de `umbralDias` corridos → desactualizado.
+ */
+export function marcaAntiguedad(
+  fechaIso: string | null | undefined,
+  umbralDias: number,
+  hoyIso = hoyArtIso(),
+): MarcaAntiguedad {
+  if (!fechaIso) return "desactualizado";
+  const dias = diasCorridos(fechaIso, hoyIso);
+  if (dias == null || dias < 0 || dias > umbralDias) return "desactualizado";
+  return "ok";
+}
 
 function ahoraArt(now = new Date()): { fecha: string; hhmm: string } {
   const hhmm = new Intl.DateTimeFormat("en-GB", {
