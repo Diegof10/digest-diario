@@ -1,7 +1,7 @@
-fecha: 2026-10-29 ART
+fecha: 2026-10-30 ART
 titulo_ui: Resumen matutino
 
-CBOT (29/10, 6:53 ART): soja 452,4 US$/t (-0,5%) · maíz 177,7 (-0,1%) · trigo 220,3 (+0,1%)
-FX: oficial 1.560 · blue 1.565 · MEP 1.573,1 · CCL 1.665,4 · riesgo país 763
-Mercados: S&P +0,3% · Nasdaq +0,3% · Dow +0,2% · WTI 101,7 (-1,1%) · Brent 110,6 (-1,0%) · UST 10a 5,05%
-Nota: Se tensa un poco el frente local: riesgo país sube a 763 (venía de 753) y CCL a 1.665,4 (brecha ~6,8%); la tasa a 10 años de EE.UU. pasa el 5%.
+CBOT (30/10, 6:48 ART): soja 453,2 US$/t (-0,1%) · maíz 176,8 (-0,5%) · trigo 221,8 (0,0%)
+FX: oficial 1.560 · blue 1.565 · MEP 1.568,8 · CCL 1.650,3 · riesgo país 741
+Mercados: S&P -0,3% · Nasdaq -1,4% · Dow -0,3% · WTI 103,5 (+1,5%) · Brent 112,6 (+1,6%) · UST 10a 4,99%
+Nota: Afloja el frente local: riesgo país baja a 741 (venía de 763) y el CCL cede a 1.650,3 (brecha ~5,8%); afuera, el petróleo sube y la tasa a 10 años de EE.UU. vuelve debajo del 5%.
