@@ -36,9 +36,9 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "US",
     countryLabel: "Estados Unidos",
     bullet:
-      "Mapa USDM 20/10 (publicado 22/10): lluvias de 3 a 5 pulgadas, con picos de 6 a 8 (13–15/10), alivian la sequía en Texas y Oklahoma, con mejoras también en Kansas, Nebraska, Colorado y el oeste; la sequía se intensifica del bajo Mississippi al oeste del valle del Ohio (Arkansas, Luisiana, Mississippi, Tennessee, sur de Missouri), con sequía excepcional (D4) en el sur de Arkansas y norte de Luisiana; Medio Oeste norte sin cambios. CPC SDO (15/10, hasta enero): mejora en Este, Sudeste, bajo Mississippi y Planicies del sur; sin cambios en Planicies del norte y alto Mississippi.",
+      "Mapa USDM 27/10 (publicado 29/10): semana seca y cálida en la mitad este; se intensifica la sequía en el bajo Mississippi, Tennessee y el sur del Medio Oeste, con D3–D4 en gran parte de Arkansas, Luisiana, oeste de Tennessee y centro-sur de Missouri y deterioro en el este de Missouri, centro-este de Illinois y centro de Indiana; la franja central (Iowa, norte de Missouri, norte del valle del Ohio) sigue mayormente sin sequía; lluvias mejoran Colorado, oeste de Kansas, Nebraska y el oeste de Texas/Oklahoma. CPC SDO (15/10, hasta enero): mejora en Este, Sudeste, bajo Mississippi y Planicies del sur; sin cambios en Planicies del norte y alto Mississippi.",
     fuente: "US Drought Monitor · NOAA CPC Seasonal Drought Outlook",
-    fecha: "20–22/10/2026",
+    fecha: "27–29/10/2026",
     url: "https://droughtmonitor.unl.edu/Summary.aspx",
     secondaryUrl:
       "https://www.cpc.ncep.noaa.gov/products/expert_assessment/sdo_summary.php",
@@ -49,14 +49,14 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
 const CURADO_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-09-30",
   BR: "2026-10-13",
-  /** Publicación del mapa (el mapa en sí es del 20/10; la antigüedad mira esa fecha). */
-  US: "2026-10-22",
+  /** Publicación del mapa (el mapa en sí es del 27/10; la antigüedad mira esa fecha). */
+  US: "2026-10-29",
 };
 /** Fecha del dato de base que se muestra (no la de la corrida del cron). USDM = fecha del mapa. */
 const BASE_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-09-30",
   BR: "2026-10-13",
-  US: "2026-10-20",
+  US: "2026-10-27",
 };
 /** Mes (portugués) del boletín INMET curado arriba */
 const INMET_CURADO = "outubro/2026";
@@ -136,9 +136,9 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
   const corrida = blob?.ultimaCorrida ?? null;
   const note = actualizadoAt
     ? vigente
-      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 13/10 · USDM 20–22/10 curados.`
-      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 13/10 · USDM 20–22/10.`
-    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 13/10 · USDM 20–22/10 · CPC 15/10";
+      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 13/10 · USDM 27–29/10 curados.`
+      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 13/10 · USDM 27–29/10.`
+    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 13/10 · USDM 27–29/10 · CPC 15/10";
 
   return {
     ok: true,

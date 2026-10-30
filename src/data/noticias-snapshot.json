@@ -1,11 +1,31 @@
 {
-  "asOf": "2026-10-29T09:58:00.000Z",
-  "asOfArg": "29/10/2026, 06:58",
+  "asOf": "2026-10-30T09:58:00.000Z",
+  "asOfArg": "30/10/2026, 06:58",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 29/10/2026, 06:58 ARG",
+  "note": "Rutina mañana · filtro manual · 30/10/2026, 06:58 ARG",
   "items": [
+    {
+      "title": "EUDR: se negociaron en A3 Mercados los primeros contratos de Soja Rosario Visec (pase sobre Soja Rosario noviembre 2026) con un premio de 10 u$s/t sobre la soja condición cámara; según ACA ya hay 3.693 empresas con 4,97 millones de hectáreas inscriptas en Visec Soja",
+      "source": "Bichos de Campo / Valor Soja",
+      "handle": "Bichos de Campo",
+      "text": "EUDR: se negociaron en A3 Mercados los primeros contratos de Soja Rosario Visec (pase sobre Soja Rosario noviembre 2026) con un premio de 10 u$s/t sobre la soja condición cámara; según ACA ya hay 3.693 empresas con 4,97 millones de hectáreas inscriptas en Visec Soja",
+      "url": "https://bichosdecampo.com/eudr-se-negociaron-los-primeros-contratos-de-soja-visec-en-a3-mercados-con-un-premio-de-10-us-tonelada/",
+      "publishedAt": "2026-10-29T22:48:23.000Z",
+      "publishedAtArg": "29/10 19:48",
+      "rank": 1
+    },
+    {
+      "title": "Arrancó la siembra de soja 2026/27: 2,3% de las 17 millones de hectáreas proyectadas (+1,3 p.p. interanual); suelos fríos en el sur de Córdoba y centro-norte de Buenos Aires y excesos en el centro-este de Entre Ríos demoran las labores",
+      "source": "Bolsa de Cereales de Buenos Aires · Panorama Agrícola Semanal",
+      "handle": "BCBA",
+      "text": "Arrancó la siembra de soja 2026/27: 2,3% de las 17 millones de hectáreas proyectadas (+1,3 p.p. interanual); suelos fríos en el sur de Córdoba y centro-norte de Buenos Aires y excesos en el centro-este de Entre Ríos demoran las labores",
+      "url": "https://www.bolsadecereales.com/imagenes/pass/2026-10/1170-pas20261029.pdf",
+      "publishedAt": "2026-10-29T18:07:43.000Z",
+      "publishedAtArg": "29/10 15:07",
+      "rank": 2
+    },
     {
       "title": "Diputados no dio dictamen al proyecto de biocombustibles con media sanción del Senado (corte de biodiésel al 7,5% y 10% en un año): PRO, UCR y Unión por la Patria pidieron revisar el cupo de las empresas no integradas y se demora su vigencia prevista para 2027",
       "source": "Bichos de Campo",
@@ -14,50 +34,41 @@
       "url": "https://bichosdecampo.com/amigos-son-los-amigos-kirchnerismo-pro-y-ucr-se-unieron-para-frenar-el-proyecto-de-biocombustibles/",
       "publishedAt": "2026-10-28T22:16:32.000Z",
       "publishedAtArg": "28/10 19:16",
-      "rank": 1
-    },
-    {
-      "title": "La UE exigirá desde el 30/12 trazabilidad libre de deforestación (EUDR): Brasil podría perder hasta 4–6 Mt de exportaciones de harina de soja y CIARA-CEC dice que Argentina, con riesgo “bajo” según FEFAC y el sistema VISEC, puede cubrir ese hueco",
-      "titleOriginal": "Argentina sees EU soymeal opportunity as deforestation rules threaten Brazil trade",
-      "source": "Reuters · traducido del inglés",
-      "handle": "Reuters",
-      "text": "La UE exigirá desde el 30/12 trazabilidad libre de deforestación (EUDR): Brasil podría perder hasta 4–6 Mt de exportaciones de harina de soja y CIARA-CEC dice que Argentina, con riesgo “bajo” según FEFAC y el sistema VISEC, puede cubrir ese hueco",
-      "url": "https://finance.yahoo.com/markets/commodities/articles/argentina-sees-eu-soymeal-opportunity-101753461.html",
-      "publishedAt": "2026-10-28T10:17:53.000Z",
-      "publishedAtArg": "28/10 07:17",
-      "rank": 2
-    },
-    {
-      "title": "Un estudio de Serasa Experian advierte que un “Súper Niño” como el de 2023/24 podría recortar 9,7% la cosecha de soja de Brasil 2026/27: 17,6 Mt menos sobre la proyección de 181,2 Mt, con el golpe concentrado en Mato Grosso (hasta 9,7 Mt)",
-      "source": "Bichos de Campo / Valor Soja (estudio Serasa Experian)",
-      "handle": "Bichos de Campo",
-      "text": "Un estudio de Serasa Experian advierte que un “Súper Niño” como el de 2023/24 podría recortar 9,7% la cosecha de soja de Brasil 2026/27: 17,6 Mt menos sobre la proyección de 181,2 Mt, con el golpe concentrado en Mato Grosso (hasta 9,7 Mt)",
-      "url": "https://bichosdecampo.com/ojo-al-piojo-un-estudio-advierte-que-el-super-nino-puede-liquidar-casi-un-10-de-la-cosecha-prevista-de-soja-en-brasil/",
-      "publishedAt": "2026-10-27T21:44:25.000Z",
-      "publishedAtArg": "27/10 18:44",
       "rank": 3
     },
     {
-      "title": "Bunge cerró su planta de Campana, donde fabricaba el fertilizante líquido tiosulfato de amonio (marca SolMix) y amoníaco; la empresa lo atribuyó a costos industriales y competencia de importados, y los trabajadores acampan en la puerta",
+      "title": "Crecida del Paraná y el Uruguay: el Senasa ya registra 147.500 bovinos y búfalos evacuados de zonas anegadas de Corrientes, Chaco, Entre Ríos, Santa Fe e islas de Buenos Aires (7.448 traslados, +102% interanual desde agosto); proyección en el puerto de Paraná hasta 5 m (nivel de evacuación) al 10/11",
+      "source": "La Nación Campo (balance Senasa)",
+      "handle": "La Nación",
+      "text": "Crecida del Paraná y el Uruguay: el Senasa ya registra 147.500 bovinos y búfalos evacuados de zonas anegadas de Corrientes, Chaco, Entre Ríos, Santa Fe e islas de Buenos Aires (7.448 traslados, +102% interanual desde agosto); proyección en el puerto de Paraná hasta 5 m (nivel de evacuación) al 10/11",
+      "url": "https://www.lanacion.com.ar/economia/campo/informe-oficial-ya-se-evacuaron-147500-bovinos-y-bufalos-de-las-zonas-inundadas-del-litoral-nid29102026/",
+      "publishedAt": "2026-10-30T03:13:00.000Z",
+      "publishedAtArg": "30/10 00:13",
+      "rank": 4
+    },
+    {
+      "title": "El Senasa prorrogó hasta el 6 de noviembre la actualización obligatoria del Renspa (Res. 679/2026; vencía el 28/10): los registros sin actualizar pueden darse de baja y quedar sin habilitación para actividades que requieran intervención del Senasa",
       "source": "Bichos de Campo",
       "handle": "Bichos de Campo",
-      "text": "Bunge cerró su planta de Campana, donde fabricaba el fertilizante líquido tiosulfato de amonio (marca SolMix) y amoníaco; la empresa lo atribuyó a costos industriales y competencia de importados, y los trabajadores acampan en la puerta",
-      "url": "https://bichosdecampo.com/las-razones-de-bunge-los-detalles-detras-del-cierre-de-la-planta-de-campana-donde-la-multinacional-producia-un-popular-fertilizante-liquido/",
-      "publishedAt": "2026-10-27T18:38:32.000Z",
-      "publishedAtArg": "27/10 15:38",
-      "rank": 4
+      "text": "El Senasa prorrogó hasta el 6 de noviembre la actualización obligatoria del Renspa (Res. 679/2026; vencía el 28/10): los registros sin actualizar pueden darse de baja y quedar sin habilitación para actividades que requieran intervención del Senasa",
+      "url": "https://bichosdecampo.com/por-la-alta-demanda-el-senasa-prorrogo-hasta-el-6-de-noviembre-la-actualizacion-del-renspa/",
+      "publishedAt": "2026-10-29T19:21:09.000Z",
+      "publishedAtArg": "29/10 16:21",
+      "rank": 5
     }
   ],
   "descartadas": [
-    "Emergencia agropecuaria 9 de Julio/Necochea (Clarín 26/10), ARCA RG 5916 (Agrofy 26/10) y BCR trigo núcleo 6,7 Mt (TodoAgro 26/10): más de 48 h",
-    "Bahillo habla de baja gradual de retenciones (Monitor Gremial) y SRA pide retenciones cero (Valor Agro 28/10): declaraciones sin medida",
-    "Ventas de maíz 65% y soja 50% (Campo Total 28/10), cierres Rosario (Ruralnet 28/10), Coninagro gasoil +58% interanual: precios/comercialización",
-    "Conab plantío soja Brasil 42,8% y MT >75% (Notícias Agrícolas/Canal Rural) y perspectiva agroclimática BCBA 29/10–4/11: avance o pronóstico sin alerta",
-    "Ley de Semillas en vía muerta (Bichos 28/10), Lula y sus urgencias (Bichos 28/10), IICA por pesticidas en la UE (Bichos 28/10): análisis sin hecho nuevo",
-    "Paro aceitero/conciliación (Monitor Gremial): sin nota fechada en las últimas 48 h",
-    "PAS Bolsa de Cereales sigue en 22/10; China compras EE. UU. ~17 Mt (análisis UkrAgroConsult/Datamar): sin dato nuevo fechado"
+    "EUDR/harina de soja Reuters 28/10 07:17: mismo tema que Soja Visec en A3 (nota más nueva) y al límite de 48 h",
+    "Súper Niño Brasil (Serasa, 27/10) y cierre Bunge Campana (27/10): más de 48 h",
+    "ARCA/PFA fraude granos SICORE u$s10 M (Infobae/argentina.gob.ar 24/10, repetida por iProfesional 28/10): hecho de más de 48 h",
+    "Biocombustibles: posición de empresas no integradas (Bichos 30/10) y Gobierno defiende ley (Clarín 28/10): sin hecho nuevo después del freno en Diputados",
+    "Garciarena en Barbechando (LN 29/10), IERAL competitividad (Infobae 29/10), Fada 850.000 empleos sin retenciones (NAP 28/10): declaraciones/estudios sin medida",
+    "AgResource Brasil baja soja 2026/27 a 181,23 Mt y ventas semanales USDA a China 1,63 Mt (Granar 29/10): consultora privada / comercialización",
+    "China sin compras nuevas tras Trump-Xi (Datamar), Chicago y pizarras: precios/comercialización sin hecho nuevo",
+    "Brote avícola en Brasil (Clarín 29/10), Pauny cheques rechazados (LN/Clarín 29/10), empresa ligada a Vicentin sin luz (LN 30/10): fuera del foco granos/decisión",
+    "Paro estivadores Santos (Reconecta): nota de marzo 2026"
   ],
-  "updatedAt": "2026-10-29T09:58:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 29/10",
+  "updatedAt": "2026-10-30T09:58:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 30/10",
   "aviso": null
 }
