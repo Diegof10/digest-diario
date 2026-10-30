@@ -418,6 +418,11 @@ function buildSlots(
   });
 }
 
+/** Slots curados del repo (fert/glifo) sin consultar fuentes; gasoil queda vacío. */
+export function curatedInsumoSlots(): CostoInsumoSlot[] {
+  return buildSlots(curatedFertilizantes(), null).filter((s) => s.id !== "gasoil");
+}
+
 export async function getInsumos(): Promise<InsumosSnapshot> {
   const fertilizantes = curatedFertilizantes();
   const gas = await fetchGasoilRetail();

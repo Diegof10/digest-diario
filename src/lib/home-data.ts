@@ -7,6 +7,42 @@ import { getFiscal } from "@/lib/fiscal";
 import { getHacienda } from "@/lib/hacienda";
 import { buildLecturaCards } from "@/lib/lectura-cards";
 import { loadResumenMatutino } from "@/lib/resumen-matutino";
+import { getClima } from "@/lib/clima";
+import { curatedInsumoSlots } from "@/lib/insumos";
+import { applyClima, applyNoticias } from "@/lib/mercado";
+import { getNoticias } from "@/lib/noticias";
+import type { CostoInsumoSlot, DigestSnapshot } from "@/lib/types";
+
+const ms = (iso: string | null | undefined) => (iso ? Date.parse(iso) || 0 : 0);
+
+/**
+ * Por bloque: si el archivo del repo (rutina 06:38) es más nuevo que lo guardado
+ * por el cron, gana el repo. Si no, queda lo guardado. Nada consulta fuentes externas.
+ */
+async function conRepoMasNuevo(saved: DigestSnapshot): Promise<DigestSnapshot> {
+  let mercado = saved.mercado;
+  const [noticias, clima] = await Promise.all([
+    getNoticias().catch(() => null),
+    getClima().catch(() => null),
+  ]);
+  if (noticias?.ok && ms(noticias.asOf) > ms(mercado.noticias?.asOf)) {
+    mercado = applyNoticias(mercado, noticias);
+  }
+  const maxBase = (es: { fechaIso?: string | null }[] | undefined) =>
+    Math.max(0, ...(es ?? []).map((e) => ms(e.fechaIso)));
+  if (clima?.ok && maxBase(clima.entries) > maxBase(mercado.clima?.entries)) {
+    mercado = applyClima(mercado, clima);
+  }
+  const repoSlots = new Map(curatedInsumoSlots().map((s) => [s.id, s]));
+  const insumos: CostoInsumoSlot[] = (saved.insumos ?? []).map((s) => {
+    const r = repoSlots.get(s.id);
+    return r && r.fechaIso && ms(r.fechaIso) > ms(s.fechaIso ?? null) ? r : s;
+  });
+  for (const [id, r] of repoSlots) {
+    if (!insumos.some((s) => s.id === id) && r.valor) insumos.push(r);
+  }
+  return { ...saved, mercado, insumos };
+}
 
 /**
  * La home lee el último resumen que guardó el cron (Blob `digest/latest.json`).
@@ -55,7 +91,8 @@ async function desdeBlob(saved: HomeBlobFile, km: number, conCos: boolean): Prom
     saved.km === km ? Promise.resolve(saved.digest.catac) : getCatac(km),
     getFiscal(),
   ]);
-  const digest = { ...saved.digest, catac, fiscal };
+  const base = await conRepoMasNuevo(saved.digest);
+  const digest = { ...base, catac, fiscal };
   const [cos, lecturaCards] = await Promise.all([
     conCos ? loadResumenMatutino() : Promise.resolve(null),
     buildLecturaCards(digest.mercado, fiscal, saved.climaVivo),

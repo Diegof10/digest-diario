@@ -358,7 +358,7 @@ function stubSnapshot(note: string): MercadoSnapshot {
   };
 }
 
-function applyClima(snap: MercadoSnapshot, clima: ClimaSnapshot): MercadoSnapshot {
+export function applyClima(snap: MercadoSnapshot, clima: ClimaSnapshot): MercadoSnapshot {
   const rows = snap.rows.map((r) => {
     if (r.id !== "clima") return r;
     if (!clima.ok || clima.entries.length === 0) return r;
@@ -448,7 +448,7 @@ async function fetchWti(): Promise<WtiQuote | null> {
 }
 
 
-function applyNoticias(
+export function applyNoticias(
   snap: MercadoSnapshot,
   noticias: NoticiasSnapshot,
 ): MercadoSnapshot {
