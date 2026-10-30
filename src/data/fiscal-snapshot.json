@@ -1,8 +1,15 @@
 {
-  "fecha": "2026-10-19",
-  "actualizadoAt": "2026-10-23T07:30:00.000-03:00",
+  "fecha": "2026-10-30",
+  "actualizadoAt": "2026-10-30T07:56:00.000-03:00",
   "fuente": "ARCA · BO",
   "novedades": [
+    {
+      "texto": "RG ARCA 5918/2026 (BO 30/10/2026): DJ Ganancias PH 2025 presentación hasta 16/11/2026 (el pago no cambia); caracterización sistémica Pequeño Contribuyente al 30/11/2026.",
+      "fuente": "BO",
+      "norma": "RG ARCA 5918/2026",
+      "boFecha": "2026-10-30",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/349882/20261030"
+    },
     {
       "texto": "RG ARCA 5911/2026 (BO 08/10/2026): DJ Ganancias PH 2025 presentación hasta 30/10/2026; pago saldo 27/07/2026 (sin cambios).",
       "fuente": "BO",
@@ -34,13 +41,6 @@
       "vence": "2026-09-24"
     },
     {
-      "concepto": "Ganancias PH DJ 2025",
-      "ventana": "presentación hasta 30/10/2026 (todas las terminaciones de CUIT)",
-      "detalle": "Pago saldo venció 27/07/2026 (sin cambios)",
-      "fuente": "ARCA · RG 5911 (BO 08/10/2026)",
-      "vence": "2026-10-30"
-    },
-    {
       "concepto": "SISA IP1",
       "ventana": "01/09–31/10/2026",
       "detalle": "Existencias al 31/08 (+ comercializado desde 01/09) + superficies Anexo IP1",
@@ -48,11 +48,18 @@
       "vence": "2026-10-31"
     },
     {
-      "concepto": "Pequeño Contribuyente (caracterización sistémica ARCA)",
-      "ventana": "16/11/2026",
-      "detalle": "Proceso de ARCA para planes de facilidades de pago (RG 5321); antes 23/10",
-      "fuente": "ARCA · RG 5911 art. 2 (BO 08/10/2026)",
+      "concepto": "Ganancias PH DJ 2025",
+      "ventana": "presentación hasta 16/11/2026 (todas las terminaciones de CUIT)",
+      "detalle": "Pago saldo venció 27/07/2026 (sin cambios); antes 30/10",
+      "fuente": "BO 30/10 · RG ARCA 5918/2026",
       "vence": "2026-11-16"
+    },
+    {
+      "concepto": "Pequeño Contribuyente (caracterización sistémica ARCA)",
+      "ventana": "30/11/2026",
+      "detalle": "Proceso de ARCA para planes de facilidades de pago (RG 5321); antes 16/11",
+      "fuente": "BO 30/10 · RG ARCA 5918/2026",
+      "vence": "2026-11-30"
     },
     {
       "concepto": "3° anticipo Ganancias y Bienes Personales PH 2026",
@@ -69,6 +76,6 @@
       "vence": "2027-02-28"
     }
   ],
-  "lineaTablero": "Próximo: 30/10 DJ Ganancias PH 2025 (RG 5911), 31/10 SISA IP1 (RG 5894), 16/11 Pequeño Contribuyente (RG 5911) y 13–15/12 3° anticipo Ganancias y BP según terminación de CUIT.",
+  "lineaTablero": "Próximo: 31/10 SISA IP1 (RG 5894), 16/11 DJ Ganancias PH 2025 (RG 5918), 30/11 Pequeño Contribuyente (RG 5918) y 13–15/12 3° anticipo Ganancias y BP según terminación de CUIT.",
   "pie": "Análisis de gestión. No es dictamen impositivo. · @dhferrari"
 }
