@@ -12,13 +12,13 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "AR",
     countryLabel: "Argentina",
     bullet:
-      "Trimestre oct–dic: lluvias superiores a lo normal en Litoral, Córdoba, oeste Santa Fe, Cuyo centro-sur, La Pampa, oeste BA y NE Patagonia; temps inferiores en Cuyo/Córdoba/oeste Santa Fe/La Pampa/oeste BA (SMN 30/9).",
-    fuente: "SMN Pronóstico Climático Trimestral oct–dic 2026",
-    fecha: "30/9/2026",
+      "Trimestre nov–ene: lluvias superiores a lo normal en norte del Litoral, oeste de Cuyo, La Pampa, sudoeste de BA y NE Patagonia; normales o superiores en Córdoba, San Luis, sur del Litoral y BA, con eventos localmente más intensos en centro y noreste; temps inferiores a lo normal en gran parte de Cuyo, Córdoba, La Pampa, BA y sudoeste de Santa Fe, normales o superiores en el norte (SMN 30/10).",
+    fuente: "SMN Pronóstico Climático Trimestral nov 2026–ene 2027",
+    fecha: "30/10/2026",
     url: "https://www.smn.gob.ar/pronostico-trimestral",
     secondaryUrl:
-      "https://www.clarin.com/sociedad/dan-pronostico-clima-fin-ano-super-nino-suma-raro-desvio-termico-exceso-lluvias_0_lA4hofaODb.html",
-    secondaryNote: "Cobertura Clarín del boletín SMN OND (elaborado 30/9)",
+      "https://infoagro.com.ar/primavera-2026-bajo-la-lupa-el-smn-preve-lluvias-excepcionales-y-temperaturas-mas-bajas/",
+    secondaryNote: "Cobertura Infoagro del boletín SMN NDJ (publicado 30/10)",
   },
   {
     country: "BR",
@@ -47,14 +47,14 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
 ];
 
 const CURADO_ISO: Record<ClimaEntry["country"], string> = {
-  AR: "2026-09-30",
+  AR: "2026-10-30",
   BR: "2026-10-13",
   /** Publicación del mapa (el mapa en sí es del 27/10; la antigüedad mira esa fecha). */
   US: "2026-10-29",
 };
 /** Fecha del dato de base que se muestra (no la de la corrida del cron). USDM = fecha del mapa. */
 const BASE_ISO: Record<ClimaEntry["country"], string> = {
-  AR: "2026-09-30",
+  AR: "2026-10-30",
   BR: "2026-10-13",
   US: "2026-10-27",
 };
@@ -136,9 +136,9 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
   const corrida = blob?.ultimaCorrida ?? null;
   const note = actualizadoAt
     ? vigente
-      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/9 · INMET 13/10 · USDM 27–29/10 curados.`
-      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/9 · INMET 13/10 · USDM 27–29/10.`
-    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/9 · INMET 13/10 · USDM 27–29/10 · CPC 15/10";
+      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/10 · INMET 13/10 · USDM 27–29/10 curados.`
+      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/10 · INMET 13/10 · USDM 27–29/10.`
+    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/10 · INMET 13/10 · USDM 27–29/10 · CPC 15/10";
 
   return {
     ok: true,

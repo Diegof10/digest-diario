@@ -1,21 +1,11 @@
 {
-  "asOf": "2026-10-30T10:40:00.000Z",
-  "asOfArg": "30/10/2026, 07:40",
+  "asOf": "2026-10-31T09:47:00.000Z",
+  "asOfArg": "31/10/2026, 06:47",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 30/10/2026, 07:40 ARG",
+  "note": "Rutina mañana · filtro manual · 31/10/2026, 06:47 ARG",
   "items": [
-    {
-      "title": "EUDR: se negociaron en A3 Mercados los primeros contratos de Soja Rosario Visec (pase sobre Soja Rosario noviembre 2026) con un premio de 10 u$s/t sobre la soja condición cámara; según ACA ya hay 3.693 empresas con 4,97 millones de hectáreas inscriptas en Visec Soja",
-      "source": "Bichos de Campo / Valor Soja",
-      "handle": "Bichos de Campo",
-      "text": "EUDR: se negociaron en A3 Mercados los primeros contratos de Soja Rosario Visec (pase sobre Soja Rosario noviembre 2026) con un premio de 10 u$s/t sobre la soja condición cámara; según ACA ya hay 3.693 empresas con 4,97 millones de hectáreas inscriptas en Visec Soja",
-      "url": "https://bichosdecampo.com/eudr-se-negociaron-los-primeros-contratos-de-soja-visec-en-a3-mercados-con-un-premio-de-10-us-tonelada/",
-      "publishedAt": "2026-10-29T22:48:23.000Z",
-      "publishedAtArg": "29/10 19:48",
-      "rank": 1
-    },
     {
       "title": "Alerta sanitaria en trigo: la BCR confirmó fusarium en lotes del sur de Santa Fe (Aldao) con 15–20% de incidencia, en pleno llenado y floración; la enfermedad puede recortar 30–70% del rinde en años epidémicos (núcleo estimado en 43,6 qq/ha, 70% de lotes excelentes/muy buenos)",
       "source": "Agrofy News (reporte Bolsa de Comercio de Rosario)",
@@ -24,7 +14,27 @@
       "publishedAt": "2026-10-30T09:31:25.000Z",
       "publishedAtArg": "30/10 06:31",
       "text": "Alerta sanitaria en trigo: la BCR confirmó fusarium en lotes del sur de Santa Fe (Aldao) con 15–20% de incidencia, en pleno llenado y floración; la enfermedad puede recortar 30–70% del rinde en años epidémicos (núcleo estimado en 43,6 qq/ha, 70% de lotes excelentes/muy buenos)",
+      "rank": 1
+    },
+    {
+      "title": "Aceiteros: la conciliación obligatoria en la paritaria del SOEA San Lorenzo y la Federación aceitera con las cámaras agroexportadoras vence el próximo jueves sin avances; el martes hay audiencia presencial en Trabajo y no se descarta un paro por tiempo indeterminado en plantas y terminales del Gran Rosario (la conciliación solo puede extenderse cinco días hábiles más)",
+      "source": "Monitor Gremial",
+      "handle": "Monitor Gremial",
+      "url": "https://monitorgremial.com.ar/aceiteros-reunion-clave-el-martes-para-intentar-evitar-un-paro-por-tiempo-indeterminado-en-plena-cosecha/",
+      "publishedAt": "2026-10-30T03:14:00.000Z",
+      "publishedAtArg": "30/10 00:14",
+      "text": "Aceiteros: la conciliación obligatoria en la paritaria del SOEA San Lorenzo y la Federación aceitera con las cámaras agroexportadoras vence el próximo jueves sin avances; el martes hay audiencia presencial en Trabajo y no se descarta un paro por tiempo indeterminado en plantas y terminales del Gran Rosario (la conciliación solo puede extenderse cinco días hábiles más)",
       "rank": 2
+    },
+    {
+      "title": "EUDR: se negociaron en A3 Mercados los primeros contratos de Soja Rosario Visec (pase sobre Soja Rosario noviembre 2026) con un premio de 10 u$s/t sobre la soja condición cámara; según ACA ya hay 3.693 empresas con 4,97 millones de hectáreas inscriptas en Visec Soja",
+      "source": "Bichos de Campo / Valor Soja",
+      "handle": "Bichos de Campo",
+      "text": "EUDR: se negociaron en A3 Mercados los primeros contratos de Soja Rosario Visec (pase sobre Soja Rosario noviembre 2026) con un premio de 10 u$s/t sobre la soja condición cámara; según ACA ya hay 3.693 empresas con 4,97 millones de hectáreas inscriptas en Visec Soja",
+      "url": "https://bichosdecampo.com/eudr-se-negociaron-los-primeros-contratos-de-soja-visec-en-a3-mercados-con-un-premio-de-10-us-tonelada/",
+      "publishedAt": "2026-10-29T22:48:23.000Z",
+      "publishedAtArg": "29/10 19:48",
+      "rank": 3
     },
     {
       "title": "Arrancó la siembra de soja 2026/27: 2,3% de las 17 millones de hectáreas proyectadas (+1,3 p.p. interanual); suelos fríos en el sur de Córdoba y centro-norte de Buenos Aires y excesos en el centro-este de Entre Ríos demoran las labores",
@@ -34,16 +44,6 @@
       "url": "https://www.bolsadecereales.com/imagenes/pass/2026-10/1170-pas20261029.pdf",
       "publishedAt": "2026-10-29T18:07:43.000Z",
       "publishedAtArg": "29/10 15:07",
-      "rank": 3
-    },
-    {
-      "title": "Diputados no dio dictamen al proyecto de biocombustibles con media sanción del Senado (corte de biodiésel al 7,5% y 10% en un año): PRO, UCR y Unión por la Patria pidieron revisar el cupo de las empresas no integradas y se demora su vigencia prevista para 2027",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "text": "Diputados no dio dictamen al proyecto de biocombustibles con media sanción del Senado (corte de biodiésel al 7,5% y 10% en un año): PRO, UCR y Unión por la Patria pidieron revisar el cupo de las empresas no integradas y se demora su vigencia prevista para 2027",
-      "url": "https://bichosdecampo.com/amigos-son-los-amigos-kirchnerismo-pro-y-ucr-se-unieron-para-frenar-el-proyecto-de-biocombustibles/",
-      "publishedAt": "2026-10-28T22:16:32.000Z",
-      "publishedAtArg": "28/10 19:16",
       "rank": 4
     },
     {
@@ -58,19 +58,16 @@
     }
   ],
   "descartadas": [
-    "Prórroga Renspa al 6/11 (Bichos/Infocampo 29/10): trámite administrativo, quedó sexta por impacto",
-    "Uatre y Visec constancia laboral (LN 29/10) y paro en frigorífico (LN 28/10): sin efecto directo en la decisión agrícola",
-    "EUDR/harina de soja Reuters 28/10 07:17: mismo tema que Soja Visec en A3 (nota más nueva) y al límite de 48 h",
-    "Súper Niño Brasil (Serasa, 27/10) y cierre Bunge Campana (27/10): más de 48 h",
-    "ARCA/PFA fraude granos SICORE u$s10 M (Infobae/argentina.gob.ar 24/10, repetida por iProfesional 28/10): hecho de más de 48 h",
-    "Biocombustibles: posición de empresas no integradas (Bichos 30/10) y Gobierno defiende ley (Clarín 28/10): sin hecho nuevo después del freno en Diputados",
-    "Garciarena en Barbechando (LN 29/10), IERAL competitividad (Infobae 29/10), Fada 850.000 empleos sin retenciones (NAP 28/10): declaraciones/estudios sin medida",
-    "AgResource Brasil baja soja 2026/27 a 181,23 Mt y ventas semanales USDA a China 1,63 Mt (Granar 29/10): consultora privada / comercialización",
-    "China sin compras nuevas tras Trump-Xi (Datamar), Chicago y pizarras: precios/comercialización sin hecho nuevo",
-    "Brote avícola en Brasil (Clarín 29/10), Pauny cheques rechazados (LN/Clarín 29/10), empresa ligada a Vicentin sin luz (LN 30/10): fuera del foco granos/decisión",
-    "Paro estivadores Santos (Reconecta): nota de marzo 2026"
+    "Diputados frena dictamen biocombustibles (Bichos 28/10 19:16): más de 48 h",
+    "Senado dio media sanción al marco del mercado de carbono (Infocampo 30/10 11:34): pasa a Diputados, sin efecto inmediato en caja; quedó sexta",
+    "SMN trimestral nov–ene (30/10): va al bloque Clima",
+    "Salta emergencia agropecuaria por heladas en Valles Calchaquíes (Bichos 30/10): vid, fuera del foco granos",
+    "Plantium cierra planta en Villa Constitución (Bichos 30/10), Redrado/UATRE formalización y retenciones (TN/Infocampo 30/10), triunfo de Lula (Bichos 30/10, opinión): sin medida que mueva la decisión",
+    "Ventas flash USDA 297.150 t a destino desconocido y cierres Chicago/Rosario (TN 30/10): comercialización/precios",
+    "China +70% compras de arveja ene–sep (Agrofy/Poletti 30/10): estudio de consultora, sin hecho nuevo",
+    "Prórroga Renspa al 6/11 y BISEC (29–30/10): trámite administrativo"
   ],
-  "updatedAt": "2026-10-30T10:40:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 30/10",
+  "updatedAt": "2026-10-31T09:47:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 31/10",
   "aviso": null
 }
