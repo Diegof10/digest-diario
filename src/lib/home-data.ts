@@ -28,9 +28,12 @@ async function conRepoMasNuevo(saved: DigestSnapshot): Promise<DigestSnapshot> {
   if (noticias?.ok && ms(noticias.asOf) > ms(mercado.noticias?.asOf)) {
     mercado = applyNoticias(mercado, noticias);
   }
-  const maxBase = (es: { fechaIso?: string | null }[] | undefined) =>
-    Math.max(0, ...(es ?? []).map((e) => ms(e.fechaIso)));
-  if (clima?.ok && maxBase(clima.entries) > maxBase(mercado.clima?.entries)) {
+  // Por país: alcanza con que un boletín curado (AR/BR/US) sea más nuevo que el guardado.
+  const savedBase = new Map((mercado.clima?.entries ?? []).map((e) => [e.country, ms(e.fechaIso)]));
+  const algunoMasNuevo = (clima?.entries ?? []).some(
+    (e) => ms(e.fechaIso) > (savedBase.get(e.country) ?? 0),
+  );
+  if (clima?.ok && algunoMasNuevo) {
     mercado = applyClima(mercado, clima);
   }
   const repoSlots = new Map(curatedInsumoSlots().map((s) => [s.id, s]));
