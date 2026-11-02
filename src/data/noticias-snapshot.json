@@ -1,21 +1,11 @@
 {
-  "asOf": "2026-11-01T09:55:00.000Z",
-  "asOfArg": "01/11/2026, 06:55",
+  "asOf": "2026-11-02T09:55:00.000Z",
+  "asOfArg": "02/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 01/11/2026, 06:55 ARG",
+  "note": "Rutina mañana · filtro manual · 02/11/2026, 06:55 ARG",
   "items": [
-    {
-      "title": "Alerta naranja del SMN por tormentas fuertes, algunas severas, para este domingo 1/11 en Córdoba, sur de Santa Fe, noroeste de Buenos Aires y norte de La Pampa: lluvias abundantes, granizo y ráfagas de más de 90 km/h; alerta amarilla en el resto de Santa Fe, sur de Entre Ríos, Chaco y CABA",
-      "source": "La Nación (alertas SMN)",
-      "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alertas-por-tormentas-lluvias-y-vientos-fuertes-para-este-domingo-1-de-noviembre-nid01112026/",
-      "publishedAt": "2026-11-01T05:49:23.000Z",
-      "publishedAtArg": "01/11 02:49",
-      "text": "Alerta naranja del SMN por tormentas fuertes, algunas severas, para este domingo 1/11 en Córdoba, sur de Santa Fe, noroeste de Buenos Aires y norte de La Pampa: lluvias abundantes, granizo y ráfagas de más de 90 km/h; alerta amarilla en el resto de Santa Fe, sur de Entre Ríos, Chaco y CABA",
-      "rank": 1
-    },
     {
       "title": "Inundaciones: Nación declaró la emergencia y/o desastre agropecuario en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea (Res. 1850/2026 de Economía, período 1/5 al 31/10/2026); los productores necesitan el certificado provincial y se instruyó a bancos oficiales y ARCA a facilitar los beneficios",
       "source": "Infobae · Revista Chacra",
@@ -24,30 +14,38 @@
       "publishedAt": "2026-10-31T12:00:00.000Z",
       "publishedAtArg": "31/10 09:00",
       "text": "Inundaciones: Nación declaró la emergencia y/o desastre agropecuario en todo el partido de 9 de Julio y cuatro circunscripciones de Necochea (Res. 1850/2026 de Economía, período 1/5 al 31/10/2026); los productores necesitan el certificado provincial y se instruyó a bancos oficiales y ARCA a facilitar los beneficios",
+      "rank": 1
+    },
+    {
+      "title": "Temporal en Córdoba: tormentas con granizo el sábado 31/10 en Río Cuarto, Alta Gracia, Colonia Caroya, Anisacate y zona serrana; Río Cuarto acumuló más de 65 mm en 24 h (62 mm en 25 minutos), según Recursos Hídricos provincial; en Río Negro el granizo destruyó peras sin malla en Valle Azul",
+      "source": "Infobae",
+      "handle": "Infobae",
+      "url": "https://www.infobae.com/sociedad/2026/11/01/destrozos-heridos-y-granizo-asi-quedaron-rio-negro-y-cordoba-tras-el-paso-de-un-temporal/",
+      "publishedAt": "2026-11-01T05:00:12.000Z",
+      "publishedAtArg": "01/11 02:00",
+      "text": "Temporal en Córdoba: tormentas con granizo el sábado 31/10 en Río Cuarto, Alta Gracia, Colonia Caroya, Anisacate y zona serrana; Río Cuarto acumuló más de 65 mm en 24 h (62 mm en 25 minutos), según Recursos Hídricos provincial; en Río Negro el granizo destruyó peras sin malla en Valle Azul",
       "rank": 2
     },
     {
-      "title": "China ya compró cerca de 17,5 millones de toneladas de soja estadounidense de la campaña nueva (StoneX, al 29/10) frente al compromiso de 25 Mt anuales; la industria de EE. UU. espera que complete la meta antes de enero y una nueva reunión EE. UU.–China en noviembre",
-      "source": "Brownfield Ag News · traducido del inglés",
-      "handle": "Brownfield",
-      "url": "https://brownfieldagnews.com/news/soybean-leaders-optimistic-about-china-purchases-emphasize-market-diversification/",
-      "publishedAt": "2026-10-30T14:24:48.000Z",
-      "publishedAtArg": "30/10 11:24",
-      "text": "China ya compró cerca de 17,5 millones de toneladas de soja estadounidense de la campaña nueva (StoneX, al 29/10) frente al compromiso de 25 Mt anuales; la industria de EE. UU. espera que complete la meta antes de enero y una nueva reunión EE. UU.–China en noviembre",
-      "rank": 3,
-      "titleOriginal": "Soybean leaders optimistic about China purchases, emphasize market diversification"
+      "title": "Alerta naranja del SMN por tormentas fuertes, algunas severas, para este domingo 1/11 en Córdoba, sur de Santa Fe, noroeste de Buenos Aires y norte de La Pampa: lluvias abundantes, granizo y ráfagas de más de 90 km/h; alerta amarilla en el resto de Santa Fe, sur de Entre Ríos, Chaco y CABA",
+      "source": "La Nación (alertas SMN)",
+      "handle": "La Nación",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alertas-por-tormentas-lluvias-y-vientos-fuertes-para-este-domingo-1-de-noviembre-nid01112026/",
+      "publishedAt": "2026-11-01T05:49:23.000Z",
+      "publishedAtArg": "01/11 02:49",
+      "text": "Alerta naranja del SMN por tormentas fuertes, algunas severas, para este domingo 1/11 en Córdoba, sur de Santa Fe, noroeste de Buenos Aires y norte de La Pampa: lluvias abundantes, granizo y ráfagas de más de 90 km/h; alerta amarilla en el resto de Santa Fe, sur de Entre Ríos, Chaco y CABA",
+      "rank": 3
     }
   ],
   "descartadas": [
-    "Fusarium en trigo (BCR vía Agrofy 30/10 06:31), conciliación aceiteros (Monitor Gremial 30/10 00:14), Soja Visec A3 (Bichos 29/10), siembra soja BCBA (29/10) y evacuación Senasa (La Nación 30/10 00:13): más de 48 h",
-    "Baja de retenciones soja 33%→26% (Merlo al Aire fechada 31/10/2026): anuncio de la Expo Rural de Palermo, no es un hecho nuevo",
-    "Aceiteros: prórroga de la conciliación al 'jueves 6 de noviembre' (Monitor Gremial): nota sin fecha verificable y el 6/11/2026 es viernes; descartada",
-    "Senado dio media sanción al marco del mercado de carbono (Infocampo 30/10): sin efecto inmediato en caja",
-    "Pronóstico lluvias 30–70 mm (Agrofy 30/10) y nota de campaña Meteored (01/11): cubiertos por la alerta SMN / análisis sin hecho nuevo",
-    "Ventas maíz 65% / soja 50% (Noticias de Campo 31/10): comercialización, sin hecho nuevo",
-    "Plantío soja Brasil Conab (27/10): más de 48 h"
+    "China ~17,5 Mt soja EE.UU. (Brownfield 30/10 11:24): más de 48 h",
+    "Emergencia por granizo Cinturón Verde de Córdoba (Infocampo 30/10 21:52) y prórroga Renspa Senasa al 6/11 (Infocampo 29/10): más de 48 h",
+    "Conciliación obligatoria aceiteros y conflicto Vicentin (Monitor Gremial): nota sin fecha de publicación verificable",
+    "Baja de retenciones soja 33%→26% (Merlo al Aire): anuncio de la Expo Rural de Palermo, no es un hecho nuevo (BO vigente: soja 24% desde Decreto 423/2026)",
+    "Reuters 02/11 compras chinas de productos agro de EE. UU. distintos de soja: link no verificable (investing.com 403) e impacto indirecto",
+    "Pronósticos de lluvia Brasil (Canal Rural, MTT News 01/11) y garrapata bovina (Infobae 01/11): sin hecho nuevo / fuera de granos"
   ],
-  "updatedAt": "2026-11-01T09:55:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 01/11",
+  "updatedAt": "2026-11-02T09:55:00.000Z",
+  "updatedBy": "rutina Resumen agrario mañana 02/11",
   "aviso": null
 }
