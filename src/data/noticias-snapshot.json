@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-11-03T09:50:00.000Z",
-  "asOfArg": "03/11/2026, 06:50",
+  "asOf": "2026-11-03T21:06:00.000Z",
+  "asOfArg": "03/11/2026, 18:06",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina mañana · filtro manual · 03/11/2026, 06:50 ARG",
+  "note": "Rutina tarde post Matba · filtro manual · 03/11/2026, 18:06 ARG",
   "items": [
     {
       "title": "Visec: tras un reclamo, los acopiadores podrán habilitar sin cargo sus plantas de silos para operar con el sistema de trazabilidad socioambiental (acuerdo Federación de Acopiadores–Visec–Incagro); las obligaciones europeas EUDR para operadores medianos y grandes arrancan el 30/12/2026",
@@ -27,6 +27,26 @@
       "rank": 2
     },
     {
+      "title": "Alerta naranja por tormentas fuertes en seis provincias: se esperan hasta 80 mm",
+      "source": "Agrofy News",
+      "handle": "Agrofy",
+      "url": "https://news.agrofy.com.ar/noticia/216924/alerta-naranja-tormentas-fuertes-seis-provincias-se-esperan-80-milimetros",
+      "publishedAt": "2026-11-03T10:18:00.000Z",
+      "publishedAtArg": "03/11 07:18",
+      "text": "Alerta naranja por tormentas fuertes en seis provincias: se esperan hasta 80 mm",
+      "rank": 3
+    },
+    {
+      "title": "Maíz tardío: las chicharritas siguen ausentes y el panorama para la siembra es “muy promisorio”",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "url": "https://www.infocampo.com.ar/maiz-tardio-las-chicharritas-siguen-ausentes-y-el-panorama-para-la-siembra-es-muy-promisorio/",
+      "publishedAt": "2026-11-03T20:52:00.000Z",
+      "publishedAtArg": "03/11 17:52",
+      "text": "Maíz tardío: las chicharritas siguen ausentes y el panorama para la siembra es “muy promisorio”",
+      "rank": 4
+    },
+    {
       "title": "Caputo prepara otra licitación de rutas nacionales (peaje incremental, abierta a nuevos operadores) y un paquete de crédito vía reforma a la Ley de Mercado de Capitales: registro único de garantías, prendas privadas y pagarés respaldados con soja u otros bienes físicos",
       "source": "La Nación",
       "handle": "La Nación",
@@ -34,19 +54,18 @@
       "publishedAt": "2026-11-02T00:06:00.000Z",
       "publishedAtArg": "01/11 21:06",
       "text": "Caputo prepara otra licitación de rutas nacionales (peaje incremental, abierta a nuevos operadores) y un paquete de crédito vía reforma a la Ley de Mercado de Capitales: registro único de garantías, prendas privadas y pagarés respaldados con soja u otros bienes físicos",
-      "rank": 3
+      "rank": 5
     }
   ],
   "descartadas": [
-    "Emergencia 9 de Julio/Necochea Res. 1850/2026 (Infobae 31/10), temporal Córdoba (Infobae 01/11) y alerta naranja SMN (La Nación 01/11): más de 48 h",
-    "Fusarium trigo región núcleo (GEA BCR 29/10; Agrofy 30/10; Clarín/TN 02/11 retoman el mismo hecho): más de 48 h desde el informe primario",
-    "Emergencia hortícola Cinturón Verde Córdoba Res. 451 (TN/Hoy Día 02/11): horticultura, no granos extensivos",
-    "Liquidación CIARA/CEC octubre USD 2.880 M (Infobae 02/11): flujo macro de divisas, no evento de decisión de lote",
-    "Aceiteros/paro Explora (Monitor Gremial): sin fecha de publicación verificable en la nota",
-    "CONAB/WASDE noviembre: WASDE sale 10/11; CONAB octubre ya cubierto; sin cifra nueva de hoy",
-    "RIF/fertilizantes Agro Hoy 31/10 («alrededor de» USD 600/980): sin rangos nombrados ni republicación Bichos post 24/10; se mantiene snapshot IF vía Bichos 24/10"
+    "Yerba mate exportaciones récord (Clarín Rural 03/11): no granos extensivos",
+    "Carne argentina en China / «orgullo» (Infocampo 03/11): perfil, no compra concreta",
+    "Poderío chino «oportunidades» (La Nación Campo 03/11): nota de color, sin compra/embarque",
+    "Importación maquinaria usada + controles plagas (Agrofy 03/11): secundario frente a alerta/plagas de lote",
+    "Emergencia 9 de Julio/Necochea y temporal Córdoba previos: más de 48 h o ya cubiertos",
+    "Liquidación CIARA/CEC octubre: flujo macro, no evento de lote"
   ],
-  "updatedAt": "2026-11-03T09:50:00.000Z",
-  "updatedBy": "rutina Resumen agrario mañana 03/11",
+  "updatedAt": "2026-11-03T21:06:00.000Z",
+  "updatedBy": "rutina Noticias tarde post cierre Matba 03/11",
   "aviso": null
 }
