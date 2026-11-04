@@ -5,17 +5,17 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF vía Bichos de Campo — weekly RIF republished 24 Oct 2026. Curated snapshot only. */
+/** IF vía Bichos de Campo — RIF N°44 (30 Oct 2026), republicado 31/10. Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://bichosdecampo.com/el-mercado-argentino-de-fertilizantes-operan-con-lo-justo-ante-productores-que-se-habituaron-a-comprar-a-ultimo-momento/";
+  "https://bichosdecampo.com/doble-comando-en-el-mercado-mundial-de-fertilizantes-costos-en-alza-en-europa-con-valores-decrecientes-en-las-americas/";
 
-const FERT_AS_OF = "2026-10-24";
+const FERT_AS_OF = "2026-10-30";
 const FERT_SOURCE_LABEL = "Bichos/IF";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 3 Nov 2026; mismos 5,50–5,90). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 4 Nov 2026; mismos 5,50–5,90). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-11-03";
+const GLIFO_AS_OF = "2026-11-04";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
@@ -164,16 +164,16 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Bichos de Campo / IF RIF dated 24 Oct 2026.
+ * Curated weekly snapshot from Bichos de Campo / IF RIF N°44 dated 30 Oct 2026.
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
- * Urea mayorista 595–605, estable por segunda semana; import granular CFR 510–520 (importación en pausa).
- * MAP/DAP mayorista 965–995; referencia import DAP/MAP nominal 855–870 CFR.
+ * Urea mayorista 595–605, tercera semana sin cambios; import granular CFR 500–515.
+ * MAP/DAP mayorista 965–995; referencia import DAP/MAP nominal 850–870 CFR.
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(595, 605, "FCA", "wholesale", "IF: mayorista estable por segunda semana"),
-      import: fertPoint(510, 520, "CFR", "import_replacement", "IF: urea granular, importación en pausa"),
+      local: fertPoint(595, 605, "FCA", "wholesale", "IF N°44: mayorista estable por tercera semana"),
+      import: fertPoint(500, 515, "CFR", "import_replacement", "IF N°44: urea granular CFR 500–515"),
     },
     map: {
       local: fertPoint(
@@ -183,7 +183,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(855, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range (nominal)"),
+      import: fertPoint(850, 870, "CFR", "import_replacement", "IF N°44: MAP/DAP import combined CFR range (nominal)"),
     },
     dap: {
       local: fertPoint(
@@ -193,7 +193,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(855, 870, "CFR", "import_replacement", "IF quotes MAP/DAP import as combined CFR range (nominal)"),
+      import: fertPoint(850, 870, "CFR", "import_replacement", "IF N°44: MAP/DAP import combined CFR range (nominal)"),
     },
   };
 }
