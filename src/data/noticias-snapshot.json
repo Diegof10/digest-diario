@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-11-04T21:10:00.000Z",
-  "asOfArg": "04/11/2026, 18:10",
+  "asOf": "2026-11-05T09:50:00.000Z",
+  "asOfArg": "05/11/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Respaldo tarde post Matba · filtro manual · 04/11/2026, 18:10 ARG · cron RSS ok:true 20:54Z metió 2 soft (mejoramiento semillas / qué cambia EE.UU.)",
+  "note": "Rutina matutina · filtro manual · 05/11/2026, 06:50 ARG",
   "items": [
     {
       "title": "Patricia Bullrich reconoció ante Coninagro los reclamos del campo por retenciones, infraestructura y leyes pendientes (semillas, certificado pyme cooperativas) y se comprometió a revisar los proyectos",
@@ -27,14 +27,24 @@
       "rank": 2
     },
     {
-      "title": "Fin a una prohibición de más de 50 años: Sturzenegger celebró una exportación de ganado en pie por avión",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "url": "https://www.lanacion.com.ar/economia/campo/finalizo-una-prohibicion-de-mas-de-50-anos-sturzenegger-celebro-una-exportacion-de-ganado-en-pie-por-nid04112026/",
-      "publishedAt": "2026-11-04T20:58:06.000Z",
-      "publishedAtArg": "04/11 17:58",
-      "text": "Fin a una prohibición de más de 50 años: Sturzenegger celebró una exportación de ganado en pie por avión",
+      "title": "Entre Ríos declaró emergencia/desastre agropecuario para ganaderos y apicultores de islas y anegadizos (La Paz, Paraná, Diamante, Victoria, Gualeguay e Islas del Ibicuy): diferimiento de inmobiliario rural y plan de facilidades (decreto 3.692; vigencia 1/8/2026–31/7/2027)",
+      "source": "Campo en Acción",
+      "handle": "Campo en Acción",
+      "url": "https://campoenaccion.com/actualidad/sali-la-emergencia-para-productores-de-carne-y-miel-en-islas.htm",
+      "publishedAt": "2026-11-04T14:27:00.000Z",
+      "publishedAtArg": "04/11 11:27",
+      "text": "Entre Ríos declaró emergencia/desastre agropecuario para ganaderos y apicultores de islas y anegadizos (La Paz, Paraná, Diamante, Victoria, Gualeguay e Islas del Ibicuy): diferimiento de inmobiliario rural y plan de facilidades (decreto 3.692; vigencia 1/8/2026–31/7/2027)",
       "rank": 3
+    },
+    {
+      "title": "Perspectiva BCBA 5–11/11: lluvias escasas o nulas en gran parte de la pampeana (focos 10–25 mm en este del NOA, Chaco y norte Mesopotamia), riesgo de heladas en serranas/este bonaerense y luego máximas de hasta 40 °C en norte y oeste",
+      "source": "Clarín Rural",
+      "handle": "Clarín Rural",
+      "url": "https://www.clarin.com/rural/lluvias-escasas-riesgo-heladas-temperaturas-40-grados-clima-proximos-7-dias_0_OxTnxXKE9g.html",
+      "publishedAt": "2026-11-04T18:00:00.000Z",
+      "publishedAtArg": "04/11 15:00",
+      "text": "Perspectiva BCBA 5–11/11: lluvias escasas o nulas en gran parte de la pampeana (focos 10–25 mm en este del NOA, Chaco y norte Mesopotamia), riesgo de heladas en serranas/este bonaerense y luego máximas de hasta 40 °C en norte y oeste",
+      "rank": 4
     },
     {
       "title": "Chicharrita: el 53.er informe de la Red Nacional de Monitoreo marca alivio en el centro (vía libre para maíz tardío) y poblaciones acotadas/estables en NOA–NEA",
@@ -44,30 +54,22 @@
       "publishedAt": "2026-11-04T13:33:40.000Z",
       "publishedAtArg": "04/11 10:33",
       "text": "Chicharrita: el 53.er informe de la Red Nacional de Monitoreo marca alivio en el centro (vía libre para maíz tardío) y poblaciones acotadas/estables en NOA–NEA",
-      "rank": 4
-    },
-    {
-      "title": "Ley de semillas: los multiplicadores reclaman un lugar en la mesa de debate con el Gobierno",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "url": "https://www.lanacion.com.ar/economia/campo/ley-de-semillas-los-multiplicadores-reclaman-un-lugar-en-la-mesa-de-debate-con-el-gobierno-nid04112026/",
-      "publishedAt": "2026-11-04T18:16:55.000Z",
-      "publishedAtArg": "04/11 15:16",
-      "text": "Ley de semillas: los multiplicadores reclaman un lugar en la mesa de debate con el Gobierno",
       "rank": 5
     }
   ],
   "descartadas": [
-    "Infocampo mejoramiento/PI soja Brasil vs Argentina: soft opinión, no evento",
-    "Agrofy/Bichos ‘qué cambia’ post elecciones EE.UU.: análisis especulativo, no medida",
-    "Clarín/TodoAgro carne cierra el año en China: tono celebratorio, no compra/flash",
-    "Caputo/ARCA embargos pymes (03/11): ya en snapshot matutino; priorizo frescos del 4/11",
-    "Metalfor concurso (03/11): cubierto a la mañana",
-    "USDA flash soja China Farm Progress (03/11): matutino; link 403 a bots",
-    "Pauny toma de fábrica: conflicto maquinaria, URL LN/Clarin inestable al verificar",
-    "Pizarras/dólar/Cañuelas precios: excluidas por regla"
+    "Ley semillas multiplicadores (LN 04/11): reclamo de mesa, soft vs emergencia/clima",
+    "Ganado en pie por avión Sturzenegger (LN 04/11): hecho puntual ganadero, menor impacto grano",
+    "Pauny toma plantas (Infobae 04/11): crisis maquinaria; priorizo clima siembra y chicharrita",
+    "John Deere caña a Brasil (Bichos 04/11): caña, no granos; tono ‘qué cambia’ post elecciones",
+    "Siembra soja PAS 2,3%/17 M ha (Clarín): dato del PAS del 30/10 vía Granar 31/10, >48 h",
+    "Fusarium GEA BCR (PDF 29/10): >48 h",
+    "Caputo/ARCA embargos y USDA flash China (03/11): matutino previo; priorizo frescos 4/11",
+    "Metalfor concurso (03/11): cubierto ayer",
+    "Agrofy ‘qué cambia’ EE.UU. / mejoramiento PI / Chicago-pizarras: NO_EVENTO o precios",
+    "Aceiteros San Lorenzo amenaza 6/11 (Monitor): artículo previo al 3/11 sin confirmación fresca de paro hoy"
   ],
-  "updatedAt": "2026-11-04T21:10:00.000Z",
-  "updatedBy": "rutina Noticias tarde post cierre Matba 04/11",
+  "updatedAt": "2026-11-05T09:50:00.000Z",
+  "updatedBy": "rutina Resumen agrario matutino 05/11",
   "aviso": null
 }
