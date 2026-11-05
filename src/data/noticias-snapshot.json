@@ -1,20 +1,50 @@
 {
-  "asOf": "2026-11-05T09:50:00.000Z",
-  "asOfArg": "05/11/2026, 06:50",
+  "asOf": "2026-11-05T21:09:30.000Z",
+  "asOfArg": "05/11/2026, 18:09",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina · filtro manual · 05/11/2026, 06:50 ARG",
+  "note": "Rutina tarde post Matba · filtro manual · 05/11/2026, 18:09 ARG",
   "items": [
     {
-      "title": "Patricia Bullrich reconoció ante Coninagro los reclamos del campo por retenciones, infraestructura y leyes pendientes (semillas, certificado pyme cooperativas) y se comprometió a revisar los proyectos",
+      "title": "Retenciones: la Argentina quedó última en un ranking mundial de apoyo al campo y revelan cuánto pierde por los impuestos",
       "source": "La Nación Campo",
       "handle": "La Nación Campo",
-      "url": "https://www.lanacion.com.ar/economia/campo/patricia-bullrich-reconocio-los-reclamos-del-campo-por-las-retenciones-y-las-leyes-pendientes-nid04112026/",
-      "publishedAt": "2026-11-04T15:04:56.000Z",
-      "publishedAtArg": "04/11 12:04",
-      "text": "Patricia Bullrich reconoció ante Coninagro los reclamos del campo por retenciones, infraestructura y leyes pendientes (semillas, certificado pyme cooperativas) y se comprometió a revisar los proyectos",
+      "url": "https://www.lanacion.com.ar/economia/campo/retenciones-la-argentina-quedo-ultima-en-un-ranking-mundial-de-apoyo-al-campo-y-revelan-cuanto-nid05112026/",
+      "publishedAt": "2026-11-05T15:36:12.000Z",
+      "publishedAtArg": "05/11 12:36",
+      "text": "Retenciones: la Argentina quedó última en un ranking mundial de apoyo al campo y revelan cuánto pierde por los impuestos",
       "rank": 1
+    },
+    {
+      "title": "“La gente mayor dice que nunca vio algo así”: el granizo arrasó el trigo a 20 días de la cosecha en Santa Fe",
+      "source": "Agrofy News",
+      "handle": "Agrofy",
+      "url": "https://news.agrofy.com.ar/noticia/216952/la-gente-mayor-dice-nunca-vio-algo-asi-granizo-arraso-trigo-20-dias-cosecha-santa-fe",
+      "publishedAt": "2026-11-05T19:04:00.000Z",
+      "publishedAtArg": "05/11 16:04",
+      "text": "“La gente mayor dice que nunca vio algo así”: el granizo arrasó el trigo a 20 días de la cosecha en Santa Fe",
+      "rank": 2
+    },
+    {
+      "title": "Luz amarilla sanitaria en el girasol: en el norte de Santa Fe se detectó roya negra",
+      "source": "Infocampo",
+      "handle": "Infocampo",
+      "url": "https://www.infocampo.com.ar/luz-amarilla-sanitaria-en-el-girasol-en-el-norte-de-santa-fe-se-detecto-roya-negra/",
+      "publishedAt": "2026-11-05T18:34:33.000Z",
+      "publishedAtArg": "05/11 15:34",
+      "text": "Luz amarilla sanitaria en el girasol: en el norte de Santa Fe se detectó roya negra",
+      "rank": 3
+    },
+    {
+      "title": "El Niño: anticipan temperaturas de más de 40 grados, riesgo de heladas y tormentas intensas",
+      "source": "La Nación Campo",
+      "handle": "La Nación Campo",
+      "url": "https://www.lanacion.com.ar/economia/campo/el-nino-anticipan-temperaturas-de-mas-de-40-grados-riesgo-de-heladas-y-tormentas-intensas-nid05112026/",
+      "publishedAt": "2026-11-05T20:19:19.000Z",
+      "publishedAtArg": "05/11 17:19",
+      "text": "El Niño: anticipan temperaturas de más de 40 grados, riesgo de heladas y tormentas intensas",
+      "rank": 4
     },
     {
       "title": "Alertan por visitas sindicales a los campos en el marco de un acuerdo del gremio de los trabajadores rurales con Visec",
@@ -24,52 +54,18 @@
       "publishedAt": "2026-11-04T12:57:00.000Z",
       "publishedAtArg": "04/11 09:57",
       "text": "Alertan por visitas sindicales a los campos en el marco de un acuerdo del gremio de los trabajadores rurales con Visec",
-      "rank": 2
-    },
-    {
-      "title": "Entre Ríos declaró emergencia/desastre agropecuario para ganaderos y apicultores de islas y anegadizos (La Paz, Paraná, Diamante, Victoria, Gualeguay e Islas del Ibicuy): diferimiento de inmobiliario rural y plan de facilidades (decreto 3.692; vigencia 1/8/2026–31/7/2027)",
-      "source": "Campo en Acción",
-      "handle": "Campo en Acción",
-      "url": "https://campoenaccion.com/actualidad/sali-la-emergencia-para-productores-de-carne-y-miel-en-islas.htm",
-      "publishedAt": "2026-11-04T14:27:00.000Z",
-      "publishedAtArg": "04/11 11:27",
-      "text": "Entre Ríos declaró emergencia/desastre agropecuario para ganaderos y apicultores de islas y anegadizos (La Paz, Paraná, Diamante, Victoria, Gualeguay e Islas del Ibicuy): diferimiento de inmobiliario rural y plan de facilidades (decreto 3.692; vigencia 1/8/2026–31/7/2027)",
-      "rank": 3
-    },
-    {
-      "title": "Perspectiva BCBA 5–11/11: lluvias escasas o nulas en gran parte de la pampeana (focos 10–25 mm en este del NOA, Chaco y norte Mesopotamia), riesgo de heladas en serranas/este bonaerense y luego máximas de hasta 40 °C en norte y oeste",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "url": "https://www.clarin.com/rural/lluvias-escasas-riesgo-heladas-temperaturas-40-grados-clima-proximos-7-dias_0_OxTnxXKE9g.html",
-      "publishedAt": "2026-11-04T18:00:00.000Z",
-      "publishedAtArg": "04/11 15:00",
-      "text": "Perspectiva BCBA 5–11/11: lluvias escasas o nulas en gran parte de la pampeana (focos 10–25 mm en este del NOA, Chaco y norte Mesopotamia), riesgo de heladas en serranas/este bonaerense y luego máximas de hasta 40 °C en norte y oeste",
-      "rank": 4
-    },
-    {
-      "title": "Chicharrita: el 53.er informe de la Red Nacional de Monitoreo marca alivio en el centro (vía libre para maíz tardío) y poblaciones acotadas/estables en NOA–NEA",
-      "source": "Clarín Rural",
-      "handle": "Clarín Rural",
-      "url": "https://www.clarin.com/rural/alivio-productores-via-libre-maiz-tardio-chicharrita-retrocede-centro-mantiene-acotada-zona-endemica_0_RczTL3wNnO.html",
-      "publishedAt": "2026-11-04T13:33:40.000Z",
-      "publishedAtArg": "04/11 10:33",
-      "text": "Chicharrita: el 53.er informe de la Red Nacional de Monitoreo marca alivio en el centro (vía libre para maíz tardío) y poblaciones acotadas/estables en NOA–NEA",
       "rank": 5
     }
   ],
   "descartadas": [
-    "Ley semillas multiplicadores (LN 04/11): reclamo de mesa, soft vs emergencia/clima",
-    "Ganado en pie por avión Sturzenegger (LN 04/11): hecho puntual ganadero, menor impacto grano",
-    "Pauny toma plantas (Infobae 04/11): crisis maquinaria; priorizo clima siembra y chicharrita",
-    "John Deere caña a Brasil (Bichos 04/11): caña, no granos; tono ‘qué cambia’ post elecciones",
-    "Siembra soja PAS 2,3%/17 M ha (Clarín): dato del PAS del 30/10 vía Granar 31/10, >48 h",
-    "Fusarium GEA BCR (PDF 29/10): >48 h",
-    "Caputo/ARCA embargos y USDA flash China (03/11): matutino previo; priorizo frescos 4/11",
-    "Metalfor concurso (03/11): cubierto ayer",
-    "Agrofy ‘qué cambia’ EE.UU. / mejoramiento PI / Chicago-pizarras: NO_EVENTO o precios",
-    "Aceiteros San Lorenzo amenaza 6/11 (Monitor): artículo previo al 3/11 sin confirmación fresca de paro hoy"
+    "Infocampo saldo récord / molienda 12 años (05/11): coyuntura comercial, no evento → NO_EVENTO",
+    "Clarín canal hacienda exportación carne (05/11): soft comercial, no paro/medida",
+    "Agrofy Paraguay 45 Mt granos (05/11): fuera de decisión productor AR",
+    "Bullrich Coninagro (04/11): cubierto por ranking retenciones fresco 05/11",
+    "Emergencia islas Entre Ríos / perspectiva BCBA / chicharrita 53 (04/11): priorizo frescos 05/11 clima+plaga",
+    "Clarín roya negra: mismo hecho que Infocampo; dejo Infocampo"
   ],
-  "updatedAt": "2026-11-05T09:50:00.000Z",
-  "updatedBy": "rutina Resumen agrario matutino 05/11",
+  "updatedAt": "2026-11-05T21:09:30.000Z",
+  "updatedBy": "rutina Noticias tarde post cierre Matba 05/11",
   "aviso": null
 }
