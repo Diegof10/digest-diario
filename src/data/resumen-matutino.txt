@@ -1,7 +1,7 @@
-fecha: 2026-11-04 ART
+fecha: 2026-11-05 ART
 titulo_ui: Resumen matutino
 
-CBOT (04/11, 6:48 ART): soja 443,3 US$/t (−0,6%) · maíz 174,2 (0,0%) · trigo 221,2 (+0,4%)
-FX: oficial 1.570 · blue 1.570 · MEP 1.581 · CCL 1.669 · riesgo país 831
-Mercados: S&P +0,4% · Nasdaq +0,8% · Dow −0,4% · WTI 96,0 (−0,1%) · Brent 102,9 (−0,6%) · UST 10a 4,95%
-Nota: Riesgo país salta a 831 (venía de 805); CCL sigue alto (~1.669, brecha ~6,3%). Afuera Nasdaq recupera (+0,8%) tras el −1,1% de ayer; oro/plata firmes y el petróleo afloja.
+CBOT (05/11, 6:55 ART): soja 442,8 US$/t (+0,2%) · maíz 175,5 (+0,3%) · trigo 219,5 (−0,2%)
+FX: oficial 1.570 · blue 1.560 · MEP 1.589 · CCL 1.680 · riesgo país 831
+Mercados: S&P +1,6% · Nasdaq +1,4% · Dow +3,0% · WTI 88,4 (+0,4%) · Brent 95,9 (+1,3%) · UST 10a 4,89%
+Nota: Wall Street fuerte (Dow +3%, VIX −18%). CCL trepa a 1.680 (+2,2%); blue afloja a 1.560. CBOT mixto, leve alza soja/maíz.
