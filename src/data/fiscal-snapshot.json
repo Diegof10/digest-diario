@@ -1,8 +1,22 @@
 {
-  "fecha": "2026-10-30",
-  "actualizadoAt": "2026-10-30T07:56:00.000-03:00",
+  "fecha": "2026-11-05",
+  "actualizadoAt": "2026-11-05T08:48:00.000-03:00",
   "fuente": "ARCA · BO",
   "novedades": [
+    {
+      "texto": "RG ARCA 5923/2026 (BO 05/11/2026): suspensión de ejecuciones fiscales y medidas cautelares hasta 30/06/2027 para MiPyME Tramos 1 y 2 (Certificado MiPyME vigente al 29/10/2026) y Pequeño Contribuyente código 547. Fuente: ARCA",
+      "fuente": "BO",
+      "norma": "RG ARCA 5923/2026",
+      "boFecha": "2026-11-05",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/350077/20261105"
+    },
+    {
+      "texto": "RG ARCA 5924/2026 (BO 05/11/2026): plan especial RG 5875, adhesión hasta 30/06/2027 (antes 30/12/2026); incluye obligaciones vencidas y multas al 31/10/2026; en Mis Facilidades desde 16/11/2026. Fuente: ARCA",
+      "fuente": "BO",
+      "norma": "RG ARCA 5924/2026",
+      "boFecha": "2026-11-05",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/350078/20261105"
+    },
     {
       "texto": "RG ARCA 5918/2026 (BO 30/10/2026): DJ Ganancias PH 2025 presentación hasta 16/11/2026 (el pago no cambia); caracterización sistémica Pequeño Contribuyente al 30/11/2026.",
       "fuente": "BO",
@@ -55,6 +69,13 @@
       "vence": "2026-11-16"
     },
     {
+      "concepto": "Plan especial RG 5875: nuevas deudas al 31/10 en Mis Facilidades",
+      "ventana": "desde 16/11/2026",
+      "detalle": "Obligaciones vencidas y multas al 31/10/2026",
+      "fuente": "BO 05/11 · RG ARCA 5924/2026",
+      "vence": "2026-11-16"
+    },
+    {
       "concepto": "Pequeño Contribuyente (caracterización sistémica ARCA)",
       "ventana": "30/11/2026",
       "detalle": "Proceso de ARCA para planes de facilidades de pago (RG 5321); antes 16/11",
@@ -69,13 +90,34 @@
       "vence": "2026-12-15"
     },
     {
+      "concepto": "Plan salud RG 5858: adhesión",
+      "ventana": "hasta 30/12/2026",
+      "detalle": "Sin cambios",
+      "fuente": "BO 30/10 · RG ARCA 5920/2026",
+      "vence": "2026-12-30"
+    },
+    {
       "concepto": "SISA IP2",
       "ventana": "01/12/2026–último día feb/2027",
       "detalle": "Superficies Anexo IP2 (aún no abre)",
       "fuente": "ARCA SISA / RG 5894",
       "vence": "2027-02-28"
+    },
+    {
+      "concepto": "Plan especial RG 5875: adhesión",
+      "ventana": "hasta 30/06/2027",
+      "detalle": "Antes 30/12/2026",
+      "fuente": "BO 05/11 · RG ARCA 5924/2026",
+      "vence": "2027-06-30"
+    },
+    {
+      "concepto": "Suspensión ejecuciones fiscales y cautelares (MiPyME T1–2 / Pequeño Contribuyente 547)",
+      "ventana": "hasta 30/06/2027",
+      "detalle": "Certificado MiPyME vigente al 29/10/2026",
+      "fuente": "BO 05/11 · RG ARCA 5923/2026",
+      "vence": "2027-06-30"
     }
   ],
-  "lineaTablero": "Próximo: 31/10 SISA IP1 (RG 5894), 16/11 DJ Ganancias PH 2025 (RG 5918), 30/11 Pequeño Contribuyente (RG 5918) y 13–15/12 3° anticipo Ganancias y BP según terminación de CUIT.",
+  "lineaTablero": "Próximo: 16/11 DJ Ganancias PH 2025 (RG 5918) y alta de deudas al 31/10 en plan RG 5875 (RG 5924), 30/11 Pequeño Contribuyente (RG 5918), 13–15/12 3° anticipo Ganancias y BP según terminación de CUIT; plan RG 5875 hasta 30/06/2027.",
   "pie": "Análisis de gestión. No es dictamen impositivo. · @dhferrari"
 }
