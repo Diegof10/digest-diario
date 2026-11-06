@@ -1,20 +1,41 @@
 {
-  "asOf": "2026-11-05T21:09:30.000Z",
-  "asOfArg": "05/11/2026, 18:09",
+  "asOf": "2026-11-06T09:50:00.000Z",
+  "asOfArg": "06/11/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina tarde post Matba · filtro manual · 05/11/2026, 18:09 ARG",
+  "note": "Rutina matutina · filtro manual · 06/11/2026, 06:50 ARG",
   "items": [
     {
-      "title": "Retenciones: la Argentina quedó última en un ranking mundial de apoyo al campo y revelan cuánto pierde por los impuestos",
+      "title": "El Niño: las lluvias no dan tregua y en el sur bonaerense hay hasta 20 días de atraso en la siembra de maíz y girasol; advierten que algunos productores podrían no completar la superficie prevista",
       "source": "La Nación Campo",
       "handle": "La Nación Campo",
-      "url": "https://www.lanacion.com.ar/economia/campo/retenciones-la-argentina-quedo-ultima-en-un-ranking-mundial-de-apoyo-al-campo-y-revelan-cuanto-nid05112026/",
-      "publishedAt": "2026-11-05T15:36:12.000Z",
-      "publishedAtArg": "05/11 12:36",
-      "text": "Retenciones: la Argentina quedó última en un ranking mundial de apoyo al campo y revelan cuánto pierde por los impuestos",
+      "url": "https://www.lanacion.com.ar/economia/campo/el-nino-las-lluvias-no-dan-tregua-y-en-el-sur-bonaerense-hay-hasta-20-dias-de-atraso-en-la-siembra-nid05112026/",
+      "publishedAt": "2026-11-06T03:15:00.000Z",
+      "publishedAtArg": "06/11 00:15",
+      "text": "El Niño: las lluvias no dan tregua y en el sur bonaerense hay hasta 20 días de atraso en la siembra de maíz y girasol; advierten que algunos productores podrían no completar la superficie prevista",
       "rank": 1
+    },
+    {
+      "title": "USDA (agregado en Beijing): eleva a 110 Mt la proyección de importaciones de soja de China en 2026/27; las SOE siguen comprando soja de EE.UU. por el acuerdo de Busan, mientras el arancel retaliatorio del 10% empuja a compradores comerciales hacia Sudamérica",
+      "titleOriginal": "Post maintained its forecast for MY 26/27 soybean production at 20.1 million metric tons (MMT) and adjusted its forecast for MY 26/27 soybean imports upward slightly to 110 MMT",
+      "source": "USDA FAS GAIN · traducido del inglés",
+      "handle": "USDA FAS",
+      "url": "https://fas-prod.azureedge.us/data/gain/2026/11/china-oilseeds-and-products-update",
+      "publishedAt": "2026-11-04T12:00:00.000Z",
+      "publishedAtArg": "04/11 09:00",
+      "text": "USDA (agregado en Beijing): eleva a 110 Mt la proyección de importaciones de soja de China en 2026/27; las SOE siguen comprando soja de EE.UU. por el acuerdo de Busan, mientras el arancel retaliatorio del 10% empuja a compradores comerciales hacia Sudamérica",
+      "rank": 2
+    },
+    {
+      "title": "BCBA PAS al 4/11: soja 4,7% de 17 Mha (+2,4 pp semanal), maíz grano comercial 50,5% de 8,4 Mha, girasol 72,4% de 3,1 Mha; trigo cosechado 8,5% del área apta (proyección 23,4 Mt); presión de cogollero en centro-norte de Santa Fe",
+      "source": "Bolsa de Cereales de Buenos Aires",
+      "handle": "BCBA",
+      "url": "https://www.bolsadecereales.com/descargar_ultimo_informe_pas",
+      "publishedAt": "2026-11-05T12:00:00.000Z",
+      "publishedAtArg": "05/11 09:00",
+      "text": "BCBA PAS al 4/11: soja 4,7% de 17 Mha (+2,4 pp semanal), maíz grano comercial 50,5% de 8,4 Mha, girasol 72,4% de 3,1 Mha; trigo cosechado 8,5% del área apta (proyección 23,4 Mt); presión de cogollero en centro-norte de Santa Fe",
+      "rank": 3
     },
     {
       "title": "“La gente mayor dice que nunca vio algo así”: el granizo arrasó el trigo a 20 días de la cosecha en Santa Fe",
@@ -24,7 +45,7 @@
       "publishedAt": "2026-11-05T19:04:00.000Z",
       "publishedAtArg": "05/11 16:04",
       "text": "“La gente mayor dice que nunca vio algo así”: el granizo arrasó el trigo a 20 días de la cosecha en Santa Fe",
-      "rank": 2
+      "rank": 4
     },
     {
       "title": "Luz amarilla sanitaria en el girasol: en el norte de Santa Fe se detectó roya negra",
@@ -34,38 +55,21 @@
       "publishedAt": "2026-11-05T18:34:33.000Z",
       "publishedAtArg": "05/11 15:34",
       "text": "Luz amarilla sanitaria en el girasol: en el norte de Santa Fe se detectó roya negra",
-      "rank": 3
-    },
-    {
-      "title": "El Niño: anticipan temperaturas de más de 40 grados, riesgo de heladas y tormentas intensas",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "url": "https://www.lanacion.com.ar/economia/campo/el-nino-anticipan-temperaturas-de-mas-de-40-grados-riesgo-de-heladas-y-tormentas-intensas-nid05112026/",
-      "publishedAt": "2026-11-05T20:19:19.000Z",
-      "publishedAtArg": "05/11 17:19",
-      "text": "El Niño: anticipan temperaturas de más de 40 grados, riesgo de heladas y tormentas intensas",
-      "rank": 4
-    },
-    {
-      "title": "Alertan por visitas sindicales a los campos en el marco de un acuerdo del gremio de los trabajadores rurales con Visec",
-      "source": "Agrofy News",
-      "handle": "Agrofy",
-      "url": "https://news.agrofy.com.ar/noticia/216940/alertan-visitas-sindicales-campos-marco-acuerdo-gremio-trabajadores-rurales-visec",
-      "publishedAt": "2026-11-04T12:57:00.000Z",
-      "publishedAtArg": "04/11 09:57",
-      "text": "Alertan por visitas sindicales a los campos en el marco de un acuerdo del gremio de los trabajadores rurales con Visec",
       "rank": 5
     }
   ],
   "descartadas": [
-    "Infocampo saldo récord / molienda 12 años (05/11): coyuntura comercial, no evento → NO_EVENTO",
-    "Clarín canal hacienda exportación carne (05/11): soft comercial, no paro/medida",
-    "Agrofy Paraguay 45 Mt granos (05/11): fuera de decisión productor AR",
-    "Bullrich Coninagro (04/11): cubierto por ranking retenciones fresco 05/11",
-    "Emergencia islas Entre Ríos / perspectiva BCBA / chicharrita 53 (04/11): priorizo frescos 05/11 clima+plaga",
-    "Clarín roya negra: mismo hecho que Infocampo; dejo Infocampo"
+    "LN atraso girasol sudeste (06/11 05:50): solapa con atraso siembra sur BA más completo",
+    "Retenciones ranking LN (05/11): soft ranking, priorizo operativos frescos",
+    "El Niño 40°/heladas LN (05/11): solapa con atraso siembra clima extremo",
+    "Visec visitas sindicales Agrofy (04/11): cerca del corte 48 h; priorizo PAS/China/atraso",
+    "Visec prima EUDR Agrofy (05/11): prima de precio + how-to; no evento nuevo de política",
+    "ARCA recaudación DEX Infocampo: análisis de setiembre, no medida nueva",
+    "Agrofy/Clarín elecciones EE.UU. ‘qué cambia’: opinión sin hecho → NO_EVENTO",
+    "Cogollero Agrofy 02/11: >48 h (PAS ya menciona presión en centro-norte SF)",
+    "Panel fiscal: RG 5923/5924 ya publicadas 05/11; BO 06/11 sin norma agro nueva relevante"
   ],
-  "updatedAt": "2026-11-05T21:09:30.000Z",
-  "updatedBy": "rutina Noticias tarde post cierre Matba 05/11",
+  "updatedAt": "2026-11-06T09:50:00.000Z",
+  "updatedBy": "rutina matutina Costos/Clima/Noticias 06/11",
   "aviso": null
 }
