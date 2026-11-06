@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-11-06T09:50:00.000Z",
-  "asOfArg": "06/11/2026, 06:50",
+  "asOf": "2026-11-06T21:08:00.000Z",
+  "asOfArg": "06/11/2026, 18:08",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina · filtro manual · 06/11/2026, 06:50 ARG",
+  "note": "Rutina tarde respaldo · filtro manual · 06/11/2026, 18:08 ARG · saco soft promesas Milei/Caputo del cron 17:54",
   "items": [
     {
       "title": "El Niño: las lluvias no dan tregua y en el sur bonaerense hay hasta 20 días de atraso en la siembra de maíz y girasol; advierten que algunos productores podrían no completar la superficie prevista",
@@ -59,17 +59,20 @@
     }
   ],
   "descartadas": [
-    "LN atraso girasol sudeste (06/11 05:50): solapa con atraso siembra sur BA más completo",
-    "Retenciones ranking LN (05/11): soft ranking, priorizo operativos frescos",
-    "El Niño 40°/heladas LN (05/11): solapa con atraso siembra clima extremo",
-    "Visec visitas sindicales Agrofy (04/11): cerca del corte 48 h; priorizo PAS/China/atraso",
-    "Visec prima EUDR Agrofy (05/11): prima de precio + how-to; no evento nuevo de política",
-    "ARCA recaudación DEX Infocampo: análisis de setiembre, no medida nueva",
-    "Agrofy/Clarín elecciones EE.UU. ‘qué cambia’: opinión sin hecho → NO_EVENTO",
-    "Cogollero Agrofy 02/11: >48 h (PAS ya menciona presión en centro-norte SF)",
-    "Panel fiscal: RG 5923/5924 ya publicadas 05/11; BO 06/11 sin norma agro nueva relevante"
+    "Cron tarde RSS (17:54 ART / asOf blob 20:54Z): 5 soft Milei/Caputo prometiendo eliminar retenciones / condicionar a reelección o segundo mandato — sin medida nueva (decreto/alícuota/BO); SIEMPRE_EVENTO las dejaba pasar → las saco",
+    "Infocampo: Milei “eliminar para siempre el invento nefasto de las retenciones” — discurso, no norma",
+    "Bichos: Milei promete eliminación + devolución si es reelegido — campaña",
+    "Agrofy: Milei ratifica plan de baja y “injustamente castigado” — promesa sin hecho",
+    "LN: Milei dice que desaparecerán en el largo plazo — horizonte político, no medida",
+    "Bichos: Caputo condiciona quita total a un segundo mandato — promesa condicionada",
+    "RSS también: Caputo “si tuviéramos otro mandato” / Clarín Caputo “si Milei gana” — mismo cluster",
+    "Granizo ~16.000 ha núcleo (Agrofy/TodoAgro 06/11) y roya negra Bichos/Clarín: solapan con granizo SF y roya Infocampo ya curados",
+    "LN El Niño 40°/heladas y atraso girasol sudeste: solapan con atraso siembra sur BA",
+    "Retenciones ranking LN: soft ranking; priorizo operativos (clima/PAS/China/plaga)",
+    "Semilla fiscalizada 19% Agrofy: reclamo sectorial, no evento de política/plaga/clima",
+    "Visec/Sturzenegger Clarín: reunión/opinión, no medida nueva"
   ],
-  "updatedAt": "2026-11-06T09:50:00.000Z",
-  "updatedBy": "rutina matutina Costos/Clima/Noticias 06/11",
+  "updatedAt": "2026-11-06T21:08:00.000Z",
+  "updatedBy": "rutina tarde respaldo 06/11",
   "aviso": null
 }

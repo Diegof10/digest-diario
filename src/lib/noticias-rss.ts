@@ -171,6 +171,18 @@ const CLIMA_EXTREMO = /\bsequia\b|inundacion|anegamiento|\bhelada(s)?\b|\bgraniz
 /** Retenciones siempre es evento, aunque el título hable de precios. */
 const SIEMPRE_EVENTO = /\bretencion(es)?\b|derechos de exportacion/;
 
+/**
+ * Promesas/discurso de campaña sobre retenciones: se rechazan AUNQUE el título
+ * diga "retenciones" (SIEMPRE_EVENTO no las salva). Medidas reales (alícuota,
+ * decreto, resolución, BO, RG, baja/sube/suspende con hecho) siguen pasando.
+ */
+const PROMESA_RETENCIONES =
+  /\b(promete|prometio|volvio a prometer)\b|\beliminar para siempre\b|\binvento nefasto\b|\bsegundo mandato\b|\bsi es reelegid|\bsi milei (gana|consigue|es reeleg)|\b(si )?tuvieramos otro mandato\b|\bdesapareceran en el largo plazo\b|\bcondicionar (la )?quita\b|\bquita total de retenciones\b|\binjustamente castigad|\bobjetivo es eliminar|\btrabajamos sin descanso para eliminar\b|\bterminar(iamos|a|ia)? con (todas )?las retenciones\b|\bdevolucion de \d+.*\bsi es reeleg|\bno tengan duda\b.*\bretencion|\bretencion.*\bno tengan duda\b|\bplan de baja de retenciones\b.*\b(dijo|objetivo|eliminar)|\bdestaco la baja de retenciones\b|\baseguro( al campo)? que si\b.*\bretencion|\ble aseguro al campo\b.*\bretencion/;
+
+/** Hecho/norma concreta de retenciones (no discurso). Exige norma o %/alícuota; evita “de 500” de promesas. */
+const RETENCIONES_MEDIDA =
+  /\b(decreto|resolucion|boletin oficial|\brg\s*\d)\b|\balicuota\b|\bretencion(es)?\b.{0,40}\b\d+\s*%|\b\d+\s*%.{0,40}\bretencion|\b(baja|sube|subio|bajo|suspende|suspendio|reduce|reduccion)\b.{0,40}\b(retencion|dex|derechos de exportacion).{0,25}\d+\s*%/;
+
 /** Contexto agro exigido a los feeds generales. */
 const AGRO = /\bcampo\b|\bagro|\bsoja\b|\bmaiz\b|\btrigo\b|\bgirasol\b|\bgranos?\b|\bcereal|\bcosecha\b|\bproductor(es)?\b|\bganad|\bcarne\b|\bfrigorific|\bretenciones\b|\bderechos de exportacion\b|\baceiter|\bagricultur/;
 
@@ -185,6 +197,8 @@ function pareceEspanol(t: string): boolean {
 export function puntuar(it: RssItem): NoticiaCandidata | null {
   const t = sinTildes(it.titulo);
   if (!pareceEspanol(it.titulo)) return null;
+  // Promesas de campaña sobre retenciones: fuera aunque SIEMPRE_EVENTO matchee.
+  if (PROMESA_RETENCIONES.test(t) && !RETENCIONES_MEDIDA.test(t)) return null;
   if (PRECIOS.test(t) && !SIEMPRE_EVENTO.test(t)) return null;
   if (it.general && !AGRO.test(t)) return null;
   let keywords = EVENTOS.filter(([, re]) => re.test(t)).map(([k]) => k);
