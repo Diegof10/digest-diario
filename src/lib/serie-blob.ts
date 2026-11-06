@@ -154,6 +154,9 @@ export interface CronRun {
   seriesWritten?: boolean;
   seriesReason?: string | null;
   granosOk?: boolean | null;
+  /** Lectura de clima ahora durante el digest. Ausente en logs viejos. No define `ok`. */
+  climaVivoOk?: boolean | null;
+  climaVivoError?: string | null;
 }
 
 export async function readCronLog(): Promise<CronRun[]> {

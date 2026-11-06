@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import vercelJson from "../../../../vercel.json";
+import { resumenClimaVivo } from "@/lib/clima-vivo";
 import { leerAlertas } from "@/lib/cron-alertas";
 import { readHomeBlob } from "@/lib/digest-blob";
 import { readNoticiasRun } from "@/lib/noticias-cron";
@@ -54,7 +55,11 @@ export async function GET() {
       seriesWritten: r.seriesWritten ?? null,
       seriesReason: r.seriesReason ?? null,
       granosOk: r.granosOk ?? null,
+      climaVivoOk: r.climaVivoOk ?? null,
+      climaVivoError: r.climaVivoError ?? null,
     })),
+    /** Clima ahora guardado por el digest (no es la lectura en vivo de la home). */
+    climaVivo: resumenClimaVivo(homeBlob?.climaVivo),
     /** Última corrida de /api/cron/noticias (ok o error) */
     noticiasCron,
     /** Última corrida de /api/cron/fiscal (BO/ARCA) y última revisión OK */

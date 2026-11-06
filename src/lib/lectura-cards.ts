@@ -1,7 +1,7 @@
 import { lineaSinNovedad } from "@/lib/fiscal";
 import { hoyArtIso, isoToDmy } from "@/lib/habiles";
 import type { CotizacionGrano, PlazaSnapshot } from "@/lib/plazas";
-import type { ClimaVivoSnapshot } from "@/lib/clima-vivo";
+import { estadoClimaVivo, horaLecturaArt, type ClimaVivoSnapshot } from "@/lib/clima-vivo";
 import type { FiscalSnapshot, MercadoSnapshot } from "@/lib/types";
 
 /**
@@ -175,10 +175,22 @@ function condDe(code: number | null): Cond | null {
 }
 
 function seccionClima(clima: ClimaVivoSnapshot | null): { s: CardSection; code: number | null } {
-  const con = (clima?.ciudades ?? []).filter((c) => c.tempC != null && !c.error);
+  const estado = clima ? estadoClimaVivo(clima) : "sin_dato";
+  const con = estado === "sin_dato" ? [] : (clima?.ciudades ?? []).filter((c) => c.tempC != null && !c.error);
   const base = { flecha: "flat" as const, flechaLabel: "sin alerta en los datos" };
   if (con.length === 0) {
-    return { s: { ...base, titulo: "Clima · sin dato", resumen: "Sin dato de clima vigente (más de 2 h o sin respuesta).", fuente: clima?.fuente ?? null, hora: null }, code: null };
+    const cuando = clima?.leidoAt ? ` Lectura ${horaLecturaArt(clima.leidoAt)}.` : "";
+    const por = clima?.errorLectura ? ` ${clima.errorLectura}.` : "";
+    return {
+      s: {
+        ...base,
+        titulo: "Clima · sin dato",
+        resumen: `Sin dato de clima vigente (más de 2 h o sin respuesta).${cuando}${por}`,
+        fuente: clima?.fuente ?? null,
+        hora: null,
+      },
+      code: null,
+    };
   }
   const cnt = new Map<Cond, number>();
   for (const c of con) {
@@ -195,11 +207,16 @@ function seccionClima(clima: ClimaVivoSnapshot | null): { s: CardSection; code: 
   const lista = nombres.length > 1 ? `${nombres.slice(0, -1).join(", ")} y ${nombres[nombres.length - 1]}` : nombres[0];
   const rango = min === max ? `${n1(min)} °C` : `entre ${n1(min)} y ${n1(max)} °C`;
   const code = con.find((c) => condDe(c.code) === top[0]?.[0])?.code ?? con[0].code;
+  const stale = estado === "stale";
+  const cuerpo = `${lista}: ${cond}, ${rango}${hora ? ` a las ${hora}` : ""}.`;
+  const resumen = stale
+    ? `Último valor, no es una lectura nueva. ${cuerpo} Reintento ${horaLecturaArt(clima?.leidoAt)} sin actualización${clima?.errorLectura ? ` (${clima.errorLectura})` : ""}. Fuente: ${clima?.fuente ?? "Open-Meteo (modelo)"}.`
+    : `${cuerpo} Fuente: ${clima?.fuente ?? "Open-Meteo (modelo)"}.`;
   return {
     s: {
       ...base,
-      titulo: `Clima · ${cond} en la zona núcleo`,
-      resumen: `${lista}: ${cond}, ${rango}${hora ? ` a las ${hora}` : ""}. Fuente: ${clima?.fuente ?? "Open-Meteo (modelo)"}.`,
+      titulo: stale ? `Clima · último valor (${cond})` : `Clima · ${cond} en la zona núcleo`,
+      resumen,
       fuente: clima?.fuente ?? null,
       hora: hora ? `${hora} ART` : null,
     },

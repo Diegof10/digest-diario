@@ -10,8 +10,9 @@ import Ticker from "@/components/ui/Ticker";
 import { cordobaParts, DEFAULT_KM, X_HANDLE, X_PROFILE_URL } from "@/lib/digest";
 import { getHomeData } from "@/lib/home-data";
 
-// El HTML sale completo: el resumen es el último guardado por el cron (Blob),
-// no un esqueleto que espera a que /api/digest consulte las fuentes.
+// El HTML sale completo: el resumen es el último guardado por el cron (Blob).
+// Clima ahora se resuelve aparte y no reutiliza un "sin dato" congelado.
+export const maxDuration = 30;
 
 export default async function Home({
   searchParams,

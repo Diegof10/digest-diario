@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { resumenClimaVivo } from "@/lib/clima-vivo";
 import { DEFAULT_KM } from "@/lib/digest";
 import { captureHome } from "@/lib/home-data";
 import { appendCronLog } from "@/lib/serie-blob";
@@ -44,6 +45,11 @@ export async function GET(req: NextRequest) {
   const ms = Date.now() - started;
   const seriesReason = p?.persistencia.reason ?? (p ? null : "sin plazas");
   const granosOk = (data.digest.mercado.sourcesOk ?? []).includes("feed granos");
+  const clima = resumenClimaVivo(data.climaVivo);
+  const climaVivoOk = clima.estado === "ok";
+  const climaVivoError = climaVivoOk ? null : (clima.errorLectura ?? clima.errores[0] ?? "sin dato");
+  // `ok` sigue siendo "el resumen se guardó". Un fallo de clima ahora no tira el digest:
+  // queda en climaVivoOk / el log, y la home reconsulta Open-Meteo.
   const ok = blob.written;
   await appendCronLog({
     at: new Date().toISOString(),
@@ -55,9 +61,14 @@ export async function GET(req: NextRequest) {
     seriesWritten: Boolean(p?.persistencia.written),
     seriesReason,
     granosOk,
+    climaVivoOk,
+    climaVivoError,
   }).catch(() => {});
+  if (!climaVivoOk) {
+    console.error(`[cron/digest] clima-vivo FAIL ${climaVivoError}`);
+  }
   console.log(
-    `[cron/digest] ${ok ? "ok" : "FAIL"} ${ms}ms blob=${blob.written} series=${seriesReason} granos=${granosOk} plazas=${JSON.stringify(resumen)}`,
+    `[cron/digest] ${ok ? "ok" : "FAIL"} ${ms}ms blob=${blob.written} series=${seriesReason} granos=${granosOk} climaVivo=${climaVivoOk ? "ok" : climaVivoError} plazas=${JSON.stringify(resumen)}`,
   );
   return NextResponse.json(
     {
@@ -70,6 +81,9 @@ export async function GET(req: NextRequest) {
       seriesWritten: Boolean(p?.persistencia.written),
       seriesReason,
       granosOk,
+      climaVivoOk,
+      climaVivoError,
+      climaVivo: clima,
       plazas: resumen,
       persistencia: p?.persistencia ?? null,
     },

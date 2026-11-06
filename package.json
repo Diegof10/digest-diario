@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test src/lib/auditoria.test.ts",
+    "test": "tsx --test src/lib/auditoria.test.ts src/lib/clima-vivo.test.ts",
     "noticias:status": "node scripts/refresh-noticias.mjs",
     "noticias:empty": "node scripts/refresh-noticias.mjs --empty",
     "noticias:refresh": "node scripts/refresh-noticias.mjs --from",
