@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { getCatac } from "@/lib/catac";
-import { getClimaVivo } from "@/lib/clima-vivo";
+import { climaVivoParaHome, getClimaVivo, mergeClimaPersistido } from "@/lib/clima-vivo";
 import { assembleDigest } from "@/lib/digest";
 import { readHomeBlob, writeHomeBlob, type HomeBlobFile } from "@/lib/digest-blob";
 import { getFiscal } from "@/lib/fiscal";
@@ -50,13 +50,15 @@ async function conRepoMasNuevo(saved: DigestSnapshot): Promise<DigestSnapshot> {
 /**
  * La home lee el último resumen que guardó el cron (Blob `digest/latest.json`).
  * No consulta Chicago, BCRA, pizarras ni el resto de las fuentes en cada visita.
+ * Clima ahora es la excepción: si el snapshot no está vigente se reconsulta Open-Meteo.
+ * Un digest que guardó "sin dato" no deja el bloque congelado.
  * Si todavía no hay blob (local, o el cron no corrió), arma en vivo una vez.
  */
 
 async function armarHome(km: number, conCos: boolean, fresh = false) {
   const [digest, climaVivo, cos, hacienda] = await Promise.all([
     assembleDigest({ km, fresh }),
-    getClimaVivo(),
+    getClimaVivo({ bypassCache: fresh }),
     conCos || fresh ? loadResumenMatutino() : Promise.resolve(null),
     getHacienda(),
   ]);
@@ -81,28 +83,38 @@ function fileDe(data: Awaited<ReturnType<typeof armarHome>>, km: number): HomeBl
 
 /** Lo usa el cron: arma fresco y deja el resumen en Blob para las visitas. */
 export async function captureHome(km: number) {
-  const data = await armarHome(km, true, true);
-  const file = fileDe(data, km);
+  const [prev, data] = await Promise.all([
+    readHomeBlob(true).catch(() => null),
+    armarHome(km, true, true),
+  ]);
+  const climaVivo = mergeClimaPersistido(prev?.climaVivo ?? null, data.climaVivo);
+  const lecturaCards =
+    climaVivo === data.climaVivo
+      ? data.lecturaCards
+      : await buildLecturaCards(data.digest.mercado, data.digest.fiscal, climaVivo);
+  const merged = { ...data, climaVivo, lecturaCards };
+  const file = fileDe(merged, km);
   const blob = await writeHomeBlob(file);
-  return { data, blob, file };
+  return { data: merged, blob, file };
 }
 
 async function desdeBlob(saved: HomeBlobFile, km: number, conCos: boolean): Promise<HomeData> {
   // El fiscal vive en su propio blob (otro cron). Releerlo no pega al Boletín:
   // así un ok:false de las 08:00 se ve aunque el resumen sea el de las 07:00.
-  const [catac, fiscal] = await Promise.all([
+  const [catac, fiscal, climaVivo] = await Promise.all([
     saved.km === km ? Promise.resolve(saved.digest.catac) : getCatac(km),
     getFiscal(),
+    climaVivoParaHome(saved.climaVivo),
   ]);
   const base = await conRepoMasNuevo(saved.digest);
   const digest = { ...base, catac, fiscal };
   const [cos, lecturaCards] = await Promise.all([
     conCos ? loadResumenMatutino() : Promise.resolve(null),
-    buildLecturaCards(digest.mercado, fiscal, saved.climaVivo),
+    buildLecturaCards(digest.mercado, fiscal, climaVivo),
   ]);
   return {
     digest,
-    climaVivo: saved.climaVivo,
+    climaVivo,
     cos,
     hacienda: saved.hacienda,
     lecturaCards,
