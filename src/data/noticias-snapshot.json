@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-11-08T09:50:00.000Z",
-  "asOfArg": "08/11/2026, 06:50",
+  "asOf": "2026-11-09T09:50:00.000Z",
+  "asOfArg": "09/11/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 08/11 · salen atraso siembra LN, BCBA PAS y roya negra (>48h) · granizo pasa a LN/BCR 07/11 (más completo que Bichos 06/11) · entran IF fertilizantes/China licencias, FIAS Santa Fe y El Niño Agrofy",
+  "note": "Rutina matutina 09/11 · salen FIAS Santa Fe, embarques trigo y El Niño Agrofy (>48h al corte) · fin de semana sin eventos nuevos que pasen el filtro · quedan granizo BCR (LN 07/11) e IF fertilizantes/China (07/11)",
   "items": [
     {
       "title": "Súper Niño: la BCR identificó casi 16.000 ha con potencial daño de granizo en Córdoba y Santa Fe; trigos revolcados, maíces barridos y lotes de soja recién emergidos a evaluar para resiembra",
@@ -25,50 +25,20 @@
       "publishedAtArg": "07/11 13:02",
       "text": "Fertilizantes: la demanda argentina sigue apagada, con compras sobre la ventana de aplicación (urea sin excedente de oferta), y China mantiene congeladas sus licencias de exportación de fertilizantes por lo que resta de 2026",
       "rank": 2
-    },
-    {
-      "title": "Santa Fe crea en el Presupuesto 2027 el Fondo de Infraestructura Agropecuaria (FIAS): el 100% del Impuesto Inmobiliario Rural irá a caminos y obras para el campo",
-      "source": "TodoAgro",
-      "handle": "TodoAgro",
-      "url": "https://www.todoagro.com.ar/santa-fe-destinara-el-100-del-impuesto-inmobiliario-rural-a-infraestructura-para-el-campo/",
-      "publishedAt": "2026-11-06T15:04:00.000Z",
-      "publishedAtArg": "06/11 12:04",
-      "text": "Santa Fe crea en el Presupuesto 2027 el Fondo de Infraestructura Agropecuaria (FIAS): el 100% del Impuesto Inmobiliario Rural irá a caminos y obras para el campo",
-      "rank": 3
-    },
-    {
-      "title": "Los embarques argentinos de trigo 2025/26 ya superaron todas las proyecciones públicas y privadas; la demanda busca orígenes alternativos ante el apagón logístico del Mar Negro",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "url": "https://bichosdecampo.com/gran-noticia-los-embarques-argentinos-de-trigo-2025-26-ya-superaron-todas-las-proyecciones-tanto-publicas-como-privadas/",
-      "publishedAt": "2026-11-06T21:11:57.000Z",
-      "publishedAtArg": "06/11 18:11",
-      "text": "Los embarques argentinos de trigo 2025/26 ya superaron todas las proyecciones públicas y privadas; la demanda busca orígenes alternativos ante el apagón logístico del Mar Negro",
-      "rank": 4
-    },
-    {
-      "title": "El Niño ya supera +2 °C en el Pacífico y podría llegar a +3 °C entre diciembre y enero; anticipan tormentas fuertes frecuentes en la segunda mitad de noviembre y diciembre en la llanura pampeana",
-      "source": "Agrofy News",
-      "handle": "Agrofy News",
-      "url": "https://news.agrofy.com.ar/noticia/216961/nino-podria-tener-segundo-pico-junio-2027-algo-nunca-visto-significa-campo",
-      "publishedAt": "2026-11-06T17:44:00.000Z",
-      "publishedAtArg": "06/11 14:44",
-      "text": "El Niño ya supera +2 °C en el Pacífico y podría llegar a +3 °C entre diciembre y enero; anticipan tormentas fuertes frecuentes en la segunda mitad de noviembre y diciembre en la llanura pampeana",
-      "rank": 5
     }
   ],
   "descartadas": [
-    "LN atraso siembra sur BA (nid05112026), BCBA PAS 05/11, roya negra Infocampo 05/11: >48h al corte 08/11",
-    "Bichos GEA granizo+fusarium 06/11 y Agrofy/TodoAgro ~16.000 ha 06/11: mismo hecho BCR, queda LN 07/11 (rank 1)",
-    "Promesas Milei/Caputo eliminar retenciones (Agrofy/LN/Clarín 06/11): sin decreto/alícuota/BO — PROMESA_RETENCIONES",
-    "LN Súper Niño >40° y tormentas 07/11 y El Niño 40°/heladas: solapan con El Niño Agrofy (rank 5)",
-    "China compra 20 cargamentos soja EE.UU. (jarayid 07/11): fuente secundaria sin Reuters/USDA que confirme en ventana; cifras coinciden con compras de octubre",
-    "Pátria AgroNegócios soja Brasil 65,45% sembrado (Reuters/UOL 06/11): consultora privada, avance de siembra sin cambio de estimación",
-    "Mesa de Enlace en San Salvador / Visec (Infocampo/Bichos 07/11): reunión, no medida nueva",
-    "Clarín semana negra soja: movimiento de precio — fuera de criterio",
-    "LN plataforma pública mapeo del campo 08/11, Calisa planta avícola, Sancor: no mueven decisión agrícola de caja"
+    "TodoAgro FIAS Santa Fe 06/11, Bichos embarques trigo 06/11, Agrofy El Niño 06/11: >48h al corte 09/11",
+    "Despertar Entrerriano / Agronews granizo 16.000 ha (09/11): mismo hecho BCR, queda LN 07/11 (rank 1)",
+    "Milei en SRA ratifica baja de retenciones (Agrofy/Laboulaye/Ruralnet 07–08/11): sin decreto ni alícuota nueva — PROMESA_RETENCIONES",
+    "LN CRA evalúa acción judicial por Visec (08/11): conflicto gremial-comercial sin medida nueva",
+    "LN riesgo maíz tardío en el norte (08/11): nota técnica sin hecho nuevo",
+    "Bichos AFA/Contigiani, cabritos Quilino, forestal (08/11): no mueven decisión agrícola de caja",
+    "Globo Rural/Emater soja RS 23% sembrado: avance de siembra sin cambio de estimación",
+    "Monitor Gremial paro aceitero 'continúa': nota vieja (no es conflicto actual)",
+    "EPA reasignación RINs (Circular Wire): propuesta en evaluación, sin decisión publicada"
   ],
-  "updatedAt": "2026-11-08T09:50:00.000Z",
-  "updatedBy": "rutina matutina 08/11",
+  "updatedAt": "2026-11-09T09:50:00.000Z",
+  "updatedBy": "rutina matutina 09/11",
   "aviso": null
 }
