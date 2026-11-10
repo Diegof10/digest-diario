@@ -1,44 +1,23 @@
 {
-  "asOf": "2026-11-09T09:50:00.000Z",
-  "asOfArg": "09/11/2026, 06:50",
+  "asOf": "2026-11-10T09:55:00.000Z",
+  "asOfArg": "10/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
-  "valor": null,
-  "note": "Rutina matutina 09/11 · salen FIAS Santa Fe, embarques trigo y El Niño Agrofy (>48h al corte) · fin de semana sin eventos nuevos que pasen el filtro · quedan granizo BCR (LN 07/11) e IF fertilizantes/China (07/11)",
-  "items": [
-    {
-      "title": "Súper Niño: la BCR identificó casi 16.000 ha con potencial daño de granizo en Córdoba y Santa Fe; trigos revolcados, maíces barridos y lotes de soja recién emergidos a evaluar para resiembra",
-      "source": "La Nación Campo",
-      "handle": "La Nación Campo",
-      "url": "https://www.lanacion.com.ar/economia/campo/super-nino-miles-de-hectareas-fueron-alcanzadas-por-violentas-tormentas-y-hay-cultivos-barridos-por-nid07112026/",
-      "publishedAt": "2026-11-07T23:06:00.000Z",
-      "publishedAtArg": "07/11 20:06",
-      "text": "Súper Niño: la BCR identificó casi 16.000 ha con potencial daño de granizo en Córdoba y Santa Fe; trigos revolcados, maíces barridos y lotes de soja recién emergidos a evaluar para resiembra",
-      "rank": 1
-    },
-    {
-      "title": "Fertilizantes: la demanda argentina sigue apagada, con compras sobre la ventana de aplicación (urea sin excedente de oferta), y China mantiene congeladas sus licencias de exportación de fertilizantes por lo que resta de 2026",
-      "source": "Bichos de Campo (IF / Valor Soja)",
-      "handle": "Bichos de Campo (IF / Valor Soja)",
-      "url": "https://bichosdecampo.com/la-demanda-argentina-de-fertilizantes-sigue-apagada-con-compras-realizadas-sobre-la-hora-advierten-que-la-estacionalidad-dejo-de-operar-como-guia/",
-      "publishedAt": "2026-11-07T16:02:00.000Z",
-      "publishedAtArg": "07/11 13:02",
-      "text": "Fertilizantes: la demanda argentina sigue apagada, con compras sobre la ventana de aplicación (urea sin excedente de oferta), y China mantiene congeladas sus licencias de exportación de fertilizantes por lo que resta de 2026",
-      "rank": 2
-    }
-  ],
+  "valor": "sin noticias nuevas · 10/11/2026",
+  "note": "Rutina matutina 10/11 · salen granizo BCR (LN 07/11) e IF fertilizantes/China (07/11) por >48h · sin eventos nuevos que pasen el filtro en las últimas 48 h",
+  "items": [],
   "descartadas": [
-    "TodoAgro FIAS Santa Fe 06/11, Bichos embarques trigo 06/11, Agrofy El Niño 06/11: >48h al corte 09/11",
-    "Despertar Entrerriano / Agronews granizo 16.000 ha (09/11): mismo hecho BCR, queda LN 07/11 (rank 1)",
-    "Milei en SRA ratifica baja de retenciones (Agrofy/Laboulaye/Ruralnet 07–08/11): sin decreto ni alícuota nueva — PROMESA_RETENCIONES",
-    "LN CRA evalúa acción judicial por Visec (08/11): conflicto gremial-comercial sin medida nueva",
-    "LN riesgo maíz tardío en el norte (08/11): nota técnica sin hecho nuevo",
-    "Bichos AFA/Contigiani, cabritos Quilino, forestal (08/11): no mueven decisión agrícola de caja",
-    "Globo Rural/Emater soja RS 23% sembrado: avance de siembra sin cambio de estimación",
-    "Monitor Gremial paro aceitero 'continúa': nota vieja (no es conflicto actual)",
-    "EPA reasignación RINs (Circular Wire): propuesta en evaluación, sin decisión publicada"
+    "LN granizo BCR 07/11 20:06 e IF fertilizantes/China (Bichos 07/11): >48h al corte 10/11",
+    "Los Agusti/Mitre granizo sudeste cordobés (09/11): mismo hecho de la tormenta del 3/11 ya cubierto por BCR",
+    "Bessent/Greer presionan a China por compras agrícolas (USTR/Treasury): llamada del 06/11, >48h",
+    "Milei/Caputo en SRA y Agro Hoy (09/11) sobre eliminar retenciones: sin decreto ni alícuota nueva — PROMESA_RETENCIONES",
+    "LN BCBA pronostica >40 °C y tormentas en el norte (07–08/11): perspectiva semanal, no alerta oficial",
+    "SMN pronóstico agro 10–12/11 (Ruralnet 09/11): tormentas aisladas sin alerta",
+    "Mesa de Enlace con el Papa León XIV (09/11), Kicillof vino, cerdo, maíz Sudamérica (Clarín/Bichos 09/11): no mueven decisión de caja",
+    "LN/Clarín Visec (09/11): conflicto comercial sin medida nueva",
+    "USDA WASDE de noviembre sale hoy 10/11 13:00 ART: fuera del corte matutino"
   ],
-  "updatedAt": "2026-11-09T09:50:00.000Z",
-  "updatedBy": "rutina matutina 09/11",
+  "updatedAt": "2026-11-10T09:55:00.000Z",
+  "updatedBy": "rutina matutina 10/11",
   "aviso": null
 }

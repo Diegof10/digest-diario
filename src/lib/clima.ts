@@ -24,13 +24,13 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
     country: "BR",
     countryLabel: "Brasil",
     bullet:
-      "Noviembre: lluvias sobre la media en todo el Sul (al menos +75 mm; hasta +150 mm en noroeste y centro-oeste de RS), MS, SP y oeste del Norte; bajo la media en gran parte del Norte, Nordeste (oeste de BA, sur de PI y MA), noroeste de MT, norte de GO y DF; temps sobre la media en todo el país (hasta +2 °C en Centro-Oeste y Sudeste); excesos en el Sul pueden atrasar la siembra de soja y dañar trigo en cosecha (INMET 28/10).",
-    fuente: "INMET Previsão climática novembro/2026",
-    fecha: "28/10/2026",
-    url: "https://portal.inmet.gov.br/noticias/novembro-como-ser%C3%A1-o-clima-no-brasil-5",
+      "Trimestre nov–ene: lluvias sobre la media en todo el Sul (más de +100 mm en RS, gran parte de SC y oeste de PR; excedentes de noviembre de más de 150 mm en oeste y norte de RS y oeste de SC), MS y sur de MT y GO; cerca o algo bajo la media en gran parte de GO, DF y MT (hasta −100 mm en el norte de MT) y bajo la media en casi todo el Norte y Nordeste; temps sobre la media en casi todo el país (hasta +2 °C en MT, GO y DF), más frías en gran parte de RS. El exceso de noviembre puede dificultar la cosecha de invierno y la implantación de verano en el Sul; déficit en MATOPIBA puede atrasar maíz y afectar floración de soja (INMET 09/11).",
+    fuente: "INMET Boletim Agroclimatológico Mensal novembro/2026 (NDJ)",
+    fecha: "09/11/2026",
+    url: "https://portal.inmet.gov.br/noticias/boletim-agroclimatol%C3%B3gico-mensal-novembro-2026",
     secondaryUrl:
-      "https://portal.inmet.gov.br/uploads/boletinsAgroclimatologicos/Boletim_AGRO_Outubro_2026.pdf",
-    secondaryNote: "Nota INMET publicada 28/10/2026 09h55 · último boletim agroclimatológico mensal: outubro/2026 (13/10)",
+      "https://portal.inmet.gov.br/uploads/boletinsAgroclimatologicos/Boletim_AGRO_Novembro_2026.pdf",
+    secondaryNote: "Boletim publicado 09/11/2026 16h41 (PDF completo)",
   },
   {
     country: "US",
@@ -48,18 +48,18 @@ const CLIMA_HECHO: Omit<ClimaEntry, "etiqueta">[] = [
 
 const CURADO_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-10-30",
-  BR: "2026-10-28",
+  BR: "2026-11-09",
   /** Publicación del mapa (el mapa en sí es del 3/11; la antigüedad mira esa fecha). */
   US: "2026-11-05",
 };
 /** Fecha del dato de base que se muestra (no la de la corrida del cron). USDM = fecha del mapa. */
 const BASE_ISO: Record<ClimaEntry["country"], string> = {
   AR: "2026-10-30",
-  BR: "2026-10-28",
+  BR: "2026-11-09",
   US: "2026-11-03",
 };
 /** Mes (portugués) del boletín INMET curado arriba */
-const INMET_CURADO = "outubro/2026";
+const INMET_CURADO = "novembro/2026";
 
 const OPEN_METEO_URL = "https://open-meteo.com/";
 const USDM_URL = "https://droughtmonitor.unl.edu/";
@@ -136,9 +136,9 @@ export async function getClima(opts: { blob?: ClimaBlobFile | null; now?: Date }
   const corrida = blob?.ultimaCorrida ?? null;
   const note = actualizadoAt
     ? vigente
-      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/10 · INMET 28/10 · USDM 3–5/11 curados.`
-      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/10 · INMET 28/10 · USDM 3–5/11.`
-    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/10 · INMET 28/10 · USDM 3–5/11 · CPC 15/10";
+      ? `Pronóstico 7 días y USDM automáticos (act. ${hhmm(actualizadoAt)} ART) · boletines SMN 30/10 · INMET 09/11 · USDM 3–5/11 curados.`
+      : `último valor guardado — sin actualización automática desde ${hhmm(actualizadoAt)} ART; boletines curados SMN 30/10 · INMET 09/11 · USDM 3–5/11.`
+    : "último valor guardado — la actualización automática todavía no corrió; boletines curados SMN 30/10 · INMET 09/11 · USDM 3–5/11 · CPC 15/10";
 
   return {
     ok: true,

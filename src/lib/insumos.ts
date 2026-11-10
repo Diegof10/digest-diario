@@ -12,10 +12,10 @@ export const FERT_SOURCE_URL =
 const FERT_AS_OF = "2026-11-07";
 const FERT_SOURCE_LABEL = "Bichos/IF";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 9 Nov 2026; mismos 5,50–5,90). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 10 Nov 2026; mismos 5,50–5,90). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-11-09";
+const GLIFO_AS_OF = "2026-11-10";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
