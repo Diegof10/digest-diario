@@ -1,7 +1,7 @@
-fecha: 2026-11-10 ART
+fecha: 2026-11-11 ART
 titulo_ui: Resumen matutino
 
-CBOT (10/11, 6:51 ART): soja 438,7 US$/t (+0,5%) · maíz 173,6 (+0,4%) · trigo 216,3 (+0,1%)
-FX: oficial 1.570 · blue 1.555 · MEP 1.587,9 · CCL 1.664,9 · riesgo país 873
-Mercados: S&P +2,3% · Nasdaq +2,7% · Dow +2,2% · WTI 84,7 (−2,5%) · Brent 90,1 (−2,6%) · UST 10a 4,86%
-Nota: Hoy 14:00 ART salen WASDE y Crop Production de noviembre. Wall Street rebota (Nasdaq +2,7% y S&P +2,3%). Petróleo corta (WTI −2,5%, Brent −2,6%). Riesgo país baja a 873 (el lunes, 939).
+CBOT (11/11, 6:51 ART): soja 449,7 US$/t (−0,3%) · maíz 176,1 (−0,4%) · trigo 220,1 (+1,1%)
+FX: oficial 1.570 · blue 1.555 · MEP 1.587,9 · CCL 1.664,9 · riesgo país 860
+Mercados: S&P −0,4% · Nasdaq −0,7% · Dow −0,3% · WTI 86,8 (+0,9%) · Brent 92,9 (+1,5%) · UST 10a 4,98%
+Nota: Ayer salió el WASDE de noviembre: stocks mundiales de soja 123,5 mill. t (−0,78 vs el informe previo) y de maíz 281,9 (+1,50). Chicago amaneció más alto que ayer (soja 449,7 vs 438,7). Riesgo país baja a 860 (ayer 873).
