@@ -5,14 +5,14 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF (informe semanal) vía Bichos de Campo / Valor Soja — publicado 7 Nov 2026. Curated snapshot only. */
+/** IF (informe semanal N.º 45, 6 Nov 2026) vía Mundo Rural — publicado 9 Nov 2026 (Agro Hoy 07/11 cita el mismo informe). Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://bichosdecampo.com/la-demanda-argentina-de-fertilizantes-sigue-apagada-con-compras-realizadas-sobre-la-hora-advierten-que-la-estacionalidad-dejo-de-operar-como-guia/";
+  "https://mundorural.com.ar/mercado-de-fertilizantes-la-llegada-de-las-lluvias-reactiva-la-logistica-local-pero-la-debilidad-de-los-granos-exige-prudencia/";
 
-const FERT_AS_OF = "2026-11-07";
-const FERT_SOURCE_LABEL = "Bichos/IF";
+const FERT_AS_OF = "2026-11-09";
+const FERT_SOURCE_LABEL = "Mundo Rural/IF";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (reconsulta 10 Nov 2026; mismos 5,50–5,90). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (último valor guardado, consulta 10 Nov 2026; 11/11 la página no devolvió precios). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
 const GLIFO_AS_OF = "2026-11-10";
@@ -164,16 +164,16 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Bichos de Campo / Valor Soja citing IF weekly report, published 7 Nov 2026 (prev. RIF N°44 30/10, same ranges).
+ * Curated weekly snapshot from Mundo Rural (9 Nov 2026) citing IF weekly report N.º 45 (6 Nov 2026; prev. RIF N°44 30/10 urea 595–605).
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
- * Urea mayorista 595–605, tercera semana sin cambios; import granular CFR 500–515.
+ * Urea mayorista 590–600 (−5); import granular CFR 495–515.
  * MAP/DAP mayorista 965–995; referencia import DAP/MAP nominal 850–870 CFR.
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(595, 605, "FCA", "wholesale", "IF 07/11: mayorista 595–605 por tercera semana"),
-      import: fertPoint(500, 515, "CFR", "import_replacement", "IF 07/11: urea granular CFR 500–515 (prima 37,5 s/Brasil)"),
+      local: fertPoint(590, 600, "FCA", "wholesale", "IF N.º 45 (06/11) vía Mundo Rural 09/11: urea granular 590–600 FCA (−0,8%)"),
+      import: fertPoint(495, 515, "CFR", "import_replacement", "IF N.º 45 vía Mundo Rural 09/11: urea CFR Argentina 495–515 (media 505)"),
     },
     map: {
       local: fertPoint(
@@ -183,7 +183,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(850, 870, "CFR", "import_replacement", "IF 07/11: MAP/DAP import combined CFR range (nominal)"),
+      import: fertPoint(850, 870, "CFR", "import_replacement", "IF N.º 45 vía Mundo Rural 09/11: MAP/DAP import CFR 850–870 (nominal)"),
     },
     dap: {
       local: fertPoint(
@@ -193,7 +193,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(850, 870, "CFR", "import_replacement", "IF 07/11: MAP/DAP import combined CFR range (nominal)"),
+      import: fertPoint(850, 870, "CFR", "import_replacement", "IF N.º 45 vía Mundo Rural 09/11: MAP/DAP import CFR 850–870 (nominal)"),
     },
   };
 }
@@ -434,7 +434,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   );
 
   const noteParts = [
-    `Fertilizantes: snapshot curado IF vía Bichos (${fmtEsDate(FERT_AS_OF)}), no scrape en vivo.`,
+    `Fertilizantes: snapshot curado IF vía Mundo Rural (${fmtEsDate(FERT_AS_OF)}), no scrape en vivo.`,
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
@@ -455,7 +455,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
       },
       {
         id: "if-rif",
-        label: "IF vía Bichos de Campo (curated)",
+        label: "IF vía Mundo Rural (curated)",
         ok: true,
       },
       {
