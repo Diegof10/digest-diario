@@ -1,10 +1,10 @@
 {
-  "asOf": "2026-11-11T09:55:00.000Z",
-  "asOfArg": "11/11/2026, 06:55",
+  "asOf": "2026-11-12T09:50:00.000Z",
+  "asOfArg": "12/11/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 11/11 · entra WASDE de noviembre (USDA 10/11) y alerta amarilla SMN por tormentas con granizo en Santa Fe (11/11) · resto sin eventos nuevos que pasen el filtro",
+  "note": "Rutina matutina 12/11 · sigue WASDE de noviembre (USDA 10/11), entra alerta amarilla SMN por tormentas 12/11 (BA, La Pampa y otras) y demora de siembra de girasol en el oeste (Aapresid vía Infocampo 11/11) · sale la alerta SMN del 11/11 (ya pasó)",
   "items": [
     {
       "title": "USDA (WASDE noviembre): mantiene la soja argentina en 50 Mt y sube el maíz de 55 a 57 Mt y el trigo de 21,5 a 23 Mt; en EE.UU. recorta el stock final de soja a 8,17 Mt y el de maíz a 44,67 Mt",
@@ -18,27 +18,36 @@
       "rank": 1
     },
     {
-      "title": "SMN: alerta amarilla por tormentas este miércoles 11/11 en Santa Fe, Entre Ríos, Corrientes, Misiones y Jujuy, con ocasional granizo, ráfagas intensas y 20–50 mm acumulados",
+      "title": "SMN: alerta amarilla por tormentas este jueves 12/11 en Buenos Aires, La Pampa, Río Negro, Chubut, Salta y Jujuy, con lluvias abundantes en poco tiempo, ocasional granizo y ráfagas fuertes",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-y-vientos-fuertes-para-este-miercoles-11-de-noviembre-las-nid11112026/",
-      "publishedAt": "2026-11-11T06:00:37.000Z",
-      "publishedAtArg": "11/11 03:00",
-      "text": "SMN: alerta amarilla por tormentas este miércoles 11/11 en Santa Fe, Entre Ríos, Corrientes, Misiones y Jujuy, con ocasional granizo, ráfagas intensas y 20–50 mm acumulados",
-      "rank": 2
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-y-vientos-fuertes-para-este-jueves-12-de-noviembre-las-provincias-nid12112026/",
+      "publishedAt": "2026-11-12T06:42:23.000Z",
+      "publishedAtArg": "12/11 03:42",
+      "rank": 2,
+      "text": "SMN: alerta amarilla por tormentas este jueves 12/11 en Buenos Aires, La Pampa, Río Negro, Chubut, Salta y Jujuy, con lluvias abundantes en poco tiempo, ocasional granizo y ráfagas fuertes"
+    },
+    {
+      "title": "Girasol: el exceso de humedad y el suelo frío demoran la siembra entre 7 y 12 días en el oeste; Aapresid advierte que sembrar después del 15/11 puede comprometer rindes",
+      "source": "Infocampo (Aapresid)",
+      "handle": "Infocampo",
+      "url": "https://www.infocampo.com.ar/alerta-en-el-girasol-las-lluvias-retrasan-la-siembra-y-abren-dudas-sobre-el-rinde-potencial/",
+      "publishedAt": "2026-11-11T14:26:58.000Z",
+      "publishedAtArg": "11/11 11:26",
+      "rank": 3,
+      "text": "Girasol: el exceso de humedad y el suelo frío demoran la siembra entre 7 y 12 días en el oeste; Aapresid advierte que sembrar después del 15/11 puede comprometer rindes"
     }
   ],
   "descartadas": [
-    "Granar/fyo/Argenfields/Forbes BR sobre WASDE (10/11): mismo hecho, queda USDA como fuente primaria",
-    "BCBA avance de siembra (06/11) y BCR trigo 23,8 Mt (03–04/11): >48h",
-    "Monitor Gremial aceiteros 'conciliación vence el jueves… plena cosecha': nota de un conflicto anterior (no es actual)",
-    "Brownfield (10/11) aranceles limitan ventas de soja a China: testimonio sin compra ni medida nueva",
-    "Infobae Revista Chacra (10/11) maíz 50,5% sembrado: repite BCBA del 06/11",
-    "CONAB 2º levantamento 2026/27 sale el 13/11: fuera del corte",
-    "Milei/Caputo retenciones (06/11): >48h y sin medida nueva — PROMESA_RETENCIONES",
-    "Precios soja/maíz Rosario (Infocampo 10/11) y suba de Chicago post-USDA: movimiento de precio, fuera de criterio"
+    "Infobae Revista Chacra (11/11) granizo 15.600 ha región núcleo: repite relevamiento GEA-BCR ya publicado (07/11, >48h)",
+    "Alerta SMN 11/11 Santa Fe/Entre Ríos: evento ya pasado, reemplazada por la del 12/11",
+    "Monitor Gremial paro aceitero / Urgara: notas de conflictos anteriores, sin medida nueva",
+    "Milei/Caputo retenciones (06/11) y cronograma DEX: >48h y sin medida nueva",
+    "USDA sin ventas flash el 11/11 (Veterans Day); ventas a México 10/11 y a China 06/11: sin compra nueva de China",
+    "Brasil plantío soja 64% (Band/Climatempo 11/11): avance de labores sin cifra oficial CONAB (CONAB sale 13/11)",
+    "Chicago post-USDA y precios Rosario: movimiento de precio, fuera de criterio"
   ],
-  "updatedAt": "2026-11-11T09:55:00.000Z",
-  "updatedBy": "rutina matutina 11/11",
+  "updatedAt": "2026-11-12T09:50:00.000Z",
+  "updatedBy": "rutina matutina 12/11",
   "aviso": null
 }
