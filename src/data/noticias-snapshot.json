@@ -1,31 +1,41 @@
 {
-  "asOf": "2026-11-12T09:50:00.000Z",
-  "asOfArg": "12/11/2026, 06:50",
+  "asOf": "2026-11-13T09:55:00.000Z",
+  "asOfArg": "13/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 12/11 · sigue WASDE de noviembre (USDA 10/11), entra alerta amarilla SMN por tormentas 12/11 (BA, La Pampa y otras) y demora de siembra de girasol en el oeste (Aapresid vía Infocampo 11/11) · sale la alerta SMN del 11/11 (ya pasó)",
+  "note": "Rutina matutina 13/11 · entra alerta naranja SMN por tormentas 13/11 (sur de Córdoba, oeste BA, este La Pampa), informe GEA-BCR 12/11 (soja 1ra 70% núcleo, resiembra por granizo en Marcos Juárez/General Roca, trigo 24,3 Mt) y venta flash de soja EE.UU. a China (USDA 12/11) · sigue girasol Aapresid 11/11 · sale WASDE (>48 h) y la alerta del 12/11",
   "items": [
     {
-      "title": "USDA (WASDE noviembre): mantiene la soja argentina en 50 Mt y sube el maíz de 55 a 57 Mt y el trigo de 21,5 a 23 Mt; en EE.UU. recorta el stock final de soja a 8,17 Mt y el de maíz a 44,67 Mt",
-      "titleOriginal": "World Agricultural Supply and Demand Estimates — November 10, 2026",
-      "source": "USDA · WASDE (ESMIS) · traducido del inglés",
-      "handle": "USDA",
-      "url": "https://esmis.nal.usda.gov/publication/world-agricultural-supply-and-demand-estimates/2026-11-10",
-      "publishedAt": "2026-11-10T17:00:00.000Z",
-      "publishedAtArg": "10/11 14:00",
-      "text": "USDA (WASDE noviembre): mantiene la soja argentina en 50 Mt y sube el maíz de 55 a 57 Mt y el trigo de 21,5 a 23 Mt; en EE.UU. recorta el stock final de soja a 8,17 Mt y el de maíz a 44,67 Mt",
-      "rank": 1
-    },
-    {
-      "title": "SMN: alerta amarilla por tormentas este jueves 12/11 en Buenos Aires, La Pampa, Río Negro, Chubut, Salta y Jujuy, con lluvias abundantes en poco tiempo, ocasional granizo y ráfagas fuertes",
+      "title": "SMN: alerta naranja por tormentas fuertes este viernes 13/11 en el sur de Córdoba, oeste de Buenos Aires, este de La Pampa, este de Río Negro y este de Chubut, con granizo, ráfagas de más de 90 km/h y 50–90 mm; alerta amarilla en Córdoba, sudoeste de Santa Fe, San Luis y otras",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-y-vientos-fuertes-para-este-jueves-12-de-noviembre-las-provincias-nid12112026/",
-      "publishedAt": "2026-11-12T06:42:23.000Z",
-      "publishedAtArg": "12/11 03:42",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-vientos-para-este-viernes-13-de-noviembre-las-nid13112026/",
+      "publishedAt": "2026-11-13T03:38:07.000Z",
+      "publishedAtArg": "13/11 00:38",
+      "rank": 1,
+      "text": "SMN: alerta naranja por tormentas fuertes este viernes 13/11 en el sur de Córdoba, oeste de Buenos Aires, este de La Pampa, este de Río Negro y este de Chubut, con granizo, ráfagas de más de 90 km/h y 50–90 mm; alerta amarilla en Córdoba, sudoeste de Santa Fe, San Luis y otras"
+    },
+    {
+      "title": "BCR (GEA): la soja de primera ya cubre el 70% de la región núcleo tras implantarse 1,16 M ha en una semana; el granizo de la semana pasada obliga a resembrar lotes al sur de Marcos Juárez y en General Roca, y la Bolsa sube la estimación de trigo 26/27 a 24,3 Mt (+0,5 Mt)",
+      "source": "BCR · GEA informe semanal zona núcleo 12/11",
+      "handle": "BCR",
+      "url": "https://www.bcr.com.ar/es/mercados/gea/seguimiento-de-cultivos/informe-semanal-zona-nucleo",
+      "publishedAt": "2026-11-12T15:55:12.000Z",
+      "publishedAtArg": "12/11 12:55",
       "rank": 2,
-      "text": "SMN: alerta amarilla por tormentas este jueves 12/11 en Buenos Aires, La Pampa, Río Negro, Chubut, Salta y Jujuy, con lluvias abundantes en poco tiempo, ocasional granizo y ráfagas fuertes"
+      "text": "BCR (GEA): la soja de primera ya cubre el 70% de la región núcleo tras implantarse 1,16 M ha en una semana; el granizo de la semana pasada obliga a resembrar lotes al sur de Marcos Juárez y en General Roca, y la Bolsa sube la estimación de trigo 26/27 a 24,3 Mt (+0,5 Mt)"
+    },
+    {
+      "title": "USDA: exportadores privados reportan la venta de 136.000 t de soja estadounidense a China para la campaña 2026/27",
+      "titleOriginal": "USDA Reports 136,000 Tonnes of Soybean Sales to China",
+      "source": "SquawkNews (USDA ventas flash) · traducido del inglés",
+      "handle": "USDA",
+      "url": "https://squawknews.com/news/913308-usda-reports-136-000-tonnes-of-soybean-sales-to-china",
+      "publishedAt": "2026-11-12T14:56:00.000Z",
+      "publishedAtArg": "12/11 11:56",
+      "rank": 3,
+      "text": "USDA: exportadores privados reportan la venta de 136.000 t de soja estadounidense a China para la campaña 2026/27"
     },
     {
       "title": "Girasol: el exceso de humedad y el suelo frío demoran la siembra entre 7 y 12 días en el oeste; Aapresid advierte que sembrar después del 15/11 puede comprometer rindes",
@@ -34,20 +44,21 @@
       "url": "https://www.infocampo.com.ar/alerta-en-el-girasol-las-lluvias-retrasan-la-siembra-y-abren-dudas-sobre-el-rinde-potencial/",
       "publishedAt": "2026-11-11T14:26:58.000Z",
       "publishedAtArg": "11/11 11:26",
-      "rank": 3,
+      "rank": 4,
       "text": "Girasol: el exceso de humedad y el suelo frío demoran la siembra entre 7 y 12 días en el oeste; Aapresid advierte que sembrar después del 15/11 puede comprometer rindes"
     }
   ],
   "descartadas": [
-    "Infobae Revista Chacra (11/11) granizo 15.600 ha región núcleo: repite relevamiento GEA-BCR ya publicado (07/11, >48h)",
-    "Alerta SMN 11/11 Santa Fe/Entre Ríos: evento ya pasado, reemplazada por la del 12/11",
-    "Monitor Gremial paro aceitero / Urgara: notas de conflictos anteriores, sin medida nueva",
-    "Milei/Caputo retenciones (06/11) y cronograma DEX: >48h y sin medida nueva",
-    "USDA sin ventas flash el 11/11 (Veterans Day); ventas a México 10/11 y a China 06/11: sin compra nueva de China",
-    "Brasil plantío soja 64% (Band/Climatempo 11/11): avance de labores sin cifra oficial CONAB (CONAB sale 13/11)",
-    "Chicago post-USDA y precios Rosario: movimiento de precio, fuera de criterio"
+    "WASDE noviembre (USDA 10/11): más de 48 h",
+    "Alerta SMN 12/11: evento pasado, reemplazada por la del 13/11",
+    "Avellaneda Online 'Milei baja retenciones soja 33→26%' fechada 12/11: es el anuncio de julio 2025 republicado; sin medida nueva (cronograma vigente Decreto 423/2026)",
+    "Monitor Gremial paro aceitero / Urgara: notas de conflictos anteriores, sin medida nueva con fecha verificable",
+    "BCBA PAS soja 4,7% / maíz 50,5% (citado por La Capital 11/11): es el panorama del 05/11; el del 12/11 no se pudo verificar",
+    "MAGyP informe semanal 12/11: avance de labores sin hecho nuevo frente a GEA",
+    "Granos bajo presión / Chicago / márgenes: movimiento de precio, fuera de criterio",
+    "CONAB 2.º levantamento sale hoy 13/11 (aún no publicado)"
   ],
-  "updatedAt": "2026-11-12T09:50:00.000Z",
-  "updatedBy": "rutina matutina 12/11",
+  "updatedAt": "2026-11-13T09:55:00.000Z",
+  "updatedBy": "rutina matutina 13/11",
   "aviso": null
 }
