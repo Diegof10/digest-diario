@@ -1,64 +1,74 @@
 {
-  "asOf": "2026-11-13T09:55:00.000Z",
-  "asOfArg": "13/11/2026, 06:55",
+  "asOf": "2026-11-14T09:55:00.000Z",
+  "asOfArg": "14/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 13/11 · entra alerta naranja SMN por tormentas 13/11 (sur de Córdoba, oeste BA, este La Pampa), informe GEA-BCR 12/11 (soja 1ra 70% núcleo, resiembra por granizo en Marcos Juárez/General Roca, trigo 24,3 Mt) y venta flash de soja EE.UU. a China (USDA 12/11) · sigue girasol Aapresid 11/11 · sale WASDE (>48 h) y la alerta del 12/11",
+  "note": "Rutina matutina 14/11 · entran alerta naranja SMN por tormentas 14/11 (norte de Córdoba, Santa Fe, etc.), PAS Bolsa de Cereales 13/11 (soja 17,8%), suba del 16% en fletes de granos en PBA, Conab 2.º relevamiento 13/11 y Res. Senasa 949/2026 (langostas) · salen alerta del 13/11, GEA 12/11, USDA flash 12/11 y girasol 11/11",
   "items": [
     {
-      "title": "SMN: alerta naranja por tormentas fuertes este viernes 13/11 en el sur de Córdoba, oeste de Buenos Aires, este de La Pampa, este de Río Negro y este de Chubut, con granizo, ráfagas de más de 90 km/h y 50–90 mm; alerta amarilla en Córdoba, sudoeste de Santa Fe, San Luis y otras",
+      "title": "SMN: alerta naranja por tormentas fuertes a severas este sábado 14/11 en el norte de Córdoba, Santa Fe, sudeste de Chaco, oeste de Corrientes, norte de San Luis, oeste de La Rioja y oeste de San Juan, con granizo, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en el este de Buenos Aires, Entre Ríos, San Luis y otras 9 provincias",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-vientos-para-este-viernes-13-de-noviembre-las-nid13112026/",
-      "publishedAt": "2026-11-13T03:38:07.000Z",
-      "publishedAtArg": "13/11 00:38",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-para-este-sabado-14-de-noviembre-las-provincias-nid14112026/",
+      "publishedAt": "2026-11-14T03:01:00.000Z",
+      "publishedAtArg": "14/11 00:01",
       "rank": 1,
-      "text": "SMN: alerta naranja por tormentas fuertes este viernes 13/11 en el sur de Córdoba, oeste de Buenos Aires, este de La Pampa, este de Río Negro y este de Chubut, con granizo, ráfagas de más de 90 km/h y 50–90 mm; alerta amarilla en Córdoba, sudoeste de Santa Fe, San Luis y otras"
+      "text": "SMN: alerta naranja por tormentas fuertes a severas este sábado 14/11 en el norte de Córdoba, Santa Fe, sudeste de Chaco, oeste de Corrientes, norte de San Luis, oeste de La Rioja y oeste de San Juan, con granizo, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en el este de Buenos Aires, Entre Ríos, San Luis y otras 9 provincias"
     },
     {
-      "title": "BCR (GEA): la soja de primera ya cubre el 70% de la región núcleo tras implantarse 1,16 M ha en una semana; el granizo de la semana pasada obliga a resembrar lotes al sur de Marcos Juárez y en General Roca, y la Bolsa sube la estimación de trigo 26/27 a 24,3 Mt (+0,5 Mt)",
-      "source": "BCR · GEA informe semanal zona núcleo 12/11",
-      "handle": "BCR",
-      "url": "https://www.bcr.com.ar/es/mercados/gea/seguimiento-de-cultivos/informe-semanal-zona-nucleo",
-      "publishedAt": "2026-11-12T15:55:12.000Z",
-      "publishedAtArg": "12/11 12:55",
+      "title": "Bolsa de Cereales (PAS 13/11): la siembra de soja salta al 17,8% de 17 M ha (+13,1 p.p. en la semana, 26% de la de primera) con mayores avances en ambos núcleos, sur de Córdoba y norte de La Pampa–oeste de BA; maíz 51,2% de 8,4 M ha; girasol 83,4%; trigo cosechado 11,9% con 22,2 qq/ha y focos de fusarium en los núcleos",
+      "source": "Bolsa de Cereales de Buenos Aires · Panorama Agrícola Semanal 13/11",
+      "handle": "BCBA",
+      "url": "https://www.bolsadecereales.com/imagenes/pass/2026-11/1172-pas20261113.pdf",
+      "publishedAt": "2026-11-13T18:00:54.000Z",
+      "publishedAtArg": "13/11 15:00",
       "rank": 2,
-      "text": "BCR (GEA): la soja de primera ya cubre el 70% de la región núcleo tras implantarse 1,16 M ha en una semana; el granizo de la semana pasada obliga a resembrar lotes al sur de Marcos Juárez y en General Roca, y la Bolsa sube la estimación de trigo 26/27 a 24,3 Mt (+0,5 Mt)"
+      "text": "Bolsa de Cereales (PAS 13/11): la siembra de soja salta al 17,8% de 17 M ha (+13,1 p.p. en la semana, 26% de la de primera) con mayores avances en ambos núcleos, sur de Córdoba y norte de La Pampa–oeste de BA; maíz 51,2% de 8,4 M ha; girasol 83,4%; trigo cosechado 11,9% con 22,2 qq/ha y focos de fusarium en los núcleos"
     },
     {
-      "title": "USDA: exportadores privados reportan la venta de 136.000 t de soja estadounidense a China para la campaña 2026/27",
-      "titleOriginal": "USDA Reports 136,000 Tonnes of Soybean Sales to China",
-      "source": "SquawkNews (USDA ventas flash) · traducido del inglés",
-      "handle": "USDA",
-      "url": "https://squawknews.com/news/913308-usda-reports-136-000-tonnes-of-soybean-sales-to-china",
-      "publishedAt": "2026-11-12T14:56:00.000Z",
-      "publishedAtArg": "12/11 11:56",
+      "title": "Provincia de Buenos Aires fija por laudo una suba del 16% en la tarifa de referencia de fletes de granos; CARBAP, Coninagro y el Centro de Acopiadores la rechazan (proponían 8,3–11,5%)",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "url": "https://bichosdecampo.com/tres-entidades-del-agro-rechazaron-el-aumento-impuesto-por-el-gobierno-de-buenos-aires-a-los-fletes-de-granos/",
+      "publishedAt": "2026-11-13T19:34:19.000Z",
+      "publishedAtArg": "13/11 16:34",
       "rank": 3,
-      "text": "USDA: exportadores privados reportan la venta de 136.000 t de soja estadounidense a China para la campaña 2026/27"
+      "text": "Provincia de Buenos Aires fija por laudo una suba del 16% en la tarifa de referencia de fletes de granos; CARBAP, Coninagro y el Centro de Acopiadores la rechazan (proponían 8,3–11,5%)"
     },
     {
-      "title": "Girasol: el exceso de humedad y el suelo frío demoran la siembra entre 7 y 12 días en el oeste; Aapresid advierte que sembrar después del 15/11 puede comprometer rindes",
-      "source": "Infocampo (Aapresid)",
-      "handle": "Infocampo",
-      "url": "https://www.infocampo.com.ar/alerta-en-el-girasol-las-lluvias-retrasan-la-siembra-y-abren-dudas-sobre-el-rinde-potencial/",
-      "publishedAt": "2026-11-11T14:26:58.000Z",
-      "publishedAtArg": "11/11 11:26",
+      "title": "Conab (2.º relevamiento 2026/27): Brasil producirá 366,1 Mt de granos (+1,3%); soja 181,6 Mt en 49,3 M ha (sin cambios vs. octubre) y maíz total 148,0 Mt; la siembra de soja llega al 66,8% (95,6% en Mato Grosso)",
+      "titleOriginal": "Nova estimativa da Conab para safra de grãos 2026/27 é de 366,1 milhões de toneladas",
+      "source": "Conab · traducido del portugués",
+      "handle": "Conab",
+      "url": "https://www.gov.br/conab/pt-br/assuntos/noticias/nova-estimativa-da-conab-para-safra-de-graos-2026-27-e-de-366-1-milhoes-de-toneladas",
+      "publishedAt": "2026-11-13T12:00:00.000Z",
+      "publishedAtArg": "13/11 09:00",
       "rank": 4,
-      "text": "Girasol: el exceso de humedad y el suelo frío demoran la siembra entre 7 y 12 días en el oeste; Aapresid advierte que sembrar después del 15/11 puede comprometer rindes"
+      "text": "Conab (2.º relevamiento 2026/27): Brasil producirá 366,1 Mt de granos (+1,3%); soja 181,6 Mt en 49,3 M ha (sin cambios vs. octubre) y maíz total 148,0 Mt; la siembra de soja llega al 66,8% (95,6% en Mato Grosso)"
+    },
+    {
+      "title": "Senasa actualiza el plan de lucha contra langostas y tucuras (Res. 949/2026, Boletín Oficial 13/11): nuevo plan de contingencia y obligación del productor de denunciar la plaga, controlarla con productos registrados y permitir inspecciones, con sanciones por Ley 27.233",
+      "source": "Bichos de Campo (Senasa · Boletín Oficial)",
+      "handle": "Bichos de Campo",
+      "url": "https://bichosdecampo.com/contra-una-plaga-historica-senasa-renovo-el-plan-de-lucha-contra-las-langostas-y-tucuras-luego-de-60-anos-y-recordo-que-los-productores-estan-obligados-a-combatirlas/",
+      "publishedAt": "2026-11-13T12:07:02.000Z",
+      "publishedAtArg": "13/11 09:07",
+      "rank": 5,
+      "text": "Senasa actualiza el plan de lucha contra langostas y tucuras (Res. 949/2026, Boletín Oficial 13/11): nuevo plan de contingencia y obligación del productor de denunciar la plaga, controlarla con productos registrados y permitir inspecciones, con sanciones por Ley 27.233"
     }
   ],
   "descartadas": [
-    "WASDE noviembre (USDA 10/11): más de 48 h",
-    "Alerta SMN 12/11: evento pasado, reemplazada por la del 13/11",
-    "Avellaneda Online 'Milei baja retenciones soja 33→26%' fechada 12/11: es el anuncio de julio 2025 republicado; sin medida nueva (cronograma vigente Decreto 423/2026)",
-    "Monitor Gremial paro aceitero / Urgara: notas de conflictos anteriores, sin medida nueva con fecha verificable",
-    "BCBA PAS soja 4,7% / maíz 50,5% (citado por La Capital 11/11): es el panorama del 05/11; el del 12/11 no se pudo verificar",
-    "MAGyP informe semanal 12/11: avance de labores sin hecho nuevo frente a GEA",
-    "Granos bajo presión / Chicago / márgenes: movimiento de precio, fuera de criterio",
-    "CONAB 2.º levantamento sale hoy 13/11 (aún no publicado)"
+    "USDA venta flash 134.000 t de soja a China (13/11, vía Barchart): hecho nuevo pero similar al del 12/11; quedó fuera por el tope de 5",
+    "Corte Suprema deja firme devolución de retenciones 2007–2008 a Louis Dreyfus (La Nación 13/11): fallo puntual de un exportador, sin efecto directo en la caja del productor; fuera por tope",
+    "Merlo al Aire 'Milei anunció baja permanente de retenciones, soja 33→26%': es el discurso de la Rural de julio 2025 republicado; sin medida nueva",
+    "Monitor Gremial 'continúa el paro de aceiteros': nota de un conflicto anterior (cita paritarias viejas), sin paro vigente verificable",
+    "GEA-BCR 12/11, alerta SMN 13/11 y venta flash USDA 12/11: ya publicadas ayer, sin hecho nuevo (la alerta del 13/11 se reemplaza por la del 14/11)",
+    "Girasol Aapresid/Infocampo 11/11: más de 48 h",
+    "Productores autoconvocados vs. Visec (Bichos de Campo 13/11): reclamo sin medida nueva",
+    "Suba de soja en Chicago por ventas de exportación / Granar cierre Chicago: movimiento de precio, fuera de criterio"
   ],
-  "updatedAt": "2026-11-13T09:55:00.000Z",
-  "updatedBy": "rutina matutina 13/11",
+  "updatedAt": "2026-11-14T09:55:00.000Z",
+  "updatedBy": "rutina matutina 14/11",
   "aviso": null
 }
