@@ -37,11 +37,11 @@ const LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo" } as const;
 
 /** Texto fijo de Fiscal mientras haya una norma en "novedad" (regla 7 días del panel). */
 const FISCAL_NOVEDAD = {
-  titulo: "Fiscal · DJ Ganancias al 16/11",
+  titulo: "Fiscal · RG 5927 al 18/12",
   resumen:
-    "La RG 5918 (Boletín Oficial del 30/10) extiende hasta el 16/11 la presentación de la DJ de Ganancias 2025 de personas humanas; el pago del saldo venció el 27/07 y no cambia. Antes vence el SISA IP1, el 31/10; la caracterización de Pequeño Contribuyente pasa al 30/11, y después viene el 3° anticipo de Ganancias y Bienes Personales, del 13 al 15/12 según la terminación del CUIT. Fuente: Boletín Oficial y ARCA.",
+    "La RG 5927 (Boletín Oficial del 12/11) reglamenta la reducción del 50% de las multas por infracciones a deberes formales; el deber omitido hay que cumplirlo hasta el 18/12 inclusive. La presentación de la DJ de Ganancias 2025 de personas humanas vence el 16/11 (RG 5918); el 30/11 corre la caracterización de Pequeño Contribuyente, y el 3° anticipo de Ganancias y Bienes Personales figura el 13, 14 y 15/12 según la terminación del CUIT (el 13/12 es domingo). Fuente: Boletín Oficial y ARCA.",
   fuente: "Boletín Oficial · ARCA",
-  hora: "BO 30/10",
+  hora: "BO 12/11",
 };
 
 function isoMasDias(iso: string, n: number): string {
