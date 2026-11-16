@@ -1,65 +1,34 @@
 {
-  "asOf": "2026-11-15T09:55:00.000Z",
-  "asOfArg": "15/11/2026, 06:55",
+  "asOf": "2026-11-16T09:55:00.000Z",
+  "asOfArg": "16/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 15/11 (domingo) · entran tormentas del 13/11 con granizo y daños + CPC El Niño fuerte (Infocampo 13/11), consejo comercial China–EE.UU. 13/11 y cumbre Trump–Xi 19/11 (CNBC/Reuters 14/11, traducido), Paraná en Rosario cerca de cota de alerta (BCR 13/11) y alerta amarilla SMN 15/11 · salen alerta naranja 14/11, PAS BCBA 13/11, fletes PBA 13/11, Conab 13/11 y Res. Senasa 949/2026 (ya publicadas ayer, sin hecho nuevo)",
+  "note": "Rutina matutina 16/11 (lunes) · entra alerta naranja SMN 16/11 por tormentas en Córdoba y centro-oeste (La Nación 16/11) · salen tormentas 13/11 + CPC (Infocampo), consejo comercial China–EE.UU. (CNBC 14/11), Paraná en Rosario (BCR 13/11) y alerta amarilla 15/11 (más de 48 h o vencidas, sin hecho nuevo)",
   "items": [
     {
-      "title": "Tormentas fuertes del viernes 13/11 en la región pampeana: más de 80 mm en menos de una hora y ráfagas cercanas a 100 km/h en Córdoba (red Omixom), granizo y daños en el norte de Buenos Aires, Córdoba y sur de Santa Fe; el CPC-NOAA ve probable un El Niño fuerte a muy fuerte hasta ene–mar 2027 (más de 79%)",
-      "source": "Infocampo",
-      "handle": "Infocampo",
-      "url": "https://www.infocampo.com.ar/el-nino-hiperactivo-un-gigantesco-frente-de-tormentas-sacudio-a-gran-parte-de-la-region-pampeana/",
-      "publishedAt": "2026-11-14T01:24:43.000Z",
-      "publishedAtArg": "13/11 22:24",
-      "rank": 1,
-      "text": "Tormentas fuertes del viernes 13/11 en la región pampeana: más de 80 mm en menos de una hora y ráfagas cercanas a 100 km/h en Córdoba (red Omixom), granizo y daños en el norte de Buenos Aires, Córdoba y sur de Santa Fe; el CPC-NOAA ve probable un El Niño fuerte a muy fuerte hasta ene–mar 2027 (más de 79%)"
-    },
-    {
-      "title": "China y EE.UU. discutieron rebajas de aranceles y comercio agrícola en su primer consejo comercial (13/11), sin anunciar acuerdos; Trump y Xi se reúnen el jueves 19/11 en Shenzhen (APEC)",
-      "titleOriginal": "China, US discuss tariffs, farm trade ahead of Xi-Trump meeting",
-      "source": "CNBC (Reuters) · traducido del inglés",
-      "handle": "CNBC",
-      "url": "https://www.cnbc.com/2026/11/14/china-us-tariffs-xi-trump-meeting.html",
-      "publishedAt": "2026-11-14T08:16:00.000Z",
-      "publishedAtArg": "14/11 05:16",
-      "rank": 2,
-      "text": "China y EE.UU. discutieron rebajas de aranceles y comercio agrícola en su primer consejo comercial (13/11), sin anunciar acuerdos; Trump y Xi se reúnen el jueves 19/11 en Shenzhen (APEC)"
-    },
-    {
-      "title": "BCR: el Paraná en Rosario marca su nivel más alto para un noviembre desde 1998 (4,47 m el 11/11, a unos 60 cm de la cota de alerta de 5 m) y el INA prevé que siga subiendo",
-      "source": "Bolsa de Comercio de Rosario · Informativo Semanal N.º 2269 (13/11)",
-      "handle": "BCR",
-      "url": "https://www.bcr.com.ar/es/mercados/investigacion-y-desarrollo/informativo-semanal/noticias-informativo-semanal/el-parana-en",
-      "publishedAt": "2026-11-13T14:07:38.000Z",
-      "publishedAtArg": "13/11 11:07",
-      "rank": 3,
-      "text": "BCR: el Paraná en Rosario marca su nivel más alto para un noviembre desde 1998 (4,47 m el 11/11, a unos 60 cm de la cota de alerta de 5 m) y el INA prevé que siga subiendo"
-    },
-    {
-      "title": "SMN: alerta amarilla por tormentas este domingo 15/11 en Mendoza, Neuquén, San Luis, Misiones, oeste de Río Negro y de La Pampa y noroeste de Chubut, con granizo ocasional, ráfagas y 15–40 mm (localmente más)",
+      "title": "SMN: alerta naranja por tormentas fuertes a severas este lunes 16/11 en Córdoba, San Luis, Mendoza y el este de La Rioja y Catamarca, con granizo de diversos tamaños, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en Buenos Aires, norte de La Pampa, oeste de Santa Fe, Santiago del Estero, Tucumán y otras zonas (30–70 mm)",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-para-este-domingo-15-de-noviembre-las-provincias-afectadas-nid15112026/",
-      "publishedAt": "2026-11-15T04:36:24.000Z",
-      "publishedAtArg": "15/11 01:36",
-      "rank": 4,
-      "text": "SMN: alerta amarilla por tormentas este domingo 15/11 en Mendoza, Neuquén, San Luis, Misiones, oeste de Río Negro y de La Pampa y noroeste de Chubut, con granizo ocasional, ráfagas y 15–40 mm (localmente más)"
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-lluvias-para-este-lunes-16-de-noviembre-las-provincias-nid16112026/",
+      "publishedAt": "2026-11-16T06:31:31.000Z",
+      "publishedAtArg": "16/11 03:31",
+      "rank": 1,
+      "text": "SMN: alerta naranja por tormentas fuertes a severas este lunes 16/11 en Córdoba, San Luis, Mendoza y el este de La Rioja y Catamarca, con granizo de diversos tamaños, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en Buenos Aires, norte de La Pampa, oeste de Santa Fe, Santiago del Estero, Tucumán y otras zonas (30–70 mm)"
     }
   ],
   "descartadas": [
-    "USDA ventas flash 13/11 (soja a China 134.000 t, Vietnam y destino desconocido; maíz a México): al límite de 48 h y el tema China ya entra por el consejo comercial; fuera por relevancia",
-    "IF fertilizantes vía Bichos de Campo 14/11 (urea mayorista 590–600, CFR 495–515): sin cambio vs. el valor ya cargado en Costos; precio de insumo, no evento",
-    "FAA pide derogar el art. 755 del Código Aduanero (La Nación 14/11) y columna sobre el fallo LDC: reacción/opinión sin medida nueva",
-    "Monitor Gremial 'continúa el paro de aceiteros' (fechado 13/11): reproduce un conflicto viejo (cita paritarias pasadas), sin paro vigente verificable",
-    "Rosgan lanza Roslot (plataforma de hacienda para faena desde 2027): ganadería, sin impacto en la decisión agrícola inmediata",
-    "Câmara de Diputados de Brasil aprueba renegociación de deudas rurales (UOL 13/11): sigue al Senado y no afecta al productor argentino",
-    "BCR '100 Mt exportadas ene–oct', El Destape 'sojeros con USD 7.000 M en silobolsas', La Nación trigo/maíz 14/11: estadísticas o análisis de mercado, sin hecho nuevo",
-    "CPC-NOAA ENSO 12/11 por separado y China importaciones de soja de octubre: más de 48 h",
-    "Alerta naranja SMN 14/11, PAS BCBA 13/11, laudo fletes PBA, Conab 13/11 y Res. Senasa 949/2026: ya publicadas ayer, sin hecho nuevo"
+    "Conab: Brasil importaría récord de 8,94 Mt de trigo 2026/27 (Bichos de Campo 14/11): cifra del informe Conab del 12–13/11 (UOL 13/11), más de 48 h y del mismo informe ya publicado el 14/11",
+    "Bichos de Campo 15/11 'alerta naranja tormentas región central': mismo evento que el aviso SMN 16/11 (se deja La Nación, más completa)",
+    "Inmobiliario Rural Córdoba (Agroverdad 16/11): el presupuesto 2027 se eleva hoy a la Legislatura; todavía sin alícuota ni cifra oficial",
+    "Retenciones: fallo de la Corte (La Nación 14–15/11), RIMI pick-ups, PRO siembra en banquinas: análisis/reclamos sin medida nueva",
+    "Plataformas de certificación EUDR (Bichos 15/11): aclaración sobre registro existente, sin medida nueva",
+    "GEIT granos sin precio fijado, Infobae récord exportaciones 100 Mt, BCR trigo 24,3 Mt (La Capital 15/11): estadísticas o ya publicadas el 13/11",
+    "ASA pide quitar el 10% de arancel chino a la soja (Agri-Pulse 15/11): reclamo; la cumbre Trump–Xi 19/11 ya se publicó",
+    "IF fertilizantes (Granar 16/11, Bichos 14/11): mismos valores ya cargados en Costos; precio de insumo, no evento",
+    "Tormentas y granizo 13/11 en Córdoba (PUE, Fulana 15/11): mismo evento ya publicado"
   ],
-  "updatedAt": "2026-11-15T09:55:00.000Z",
-  "updatedBy": "rutina matutina 15/11",
+  "updatedAt": "2026-11-16T09:55:00.000Z",
+  "updatedBy": "rutina matutina 16/11",
   "aviso": null
 }
