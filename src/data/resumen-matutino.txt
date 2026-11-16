@@ -1,7 +1,7 @@
-fecha: 2026-11-13 ART
+fecha: 2026-11-16 ART
 titulo_ui: Resumen matutino
 
-CBOT (13/11, 6:50 ART): soja 453,4 US$/t (+1,2%) · maíz 175,9 (+1,0%) · trigo 218,3 (+1,7%)
-FX: oficial 1.570 · blue 1.565 · MEP 1.573,8 · CCL 1.668,4 · riesgo país 829
-Mercados: S&P −0,4% · Nasdaq −0,4% · Dow −0,4% · WTI 88,6 (−0,1%) · Brent 96,0 (+0,2%) · UST 10a 5,10%
-Nota: Chicago rebotó (soja +1,2%, trigo +1,7%). Riesgo país baja a 829 (ayer 852). Blue 1.565, debajo del oficial.
+CBOT (16/11, 6:48 ART): soja 450,2 US$/t (−0,5%) · maíz 174,8 (−0,3%) · trigo 216,3 (−0,8%)
+FX: oficial 1.570 · blue 1.575 · MEP 1.580,9 · CCL 1.671,9 · riesgo país 830
+Mercados: S&P −0,4% · Nasdaq −0,9% · Dow +0,1% · WTI 88,0 (−0,6%) · Brent 92,3 (−0,8%) · UST 10a 5,15%
+Nota: Chicago abre la semana en baja (trigo −0,8%, soja −0,5%). Blue 1.575, arriba del oficial. Brent 92,3 (el viernes a esta hora, 96,0).
