@@ -1,34 +1,77 @@
 {
-  "asOf": "2026-11-16T09:55:00.000Z",
-  "asOfArg": "16/11/2026, 06:55",
+  "asOf": "2026-11-17T09:55:00.000Z",
+  "asOfArg": "17/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 16/11 (lunes) · entra alerta naranja SMN 16/11 por tormentas en Córdoba y centro-oeste (La Nación 16/11) · salen tormentas 13/11 + CPC (Infocampo), consejo comercial China–EE.UU. (CNBC 14/11), Paraná en Rosario (BCR 13/11) y alerta amarilla 15/11 (más de 48 h o vencidas, sin hecho nuevo)",
+  "note": "Rutina matutina 17/11 (martes) · entran alerta naranja SMN 17/11 (La Nación), granizo 16/11 sur de Córdoba (La Nación), Inmobiliario Rural Córdoba 2027 (La Voz 16/11), Res. Senasa 952/2026 (BO 16/11) y compromiso agrícola China antes de Trump–Xi (Bloomberg 16/11, traducido) · sale alerta naranja 16/11 (vencida)",
   "items": [
     {
-      "title": "SMN: alerta naranja por tormentas fuertes a severas este lunes 16/11 en Córdoba, San Luis, Mendoza y el este de La Rioja y Catamarca, con granizo de diversos tamaños, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en Buenos Aires, norte de La Pampa, oeste de Santa Fe, Santiago del Estero, Tucumán y otras zonas (30–70 mm)",
+      "title": "SMN: alerta naranja por tormentas fuertes a severas este martes 17/11 en Corrientes, Santa Fe, Córdoba, Entre Ríos y Santiago del Estero, con granizo, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en el resto de esas provincias, mitad norte de Buenos Aires, Mendoza, San Luis, Misiones, Formosa, Chaco y Tucumán (30–70 mm)",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-lluvias-para-este-lunes-16-de-noviembre-las-provincias-nid16112026/",
-      "publishedAt": "2026-11-16T06:31:31.000Z",
-      "publishedAtArg": "16/11 03:31",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-lluvias-y-vientos-zonda-para-este-martes-17-de-noviembre-nid17112026/",
+      "publishedAt": "2026-11-17T06:51:33.000Z",
+      "publishedAtArg": "17/11 03:51",
       "rank": 1,
-      "text": "SMN: alerta naranja por tormentas fuertes a severas este lunes 16/11 en Córdoba, San Luis, Mendoza y el este de La Rioja y Catamarca, con granizo de diversos tamaños, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en Buenos Aires, norte de La Pampa, oeste de Santa Fe, Santiago del Estero, Tucumán y otras zonas (30–70 mm)"
+      "text": "SMN: alerta naranja por tormentas fuertes a severas este martes 17/11 en Corrientes, Santa Fe, Córdoba, Entre Ríos y Santiago del Estero, con granizo, ráfagas de más de 90 km/h y 80–120 mm; alerta amarilla en el resto de esas provincias, mitad norte de Buenos Aires, Mendoza, San Luis, Misiones, Formosa, Chaco y Tucumán (30–70 mm)"
+    },
+    {
+      "title": "Granizo en el sur de Córdoba el lunes 16/11: epicentro entre General Roca y Hernando, con piedras de más de 150 g; 92 mm en dos horas en General Deheza, ~110 mm en una hora en zona rural de La Cautiva y granizo también en General Cabrera y Río Cuarto",
+      "source": "La Nación",
+      "handle": "La Nación",
+      "url": "https://www.lanacion.com.ar/sociedad/mega-granizo-en-cordoba-un-temporal-azoto-a-la-provincia-y-hay-alerta-naranja-por-abundantes-nid16112026/",
+      "publishedAt": "2026-11-16T23:00:24.000Z",
+      "publishedAtArg": "16/11 20:00",
+      "rank": 2,
+      "text": "Granizo en el sur de Córdoba el lunes 16/11: epicentro entre General Roca y Hernando, con piedras de más de 150 g; 92 mm en dos horas en General Deheza, ~110 mm en una hora en zona rural de La Cautiva y granizo también en General Cabrera y Río Cuarto"
+    },
+    {
+      "title": "Córdoba, Presupuesto 2027: el Inmobiliario Rural no tendrá revalúo de bases imponibles y se actualizará por IPIM (las entidades estiman 25–28%), con descuentos de 5% por BPA y 5% por propietario productor; el 98% va al Fondo de Desarrollo Agropecuario ($298.369 millones para caminos y canales)",
+      "source": "La Voz",
+      "handle": "La Voz",
+      "url": "https://www.lavoz.com.ar/agro/inmobiliario-rural-actualizara-debajo-inflacion-replico-baja-urbano_0_MoIaJA5ZZp.html",
+      "publishedAt": "2026-11-16T16:49:50.000Z",
+      "publishedAtArg": "16/11 13:49",
+      "rank": 3,
+      "text": "Córdoba, Presupuesto 2027: el Inmobiliario Rural no tendrá revalúo de bases imponibles y se actualizará por IPIM (las entidades estiman 25–28%), con descuentos de 5% por BPA y 5% por propietario productor; el 98% va al Fondo de Desarrollo Agropecuario ($298.369 millones para caminos y canales)"
+    },
+    {
+      "title": "Senasa (Res. 952/2026, Boletín Oficial 16/11): el control fitosanitario de exportaciones de granos y productos vegetales pasa a ser obligatorio solo cuando lo exige el país de destino; si no, es optativo y se emite un CEPVP vía Cert-POV. Deroga las Res. 141/14, 260/14 y 37/17",
+      "source": "Senasa (Boletín Oficial)",
+      "handle": "Senasa",
+      "url": "https://www.argentina.gob.ar/noticias/senasa-simplifica-y-moderniza-los-controles-fitosanitarios-de-exportacion-de-productos",
+      "publishedAt": "2026-11-16T19:19:45.000Z",
+      "publishedAtArg": "16/11 16:19",
+      "rank": 4,
+      "text": "Senasa (Res. 952/2026, Boletín Oficial 16/11): el control fitosanitario de exportaciones de granos y productos vegetales pasa a ser obligatorio solo cuando lo exige el país de destino; si no, es optativo y se emite un CEPVP vía Cert-POV. Deroga las Res. 141/14, 260/14 y 37/17"
+    },
+    {
+      "title": "Antes de la cumbre Trump–Xi en Shenzhen (APEC, esta semana), China se acerca a su meta de 25 Mt de soja de EE.UU. (faltan ~4 Mt según AgResource), pero el compromiso de comprar US$ 17.000 millones en otros productos agrícolas no avanza y las rebajas arancelarias acordadas en septiembre siguen sin aplicarse",
+      "titleOriginal": "China’s $17 Billion Crop Pledge Falters Ahead of Trump-Xi Summit",
+      "source": "Bloomberg (vía Yahoo Finance) · traducido del inglés",
+      "handle": "Bloomberg",
+      "url": "https://finance.yahoo.com/economy/policy/articles/china-17-billion-crop-pledge-012343620.html",
+      "publishedAt": "2026-11-17T01:23:00.000Z",
+      "publishedAtArg": "16/11 22:23",
+      "rank": 5,
+      "text": "Antes de la cumbre Trump–Xi en Shenzhen (APEC, esta semana), China se acerca a su meta de 25 Mt de soja de EE.UU. (faltan ~4 Mt según AgResource), pero el compromiso de comprar US$ 17.000 millones en otros productos agrícolas no avanza y las rebajas arancelarias acordadas en septiembre siguen sin aplicarse"
     }
   ],
   "descartadas": [
-    "Conab: Brasil importaría récord de 8,94 Mt de trigo 2026/27 (Bichos de Campo 14/11): cifra del informe Conab del 12–13/11 (UOL 13/11), más de 48 h y del mismo informe ya publicado el 14/11",
-    "Bichos de Campo 15/11 'alerta naranja tormentas región central': mismo evento que el aviso SMN 16/11 (se deja La Nación, más completa)",
-    "Inmobiliario Rural Córdoba (Agroverdad 16/11): el presupuesto 2027 se eleva hoy a la Legislatura; todavía sin alícuota ni cifra oficial",
-    "Retenciones: fallo de la Corte (La Nación 14–15/11), RIMI pick-ups, PRO siembra en banquinas: análisis/reclamos sin medida nueva",
-    "Plataformas de certificación EUDR (Bichos 15/11): aclaración sobre registro existente, sin medida nueva",
-    "GEIT granos sin precio fijado, Infobae récord exportaciones 100 Mt, BCR trigo 24,3 Mt (La Capital 15/11): estadísticas o ya publicadas el 13/11",
-    "ASA pide quitar el 10% de arancel chino a la soja (Agri-Pulse 15/11): reclamo; la cumbre Trump–Xi 19/11 ya se publicó",
-    "IF fertilizantes (Granar 16/11, Bichos 14/11): mismos valores ya cargados en Costos; precio de insumo, no evento",
-    "Tormentas y granizo 13/11 en Córdoba (PUE, Fulana 15/11): mismo evento ya publicado"
+    "Granizo en el SE de Córdoba (Inriville, Bouquet, Saira, Marcos Juárez) con daños en trigo y maíz y peritajes hasta la semana próxima (Los Agusti 16/11 11:41): relevante, pero queda fuera por tope 5; sin fecha precisa de las tormentas",
+    "Temporal 13/11 en Teodelina y Germania (TN 16/11): mismo evento de tormentas 13/11 ya publicado el 15/11",
+    "ASA pide quitar el 10% de arancel chino a la soja (DTN 16/11, US Farm News 16/11): reclamo sin medida nueva; la cumbre se cubre con Bloomberg",
+    "BCR trigo 24,3 Mt (Método Crítico 16/11): cifra del informe ya publicado el 13/11",
+    "USDA recortó stocks de maíz EE.UU. (Periodismo del Mercosur 17/11): WASDE del 10/11, más de 48 h",
+    "Fletes de granos PBA +16% (Clarín/Argenfields): ya publicado el 14/11",
+    "Paro Nacional del Campo en México 17/11 (bloqueos en 25 puntos): sin impacto directo en Argentina",
+    "EPA RVO/RFS 2027: sin decisión nueva (comentarios hasta 04/12)",
+    "Brasil prorroga 30 días desoneración de gasolina y etanol (Casa Civil): no afecta granos/insumos del productor argentino",
+    "Paro aceitero / Urgara en puertos: resultados de búsqueda eran notas viejas (2021 y agosto 2026), sin conflicto activo verificado al 17/11",
+    "IF fertilizantes 13/11 (Aplica 16/11, Verdenews 16/11, Tardáguila 13/11): precio de insumo, cargado en Costos"
   ],
-  "updatedAt": "2026-11-16T09:55:00.000Z",
-  "updatedBy": "rutina matutina 16/11",
+  "updatedAt": "2026-11-17T09:55:00.000Z",
+  "updatedBy": "rutina matutina 17/11",
   "aviso": null
 }

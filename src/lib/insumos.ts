@@ -5,17 +5,17 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF (informe semanal N.º 45, 6 Nov 2026) vía Mundo Rural — publicado 9 Nov 2026 (Agro Hoy 07/11 cita el mismo informe). Curated snapshot only. */
+/** IF (reporte semanal del 13 Nov 2026) vía Aplica — publicado 16 Nov 2026 09:15 ART (Verdenews 16/11 cita el mismo reporte). Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://mundorural.com.ar/mercado-de-fertilizantes-la-llegada-de-las-lluvias-reactiva-la-logistica-local-pero-la-debilidad-de-los-granos-exige-prudencia/";
+  "https://www.aplica.com.ar/post/los-fertilizantes-nitrogenados-bajan-de-precio-pero-el-poder-de-compra-del-productor-sigue-condicio";
 
-const FERT_AS_OF = "2026-11-09";
-const FERT_SOURCE_LABEL = "Mundo Rural/IF";
+const FERT_AS_OF = "2026-11-16";
+const FERT_SOURCE_LABEL = "Aplica/IF";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 16 Nov 2026: genérico 66,2% eq.ác. 54% 20 L 5,5 y Power Plus II 54% 20 L 5,9 USD/L, sin cambio vs. 10/11). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 17 Nov 2026: genérico 66,2% eq.ác. 54% 20 L 5,5 y mezcla sales potásica/amónica eq.ác. 54% 20 L 5,9 USD/L, sin cambio vs. 16/11). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-11-16";
+const GLIFO_AS_OF = "2026-11-17";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
@@ -164,16 +164,16 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Mundo Rural (9 Nov 2026) citing IF weekly report N.º 45 (6 Nov 2026; prev. RIF N°44 30/10 urea 595–605).
+ * Curated weekly snapshot from Aplica (16 Nov 2026) citing IF weekly report of 13 Nov 2026 (prev. IF N.º 45 06/11 urea 590–600).
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
- * Urea mayorista 590–600 (−5); import granular CFR 495–515.
- * MAP/DAP mayorista 965–995; referencia import DAP/MAP nominal 850–870 CFR.
+ * Urea mayorista 585–595 FCA (media 590, −1%); urea CFR Argentina 490 (−10).
+ * MAP/DAP mayorista 965–995 FCA sin cambios; MAP CFR Argentina media 861 (Verdenews 16/11, mismo reporte IF).
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(590, 600, "FCA", "wholesale", "IF N.º 45 (06/11) vía Mundo Rural 09/11: urea granular 590–600 FCA (−0,8%)"),
-      import: fertPoint(495, 515, "CFR", "import_replacement", "IF N.º 45 vía Mundo Rural 09/11: urea CFR Argentina 495–515 (media 505)"),
+      local: fertPoint(585, 595, "FCA", "wholesale", "IF 13/11 vía Aplica 16/11: urea granular 585–595 FCA (media 590, −1%)"),
+      import: fertPoint(490, 490, "CFR", "import_replacement", "IF 13/11 vía Aplica 16/11: urea CFR Argentina 490 (−10)"),
     },
     map: {
       local: fertPoint(
@@ -183,7 +183,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(850, 870, "CFR", "import_replacement", "IF N.º 45 vía Mundo Rural 09/11: MAP/DAP import CFR 850–870 (nominal)"),
+      import: fertPoint(861, 861, "CFR", "import_replacement", "IF 13/11 vía Verdenews 16/11: MAP CFR Argentina media 861"),
     },
     dap: {
       local: fertPoint(
@@ -193,7 +193,7 @@ function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(850, 870, "CFR", "import_replacement", "IF N.º 45 vía Mundo Rural 09/11: MAP/DAP import CFR 850–870 (nominal)"),
+      import: fertPoint(861, 861, "CFR", "import_replacement", "IF 13/11 vía Verdenews 16/11: sin cifra DAP CFR Argentina; referencia MAP CFR media 861"),
     },
   };
 }
@@ -434,7 +434,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   );
 
   const noteParts = [
-    `Fertilizantes: snapshot curado IF vía Mundo Rural (${fmtEsDate(FERT_AS_OF)}), no scrape en vivo.`,
+    `Fertilizantes: snapshot curado IF vía Aplica (${fmtEsDate(FERT_AS_OF)}), no scrape en vivo.`,
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
@@ -455,7 +455,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
       },
       {
         id: "if-rif",
-        label: "IF vía Mundo Rural (curated)",
+        label: "IF vía Aplica (curated)",
         ok: true,
       },
       {
