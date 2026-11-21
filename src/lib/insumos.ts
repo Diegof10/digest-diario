@@ -5,17 +5,17 @@ import { frescuraCiclo } from "@/lib/habiles";
 export const SE_SURTIDOR_CSV_URL =
   "http://datos.energia.gob.ar/dataset/1c181390-5045-475e-94dc-410429be4b17/resource/80ac25de-a44a-4445-9215-090cf55cfda5/download/precios-en-surtidor-resolucin-3142016.csv";
 
-/** IF (reporte semanal del 13 Nov 2026) vía Aplica — publicado 16 Nov 2026 09:15 ART (Verdenews 16/11 cita el mismo reporte). Curated snapshot only. */
+/** IF (relevamiento semana del 20 Nov 2026; mayorista 12→19/11) vía Sociedad Rural de Rosario — publicado 20 Nov 2026. Curated snapshot only. */
 export const FERT_SOURCE_URL =
-  "https://www.aplica.com.ar/post/los-fertilizantes-nitrogenados-bajan-de-precio-pero-el-poder-de-compra-del-productor-sigue-condicio";
+  "https://ruralrosario.org/detalle/23602/Fertilizantes-cae-la-urea-internacional-pero-el-costo-sigue-presionando-al-agro-argentino.html";
 
-const FERT_AS_OF = "2026-11-16";
-const FERT_SOURCE_LABEL = "Aplica/IF";
+const FERT_AS_OF = "2026-11-20";
+const FERT_SOURCE_LABEL = "IF vía Rural de Rosario";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 20 Nov 2026: genérico 66,2% eq.ác. 54% 20 L 5,5 y Power Plus II mezcla sales potásica/amónica eq.ác. 54% 20 L 5,9 USD/L, sin cambio vs. 19/11). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 21 Nov 2026: genérico 66,2% eq.ác. 54% 20 L 5,5 y Power Plus II mezcla sales potásica/amónica eq.ác. 54% 20 L 5,9 USD/L, sin cambio vs. 20/11). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-11-20";
+const GLIFO_AS_OF = "2026-11-21";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
@@ -164,36 +164,36 @@ function fertPoint(
 }
 
 /**
- * Curated weekly snapshot from Aplica (16 Nov 2026) citing IF weekly report of 13 Nov 2026 (prev. IF N.º 45 06/11 urea 590–600).
+ * Curated weekly snapshot from Sociedad Rural de Rosario (20 Nov 2026) citing IF report semana del 20/11 (prev. IF 13/11 vía Aplica 16/11: urea 585–595, MAP/DAP 965–995).
  * Not a live scrape — etiqueta ÚLTIMO_GUARDADO.
- * Urea mayorista 585–595 FCA (media 590, −1%); urea CFR Argentina 490 (−10).
- * MAP/DAP mayorista 965–995 FCA sin cambios; MAP CFR Argentina media 861 (Verdenews 16/11, mismo reporte IF).
+ * Urea mayorista 575–585 FCA (media 580, −2%; 12→19/11); urea CFR Argentina 480 (−10).
+ * MAP/DAP mayorista 975–995 FCA (media 985, +0,5%); DAP y MAP CFR nominales ~860 sin negocios de importación.
  */
 function curatedFertilizantes(): InsumosSnapshot["fertilizantes"] {
   return {
     urea: {
-      local: fertPoint(585, 595, "FCA", "wholesale", "IF 13/11 vía Aplica 16/11: urea granular 585–595 FCA (media 590, −1%)"),
-      import: fertPoint(490, 490, "CFR", "import_replacement", "IF 13/11 vía Aplica 16/11: urea CFR Argentina 490 (−10)"),
+      local: fertPoint(575, 585, "FCA", "wholesale", "IF semana 20/11 vía Rural de Rosario 20/11: urea granular 575–585 FCA (media 580, −2%)"),
+      import: fertPoint(480, 480, "CFR", "import_replacement", "IF semana 20/11 vía Rural de Rosario 20/11: urea CFR Argentina 480 (−10)"),
     },
     map: {
       local: fertPoint(
-        965,
+        975,
         995,
         "FCA",
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(861, 861, "CFR", "import_replacement", "IF 13/11 vía Verdenews 16/11: MAP CFR Argentina media 861"),
+      import: fertPoint(860, 860, "CFR", "import_replacement", "IF semana 20/11 vía Rural de Rosario 20/11: MAP CFR nominal ~860, sin negocios de importación"),
     },
     dap: {
       local: fertPoint(
-        965,
+        975,
         995,
         "FCA",
         "wholesale_bulk_port",
         "IF quotes MAP/DAP as combined FCA range",
       ),
-      import: fertPoint(861, 861, "CFR", "import_replacement", "IF 13/11 vía Verdenews 16/11: sin cifra DAP CFR Argentina; referencia MAP CFR media 861"),
+      import: fertPoint(860, 860, "CFR", "import_replacement", "IF semana 20/11 vía Rural de Rosario 20/11: DAP CFR nominal ~860, sin negocios de importación"),
     },
   };
 }
@@ -434,7 +434,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
   );
 
   const noteParts = [
-    `Fertilizantes: snapshot curado IF vía Aplica (${fmtEsDate(FERT_AS_OF)}), no scrape en vivo.`,
+    `Fertilizantes: snapshot curado IF vía Sociedad Rural de Rosario (${fmtEsDate(FERT_AS_OF)}), no scrape en vivo.`,
     gas.ok
       ? `Gasoil: mediana SE YPF G2 Diurno (retail_pump), n=${gas.point?.nStations}.`
       : `Gasoil: vacío (${gas.error ?? "sin dato"}).`,
@@ -455,7 +455,7 @@ export async function getInsumos(): Promise<InsumosSnapshot> {
       },
       {
         id: "if-rif",
-        label: "IF vía Aplica (curated)",
+        label: "IF vía Sociedad Rural de Rosario (curated)",
         ok: true,
       },
       {
