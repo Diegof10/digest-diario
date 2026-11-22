@@ -1,73 +1,52 @@
 {
-  "asOf": "2026-11-21T09:45:00.000Z",
-  "asOfArg": "21/11/2026, 06:45",
+  "asOf": "2026-11-22T09:45:00.000Z",
+  "asOfArg": "22/11/2026, 06:45",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 21/11 (sábado) · entran alerta amarilla SMN 21/11 (La Nación), media sanción de la Ley de Cabotaje (LN 20/11), restitución de la Ley de Tierras (EFE/Infobae 19/11), Cuota 481 Res. 2003/2026 (BO 20/11) e importaciones de soja de China en octubre (Reuters 20/11, traducido) · salen las del 20/11 (alerta SMN 20/11 vencida; granizo GEA-BCR, PAS BCBA, Los Grobo y chicharrita sin hecho nuevo)",
+  "note": "Rutina matutina 22/11 (domingo) · entran alerta naranja/amarilla SMN 22/11 (La Nación), actualización del aporte IPCVA desde diciembre (Bichos 20/11) y Res. 260/2026 PBA sistema FUTURO (Bichos 20/11) · salen las del 21/11 (alerta SMN 21/11 vencida; Cabotaje, Ley de Tierras, Cuota 481 e importaciones de China sin hecho nuevo o con más de 48 h)",
   "items": [
     {
-      "title": "SMN: alerta amarilla por tormentas fuertes, algunas severas, este sábado 21/11 en Córdoba, La Pampa, Mendoza, Neuquén, Río Negro, Misiones y Formosa (granizo, ráfagas de más de 90 km/h, 80–120 mm acumulados) y por nevadas en Mendoza",
+      "title": "SMN: alerta naranja por tormentas fuertes o severas este domingo 22/11 en Misiones y el este de Formosa (70–100 mm, granizo, ráfagas intensas) y alerta amarilla en Córdoba, La Rioja, Chaco, Corrientes y el resto de Misiones y Formosa (30–70 mm)",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-y-nevadas-para-este-sabado-21-de-noviembre-las-provincias-nid21112026/",
-      "publishedAt": "2026-11-21T03:01:00.000Z",
-      "publishedAtArg": "21/11 00:01",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-lluvias-para-este-domingo-22-de-noviembre-las-nid22112026/",
+      "publishedAt": "2026-11-22T05:53:00.000Z",
+      "publishedAtArg": "22/11 02:53",
       "rank": 1,
-      "text": "SMN: alerta amarilla por tormentas fuertes, algunas severas, este sábado 21/11 en Córdoba, La Pampa, Mendoza, Neuquén, Río Negro, Misiones y Formosa (granizo, ráfagas de más de 90 km/h, 80–120 mm acumulados) y por nevadas en Mendoza"
+      "text": "SMN: alerta naranja por tormentas fuertes o severas este domingo 22/11 en Misiones y el este de Formosa (70–100 mm, granizo, ráfagas intensas) y alerta amarilla en Córdoba, La Rioja, Chaco, Corrientes y el resto de Misiones y Formosa (30–70 mm)"
     },
     {
-      "title": "El Senado dio media sanción a la reforma de la Ley de Cabotaje, que habilita buques y barcazas extranjeros entre puertos argentinos; el CAA, las bolsas y la SRA piden que Diputados la trate pronto para bajar el flete fluvial de granos y fertilizantes",
-      "source": "La Nación",
-      "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/economia/campo/herramienta-indispensable-celebran-la-media-sancion-de-una-ley-que-cambiara-el-transporte-fluvial-y-nid20112026/",
-      "publishedAt": "2026-11-20T14:36:00.000Z",
-      "publishedAtArg": "20/11 11:36",
+      "title": "El IPCVA actualiza desde la faena de diciembre el aporte obligatorio por cabeza bovina faenada: $1.582 a cargo del ganadero y $714 del frigorífico ($2.296 en total)",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "url": "https://bichosdecampo.com/en-medio-de-la-polemica-por-el-visec-el-instituto-de-promocion-de-la-carne-decidio-actualizar-el-aporte-obligatorio-de-ganaderos-y-frigorificos/",
+      "publishedAt": "2026-11-20T17:55:40.000Z",
+      "publishedAtArg": "20/11 14:55",
       "rank": 2,
-      "text": "El Senado dio media sanción a la reforma de la Ley de Cabotaje, que habilita buques y barcazas extranjeros entre puertos argentinos; el CAA, las bolsas y la SRA piden que Diputados la trate pronto para bajar el flete fluvial de granos y fertilizantes"
+      "text": "El IPCVA actualiza desde la faena de diciembre el aporte obligatorio por cabeza bovina faenada: $1.582 a cargo del ganadero y $714 del frigorífico ($2.296 en total)"
     },
     {
-      "title": "El Senado sancionó la Ley de Inviolabilidad de la Propiedad Privada, que restituye la Ley de Tierras: tope de 15% de tierras rurales en manos extranjeras y máximo de 1.000 ha por titular extranjero en la zona núcleo",
-      "source": "EFE vía Infobae",
-      "handle": "Infobae",
-      "url": "https://www.infobae.com/america/agencias/2026/11/20/congreso-argentino-restituye-los-limites-a-la-venta-de-tierras-rurales-a-extranjeros/",
-      "publishedAt": "2026-11-20T01:45:00.000Z",
-      "publishedAtArg": "19/11 22:45",
+      "title": "Provincia de Buenos Aires: la Resolución 260/2026 del Ministerio de Trabajo obliga desde enero de 2027 a todos los empleadores, incluidos los rurales, a presentar mensualmente por el sistema FUTURO datos salariales, recibos de haberes y comprobantes bancarios; la SRA pidió revisarla",
+      "source": "Bichos de Campo",
+      "handle": "Bichos de Campo",
+      "url": "https://bichosdecampo.com/futuro-o-pasado-la-sociedad-rural-argentina-se-molesto-con-las-nuevas-exigencias-de-informacion-laboral-incluyendo-los-recibos-salariales-del-gobierno-de-axel-kicillof/",
+      "publishedAt": "2026-11-20T20:34:12.000Z",
+      "publishedAtArg": "20/11 17:34",
       "rank": 3,
-      "text": "El Senado sancionó la Ley de Inviolabilidad de la Propiedad Privada, que restituye la Ley de Tierras: tope de 15% de tierras rurales en manos extranjeras y máximo de 1.000 ha por titular extranjero en la zona núcleo"
-    },
-    {
-      "title": "Cuota 481: la Resolución 2003/2026 del Ministerio de Economía actualiza el protocolo para exportar carne vacuna de alta calidad a la UE (faena, registros SIF/SIGICA, tipificación y trazabilidad) y deroga las resoluciones 1466/2011 y 145/2014",
-      "source": "Boletín Oficial",
-      "handle": "Boletín Oficial",
-      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/350619/20261120",
-      "publishedAt": "2026-11-20T03:00:00.000Z",
-      "publishedAtArg": "20/11 00:00",
-      "rank": 4,
-      "text": "Cuota 481: la Resolución 2003/2026 del Ministerio de Economía actualiza el protocolo para exportar carne vacuna de alta calidad a la UE (faena, registros SIF/SIGICA, tipificación y trazabilidad) y deroga las resoluciones 1466/2011 y 145/2014"
-    },
-    {
-      "title": "Las importaciones de soja de China cayeron 23% en octubre por menores embarques desde Brasil",
-      "titleOriginal": "China's October soybean imports fall 23% as Brazil shipments decline",
-      "source": "Reuters (vía MarketScreener) · traducido del inglés",
-      "handle": "Reuters",
-      "url": "https://www.marketscreener.com/news/china-s-october-soybean-imports-fall-23-as-brazil-shipments-decline-ce785ed2d18bf421",
-      "publishedAt": "2026-11-20T05:12:00.000Z",
-      "publishedAtArg": "20/11 02:12",
-      "rank": 5,
-      "text": "Las importaciones de soja de China cayeron 23% en octubre por menores embarques desde Brasil"
+      "text": "Provincia de Buenos Aires: la Resolución 260/2026 del Ministerio de Trabajo obliga desde enero de 2027 a todos los empleadores, incluidos los rurales, a presentar mensualmente por el sistema FUTURO datos salariales, recibos de haberes y comprobantes bancarios; la SRA pidió revisarla"
     }
   ],
   "descartadas": [
-    "Granizo GEA-BCR (19/11), PAS BCBA (19/11), Los Grobo (18/11), chicharrita (19/11): sin hecho nuevo respecto del 20/11",
-    "Retenciones: columna LN 21/11 y reclamo de las cadenas por una ley de DEX: opinión/reclamo sin medida nueva; cronograma DEX desde enero 2027 sin cambios",
-    "Rivara (Federación de Acopiadores) contra molinos y retención financiera del 2,5% (20/11): reclamo sectorial sin medida",
-    "Paro aceitero (Monitor Gremial): nota sin fecha verificable reciente, sin conflicto activo confirmado al 21/11",
-    "CONAB 2º levantamiento 2026/27 y BCR estimaciones 12/11: más de 48 h",
-    "Compras de China de soja de EE.UU. (Reuters, oct.): notas viejas",
-    "Precios de soja/trigo en Rosario (Infocampo 20/11) y fertilizantes: precios, fuera del criterio (fert va a Costos)"
+    "Cabotaje (LN 20/11), Ley de Tierras (19/11), Cuota 481 (BO 20/11), importaciones de soja de China oct. (Reuters 20/11): sin hecho nuevo / más de 48 h",
+    "INTA El Niño 2026/27, granizo y crecidas (INTA Informa 19/11; réplicas Infosastre 21/11): más de 48 h en la fuente primaria",
+    "Compras estatales chinas de 10–13 cargamentos de soja de EE.UU. (republicadas 21–22/11): nota Reuters original del 15/10, vieja",
+    "Retenciones: columna LN 21/11 y opinión LN 22/11 sobre biocombustibles: opinión sin medida nueva",
+    "Paro aceitero (Monitor Gremial): nota sin fecha verificable, sin conflicto activo confirmado al 22/11",
+    "CONAB 2º levantamiento 2026/27 y PAS BCBA 19/11: más de 48 h; trigo >60 qq en zona núcleo (Meteored, BCR 19/11) sin dato nuevo",
+    "Fertilizantes (Argenfields 22/11, réplica IF 20/11) y Panorama semanal Granar 21/11: precios, fuera del criterio (fert va a Costos)"
   ],
-  "updatedAt": "2026-11-21T09:45:00.000Z",
-  "updatedBy": "rutina matutina 21/11",
+  "updatedAt": "2026-11-22T09:45:00.000Z",
+  "updatedBy": "rutina matutina 22/11",
   "aviso": null
 }
