@@ -39,7 +39,7 @@ const LABEL = { soja: "Soja", maiz: "Maíz", trigo: "Trigo" } as const;
 const FISCAL_NOVEDAD = {
   titulo: "Fiscal · RG 5927 al 18/12",
   resumen:
-    "La RG 5927 (Boletín Oficial del 12/11) reglamenta la reducción del 50% de las multas por infracciones a deberes formales; el deber omitido hay que cumplirlo hasta el 18/12 inclusive. La presentación de la DJ de Ganancias 2025 de personas humanas vence el 16/11 (RG 5918); el 30/11 corre la caracterización de Pequeño Contribuyente, y el 3° anticipo de Ganancias y Bienes Personales figura el 13, 14 y 15/12 según la terminación del CUIT (el 13/12 es domingo). Fuente: Boletín Oficial y ARCA.",
+    "La RG 5927 (Boletín Oficial del 12/11) reglamenta la reducción del 50% de las multas por infracciones a deberes formales; el deber omitido hay que cumplirlo hasta el 18/12 inclusive. El 30/11 corre la caracterización de Pequeño Contribuyente, y el 3° anticipo de Ganancias y Bienes Personales vence el 14, 15 y 16/12 según la terminación del CUIT. Fuente: Boletín Oficial y ARCA.",
   fuente: "Boletín Oficial · ARCA",
   hora: "BO 12/11",
 };
