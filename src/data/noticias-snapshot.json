@@ -1,52 +1,43 @@
 {
-  "asOf": "2026-11-22T09:45:00.000Z",
-  "asOfArg": "22/11/2026, 06:45",
+  "asOf": "2026-11-23T09:50:00.000Z",
+  "asOfArg": "23/11/2026, 06:50",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 22/11 (domingo) · entran alerta naranja/amarilla SMN 22/11 (La Nación), actualización del aporte IPCVA desde diciembre (Bichos 20/11) y Res. 260/2026 PBA sistema FUTURO (Bichos 20/11) · salen las del 21/11 (alerta SMN 21/11 vencida; Cabotaje, Ley de Tierras, Cuota 481 e importaciones de China sin hecho nuevo o con más de 48 h)",
+  "note": "Rutina matutina 23/11 (lunes feriado) · entran alerta amarilla SMN por tormentas 23/11 en Córdoba, San Luis, La Rioja y Mendoza (La Nación 23/11) y crecida del Paraná frente a Rosario a 9 cm del nivel de alerta, INA prevé 5 m (Infobae 23/11) · salen alerta SMN 22/11 (vencida), aporte IPCVA y Res. 260/2026 PBA (más de 48 h, sin hecho nuevo)",
   "items": [
     {
-      "title": "SMN: alerta naranja por tormentas fuertes o severas este domingo 22/11 en Misiones y el este de Formosa (70–100 mm, granizo, ráfagas intensas) y alerta amarilla en Córdoba, La Rioja, Chaco, Corrientes y el resto de Misiones y Formosa (30–70 mm)",
+      "title": "SMN: alerta amarilla por tormentas fuertes o localmente severas este lunes 23/11 en Córdoba, San Luis, La Rioja y Mendoza, con lluvias abundantes en poco tiempo, granizo y ráfagas intensas",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-lluvias-para-este-domingo-22-de-noviembre-las-nid22112026/",
-      "publishedAt": "2026-11-22T05:53:00.000Z",
-      "publishedAtArg": "22/11 02:53",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-y-vientos-para-este-lunes-23-de-noviembre-las-provincias-afectadas-nid23112026/",
+      "publishedAt": "2026-11-23T04:31:00.000Z",
+      "publishedAtArg": "23/11 01:31",
       "rank": 1,
-      "text": "SMN: alerta naranja por tormentas fuertes o severas este domingo 22/11 en Misiones y el este de Formosa (70–100 mm, granizo, ráfagas intensas) y alerta amarilla en Córdoba, La Rioja, Chaco, Corrientes y el resto de Misiones y Formosa (30–70 mm)"
+      "text": "SMN: alerta amarilla por tormentas fuertes o localmente severas este lunes 23/11 en Córdoba, San Luis, La Rioja y Mendoza, con lluvias abundantes en poco tiempo, granizo y ráfagas intensas"
     },
     {
-      "title": "El IPCVA actualiza desde la faena de diciembre el aporte obligatorio por cabeza bovina faenada: $1.582 a cargo del ganadero y $714 del frigorífico ($2.296 en total)",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "url": "https://bichosdecampo.com/en-medio-de-la-polemica-por-el-visec-el-instituto-de-promocion-de-la-carne-decidio-actualizar-el-aporte-obligatorio-de-ganaderos-y-frigorificos/",
-      "publishedAt": "2026-11-20T17:55:40.000Z",
-      "publishedAtArg": "20/11 14:55",
+      "title": "Crecida del Paraná: en Rosario el río marcó 4,91 m el domingo 22/11, a 9 cm del nivel de alerta y la mayor altura para noviembre desde 1998; el INA prevé que llegue a 5 m",
+      "source": "Infobae (INA)",
+      "handle": "Infobae",
+      "url": "https://www.infobae.com/sociedad/2026/11/23/sigue-la-alerta-por-la-crecida-del-rio-parana-el-agua-esta-cada-vez-mas-cerca-de-los-niveles-de-evacuacion-en-rosario/",
+      "publishedAt": "2026-11-23T07:07:00.000Z",
+      "publishedAtArg": "23/11 04:07",
       "rank": 2,
-      "text": "El IPCVA actualiza desde la faena de diciembre el aporte obligatorio por cabeza bovina faenada: $1.582 a cargo del ganadero y $714 del frigorífico ($2.296 en total)"
-    },
-    {
-      "title": "Provincia de Buenos Aires: la Resolución 260/2026 del Ministerio de Trabajo obliga desde enero de 2027 a todos los empleadores, incluidos los rurales, a presentar mensualmente por el sistema FUTURO datos salariales, recibos de haberes y comprobantes bancarios; la SRA pidió revisarla",
-      "source": "Bichos de Campo",
-      "handle": "Bichos de Campo",
-      "url": "https://bichosdecampo.com/futuro-o-pasado-la-sociedad-rural-argentina-se-molesto-con-las-nuevas-exigencias-de-informacion-laboral-incluyendo-los-recibos-salariales-del-gobierno-de-axel-kicillof/",
-      "publishedAt": "2026-11-20T20:34:12.000Z",
-      "publishedAtArg": "20/11 17:34",
-      "rank": 3,
-      "text": "Provincia de Buenos Aires: la Resolución 260/2026 del Ministerio de Trabajo obliga desde enero de 2027 a todos los empleadores, incluidos los rurales, a presentar mensualmente por el sistema FUTURO datos salariales, recibos de haberes y comprobantes bancarios; la SRA pidió revisarla"
+      "text": "Crecida del Paraná: en Rosario el río marcó 4,91 m el domingo 22/11, a 9 cm del nivel de alerta y la mayor altura para noviembre desde 1998; el INA prevé que llegue a 5 m"
     }
   ],
   "descartadas": [
-    "Cabotaje (LN 20/11), Ley de Tierras (19/11), Cuota 481 (BO 20/11), importaciones de soja de China oct. (Reuters 20/11): sin hecho nuevo / más de 48 h",
-    "INTA El Niño 2026/27, granizo y crecidas (INTA Informa 19/11; réplicas Infosastre 21/11): más de 48 h en la fuente primaria",
-    "Compras estatales chinas de 10–13 cargamentos de soja de EE.UU. (republicadas 21–22/11): nota Reuters original del 15/10, vieja",
-    "Retenciones: columna LN 21/11 y opinión LN 22/11 sobre biocombustibles: opinión sin medida nueva",
-    "Paro aceitero (Monitor Gremial): nota sin fecha verificable, sin conflicto activo confirmado al 22/11",
-    "CONAB 2º levantamiento 2026/27 y PAS BCBA 19/11: más de 48 h; trigo >60 qq en zona núcleo (Meteored, BCR 19/11) sin dato nuevo",
-    "Fertilizantes (Argenfields 22/11, réplica IF 20/11) y Panorama semanal Granar 21/11: precios, fuera del criterio (fert va a Costos)"
+    "Alerta SMN 22/11, aporte IPCVA (Bichos 20/11), Res. 260/2026 PBA (Bichos 20/11), Cabotaje, Ley de Tierras, Cuota 481, importaciones de soja de China oct.: ya publicadas, sin hecho nuevo / más de 48 h",
+    "Ley de Biocombustibles: venció el plazo de dictamen el 20/11 (Infobae 21/11 01:53, Perfil 19/11, El Rural 19/11): más de 48 h, sin hecho nuevo",
+    "Granizo en la cuenca lechera santafesina (Puntomedia 22/11, vía Cadena 3): evento de mediados de noviembre, sin fecha precisa; granizo GEA-BCR 90.000 ha ya publicado el 20/11",
+    "Paro aceitero / conciliación (Monitor Gremial ~20/11): más de 48 h y fecha poco verificable",
+    "Retenciones: Milei 'no tengo los recursos' (LN 19/11) y columna LN 21/11: sin medida nueva",
+    "Cogollero (Clarín 20/10) y chicharrita (TN 20/11): viejas o más de 48 h; avance de siembra/cosecha (Infobae Chacra 22/11 sobre PAS 19/11): dato repetido",
+    "EE.UU.: pedidos de exención RFS 2027 de Luisiana y Alabama (9/11) y pagos ARC/PLC USDA (21/11): viejo / sin impacto directo en Argentina; Brasil B16 sin decisión del CNPE",
+    "Fertilizantes IF 20/11 (réplicas): precios, van a Costos"
   ],
-  "updatedAt": "2026-11-22T09:45:00.000Z",
-  "updatedBy": "rutina matutina 22/11",
+  "updatedAt": "2026-11-23T09:50:00.000Z",
+  "updatedBy": "rutina matutina 23/11",
   "aviso": null
 }

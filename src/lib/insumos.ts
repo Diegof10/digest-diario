@@ -12,10 +12,10 @@ export const FERT_SOURCE_URL =
 const FERT_AS_OF = "2026-11-20";
 const FERT_SOURCE_LABEL = "IF vía Rural de Rosario";
 
-/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 22 Nov 2026: genérico 66,2% eq.ác. 54% 20 L 5,5 y Power Plus II mezcla sales potásica/amónica eq.ác. 54% 20 L 5,9 USD/L, sin cambio vs. 21/11). */
+/** Campo Simple — lista web glifosato líquido eq.ác. ~54% (consulta 23 Nov 2026: genérico 66,2% eq.ác. 54% 20 L 5,5 y Power Plus II mezcla sales potásica/amónica eq.ác. 54% 20 L 5,9 USD/L, sin cambio vs. 22/11). */
 export const GLIFO_SOURCE_URL =
   "https://www.camposimple.com.ar/default/herbicidas/glifosato.html";
-const GLIFO_AS_OF = "2026-11-22";
+const GLIFO_AS_OF = "2026-11-23";
 const GLIFO_SOURCE_LABEL = "Campo Simple";
 const GLIFO_LOW = 5.5; // genérico 66,2% eq.ác. 54% · 20 L
 const GLIFO_HIGH = 5.9; // Power Plus II 54% · 20 L
