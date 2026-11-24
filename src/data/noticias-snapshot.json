@@ -1,43 +1,64 @@
 {
-  "asOf": "2026-11-23T09:50:00.000Z",
-  "asOfArg": "23/11/2026, 06:50",
+  "asOf": "2026-11-24T09:45:00.000Z",
+  "asOfArg": "24/11/2026, 06:45",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 23/11 (lunes feriado) · entran alerta amarilla SMN por tormentas 23/11 en Córdoba, San Luis, La Rioja y Mendoza (La Nación 23/11) y crecida del Paraná frente a Rosario a 9 cm del nivel de alerta, INA prevé 5 m (Infobae 23/11) · salen alerta SMN 22/11 (vencida), aporte IPCVA y Res. 260/2026 PBA (más de 48 h, sin hecho nuevo)",
+  "note": "Rutina matutina 24/11 · entran alertas naranja (NEA) y amarilla SMN por tormentas 24/11 con Córdoba, Santa Fe y Entre Ríos (La Nación 24/11), crecida del Paraná con INA que prevé superar levemente 5 m a fin de noviembre y niveles altos hasta febrero (Clarín 23/11, reemplaza Infobae 23/11), granizo en Traslasierra (La Voz 23/11) y siembra de soja Brasil 86% AgRural (Reuters vía CNN Brasil 23/11) · sale alerta SMN 23/11 (vencida)",
   "items": [
     {
-      "title": "SMN: alerta amarilla por tormentas fuertes o localmente severas este lunes 23/11 en Córdoba, San Luis, La Rioja y Mendoza, con lluvias abundantes en poco tiempo, granizo y ráfagas intensas",
+      "title": "SMN: alerta naranja por tormentas fuertes o severas este martes 24/11 en Chaco, Formosa, Corrientes y Misiones (70 a 100 mm, granizo y ráfagas de 90 km/h) y alerta amarilla en Córdoba, Santa Fe, Entre Ríos, Santiago del Estero, Salta, Jujuy, Catamarca, La Rioja y la costa bonaerense (30 a 70 mm)",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-por-tormentas-y-vientos-para-este-lunes-23-de-noviembre-las-provincias-afectadas-nid23112026/",
-      "publishedAt": "2026-11-23T04:31:00.000Z",
-      "publishedAtArg": "23/11 01:31",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alertas-naranja-y-amarilla-por-tormentas-y-vientos-para-este-martes-24-de-noviembre-las-nid24112026/",
+      "publishedAt": "2026-11-24T03:01:00.000Z",
+      "publishedAtArg": "24/11 00:01",
       "rank": 1,
-      "text": "SMN: alerta amarilla por tormentas fuertes o localmente severas este lunes 23/11 en Córdoba, San Luis, La Rioja y Mendoza, con lluvias abundantes en poco tiempo, granizo y ráfagas intensas"
+      "text": "SMN: alerta naranja por tormentas fuertes o severas este martes 24/11 en Chaco, Formosa, Corrientes y Misiones (70 a 100 mm, granizo y ráfagas de 90 km/h) y alerta amarilla en Córdoba, Santa Fe, Entre Ríos, Santiago del Estero, Salta, Jujuy, Catamarca, La Rioja y la costa bonaerense (30 a 70 mm)"
     },
     {
-      "title": "Crecida del Paraná: en Rosario el río marcó 4,91 m el domingo 22/11, a 9 cm del nivel de alerta y la mayor altura para noviembre desde 1998; el INA prevé que llegue a 5 m",
-      "source": "Infobae (INA)",
-      "handle": "Infobae",
-      "url": "https://www.infobae.com/sociedad/2026/11/23/sigue-la-alerta-por-la-crecida-del-rio-parana-el-agua-esta-cada-vez-mas-cerca-de-los-niveles-de-evacuacion-en-rosario/",
-      "publishedAt": "2026-11-23T07:07:00.000Z",
-      "publishedAtArg": "23/11 04:07",
+      "title": "Crecida del Paraná: con Rosario en 4,91 m, el INA prevé que el río termine noviembre superando levemente los 5 m (nivel de alerta) y que se mantenga alto durante el verano, posiblemente hasta fines de febrero",
+      "source": "Clarín (INA)",
+      "handle": "Clarín",
+      "url": "https://www.clarin.com/sociedad/alerta-rosario-crecida-rio-parana-estiman-proxima-semana-agua-podria-superar-metros_0_toiCBOcZ07.html",
+      "publishedAt": "2026-11-23T19:48:00.000Z",
+      "publishedAtArg": "23/11 16:48",
       "rank": 2,
-      "text": "Crecida del Paraná: en Rosario el río marcó 4,91 m el domingo 22/11, a 9 cm del nivel de alerta y la mayor altura para noviembre desde 1998; el INA prevé que llegue a 5 m"
+      "text": "Crecida del Paraná: con Rosario en 4,91 m, el INA prevé que el río termine noviembre superando levemente los 5 m (nivel de alerta) y que se mantenga alto durante el verano, posiblemente hasta fines de febrero"
+    },
+    {
+      "title": "Granizo en Traslasierra (Córdoba): dos pedreas en menos de 24 horas dañaron seriamente cultivos de sandía, melón, papa y menta al oeste de Villa Dolores y en la zona de Nono, semanas antes de la cosecha",
+      "source": "La Voz",
+      "handle": "La Voz",
+      "url": "https://www.lavoz.com.ar/ciudadanos/granizo-causo-serios-danos-lunes-traslasierra_0_cclRBHY2pz.html",
+      "publishedAt": "2026-11-23T23:08:00.000Z",
+      "publishedAtArg": "23/11 20:08",
+      "rank": 3,
+      "text": "Granizo en Traslasierra (Córdoba): dos pedreas en menos de 24 horas dañaron seriamente cultivos de sandía, melón, papa y menta al oeste de Villa Dolores y en la zona de Nono, semanas antes de la cosecha"
+    },
+    {
+      "title": "Brasil: la siembra de soja 2026/27 llegó al 86% del área proyectada, contra 78% la semana anterior y 81% hace un año; el maíz de primera en el centro-sur, al 90% (AgRural)",
+      "titleOriginal": "Plantio de soja no Brasil avança para 86% com ajuda das chuvas, diz AgRural",
+      "source": "Reuters vía CNN Brasil (AgRural) · traducido del portugués",
+      "handle": "CNN Brasil",
+      "url": "https://www.cnnbrasil.com.br/agro/plantio-de-soja-no-8/",
+      "publishedAt": "2026-11-23T17:09:00.000Z",
+      "publishedAtArg": "23/11 14:09",
+      "rank": 4,
+      "text": "Brasil: la siembra de soja 2026/27 llegó al 86% del área proyectada, contra 78% la semana anterior y 81% hace un año; el maíz de primera en el centro-sur, al 90% (AgRural)"
     }
   ],
   "descartadas": [
-    "Alerta SMN 22/11, aporte IPCVA (Bichos 20/11), Res. 260/2026 PBA (Bichos 20/11), Cabotaje, Ley de Tierras, Cuota 481, importaciones de soja de China oct.: ya publicadas, sin hecho nuevo / más de 48 h",
-    "Ley de Biocombustibles: venció el plazo de dictamen el 20/11 (Infobae 21/11 01:53, Perfil 19/11, El Rural 19/11): más de 48 h, sin hecho nuevo",
-    "Granizo en la cuenca lechera santafesina (Puntomedia 22/11, vía Cadena 3): evento de mediados de noviembre, sin fecha precisa; granizo GEA-BCR 90.000 ha ya publicado el 20/11",
-    "Paro aceitero / conciliación (Monitor Gremial ~20/11): más de 48 h y fecha poco verificable",
-    "Retenciones: Milei 'no tengo los recursos' (LN 19/11) y columna LN 21/11: sin medida nueva",
-    "Cogollero (Clarín 20/10) y chicharrita (TN 20/11): viejas o más de 48 h; avance de siembra/cosecha (Infobae Chacra 22/11 sobre PAS 19/11): dato repetido",
-    "EE.UU.: pedidos de exención RFS 2027 de Luisiana y Alabama (9/11) y pagos ARC/PLC USDA (21/11): viejo / sin impacto directo en Argentina; Brasil B16 sin decisión del CNPE",
-    "Fertilizantes IF 20/11 (réplicas): precios, van a Costos"
+    "Alerta SMN 23/11 (vencida); crecida del Paraná Infobae 23/11 04:07 (reemplazada por Clarín 23/11 con pronóstico INA más nuevo); RíoAlert 4,99 m 24/11 00:00 (agregador, dato Prefectura sin validar)",
+    "Biocombustibles: pedido del CAA a Diputados (Axi 23/11): reclamo sin hecho nuevo",
+    "Granizo cuenca lechera santafesina (Puntomedia 22/11) y GEA-BCR 90.000 ha: ya publicados / más de 48 h",
+    "Paro aceitero (Monitor Gremial): sin fecha verificable",
+    "Retenciones: sin medida nueva (Decreto 423/2026 vigente); Ley de semillas: sin proyecto en el Congreso",
+    "China: arancel 13% a soja EE.UU. (US Farm News 10/11) y compromiso 25 Mt: viejo / sin hecho nuevo",
+    "Boletín Oficial 24/11: solo inscripción de cultivar de vid (INASE), sin impacto",
+    "Fertilizantes IF 20/11 (réplicas Granar/Verdenews 23/11): precios, van a Costos"
   ],
-  "updatedAt": "2026-11-23T09:50:00.000Z",
-  "updatedBy": "rutina matutina 23/11",
+  "updatedAt": "2026-11-24T09:45:00.000Z",
+  "updatedBy": "rutina matutina 24/11",
   "aviso": null
 }
