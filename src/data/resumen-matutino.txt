@@ -1,7 +1,7 @@
-fecha: 2026-11-25 ART
+fecha: 2026-11-26 ART
 titulo_ui: Resumen matutino
 
-CBOT (25/11, 6:49 ART): soja 448,7 US$/t (−1,0%) · maíz 176,4 (−0,5%) · trigo 213,1 (−1,6%)
-FX (cierre 24/11, DolarAPI): oficial 1.615 · blue 1.700 · MEP 1.695,1 · CCL 1.797,1 · riesgo país 1.094
-Mercados: S&P −0,5% · Nasdaq −1,5% · Dow +0,9% · WTI 81,6 (−0,5%) · Brent 88,4 (−3,3%) · UST 10a 4,90%
-Nota: Riesgo país a 1.094 (dato 24/11; el lunes 23/11, 1.035). Wall Street cerró mixto el martes. Brent 88,4 (−3,3%) a esta hora.
+CBOT (cierre 25/11; hoy 26/11 cerrado por Thanksgiving): soja 457,1 US$/t (+0,8%) · maíz 179,7 (+1,4%) · trigo 215,9 (−0,3%)
+FX (cierre 25/11, DolarAPI): oficial 1.630 · blue 1.710 · MEP 1.688,7 · CCL 1.767,9 · riesgo país 1.067
+Mercados (cierre 25/11): S&P −0,3% · Nasdaq −0,6% · Dow +0,3% · UST 10a 4,85% · WTI 83,3 (−0,5%) y Brent 89,8 a las 6:30 ART
+Nota: Hoy 26/11 no operan CBOT ni Wall Street por Thanksgiving (el viernes, rueda corta). Riesgo país a 1.067 (dato 25/11; el 24/11, 1.094).

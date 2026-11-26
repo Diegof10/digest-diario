@@ -1,75 +1,74 @@
 {
-  "asOf": "2026-11-25T09:50:00.000Z",
-  "asOfArg": "25/11/2026, 06:50",
+  "asOf": "2026-11-26T09:55:00.000Z",
+  "asOfArg": "26/11/2026, 06:55",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 25/11 · entran alerta naranja/amarilla SMN 25/11 (La Nación 25/11), Paraná en Rosario 4,99 m a 1 cm de la alerta (La Capital 24/11, reemplaza Clarín 23/11), primeros trigos >60 qq y granizo en centro-sur santafesino (Expoagro/GEA 24/11), USDA Crop Progress 22/11 (DTN 23/11, traducido) · sigue siembra soja Brasil 86% AgRural · salen alerta SMN 24/11 (vencida) y granizo Traslasierra (hortícola, menor impacto)",
+  "note": "Rutina matutina 26/11 · entran compra china de 132.000 t de soja de EE.UU. (USDA 25/11, traducido), cosecha récord 2025/26 171 Mt (SAGyP vía La Nación 25/11), INA 25/11 Paraná Rosario con probabilidad de superar alerta, Brasil importaría 9–10 Mt de trigo en 2027 (Agrofy 25/11), alertas SMN 26/11 (La Nación) · salen alerta SMN 25/11 (vencida), La Capital 24/11 (reemplazada por INA 25/11), Expoagro/GEA 24/11, USDA Crop Progress 22/11 y AgRural 23/11 (>48 h)",
   "items": [
     {
-      "title": "SMN: alerta naranja por tormentas fuertes o severas este miércoles 25/11 en Formosa y Salta (70 a 100 mm, granizo y ráfagas de 90 km/h) y alerta amarilla por tormentas en Salta, Jujuy, Corrientes, Catamarca y sectores de La Rioja y San Juan; amarilla por viento en la costa bonaerense",
+      "title": "China compró 132.000 t de soja de EE.UU. para la campaña 2026/27 (venta diaria reportada al USDA el miércoles 25/11), el mismo día en que Pekín informó la primera reunión del grupo de trabajo agrícola China–EE.UU.",
+      "titleOriginal": "USDA: EUA vendem 132 mil toneladas de soja para a China nesta 4ª feira (25)",
+      "source": "Notícias Agrícolas (USDA) · traducido del portugués",
+      "handle": "Notícias Agrícolas",
+      "url": "https://www.noticiasagricolas.com.br/noticias/soja/431924-usda-eua-vendem-132-mil-toneladas-de-soja-para-a-china-nesta-4-feira-25.amp.html",
+      "publishedAt": "2026-11-25T14:26:52.000Z",
+      "publishedAtArg": "25/11 11:26",
+      "rank": 1,
+      "text": "China compró 132.000 t de soja de EE.UU. para la campaña 2026/27 (venta diaria reportada al USDA el miércoles 25/11), el mismo día en que Pekín informó la primera reunión del grupo de trabajo agrícola China–EE.UU."
+    },
+    {
+      "title": "Secretaría de Agricultura: la cosecha 2025/26 cerró en un récord de 171 millones de toneladas, 30 Mt más que el ciclo anterior (+21%); soja 52 Mt según Acsoja",
+      "source": "La Nación (SAGyP)",
+      "handle": "La Nación",
+      "url": "https://www.lanacion.com.ar/economia/campo/historico-la-cosecha-de-granos-aumento-un-21-y-marco-un-nuevo-record-con-171-millones-de-toneladas-nid25112026/",
+      "publishedAt": "2026-11-25T17:09:25.000Z",
+      "publishedAtArg": "25/11 14:09",
+      "rank": 2,
+      "text": "Secretaría de Agricultura: la cosecha 2025/26 cerró en un récord de 171 millones de toneladas, 30 Mt más que el ciclo anterior (+21%); soja 52 Mt según Acsoja"
+    },
+    {
+      "title": "INA: el Paraná en Rosario sigue en punta (4,92 m; tocó 4,99 m) y para los próximos 7 días prevé 4,70–5,20 m, con probabilidad de superar la alerta de 5 m; en Corrientes-Barranqueras, posible alerta desde el 2/12",
+      "source": "INA (Instituto Nacional del Agua)",
+      "handle": "INA",
+      "url": "https://www.ina.gob.ar/archivos/alerta/2026Nov25_10481.pdf",
+      "publishedAt": "2026-11-25T23:39:03.000Z",
+      "publishedAtArg": "25/11 20:39",
+      "rank": 3,
+      "text": "INA: el Paraná en Rosario sigue en punta (4,92 m; tocó 4,99 m) y para los próximos 7 días prevé 4,70–5,20 m, con probabilidad de superar la alerta de 5 m; en Corrientes-Barranqueras, posible alerta desde el 2/12"
+    },
+    {
+      "title": "Brasil importaría entre 9 y 10 Mt de trigo en 2027, el mayor volumen en 30 años (Abitrigo), con cosecha propia de 5,26 Mt (−33,2%, Conab); la Argentina explicó el 74,4% de sus importaciones ene–oct 2026",
+      "source": "Agrofy News (Abitrigo/Conab)",
+      "handle": "Agrofy News",
+      "url": "https://news.agrofy.com.ar/noticia/217057/brasil-importaria-mayor-volumen-trigo-30-anos-hubo-visita-record-argentina-45-molineros-pasaron-sant",
+      "publishedAt": "2026-11-25T15:48:00.000Z",
+      "publishedAtArg": "25/11 12:48",
+      "rank": 4,
+      "text": "Brasil importaría entre 9 y 10 Mt de trigo en 2027, el mayor volumen en 30 años (Abitrigo), con cosecha propia de 5,26 Mt (−33,2%, Conab); la Argentina explicó el 74,4% de sus importaciones ene–oct 2026"
+    },
+    {
+      "title": "SMN: alerta naranja por viento en Santa Cruz (ráfagas de hasta 110 km/h) y alerta amarilla por tormentas fuertes o localmente severas, con granizo ocasional, en Mendoza, San Juan y La Rioja este jueves 26/11",
       "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-vientos-para-este-miercoles-25-de-noviembre-las-nid25112026/",
-      "publishedAt": "2026-11-25T03:01:00.000Z",
-      "publishedAtArg": "25/11 00:01",
-      "rank": 1,
-      "text": "SMN: alerta naranja por tormentas fuertes o severas este miércoles 25/11 en Formosa y Salta (70 a 100 mm, granizo y ráfagas de 90 km/h) y alerta amarilla por tormentas en Salta, Jujuy, Corrientes, Catamarca y sectores de La Rioja y San Juan; amarilla por viento en la costa bonaerense"
-    },
-    {
-      "title": "Crecida del Paraná: en Rosario el río llegó a 4,99 m a la medianoche del martes 24/11 (a 1 cm del nivel de alerta de 5 m, récord para noviembre según Prefectura) y al mediodía bajó a 4,94 m",
-      "source": "La Capital (Prefectura Naval)",
-      "handle": "La Capital",
-      "url": "https://www.lacapital.com.ar/la-ciudad/el-rio-parana-dio-un-pequeno-respiro-rosario-y-cinco-centimetros-n10294038.html",
-      "publishedAt": "2026-11-25T00:34:00.000Z",
-      "publishedAtArg": "24/11 21:34",
-      "rank": 2,
-      "text": "Crecida del Paraná: en Rosario el río llegó a 4,99 m a la medianoche del martes 24/11 (a 1 cm del nivel de alerta de 5 m, récord para noviembre según Prefectura) y al mediodía bajó a 4,94 m"
-    },
-    {
-      "title": "Centro-sur de Santa Fe: los primeros trigos cosechados superan los 60 qq/ha (López, Gálvez, Cañada Rosquín, El Trébol, Carlos Pellegrini, Centeno), pero el granizo arrasó lotes; GEA-BCR estima ~14.000 ha de trigo y ~18.000 de maíz temprano afectadas",
-      "source": "Expoagro (GEA-BCR)",
-      "handle": "Expoagro",
-      "url": "https://www.expoagro.com.ar/los-primeros-trigos-superan-los-60-quintales-pero-el-granizo-arraso-lotes/",
-      "publishedAt": "2026-11-24T16:13:44.000Z",
-      "publishedAtArg": "24/11 13:13",
-      "rank": 3,
-      "text": "Centro-sur de Santa Fe: los primeros trigos cosechados superan los 60 qq/ha (López, Gálvez, Cañada Rosquín, El Trébol, Carlos Pellegrini, Centeno), pero el granizo arrasó lotes; GEA-BCR estima ~14.000 ha de trigo y ~18.000 de maíz temprano afectadas"
-    },
-    {
-      "title": "USDA (Crop Progress al 22/11): EE.UU. lleva cosechado el 94% del maíz (2 puntos debajo del promedio de 5 años) y el trigo de invierno mejora por tercera semana: 54% bueno/excelente, 87% emergido",
-      "titleOriginal": "USDA Crop Progress: 6% of Corn Left to Harvest; Winter Wheat Condition Up as of Nov. 22",
-      "source": "DTN (USDA NASS) · traducido del inglés",
-      "handle": "DTN",
-      "url": "https://www.dtnpf.com/agriculture/web/AG/news/article/2026/11/23/usda-crop-progress-6-corn-left-wheat",
-      "publishedAt": "2026-11-23T21:33:00.000Z",
-      "publishedAtArg": "23/11 18:33",
-      "rank": 4,
-      "text": "USDA (Crop Progress al 22/11): EE.UU. lleva cosechado el 94% del maíz (2 puntos debajo del promedio de 5 años) y el trigo de invierno mejora por tercera semana: 54% bueno/excelente, 87% emergido"
-    },
-    {
-      "title": "Brasil: la siembra de soja 2026/27 llegó al 86% del área proyectada, contra 78% la semana anterior y 81% hace un año; el maíz de primera en el centro-sur, al 90% (AgRural)",
-      "titleOriginal": "Plantio de soja no Brasil avança para 86% com ajuda das chuvas, diz AgRural",
-      "source": "Reuters vía CNN Brasil (AgRural) · traducido del portugués",
-      "handle": "CNN Brasil",
-      "url": "https://www.cnnbrasil.com.br/agro/plantio-de-soja-no-8/",
-      "publishedAt": "2026-11-23T17:09:00.000Z",
-      "publishedAtArg": "23/11 14:09",
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-vientos-fuertes-para-este-jueves-26-de-noviembre-las-nid26112026/",
+      "publishedAt": "2026-11-26T03:01:00.000Z",
+      "publishedAtArg": "26/11 00:01",
       "rank": 5,
-      "text": "Brasil: la siembra de soja 2026/27 llegó al 86% del área proyectada, contra 78% la semana anterior y 81% hace un año; el maíz de primera en el centro-sur, al 90% (AgRural)"
+      "text": "SMN: alerta naranja por viento en Santa Cruz (ráfagas de hasta 110 km/h) y alerta amarilla por tormentas fuertes o localmente severas, con granizo ocasional, en Mendoza, San Juan y La Rioja este jueves 26/11"
     }
   ],
   "descartadas": [
-    "Alerta SMN 24/11 (vencida); crecida del Paraná Clarín 23/11 (reemplazada por La Capital 24/11); granizo Traslasierra (La Voz 23/11): hortícola, desplazada por ranking",
-    "Paro aceitero (Monitor Gremial 25/11 00:15): texto inconsistente (miércoles/jueves), sin confirmación en otra fuente; no verificado",
-    "Estimación oficial trigo 24,7 Mt y DJVE 21,1 Mt (Devengado 21/11, Bichos 20/11): más de 48 h",
-    "China compromiso USD 17.000 M (Farmers Advance 24/11, paywall; RFD-TV 19/11): sin hecho nuevo verificable",
-    "Exportaciones de maíz +41% (Infobae 24/11, Univ. Austral): análisis de comercio, sin hecho nuevo",
-    "Retenciones: sin medida nueva (Decreto 423/2026 vigente); Boletín Oficial 25/11: Disposición SENASA 2/2026 (DNIyCA) sin impacto productor identificado",
-    "Chicharrita: último informe Red Nacional de Monitoreo ya publicado, capturas bajas en el centro",
+    "Alerta SMN 25/11 (vencida); La Capital 24/11 (reemplazada por INA 25/11); Expoagro/GEA 24/11, Crop Progress 22/11 y AgRural 23/11: más de 48 h",
+    "Paro aceitero/portuario contra la reforma laboral (DeGremiales 26/11, Monitor Gremial): no confirmado por medios nacionales; Monitor Gremial republica notas sin fecha con datos de otro año; no verificado",
+    "SENASA 2,4-D sin aplicaciones aéreas (Agrofy 25/11): la Res. 373/2026 es de abril; lo nuevo es un reclamo de FeArCA",
+    "SENASA deja sin efecto 4.346 circulares (La Nación/Agrofy 25/11): mayormente producción animal y certificación de carnes, sin impacto directo en granos",
+    "Temporal destrozó planta de acopio en Frontera (La Nación 25/11): hecho del viernes previo, más de 48 h",
+    "Fallo AGD retenciones (La Nación 24/11) y propuesta de ley de cadenas (21/11): sin medida nueva; Decreto 423/2026 vigente",
+    "Boletín Oficial 26/11: sin resoluciones de SAGyP identificadas con impacto productor",
     "Fertilizantes IF 20/11: precios, van a Costos"
   ],
-  "updatedAt": "2026-11-25T09:50:00.000Z",
-  "updatedBy": "rutina matutina 25/11",
+  "updatedAt": "2026-11-26T09:55:00.000Z",
+  "updatedBy": "rutina matutina 26/11",
   "aviso": null
 }
