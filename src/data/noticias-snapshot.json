@@ -1,11 +1,21 @@
 {
-  "asOf": "2026-11-26T09:55:00.000Z",
-  "asOfArg": "26/11/2026, 06:55",
+  "asOf": "2026-11-27T10:00:00.000Z",
+  "asOfArg": "27/11/2026, 07:00",
   "maxAgeHours": 48,
   "criterio": "Eventos que muevan la decisión del productor argentino. Nunca movimientos de precio (Chicago, pizarras, futuros, tipo de cambio). Máx. 5, rankeadas por impacto en caja/decisión. Links abiertos y verificados.",
   "valor": null,
-  "note": "Rutina matutina 26/11 · entran compra china de 132.000 t de soja de EE.UU. (USDA 25/11, traducido), cosecha récord 2025/26 171 Mt (SAGyP vía La Nación 25/11), INA 25/11 Paraná Rosario con probabilidad de superar alerta, Brasil importaría 9–10 Mt de trigo en 2027 (Agrofy 25/11), alertas SMN 26/11 (La Nación) · salen alerta SMN 25/11 (vencida), La Capital 24/11 (reemplazada por INA 25/11), Expoagro/GEA 24/11, USDA Crop Progress 22/11 y AgRural 23/11 (>48 h)",
+  "note": "Rutina matutina 27/11 · entran PAS Bolsa de Cereales 26/11 (vía Campo Total), Res. SAGyP 239/2026 soja GM (BO 27/11), alertas SMN 27/11 (La Nación) · siguen China 132.000 t (USDA 25/11) e INA 25/11 (<48 h) · salen alerta SMN 26/11 (vencida), cosecha récord SAGyP 25/11 y Brasil trigo (Agrofy 25/11) por cupo de 5",
   "items": [
+    {
+      "title": "Bolsa de Cereales (PAS 26/11): la siembra de soja 2026/27 llega al 39,7% de 17 Mha (+9,2 pp; soja de primera 55,8%) y el maíz comercial al 52,7% de 8,4 Mha; trigo cosechado 24,9% con rindes de 30–60 qq/ha en el centro (máx. 75) y posible suba de la estimación de producción",
+      "source": "Campo Total (Bolsa de Cereales de Buenos Aires)",
+      "handle": "Campo Total",
+      "url": "https://campototalweb.com.ar/48202/",
+      "publishedAt": "2026-11-26T03:00:00.000Z",
+      "publishedAtArg": "26/11 (hora no publicada)",
+      "text": "Bolsa de Cereales (PAS 26/11): la siembra de soja 2026/27 llega al 39,7% de 17 Mha (+9,2 pp; soja de primera 55,8%) y el maíz comercial al 52,7% de 8,4 Mha; trigo cosechado 24,9% con rindes de 30–60 qq/ha en el centro (máx. 75) y posible suba de la estimación de producción",
+      "rank": 1
+    },
     {
       "title": "China compró 132.000 t de soja de EE.UU. para la campaña 2026/27 (venta diaria reportada al USDA el miércoles 25/11), el mismo día en que Pekín informó la primera reunión del grupo de trabajo agrícola China–EE.UU.",
       "titleOriginal": "USDA: EUA vendem 132 mil toneladas de soja para a China nesta 4ª feira (25)",
@@ -14,18 +24,28 @@
       "url": "https://www.noticiasagricolas.com.br/noticias/soja/431924-usda-eua-vendem-132-mil-toneladas-de-soja-para-a-china-nesta-4-feira-25.amp.html",
       "publishedAt": "2026-11-25T14:26:52.000Z",
       "publishedAtArg": "25/11 11:26",
-      "rank": 1,
+      "rank": 2,
       "text": "China compró 132.000 t de soja de EE.UU. para la campaña 2026/27 (venta diaria reportada al USDA el miércoles 25/11), el mismo día en que Pekín informó la primera reunión del grupo de trabajo agrícola China–EE.UU."
     },
     {
-      "title": "Secretaría de Agricultura: la cosecha 2025/26 cerró en un récord de 171 millones de toneladas, 30 Mt más que el ciclo anterior (+21%); soja 52 Mt según Acsoja",
-      "source": "La Nación (SAGyP)",
+      "title": "SAGyP autorizó la comercialización de una nueva soja GM apilada (DBN-09004-6 x DBN-08002-3 x DBN-08205-8, resistente a lepidópteros y tolerante a glufosinato y glifosato) de DBNBC Argentina, condicionada a su aprobación en la Unión Europea (Res. 239/2026)",
+      "source": "Boletín Oficial (SAGyP)",
+      "handle": "Boletín Oficial",
+      "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/350901/20261127",
+      "publishedAt": "2026-11-27T03:00:00.000Z",
+      "publishedAtArg": "27/11 (edición del día)",
+      "text": "SAGyP autorizó la comercialización de una nueva soja GM apilada (DBN-09004-6 x DBN-08002-3 x DBN-08205-8, resistente a lepidópteros y tolerante a glufosinato y glifosato) de DBNBC Argentina, condicionada a su aprobación en la Unión Europea (Res. 239/2026)",
+      "rank": 3
+    },
+    {
+      "title": "SMN: alertas amarilla y naranja por tormentas fuertes o severas este viernes 27/11 en Misiones, Corrientes y Formosa (granizo, ráfagas de 90 km/h, 70–100 mm) y en Catamarca, La Rioja y San Juan (20–40 mm); sin alertas en la zona núcleo",
+      "source": "La Nación (SMN)",
       "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/economia/campo/historico-la-cosecha-de-granos-aumento-un-21-y-marco-un-nuevo-record-con-171-millones-de-toneladas-nid25112026/",
-      "publishedAt": "2026-11-25T17:09:25.000Z",
-      "publishedAtArg": "25/11 14:09",
-      "rank": 2,
-      "text": "Secretaría de Agricultura: la cosecha 2025/26 cerró en un récord de 171 millones de toneladas, 30 Mt más que el ciclo anterior (+21%); soja 52 Mt según Acsoja"
+      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-amarilla-y-naranja-por-tormentas-para-este-viernes-27-de-noviembre-las-provincias-nid27112026/",
+      "publishedAt": "2026-11-27T03:01:00.000Z",
+      "publishedAtArg": "27/11 00:01",
+      "text": "SMN: alertas amarilla y naranja por tormentas fuertes o severas este viernes 27/11 en Misiones, Corrientes y Formosa (granizo, ráfagas de 90 km/h, 70–100 mm) y en Catamarca, La Rioja y San Juan (20–40 mm); sin alertas en la zona núcleo",
+      "rank": 4
     },
     {
       "title": "INA: el Paraná en Rosario sigue en punta (4,92 m; tocó 4,99 m) y para los próximos 7 días prevé 4,70–5,20 m, con probabilidad de superar la alerta de 5 m; en Corrientes-Barranqueras, posible alerta desde el 2/12",
@@ -34,41 +54,20 @@
       "url": "https://www.ina.gob.ar/archivos/alerta/2026Nov25_10481.pdf",
       "publishedAt": "2026-11-25T23:39:03.000Z",
       "publishedAtArg": "25/11 20:39",
-      "rank": 3,
-      "text": "INA: el Paraná en Rosario sigue en punta (4,92 m; tocó 4,99 m) y para los próximos 7 días prevé 4,70–5,20 m, con probabilidad de superar la alerta de 5 m; en Corrientes-Barranqueras, posible alerta desde el 2/12"
-    },
-    {
-      "title": "Brasil importaría entre 9 y 10 Mt de trigo en 2027, el mayor volumen en 30 años (Abitrigo), con cosecha propia de 5,26 Mt (−33,2%, Conab); la Argentina explicó el 74,4% de sus importaciones ene–oct 2026",
-      "source": "Agrofy News (Abitrigo/Conab)",
-      "handle": "Agrofy News",
-      "url": "https://news.agrofy.com.ar/noticia/217057/brasil-importaria-mayor-volumen-trigo-30-anos-hubo-visita-record-argentina-45-molineros-pasaron-sant",
-      "publishedAt": "2026-11-25T15:48:00.000Z",
-      "publishedAtArg": "25/11 12:48",
-      "rank": 4,
-      "text": "Brasil importaría entre 9 y 10 Mt de trigo en 2027, el mayor volumen en 30 años (Abitrigo), con cosecha propia de 5,26 Mt (−33,2%, Conab); la Argentina explicó el 74,4% de sus importaciones ene–oct 2026"
-    },
-    {
-      "title": "SMN: alerta naranja por viento en Santa Cruz (ráfagas de hasta 110 km/h) y alerta amarilla por tormentas fuertes o localmente severas, con granizo ocasional, en Mendoza, San Juan y La Rioja este jueves 26/11",
-      "source": "La Nación (SMN)",
-      "handle": "La Nación",
-      "url": "https://www.lanacion.com.ar/sociedad/hay-alerta-naranja-y-amarilla-por-tormentas-y-vientos-fuertes-para-este-jueves-26-de-noviembre-las-nid26112026/",
-      "publishedAt": "2026-11-26T03:01:00.000Z",
-      "publishedAtArg": "26/11 00:01",
       "rank": 5,
-      "text": "SMN: alerta naranja por viento en Santa Cruz (ráfagas de hasta 110 km/h) y alerta amarilla por tormentas fuertes o localmente severas, con granizo ocasional, en Mendoza, San Juan y La Rioja este jueves 26/11"
+      "text": "INA: el Paraná en Rosario sigue en punta (4,92 m; tocó 4,99 m) y para los próximos 7 días prevé 4,70–5,20 m, con probabilidad de superar la alerta de 5 m; en Corrientes-Barranqueras, posible alerta desde el 2/12"
     }
   ],
   "descartadas": [
-    "Alerta SMN 25/11 (vencida); La Capital 24/11 (reemplazada por INA 25/11); Expoagro/GEA 24/11, Crop Progress 22/11 y AgRural 23/11: más de 48 h",
-    "Paro aceitero/portuario contra la reforma laboral (DeGremiales 26/11, Monitor Gremial): no confirmado por medios nacionales; Monitor Gremial republica notas sin fecha con datos de otro año; no verificado",
-    "SENASA 2,4-D sin aplicaciones aéreas (Agrofy 25/11): la Res. 373/2026 es de abril; lo nuevo es un reclamo de FeArCA",
-    "SENASA deja sin efecto 4.346 circulares (La Nación/Agrofy 25/11): mayormente producción animal y certificación de carnes, sin impacto directo en granos",
-    "Temporal destrozó planta de acopio en Frontera (La Nación 25/11): hecho del viernes previo, más de 48 h",
-    "Fallo AGD retenciones (La Nación 24/11) y propuesta de ley de cadenas (21/11): sin medida nueva; Decreto 423/2026 vigente",
-    "Boletín Oficial 26/11: sin resoluciones de SAGyP identificadas con impacto productor",
+    "Alerta SMN 26/11: vencida, reemplazada por la del 27/11",
+    "Cosecha récord 171 Mt (SAGyP 25/11) y Brasil importaría 9–10 Mt de trigo (Agrofy 25/11): fuera por cupo de 5, ya publicadas ayer",
+    "IERAL: distorsiones costaron US$4.800 M ene–sep (La Nación 26/11): estudio sin medida nueva",
+    "Milei \"no tengo los recursos\" para eliminar retenciones (La Voz): sin medida nueva; Decreto 423/2026 vigente",
+    "Paro aceitero (Monitor Gremial): notas sin fecha verificable, no confirmado por medios nacionales",
+    "Conab plantío soja 82,9% (Biomercado 26/11): semana al 20/11, AgRural 86% ya publicado 23/11",
     "Fertilizantes IF 20/11: precios, van a Costos"
   ],
-  "updatedAt": "2026-11-26T09:55:00.000Z",
-  "updatedBy": "rutina matutina 26/11",
+  "updatedAt": "2026-11-27T10:00:00.000Z",
+  "updatedBy": "rutina matutina 27/11",
   "aviso": null
 }
